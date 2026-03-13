@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cotizacion Transportes D’ Leon</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+</head>
+
+<body>
+
+<header>
+<img src="icon192.png">
+Cotizacion Transportes D’ Leon
+</header>
+
+<div class="container">
+
+<label>Cliente</label>
+<input id="cliente">
+
+<label>Origen</label>
+<input id="origen">
+
+<label>Destino</label>
+<input id="destino">
+
+<button onclick="calcularRuta()">Calcular kilómetros</button>
+
+<div id="map"></div>
+
+<label>Kilómetros</label>
+<input id="km">
+
+<label>Tipo de camión</label>
+<select id="camion" onchange="setEjes()">
+<option value="2">Camioneta</option>
+<option value="3">Torton</option>
+<option value="4">Rabón</option>
+<option value="5" selected>Tráiler</option>
+<option value="6">Full</option>
+</select>
+
+<label>Ejes</label>
+<input id="ejes" value="5">
+
+<label>Precio Diesel</label>
+<input id="diesel" value="24">
+
+<label>Rendimiento km/L</label>
+<input id="rendimiento" value="2.8">
+
+<div id="resultado"></div>
+
+<h3>Precio a enviar</h3>
+
+<select id="precioSeleccionado">
+<option value="bajo">Precio Bajo</option>
+<option value="medio">Precio Medio</option>
+<option value="alto" selected>Precio Alto</option>
+</select>
+
+<button onclick="calcular()">Calcular Cotización</button>
+<button onclick="enviarWhatsApp()">Enviar WhatsApp</button>
+<button onclick="generarImagen()">Generar Cotización JPG</button>
+<button onclick="reiniciar()">Reiniciar</button>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
