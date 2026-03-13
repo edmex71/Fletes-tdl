@@ -1,0 +1,28 @@
+{
+  "autopistas": [
+    {
+      "nombre": "Tepotzotlan",
+      "lat": 19.71,
+      "lon": -99.22,
+      "precio": {
+        "5": 540
+      }
+    },
+    {
+      "nombre": "Palmillas",
+      "lat": 20.35,
+      "lon": -99.9,
+      "precio": {
+        "5": 890
+      }
+    },
+    {
+      "nombre": "San Juan del Rio",
+      "lat": 20.38,
+      "lon": -99.99,
+      "precio": {
+        "5": 470
+      }
+    }
+  ]
+}
