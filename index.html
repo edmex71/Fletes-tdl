@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Flete TDL</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="apple-touch-icon" href="icon.png">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+</head>
+
+<body>
+
+<header>
+<img src="icon.png">
+Flete TDL
+</header>
+
+<div class="container">
+
+<label>Origen</label>
+<input id="origen">
+
+<label>Destino</label>
+<input id="destino">
+
+<button onclick="calcularRuta()">Calcular ruta</button>
+
+<div id="map"></div>
+
+<label>Kilómetros</label>
+<input id="km">
+
+<label>Precio Diesel</label>
+<input id="diesel" value="24">
+
+<label>Rendimiento km/L</label>
+<input id="rendimiento" value="2.8">
+
+<label>Ejes</label>
+<select id="ejes">
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option selected>5</option>
+<option>6</option>
+</select>
+
+<div id="resultado"></div>
+
+<button onclick="calcular()">Calcular Flete</button>
+<button onclick="generarImagen()">Enviar Cotización</button>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
