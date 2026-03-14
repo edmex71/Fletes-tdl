@@ -12,7 +12,7 @@ async function calcularRuta(){
 
  try{
 
- setEstado("Calculando ruta")
+ setEstado("Calculando ruta...")
 
  const o=await geocode(document.getElementById("origen").value)
  const d=await geocode(document.getElementById("destino").value)
@@ -34,7 +34,7 @@ async function calcularRuta(){
 
  currentRoute=route.geometry.coordinates
 
- setEstado("Ruta lista")
+ setEstado("Ruta calculada")
 
  }catch(e){
 

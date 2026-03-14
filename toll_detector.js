@@ -14,18 +14,22 @@ function dist(a,b){
 
 }
 
-function limpiar(n){
+function normalizar(n){
 
  if(!n) return null
 
  n=n.toUpperCase()
 
  n=n.replace(/CASETA DE COBRO/g,"")
+ n=n.replace(/CASETA COBRO/g,"")
  n=n.replace(/PLAZA DE COBRO/g,"")
  n=n.replace(/NRO/g,"")
  n=n.replace(/[0-9]/g,"")
 
  n=n.replace(/\s+/g," ").trim()
+
+ if(n.includes("SAN MARTIN")) return "SAN MARTIN TEXMELUCAN"
+ if(n.includes("LIBRAMIENTO ORIENTE") && n.includes("SAN LUIS")) return "LIBRAMIENTO ORIENTE SAN LUIS POTOSI"
 
  return n
 
@@ -40,12 +44,12 @@ const EXCLUIR=[
 
 function detectarCasetas(){
 
- const casetas=[]
+ const detectadas=[]
 
  dataset_tolls.features.forEach(c=>{
 
  const coord=c.geometry.coordinates
- const nombre=limpiar(c.properties?.name)
+ const nombre=normalizar(c.properties?.name)
 
  if(!nombre) return
  if(EXCLUIR.includes(nombre)) return
@@ -54,7 +58,7 @@ function detectarCasetas(){
 
  if(dist(p,coord)<2){
 
- casetas.push({nombre:nombre,pos:i})
+ detectadas.push({nombre:nombre,pos:i})
 
  }
 
@@ -64,7 +68,7 @@ function detectarCasetas(){
 
  const mapUnique={}
 
- casetas.forEach(c=>{
+ detectadas.forEach(c=>{
 
  if(!mapUnique[c.nombre] || mapUnique[c.nombre].pos>c.pos)
    mapUnique[c.nombre]=c
