@@ -1,13 +1,14 @@
 
 async function cargarTarifas(){
-
  try{
-  let r=await fetch("tarifas_capufe.json")
-  window.tarifasCAPUFE=await r.json()
+   const r = await fetch('tarifas_capufe.json');
+   const data = await r.json();
+   window.TARIFAS_CAPUFE = data;
+   console.log("Tarifas cargadas:", Object.keys(data).length);
  }catch(e){
-  window.tarifasCAPUFE={}
+   console.error("Error cargando tarifas",e);
+   window.TARIFAS_CAPUFE = {};
  }
-
 }
 
-cargarTarifas()
+document.addEventListener("DOMContentLoaded", cargarTarifas);
