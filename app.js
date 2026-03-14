@@ -13,27 +13,50 @@ function calcularPrecios(costo){
  localStorage.setItem("ultimaCotizacion",JSON.stringify({fecha:new Date().toISOString(),costo}))
 }
 
+
 function generarImagen(){
- const ruta=document.getElementById("origen").value+" → "+document.getElementById("destino").value
+
+ const origen=document.getElementById("origen").value
+ const destino=document.getElementById("destino").value
+ const ruta=origen+" → "+destino
  const precio=document.getElementById("precio_medio").innerText
+
  const canvas=document.createElement("canvas")
  canvas.width=800
- canvas.height=400
+ canvas.height=500
  const ctx=canvas.getContext("2d")
- ctx.fillStyle="#fff"
- ctx.fillRect(0,0,800,400)
+
+ ctx.fillStyle="#ffffff"
+ ctx.fillRect(0,0,800,500)
+
+ const logo=new Image()
+ logo.src="logo.png"
+
+ logo.onload=function(){
+
+ ctx.drawImage(logo,330,20,140,140)
+
  ctx.fillStyle="#000"
- ctx.font="28px Arial"
- ctx.fillText("🦁 Transporte D’Leon",40,80)
- ctx.font="22px Arial"
- ctx.fillText("Ruta: "+ruta,40,160)
- ctx.fillText("Precio: "+precio,40,220)
+ ctx.font="32px Arial"
+ ctx.fillText("Transporte D’Leon",240,200)
+
+ ctx.font="24px Arial"
+ ctx.fillText("Ruta:",100,280)
+ ctx.fillText(ruta,100,310)
+
+ ctx.fillText("Precio:",100,360)
+ ctx.fillText(precio,100,390)
+
  const img=canvas.toDataURL("image/jpeg")
  const a=document.createElement("a")
  a.href=img
  a.download="cotizacion.jpg"
  a.click()
+
+ }
+
 }
+
 
 
 function formatoDinero(n){
@@ -77,6 +100,7 @@ function calcularFlete(){
 
  const litros=km/rend
  const dieselCosto=litros*diesel
+ const costoTotal=dieselCosto+totalCasetas
 
  const origen=document.getElementById("origen").value
  const destino=document.getElementById("destino").value
@@ -99,6 +123,7 @@ function calcularFlete(){
 
  document.getElementById("resultado").innerHTML=html
  setEstado("Casetas detectadas "+casetas.length)
+ calcularPrecios(costoTotal)
 
 }
 
