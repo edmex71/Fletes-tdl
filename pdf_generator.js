@@ -1,1 +1,0 @@
-function generarPDF(){ alert('PDF no implementado aún'); }
