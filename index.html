@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flete TDL</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+</head>
+
+<body>
+
+<div class="header">
+<img src="logo.png" class="logo">
+<h1>Flete TDL</h1>
+</div>
+
+<div class="container">
+
+<label>Origen</label>
+<input id="origen">
+
+<label>Destino</label>
+<input id="destino">
+
+<button onclick="calcularRuta()">Calcular ruta</button>
+
+<div id="map"></div>
+
+<label>Kilómetros</label>
+<input id="km">
+
+<label>Precio Diesel</label>
+<input id="diesel" value="27">
+
+<label>Rendimiento km/L</label>
+<input id="rendimiento" value="2.6">
+
+<label>Ejes</label>
+<select id="ejes">
+<option value="5">5</option>
+<option value="6">6</option>
+</select>
+
+<div id="resultado"></div>
+
+<button onclick="calcularFlete()">Calcular Flete</button>
+
+</div>
+
+<script src="ruta.js"></script>
+<script src="casetas.js"></script>
+<script src="cotizacion.js"></script>
+
+</body>
+</html>
