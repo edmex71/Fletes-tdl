@@ -31,7 +31,12 @@ function limpiar(n){
 
 }
 
-const RAMALES=["POLOTITLAN","JOROBAS"]
+const EXCLUIR=[
+"CHALCO",
+"VIA ATLIXCAYOTL",
+"POLOTITLAN",
+"JOROBAS"
+]
 
 function detectarCasetas(){
 
@@ -43,7 +48,7 @@ function detectarCasetas(){
  const nombre=limpiar(c.properties?.name)
 
  if(!nombre) return
- if(RAMALES.includes(nombre)) return
+ if(EXCLUIR.includes(nombre)) return
 
  currentRoute.forEach((p,i)=>{
 
