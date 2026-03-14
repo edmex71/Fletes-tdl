@@ -5,3 +5,9 @@ async function iniciarMotor(ruta){
  console.log(detectadas);
  return detectadas;
 }
+
+
+function mostrarAnalisis(){
+ const el=document.getElementById('analizando');
+ if(el){ el.innerHTML='Analizando casetas...'; }
+}
