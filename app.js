@@ -1,4 +1,41 @@
 
+function formatoDinero(v){
+ return "$"+Math.ceil(v/100)*100 .toLocaleString ? "$"+(Math.ceil(v/100)*100).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}) : "$"+Math.ceil(v/100)*100;
+}
+
+function calcularPrecios(costo){
+ const bajo=costo*1.15
+ const medio=costo*1.30
+ const alto=costo*1.45
+ document.getElementById("precio_bajo").innerText=formatoDinero(bajo)
+ document.getElementById("precio_medio").innerText=formatoDinero(medio)
+ document.getElementById("precio_alto").innerText=formatoDinero(alto)
+ localStorage.setItem("ultimaCotizacion",JSON.stringify({fecha:new Date().toISOString(),costo}))
+}
+
+function generarImagen(){
+ const ruta=document.getElementById("origen").value+" → "+document.getElementById("destino").value
+ const precio=document.getElementById("precio_medio").innerText
+ const canvas=document.createElement("canvas")
+ canvas.width=800
+ canvas.height=400
+ const ctx=canvas.getContext("2d")
+ ctx.fillStyle="#fff"
+ ctx.fillRect(0,0,800,400)
+ ctx.fillStyle="#000"
+ ctx.font="28px Arial"
+ ctx.fillText("🦁 Transporte D’Leon",40,80)
+ ctx.font="22px Arial"
+ ctx.fillText("Ruta: "+ruta,40,160)
+ ctx.fillText("Precio: "+precio,40,220)
+ const img=canvas.toDataURL("image/jpeg")
+ const a=document.createElement("a")
+ a.href=img
+ a.download="cotizacion.jpg"
+ a.click()
+}
+
+
 function formatoDinero(n){
  const v=Math.ceil(n/100)*100
  return "$"+v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})
