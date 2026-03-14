@@ -1,0 +1,842 @@
+[
+  {
+    "name": "Tepotzotlan",
+    "autopista": "57D",
+    "lat": 19.7,
+    "lon": -99.22
+  },
+  {
+    "name": "Tepotzotlan Aux 1",
+    "autopista": "57D",
+    "lat": 19.615572420194397,
+    "lon": -99.08930678800454
+  },
+  {
+    "name": "Tepotzotlan Aux 2",
+    "autopista": "57D",
+    "lat": 19.71138277853623,
+    "lon": -99.20986213428935
+  },
+  {
+    "name": "Tepotzotlan Aux 3",
+    "autopista": "57D",
+    "lat": 19.811524162308128,
+    "lon": -99.36467363770548
+  },
+  {
+    "name": "Tepotzotlan Aux 4",
+    "autopista": "57D",
+    "lat": 19.7147900914221,
+    "lon": -99.17161210917887
+  },
+  {
+    "name": "Palmillas",
+    "autopista": "57D",
+    "lat": 20.38,
+    "lon": -99.93
+  },
+  {
+    "name": "Palmillas Aux 1",
+    "autopista": "57D",
+    "lat": 20.241557762703962,
+    "lon": -100.07503811567763
+  },
+  {
+    "name": "Palmillas Aux 2",
+    "autopista": "57D",
+    "lat": 20.510828067048767,
+    "lon": -99.97379988695701
+  },
+  {
+    "name": "Palmillas Aux 3",
+    "autopista": "57D",
+    "lat": 20.261916561330615,
+    "lon": -100.07277082486517
+  },
+  {
+    "name": "Palmillas Aux 4",
+    "autopista": "57D",
+    "lat": 20.519817001984162,
+    "lon": -99.87500765252642
+  },
+  {
+    "name": "San Juan del Rio",
+    "autopista": "57D",
+    "lat": 20.38,
+    "lon": -99.99
+  },
+  {
+    "name": "San Juan del Rio Aux 1",
+    "autopista": "57D",
+    "lat": 20.519092568581765,
+    "lon": -99.94329523846244
+  },
+  {
+    "name": "San Juan del Rio Aux 2",
+    "autopista": "57D",
+    "lat": 20.418668866306316,
+    "lon": -100.08346328651147
+  },
+  {
+    "name": "San Juan del Rio Aux 3",
+    "autopista": "57D",
+    "lat": 20.35553285135618,
+    "lon": -99.85212823328229
+  },
+  {
+    "name": "San Juan del Rio Aux 4",
+    "autopista": "57D",
+    "lat": 20.440927244051203,
+    "lon": -100.00170193828536
+  },
+  {
+    "name": "Queretaro",
+    "autopista": "57D",
+    "lat": 20.59,
+    "lon": -100.39
+  },
+  {
+    "name": "Queretaro Aux 1",
+    "autopista": "57D",
+    "lat": 20.463860627912325,
+    "lon": -100.4800951930372
+  },
+  {
+    "name": "Queretaro Aux 2",
+    "autopista": "57D",
+    "lat": 20.65861578518449,
+    "lon": -100.42468133458273
+  },
+  {
+    "name": "Queretaro Aux 3",
+    "autopista": "57D",
+    "lat": 20.483443515995422,
+    "lon": -100.27035966573953
+  },
+  {
+    "name": "Queretaro Aux 4",
+    "autopista": "57D",
+    "lat": 20.679293056666076,
+    "lon": -100.30640932450459
+  },
+  {
+    "name": "San Luis Potosi",
+    "autopista": "57D",
+    "lat": 22.15,
+    "lon": -100.98
+  },
+  {
+    "name": "San Luis Potosi Aux 1",
+    "autopista": "57D",
+    "lat": 22.290921327777685,
+    "lon": -100.97587718379704
+  },
+  {
+    "name": "San Luis Potosi Aux 2",
+    "autopista": "57D",
+    "lat": 22.026863915424716,
+    "lon": -101.0999919725349
+  },
+  {
+    "name": "San Luis Potosi Aux 3",
+    "autopista": "57D",
+    "lat": 22.01916443990422,
+    "lon": -100.97149378610956
+  },
+  {
+    "name": "San Luis Potosi Aux 4",
+    "autopista": "57D",
+    "lat": 22.154116539044622,
+    "lon": -101.00712323297242
+  },
+  {
+    "name": "Matehuala",
+    "autopista": "57D",
+    "lat": 23.64,
+    "lon": -100.64
+  },
+  {
+    "name": "Matehuala Aux 1",
+    "autopista": "57D",
+    "lat": 23.520454007357586,
+    "lon": -100.66200041615092
+  },
+  {
+    "name": "Matehuala Aux 2",
+    "autopista": "57D",
+    "lat": 23.621962677640916,
+    "lon": -100.66092213831914
+  },
+  {
+    "name": "Matehuala Aux 3",
+    "autopista": "57D",
+    "lat": 23.51960906587933,
+    "lon": -100.68771702342798
+  },
+  {
+    "name": "Matehuala Aux 4",
+    "autopista": "57D",
+    "lat": 23.497723260829165,
+    "lon": -100.72458589622046
+  },
+  {
+    "name": "Los Chorros",
+    "autopista": "57D",
+    "lat": 25.35,
+    "lon": -100.94
+  },
+  {
+    "name": "Los Chorros Aux 1",
+    "autopista": "57D",
+    "lat": 25.228182078408057,
+    "lon": -101.08175083088156
+  },
+  {
+    "name": "Los Chorros Aux 2",
+    "autopista": "57D",
+    "lat": 25.37229598700919,
+    "lon": -101.05634564037808
+  },
+  {
+    "name": "Los Chorros Aux 3",
+    "autopista": "57D",
+    "lat": 25.223170727666528,
+    "lon": -100.81270659041552
+  },
+  {
+    "name": "Los Chorros Aux 4",
+    "autopista": "57D",
+    "lat": 25.252611812309052,
+    "lon": -101.0389370588388
+  },
+  {
+    "name": "Saltillo",
+    "autopista": "57D",
+    "lat": 25.42,
+    "lon": -100.99
+  },
+  {
+    "name": "Saltillo Aux 1",
+    "autopista": "57D",
+    "lat": 25.479931435851263,
+    "lon": -101.12406552494672
+  },
+  {
+    "name": "Saltillo Aux 2",
+    "autopista": "57D",
+    "lat": 25.56833535939087,
+    "lon": -100.98968139895332
+  },
+  {
+    "name": "Saltillo Aux 3",
+    "autopista": "57D",
+    "lat": 25.438251447418466,
+    "lon": -100.91357210292018
+  },
+  {
+    "name": "Saltillo Aux 4",
+    "autopista": "57D",
+    "lat": 25.362110242358707,
+    "lon": -100.96976703818176
+  },
+  {
+    "name": "San Marcos",
+    "autopista": "150D",
+    "lat": 19.28,
+    "lon": -98.94
+  },
+  {
+    "name": "San Marcos Aux 1",
+    "autopista": "150D",
+    "lat": 19.285833209004114,
+    "lon": -98.82718300373583
+  },
+  {
+    "name": "San Marcos Aux 2",
+    "autopista": "150D",
+    "lat": 19.269692496955937,
+    "lon": -98.88912422736598
+  },
+  {
+    "name": "San Marcos Aux 3",
+    "autopista": "150D",
+    "lat": 19.195078299250536,
+    "lon": -98.80613177418722
+  },
+  {
+    "name": "San Marcos Aux 4",
+    "autopista": "150D",
+    "lat": 19.136308459619066,
+    "lon": -98.85156710519274
+  },
+  {
+    "name": "San Martin Texmelucan",
+    "autopista": "150D",
+    "lat": 19.07,
+    "lon": -98.25
+  },
+  {
+    "name": "San Martin Texmelucan Aux 1",
+    "autopista": "150D",
+    "lat": 19.09502961476156,
+    "lon": -98.12324675537646
+  },
+  {
+    "name": "San Martin Texmelucan Aux 2",
+    "autopista": "150D",
+    "lat": 18.954409472157106,
+    "lon": -98.14816375701311
+  },
+  {
+    "name": "San Martin Texmelucan Aux 3",
+    "autopista": "150D",
+    "lat": 19.02933246130157,
+    "lon": -98.14852397656178
+  },
+  {
+    "name": "San Martin Texmelucan Aux 4",
+    "autopista": "150D",
+    "lat": 19.137205143230855,
+    "lon": -98.35362935193389
+  },
+  {
+    "name": "Amozoc",
+    "autopista": "150D",
+    "lat": 19.05,
+    "lon": -98.04
+  },
+  {
+    "name": "Amozoc Aux 1",
+    "autopista": "150D",
+    "lat": 18.989719478428427,
+    "lon": -98.0797668737705
+  },
+  {
+    "name": "Amozoc Aux 2",
+    "autopista": "150D",
+    "lat": 19.177193153852045,
+    "lon": -98.01212681979327
+  },
+  {
+    "name": "Amozoc Aux 3",
+    "autopista": "150D",
+    "lat": 19.035929585109535,
+    "lon": -98.0743624185392
+  },
+  {
+    "name": "Amozoc Aux 4",
+    "autopista": "150D",
+    "lat": 19.186477554308595,
+    "lon": -98.05850244711726
+  },
+  {
+    "name": "La Venta",
+    "autopista": "15D",
+    "lat": 19.3,
+    "lon": -99.35
+  },
+  {
+    "name": "La Venta Aux 1",
+    "autopista": "15D",
+    "lat": 19.36799771098162,
+    "lon": -99.46502192097576
+  },
+  {
+    "name": "La Venta Aux 2",
+    "autopista": "15D",
+    "lat": 19.437504680787317,
+    "lon": -99.43670347790398
+  },
+  {
+    "name": "La Venta Aux 3",
+    "autopista": "15D",
+    "lat": 19.403917760052554,
+    "lon": -99.41462038351482
+  },
+  {
+    "name": "La Venta Aux 4",
+    "autopista": "15D",
+    "lat": 19.304517145463265,
+    "lon": -99.49492691021429
+  },
+  {
+    "name": "Lerma",
+    "autopista": "15D",
+    "lat": 19.29,
+    "lon": -99.56
+  },
+  {
+    "name": "Lerma Aux 1",
+    "autopista": "15D",
+    "lat": 19.318654890327107,
+    "lon": -99.497798953724
+  },
+  {
+    "name": "Lerma Aux 2",
+    "autopista": "15D",
+    "lat": 19.24341821289661,
+    "lon": -99.6304807239213
+  },
+  {
+    "name": "Lerma Aux 3",
+    "autopista": "15D",
+    "lat": 19.19558446040924,
+    "lon": -99.56418694336698
+  },
+  {
+    "name": "Lerma Aux 4",
+    "autopista": "15D",
+    "lat": 19.264417193775426,
+    "lon": -99.53381625850447
+  },
+  {
+    "name": "Atlacomulco",
+    "autopista": "15D",
+    "lat": 19.28,
+    "lon": -100.1
+  },
+  {
+    "name": "Atlacomulco Aux 1",
+    "autopista": "15D",
+    "lat": 19.27439058136752,
+    "lon": -100.20217516634074
+  },
+  {
+    "name": "Atlacomulco Aux 2",
+    "autopista": "15D",
+    "lat": 19.371594905796577,
+    "lon": -99.96764139608382
+  },
+  {
+    "name": "Atlacomulco Aux 3",
+    "autopista": "15D",
+    "lat": 19.411359816957695,
+    "lon": -99.96462041165438
+  },
+  {
+    "name": "Atlacomulco Aux 4",
+    "autopista": "15D",
+    "lat": 19.387827459516448,
+    "lon": -100.06607455141324
+  },
+  {
+    "name": "Maravatio",
+    "autopista": "15D",
+    "lat": 19.89,
+    "lon": -100.44
+  },
+  {
+    "name": "Maravatio Aux 1",
+    "autopista": "15D",
+    "lat": 19.781249461817843,
+    "lon": -100.52360499735543
+  },
+  {
+    "name": "Maravatio Aux 2",
+    "autopista": "15D",
+    "lat": 19.777115538894446,
+    "lon": -100.32386594811945
+  },
+  {
+    "name": "Maravatio Aux 3",
+    "autopista": "15D",
+    "lat": 19.864872453898062,
+    "lon": -100.52060394747345
+  },
+  {
+    "name": "Maravatio Aux 4",
+    "autopista": "15D",
+    "lat": 19.8534469056138,
+    "lon": -100.30093749783181
+  },
+  {
+    "name": "Guadalajara",
+    "autopista": "15D",
+    "lat": 20.67,
+    "lon": -103.35
+  },
+  {
+    "name": "Guadalajara Aux 1",
+    "autopista": "15D",
+    "lat": 20.684109533757223,
+    "lon": -103.30703826275573
+  },
+  {
+    "name": "Guadalajara Aux 2",
+    "autopista": "15D",
+    "lat": 20.583521455795204,
+    "lon": -103.34784503567064
+  },
+  {
+    "name": "Guadalajara Aux 3",
+    "autopista": "15D",
+    "lat": 20.54692993359446,
+    "lon": -103.44724764497954
+  },
+  {
+    "name": "Guadalajara Aux 4",
+    "autopista": "15D",
+    "lat": 20.58196348669286,
+    "lon": -103.32341405922227
+  },
+  {
+    "name": "Durango",
+    "autopista": "40D",
+    "lat": 24.02,
+    "lon": -104.65
+  },
+  {
+    "name": "Durango Aux 1",
+    "autopista": "40D",
+    "lat": 24.104159303062662,
+    "lon": -104.74551130172185
+  },
+  {
+    "name": "Durango Aux 2",
+    "autopista": "40D",
+    "lat": 24.000656424613787,
+    "lon": -104.58511496439142
+  },
+  {
+    "name": "Durango Aux 3",
+    "autopista": "40D",
+    "lat": 23.87646011119498,
+    "lon": -104.50816129830574
+  },
+  {
+    "name": "Durango Aux 4",
+    "autopista": "40D",
+    "lat": 23.9012924109025,
+    "lon": -104.69711409559199
+  },
+  {
+    "name": "Mazatlan",
+    "autopista": "40D",
+    "lat": 23.25,
+    "lon": -106.41
+  },
+  {
+    "name": "Mazatlan Aux 1",
+    "autopista": "40D",
+    "lat": 23.36721506073599,
+    "lon": -106.50900004420738
+  },
+  {
+    "name": "Mazatlan Aux 2",
+    "autopista": "40D",
+    "lat": 23.356190585456396,
+    "lon": -106.44049384164576
+  },
+  {
+    "name": "Mazatlan Aux 3",
+    "autopista": "40D",
+    "lat": 23.179453920856787,
+    "lon": -106.29852262779696
+  },
+  {
+    "name": "Mazatlan Aux 4",
+    "autopista": "40D",
+    "lat": 23.274973930293402,
+    "lon": -106.48192067037792
+  },
+  {
+    "name": "Celaya",
+    "autopista": "45D",
+    "lat": 20.52,
+    "lon": -100.81
+  },
+  {
+    "name": "Celaya Aux 1",
+    "autopista": "45D",
+    "lat": 20.474882416821487,
+    "lon": -100.66557087305172
+  },
+  {
+    "name": "Celaya Aux 2",
+    "autopista": "45D",
+    "lat": 20.39680719787034,
+    "lon": -100.8396595282319
+  },
+  {
+    "name": "Celaya Aux 3",
+    "autopista": "45D",
+    "lat": 20.507152363833995,
+    "lon": -100.82731122832735
+  },
+  {
+    "name": "Celaya Aux 4",
+    "autopista": "45D",
+    "lat": 20.47910394810881,
+    "lon": -100.70400571360025
+  },
+  {
+    "name": "Salamanca",
+    "autopista": "45D",
+    "lat": 20.57,
+    "lon": -101.19
+  },
+  {
+    "name": "Salamanca Aux 1",
+    "autopista": "45D",
+    "lat": 20.45069477042016,
+    "lon": -101.22895854245603
+  },
+  {
+    "name": "Salamanca Aux 2",
+    "autopista": "45D",
+    "lat": 20.692342913061317,
+    "lon": -101.30864632762288
+  },
+  {
+    "name": "Salamanca Aux 3",
+    "autopista": "45D",
+    "lat": 20.424371741615847,
+    "lon": -101.15988278849798
+  },
+  {
+    "name": "Salamanca Aux 4",
+    "autopista": "45D",
+    "lat": 20.59318761012773,
+    "lon": -101.07737009209417
+  },
+  {
+    "name": "Irapuato",
+    "autopista": "45D",
+    "lat": 20.67,
+    "lon": -101.35
+  },
+  {
+    "name": "Irapuato Aux 1",
+    "autopista": "45D",
+    "lat": 20.545232150172044,
+    "lon": -101.34758588279574
+  },
+  {
+    "name": "Irapuato Aux 2",
+    "autopista": "45D",
+    "lat": 20.65649531110827,
+    "lon": -101.26918036272401
+  },
+  {
+    "name": "Irapuato Aux 3",
+    "autopista": "45D",
+    "lat": 20.527518864565394,
+    "lon": -101.37653714659814
+  },
+  {
+    "name": "Irapuato Aux 4",
+    "autopista": "45D",
+    "lat": 20.545864473103634,
+    "lon": -101.22926861939851
+  },
+  {
+    "name": "Leon",
+    "autopista": "45D",
+    "lat": 21.12,
+    "lon": -101.68
+  },
+  {
+    "name": "Leon Aux 1",
+    "autopista": "45D",
+    "lat": 21.114407239263564,
+    "lon": -101.72050155919902
+  },
+  {
+    "name": "Leon Aux 2",
+    "autopista": "45D",
+    "lat": 21.052113654008473,
+    "lon": -101.62190911627229
+  },
+  {
+    "name": "Leon Aux 3",
+    "autopista": "45D",
+    "lat": 21.12744751309074,
+    "lon": -101.60788002994862
+  },
+  {
+    "name": "Leon Aux 4",
+    "autopista": "45D",
+    "lat": 21.157649850797462,
+    "lon": -101.77623227502167
+  },
+  {
+    "name": "Lagos de Moreno",
+    "autopista": "45D",
+    "lat": 21.35,
+    "lon": -101.93
+  },
+  {
+    "name": "Lagos de Moreno Aux 1",
+    "autopista": "45D",
+    "lat": 21.34399941239335,
+    "lon": -101.92913203079421
+  },
+  {
+    "name": "Lagos de Moreno Aux 2",
+    "autopista": "45D",
+    "lat": 21.233416863151437,
+    "lon": -101.82444238356412
+  },
+  {
+    "name": "Lagos de Moreno Aux 3",
+    "autopista": "45D",
+    "lat": 21.276866107674053,
+    "lon": -101.91085560996672
+  },
+  {
+    "name": "Lagos de Moreno Aux 4",
+    "autopista": "45D",
+    "lat": 21.420112269139246,
+    "lon": -102.05467936763944
+  },
+  {
+    "name": "Tlalpan",
+    "autopista": "95D",
+    "lat": 19.29,
+    "lon": -99.23
+  },
+  {
+    "name": "Tlalpan Aux 1",
+    "autopista": "95D",
+    "lat": 19.305751581523367,
+    "lon": -99.28026680514569
+  },
+  {
+    "name": "Tlalpan Aux 2",
+    "autopista": "95D",
+    "lat": 19.368228818134458,
+    "lon": -99.17187838479077
+  },
+  {
+    "name": "Tlalpan Aux 3",
+    "autopista": "95D",
+    "lat": 19.281365293853305,
+    "lon": -99.20074784548395
+  },
+  {
+    "name": "Tlalpan Aux 4",
+    "autopista": "95D",
+    "lat": 19.25072898196633,
+    "lon": -99.34660105382588
+  },
+  {
+    "name": "Cuernavaca",
+    "autopista": "95D",
+    "lat": 18.91,
+    "lon": -99.23
+  },
+  {
+    "name": "Cuernavaca Aux 1",
+    "autopista": "95D",
+    "lat": 18.85234324652213,
+    "lon": -99.29474897275426
+  },
+  {
+    "name": "Cuernavaca Aux 2",
+    "autopista": "95D",
+    "lat": 18.817522693594267,
+    "lon": -99.23793334526358
+  },
+  {
+    "name": "Cuernavaca Aux 3",
+    "autopista": "95D",
+    "lat": 18.95250235841135,
+    "lon": -99.25407480784416
+  },
+  {
+    "name": "Cuernavaca Aux 4",
+    "autopista": "95D",
+    "lat": 18.961424527021848,
+    "lon": -99.12794731613502
+  },
+  {
+    "name": "Paso Morelos",
+    "autopista": "95D",
+    "lat": 18.35,
+    "lon": -99.64
+  },
+  {
+    "name": "Paso Morelos Aux 1",
+    "autopista": "95D",
+    "lat": 18.46246035633563,
+    "lon": -99.67212797064951
+  },
+  {
+    "name": "Paso Morelos Aux 2",
+    "autopista": "95D",
+    "lat": 18.27891217595052,
+    "lon": -99.58406447143247
+  },
+  {
+    "name": "Paso Morelos Aux 3",
+    "autopista": "95D",
+    "lat": 18.30269089736892,
+    "lon": -99.50313157146788
+  },
+  {
+    "name": "Paso Morelos Aux 4",
+    "autopista": "95D",
+    "lat": 18.202363353075196,
+    "lon": -99.70339148873103
+  },
+  {
+    "name": "Palo Blanco",
+    "autopista": "95D",
+    "lat": 17.98,
+    "lon": -99.75
+  },
+  {
+    "name": "Palo Blanco Aux 1",
+    "autopista": "95D",
+    "lat": 17.924960827290995,
+    "lon": -99.83250067072196
+  },
+  {
+    "name": "Palo Blanco Aux 2",
+    "autopista": "95D",
+    "lat": 17.96179373676568,
+    "lon": -99.8763098978837
+  },
+  {
+    "name": "Palo Blanco Aux 3",
+    "autopista": "95D",
+    "lat": 17.91290856213896,
+    "lon": -99.70257078386645
+  },
+  {
+    "name": "Palo Blanco Aux 4",
+    "autopista": "95D",
+    "lat": 17.97970631639439,
+    "lon": -99.61193818743939
+  },
+  {
+    "name": "La Venta Acapulco",
+    "autopista": "95D",
+    "lat": 16.85,
+    "lon": -99.82
+  },
+  {
+    "name": "La Venta Acapulco Aux 1",
+    "autopista": "95D",
+    "lat": 16.936974234250226,
+    "lon": -99.96843692532106
+  },
+  {
+    "name": "La Venta Acapulco Aux 2",
+    "autopista": "95D",
+    "lat": 16.996379689892176,
+    "lon": -99.73732750373615
+  },
+  {
+    "name": "La Venta Acapulco Aux 3",
+    "autopista": "95D",
+    "lat": 16.802378916821446,
+    "lon": -99.93547122454487
+  },
+  {
+    "name": "La Venta Acapulco Aux 4",
+    "autopista": "95D",
+    "lat": 16.790635657102296,
+    "lon": -99.79076999642677
+  }
+]
