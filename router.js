@@ -1,39 +1,53 @@
 
-let map
-let rutaLayer
+let map;
+let routeLayer;
+let currentRoute=[];
 
 function initMap(){
- map=L.map('map').setView([23,-102],5)
- L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18}).addTo(map)
+ map=L.map('map').setView([23,-102],5);
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18}).addTo(map);
 }
 
-function calcularRuta(){
+async function calcularRuta(){
 
- setEstado("Calculando ruta...")
+ try{
 
- const origen=document.getElementById("origen").value
- const destino=document.getElementById("destino").value
+ setEstado("Buscando coordenadas origen...");
+ const origen=document.getElementById("origen").value;
+ const destino=document.getElementById("destino").value;
 
- const url=`https://router.project-osrm.org/route/v1/driving/${encodeURIComponent(origen)};${encodeURIComponent(destino)}?overview=full&geometries=geojson`
+ const o=await geocode(origen);
 
- fetch(url)
- .then(r=>r.json())
- .then(data=>{
+ setEstado("Buscando coordenadas destino...");
+ const d=await geocode(destino);
 
- const route=data.routes[0]
- const km=(route.distance/1000).toFixed(0)
+ setEstado("Calculando ruta...");
 
- document.getElementById("km").value=km
+ const url=`https://router.project-osrm.org/route/v1/driving/${o[0]},${o[1]};${d[0]},${d[1]}?overview=full&geometries=geojson`;
 
- if(rutaLayer) map.removeLayer(rutaLayer)
+ const r=await fetch(url);
+ const data=await r.json();
 
- rutaLayer=L.geoJSON(route.geometry).addTo(map)
+ const route=data.routes[0];
 
- map.fitBounds(rutaLayer.getBounds())
+ const km=(route.distance/1000).toFixed(0);
 
- window.currentRoute=route.geometry.coordinates
+ document.getElementById("km").value=km;
 
- setEstado("Ruta calculada")
+ if(routeLayer) map.removeLayer(routeLayer);
 
- })
+ routeLayer=L.geoJSON(route.geometry).addTo(map);
+
+ map.fitBounds(routeLayer.getBounds());
+
+ currentRoute=route.geometry.coordinates;
+
+ setEstado("Ruta lista");
+
+ }catch(e){
+
+ setEstado("Error: "+e);
+
+ }
+
 }

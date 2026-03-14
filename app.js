@@ -1,37 +1,29 @@
 
-window.onload=()=>{
-
- initMap()
-
-}
+window.onload=()=>{initMap();}
 
 function setEstado(t){
-
- document.getElementById("estado").innerText=t
-
+ document.getElementById("estado").innerText=t;
 }
 
 function calcularFlete(){
 
- const km=parseFloat(document.getElementById("km").value)
- const diesel=parseFloat(document.getElementById("diesel").value)
+ setEstado("Analizando casetas...");
 
- const casetas=detectarCasetas()
+ const km=parseFloat(document.getElementById("km").value);
+ const diesel=parseFloat(document.getElementById("diesel").value);
 
- let total=0
- let lista=""
+ const casetas=detectarCasetas();
+
+ let total=0;
+ let lista="";
 
  casetas.forEach(c=>{
+ const p=TARIFAS[c]||0;
+ total+=p;
+ lista+=c+" $"+p+"<br>";
+ });
 
- const p=TARIFAS[c]||0
-
- total+=p
-
- lista+=c+" $"+p+"<br>"
-
- })
-
- const dieselCosto=km*0.35*diesel
+ const dieselCosto=km*0.35*diesel;
 
  const html=`
  <h3>COSTO OPERATIVO</h3>
@@ -40,21 +32,21 @@ function calcularFlete(){
  Casetas: $${total}<br><br>
  <b>Casetas</b><br>
  ${lista}
- `
+ `;
 
- document.getElementById("resultado").innerHTML=html
+ document.getElementById("resultado").innerHTML=html;
 
- setEstado("Casetas detectadas: "+casetas.length)
+ setEstado("Casetas detectadas: "+casetas.length);
 
 }
 
 function borrar(){
 
- document.getElementById("origen").value=""
- document.getElementById("destino").value=""
- document.getElementById("km").value=""
- document.getElementById("resultado").innerHTML=""
+ document.getElementById("origen").value="";
+ document.getElementById("destino").value="";
+ document.getElementById("km").value="";
+ document.getElementById("resultado").innerHTML="";
 
- setEstado("Sistema listo")
+ setEstado("Sistema listo");
 
 }
