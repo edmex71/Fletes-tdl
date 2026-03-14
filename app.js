@@ -1,4 +1,24 @@
 
+function precioPorKm(km){
+ let tarifa=22
+ if(km>300) tarifa=32
+ if(km>700) tarifa=38
+ return Math.ceil((km*tarifa)/100)*100
+}
+
+
+function filtrarCasetas(lista,ejes){
+ const unicas={}
+ lista.forEach(c=>{
+  const precio=TARIFAS[c]?.[ejes]||0
+  if(precio>0 && !c.includes("KM")){
+   unicas[c]=precio
+  }
+ })
+ return Object.keys(unicas)
+}
+
+
 function formatoDinero(v){
  return "$"+Math.ceil(v/100)*100 .toLocaleString ? "$"+(Math.ceil(v/100)*100).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}) : "$"+Math.ceil(v/100)*100;
 }
@@ -14,20 +34,28 @@ function calcularPrecios(costo){
 }
 
 
+
 function generarImagen(){
 
  const origen=document.getElementById("origen").value
  const destino=document.getElementById("destino").value
  const ruta=origen+" → "+destino
- const precio=document.getElementById("precio_medio").innerText
+ const km=document.getElementById("km").value
+
+ const precioSel=document.querySelector('input[name="precio_envio"]:checked')
+ let precio=""
+ if(precioSel.value==="bajo") precio=document.getElementById("precio_bajo").innerText
+ if(precioSel.value==="medio") precio=document.getElementById("precio_medio").innerText
+ if(precioSel.value==="alto") precio=document.getElementById("precio_alto").innerText
+ if(precioSel.value==="km") precio="$"+precioPorKm(km).toLocaleString()
 
  const canvas=document.createElement("canvas")
  canvas.width=800
- canvas.height=500
+ canvas.height=520
  const ctx=canvas.getContext("2d")
 
  ctx.fillStyle="#ffffff"
- ctx.fillRect(0,0,800,500)
+ ctx.fillRect(0,0,800,520)
 
  const logo=new Image()
  logo.src="logo.png"
@@ -44,8 +72,11 @@ function generarImagen(){
  ctx.fillText("Ruta:",100,280)
  ctx.fillText(ruta,100,310)
 
- ctx.fillText("Precio:",100,360)
- ctx.fillText(precio,100,390)
+ ctx.fillText("Distancia:",100,350)
+ ctx.fillText(km+" km",100,380)
+
+ ctx.fillText("Precio:",100,430)
+ ctx.fillText(precio,100,460)
 
  const img=canvas.toDataURL("image/jpeg")
  const a=document.createElement("a")
@@ -54,8 +85,8 @@ function generarImagen(){
  a.click()
 
  }
-
 }
+
 
 
 
@@ -85,7 +116,7 @@ function calcularFlete(){
  const rend=parseFloat(document.getElementById("rend").value)
  const ejes=document.getElementById("ejes").value
 
- const casetas=detectarCasetas()
+ let casetas=detectarCasetas(); casetas=filtrarCasetas(casetas,ejes)
 
  let totalCasetas=0
  let lista=""
