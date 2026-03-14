@@ -18,9 +18,13 @@ function calcularFlete(){
  let lista="";
 
  casetas.forEach(c=>{
- const p=TARIFAS[c]||0;
- total+=p;
- lista+=c+" $"+p+"<br>";
+
+ const precio=TARIFAS[c]||0;
+
+ total+=precio;
+
+ lista+=c+" $"+precio+"<br>";
+
  });
 
  const dieselCosto=km*0.35*diesel;

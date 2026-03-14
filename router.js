@@ -29,7 +29,6 @@ async function calcularRuta(){
  const data=await r.json();
 
  const route=data.routes[0];
-
  const km=(route.distance/1000).toFixed(0);
 
  document.getElementById("km").value=km;
@@ -37,7 +36,6 @@ async function calcularRuta(){
  if(routeLayer) map.removeLayer(routeLayer);
 
  routeLayer=L.geoJSON(route.geometry).addTo(map);
-
  map.fitBounds(routeLayer.getBounds());
 
  currentRoute=route.geometry.coordinates;
@@ -45,9 +43,7 @@ async function calcularRuta(){
  setEstado("Ruta lista");
 
  }catch(e){
-
  setEstado("Error: "+e);
-
  }
 
 }

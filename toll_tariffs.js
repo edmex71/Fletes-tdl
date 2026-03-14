@@ -1,7 +1,7 @@
 
 const TARIFAS={
-"Tepotzotlan":260,
-"Palmillas":310,
-"San Juan del Rio":280,
-"San Marcos":156
+"TEPOTZOTLAN":260,
+"PALMILLAS":310,
+"SAN":156,
+"QUERETARO":180
 };
