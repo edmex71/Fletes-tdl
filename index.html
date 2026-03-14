@@ -31,16 +31,23 @@
 <label>Kilómetros</label>
 <input id="km">
 
-<label>Tipo de camión</label>
-<select id="camion">
-<option value="5">Tráiler 5 ejes</option>
+<label>Ejes</label>
+<select id="ejes">
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5" selected>5</option>
+<option value="6">6</option>
 </select>
 
+<label>Rendimiento km/L</label>
+<input id="rend" value="2.3">
+
 <label>Precio Diesel</label>
-<input id="diesel" value="24">
+<input id="diesel" value="26">
 
 <button onclick="calcularFlete()">Calcular Flete</button>
-<button onclick="borrar()">Borrar datos</button>
+<button onclick="borrar()">Borrar</button>
 
 <div id="map"></div>
 <div id="resultado"></div>
@@ -52,7 +59,7 @@
 <script src="geocoder.js"></script>
 <script src="router.js"></script>
 <script src="toll_detector.js"></script>
-<script src="toll_tariffs.js"></script>
+<script src="tariffs.js"></script>
 <script src="app.js"></script>
 
 </body>
