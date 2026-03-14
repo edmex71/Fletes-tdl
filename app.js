@@ -7,8 +7,6 @@ function setEstado(t){
 
 function calcularFlete(){
 
- setEstado("Analizando casetas")
-
  const km=parseFloat(document.getElementById("km").value)
  const diesel=parseFloat(document.getElementById("diesel").value)
  const rend=parseFloat(document.getElementById("rend").value)
@@ -22,9 +20,7 @@ function calcularFlete(){
  casetas.forEach(c=>{
 
  const precio=TARIFAS[c]?.[ejes]||0
-
  totalCasetas+=precio
-
  lista+=c+" $"+precio+"<br>"
 
  })
@@ -44,7 +40,6 @@ function calcularFlete(){
  `
 
  document.getElementById("resultado").innerHTML=html
-
  setEstado("Casetas detectadas "+casetas.length)
 
 }
@@ -55,7 +50,6 @@ function borrar(){
  document.getElementById("destino").value=""
  document.getElementById("km").value=""
  document.getElementById("resultado").innerHTML=""
-
  setEstado("Sistema listo")
 
 }

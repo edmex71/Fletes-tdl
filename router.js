@@ -12,13 +12,10 @@ async function calcularRuta(){
 
  try{
 
- setEstado("Geocoding origen")
- const o=await geocode(document.getElementById("origen").value)
-
- setEstado("Geocoding destino")
- const d=await geocode(document.getElementById("destino").value)
-
  setEstado("Calculando ruta")
+
+ const o=await geocode(document.getElementById("origen").value)
+ const d=await geocode(document.getElementById("destino").value)
 
  const url=`https://router.project-osrm.org/route/v1/driving/${o[0]},${o[1]};${d[0]},${d[1]}?overview=full&geometries=geojson`
 

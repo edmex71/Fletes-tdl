@@ -49,10 +49,7 @@ function detectarCasetas(){
 
  if(dist(p,coord)<2){
 
- casetas.push({
-  nombre:nombre,
-  pos:i
- })
+ casetas.push({nombre:nombre,pos:i})
 
  }
 
