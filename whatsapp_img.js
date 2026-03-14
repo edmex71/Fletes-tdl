@@ -1,0 +1,1 @@
+// WhatsApp image module placeholder
