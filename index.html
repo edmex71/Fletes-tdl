@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flete TDL</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script></head>
+
+<body>
+
+<div class="header">
+<img src="logo.png" class="logo">
+<h1>Flete TDL</h1>
+</div>
+
+<div class="container">
+
+<label>Origen</label>
+<input id="origen">
+
+<label>Destino</label>
+<input id="destino">
+
+<button onclick="calcularRuta()">Calcular ruta</button>
+
+<label>Kilómetros</label>
+<input id="km">
+
+<label>Tipo de camión</label>
+<select id="camion">
+<option value="2.8">Tráiler 5 ejes</option>
+<option value="3.5">Torton</option>
+<option value="4.5">Rabón</option>
+</select>
+
+
+
+<label>Viaje</label>
+<select id="viaje">
+<option value="1">Solo ida</option>
+<option value="2">Ida y vuelta</option>
+</select>
+
+<label>Retorno vacío (%)</label>
+<input id="retornoVacio" value="50">
+
+<select id="viaje">
+<option value="1">Solo ida</option>
+<option value="2">Ida y vuelta</option>
+</select>
+
+<label>Precio Diesel</label>
+<input id="diesel" value="24">
+
+<button onclick="calcularFlete()">Calcular Flete</button>
+<button onclick="enviarCotizacion()">Enviar Cotización</button><button onclick='reiniciarApp()'>Borrar datos</button><button onclick='generarJPG()'>JPG</button><button onclick='generarPDF()'>PDF</button></button>
+
+<div id="precios"></div>
+
+<div id="map"></div>
+
+
+<button onclick="mostrarHistorial()">Historial</button>
+
+<div id="historial" style="display:none;background:#fff;padding:10px;margin-top:20px"></div>
+
+</div>
+
+<script src="ruta.js"></script>
+<script src="cotizacion.js"></script>
+
+<script src='casetas.js'></script>
+<script src="capufe_casetas.js"></script>
+</body>
+</html>
