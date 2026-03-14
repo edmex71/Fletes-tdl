@@ -1,4 +1,25 @@
 
+function normalizarNombre(nombre){
+ if(!nombre) return "";
+ let n = nombre.toUpperCase();
+ n = n.replace(/AUX.*/g,"");
+ n = n.replace(/AUXILIAR.*/g,"");
+ n = n.replace(/CASETA/g,"");
+ n = n.replace(/\s+/g," ").trim();
+ return n;
+}
+
+function buscarPrecio(nombre, tarifas){
+ const base = normalizarNombre(nombre);
+ for(const k in tarifas){
+   if(normalizarNombre(k)===base){
+      return tarifas[k];
+   }
+ }
+ return 0;
+}
+
+
 async function cargarCasetas(){
  const res = await fetch('dataset_capufe_nacional.json');
  return await res.json();
