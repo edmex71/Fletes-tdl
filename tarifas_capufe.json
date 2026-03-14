@@ -1,0 +1,702 @@
+{
+  "Tepotzotlan": {
+    "auto": 123,
+    "5ejes": 322,
+    "6ejes": 273
+  },
+  "Tepotzotlan Aux 1": {
+    "auto": 174,
+    "5ejes": 385,
+    "6ejes": 259
+  },
+  "Tepotzotlan Aux 2": {
+    "auto": 82,
+    "5ejes": 400,
+    "6ejes": 487
+  },
+  "Tepotzotlan Aux 3": {
+    "auto": 185,
+    "5ejes": 414,
+    "6ejes": 366
+  },
+  "Tepotzotlan Aux 4": {
+    "auto": 133,
+    "5ejes": 233,
+    "6ejes": 255
+  },
+  "Palmillas": {
+    "auto": 178,
+    "5ejes": 375,
+    "6ejes": 261
+  },
+  "Palmillas Aux 1": {
+    "auto": 86,
+    "5ejes": 431,
+    "6ejes": 338
+  },
+  "Palmillas Aux 2": {
+    "auto": 84,
+    "5ejes": 389,
+    "6ejes": 256
+  },
+  "Palmillas Aux 3": {
+    "auto": 166,
+    "5ejes": 256,
+    "6ejes": 403
+  },
+  "Palmillas Aux 4": {
+    "auto": 88,
+    "5ejes": 337,
+    "6ejes": 378
+  },
+  "San Juan del Rio": {
+    "auto": 109,
+    "5ejes": 345,
+    "6ejes": 447
+  },
+  "San Juan del Rio Aux 1": {
+    "auto": 171,
+    "5ejes": 330,
+    "6ejes": 388
+  },
+  "San Juan del Rio Aux 2": {
+    "auto": 157,
+    "5ejes": 375,
+    "6ejes": 309
+  },
+  "San Juan del Rio Aux 3": {
+    "auto": 107,
+    "5ejes": 201,
+    "6ejes": 455
+  },
+  "San Juan del Rio Aux 4": {
+    "auto": 182,
+    "5ejes": 322,
+    "6ejes": 303
+  },
+  "Queretaro": {
+    "auto": 95,
+    "5ejes": 331,
+    "6ejes": 396
+  },
+  "Queretaro Aux 1": {
+    "auto": 191,
+    "5ejes": 435,
+    "6ejes": 280
+  },
+  "Queretaro Aux 2": {
+    "auto": 94,
+    "5ejes": 217,
+    "6ejes": 449
+  },
+  "Queretaro Aux 3": {
+    "auto": 159,
+    "5ejes": 213,
+    "6ejes": 275
+  },
+  "Queretaro Aux 4": {
+    "auto": 151,
+    "5ejes": 222,
+    "6ejes": 259
+  },
+  "San Luis Potosi": {
+    "auto": 119,
+    "5ejes": 200,
+    "6ejes": 408
+  },
+  "San Luis Potosi Aux 1": {
+    "auto": 84,
+    "5ejes": 265,
+    "6ejes": 407
+  },
+  "San Luis Potosi Aux 2": {
+    "auto": 109,
+    "5ejes": 386,
+    "6ejes": 418
+  },
+  "San Luis Potosi Aux 3": {
+    "auto": 111,
+    "5ejes": 352,
+    "6ejes": 256
+  },
+  "San Luis Potosi Aux 4": {
+    "auto": 180,
+    "5ejes": 390,
+    "6ejes": 458
+  },
+  "Matehuala": {
+    "auto": 122,
+    "5ejes": 403,
+    "6ejes": 255
+  },
+  "Matehuala Aux 1": {
+    "auto": 163,
+    "5ejes": 390,
+    "6ejes": 370
+  },
+  "Matehuala Aux 2": {
+    "auto": 160,
+    "5ejes": 403,
+    "6ejes": 371
+  },
+  "Matehuala Aux 3": {
+    "auto": 128,
+    "5ejes": 250,
+    "6ejes": 433
+  },
+  "Matehuala Aux 4": {
+    "auto": 143,
+    "5ejes": 258,
+    "6ejes": 276
+  },
+  "Los Chorros": {
+    "auto": 189,
+    "5ejes": 322,
+    "6ejes": 333
+  },
+  "Los Chorros Aux 1": {
+    "auto": 144,
+    "5ejes": 228,
+    "6ejes": 446
+  },
+  "Los Chorros Aux 2": {
+    "auto": 199,
+    "5ejes": 267,
+    "6ejes": 499
+  },
+  "Los Chorros Aux 3": {
+    "auto": 143,
+    "5ejes": 343,
+    "6ejes": 507
+  },
+  "Los Chorros Aux 4": {
+    "auto": 131,
+    "5ejes": 246,
+    "6ejes": 345
+  },
+  "Saltillo": {
+    "auto": 88,
+    "5ejes": 217,
+    "6ejes": 319
+  },
+  "Saltillo Aux 1": {
+    "auto": 88,
+    "5ejes": 402,
+    "6ejes": 295
+  },
+  "Saltillo Aux 2": {
+    "auto": 117,
+    "5ejes": 264,
+    "6ejes": 417
+  },
+  "Saltillo Aux 3": {
+    "auto": 88,
+    "5ejes": 255,
+    "6ejes": 412
+  },
+  "Saltillo Aux 4": {
+    "auto": 110,
+    "5ejes": 234,
+    "6ejes": 431
+  },
+  "San Marcos": {
+    "auto": 198,
+    "5ejes": 282,
+    "6ejes": 288
+  },
+  "San Marcos Aux 1": {
+    "auto": 198,
+    "5ejes": 367,
+    "6ejes": 463
+  },
+  "San Marcos Aux 2": {
+    "auto": 168,
+    "5ejes": 279,
+    "6ejes": 349
+  },
+  "San Marcos Aux 3": {
+    "auto": 114,
+    "5ejes": 227,
+    "6ejes": 350
+  },
+  "San Marcos Aux 4": {
+    "auto": 126,
+    "5ejes": 321,
+    "6ejes": 257
+  },
+  "San Martin Texmelucan": {
+    "auto": 197,
+    "5ejes": 434,
+    "6ejes": 252
+  },
+  "San Martin Texmelucan Aux 1": {
+    "auto": 116,
+    "5ejes": 212,
+    "6ejes": 360
+  },
+  "San Martin Texmelucan Aux 2": {
+    "auto": 184,
+    "5ejes": 444,
+    "6ejes": 480
+  },
+  "San Martin Texmelucan Aux 3": {
+    "auto": 92,
+    "5ejes": 388,
+    "6ejes": 514
+  },
+  "San Martin Texmelucan Aux 4": {
+    "auto": 190,
+    "5ejes": 286,
+    "6ejes": 385
+  },
+  "Amozoc": {
+    "auto": 199,
+    "5ejes": 378,
+    "6ejes": 472
+  },
+  "Amozoc Aux 1": {
+    "auto": 162,
+    "5ejes": 394,
+    "6ejes": 406
+  },
+  "Amozoc Aux 2": {
+    "auto": 109,
+    "5ejes": 347,
+    "6ejes": 366
+  },
+  "Amozoc Aux 3": {
+    "auto": 189,
+    "5ejes": 274,
+    "6ejes": 310
+  },
+  "Amozoc Aux 4": {
+    "auto": 127,
+    "5ejes": 357,
+    "6ejes": 255
+  },
+  "La Venta": {
+    "auto": 134,
+    "5ejes": 401,
+    "6ejes": 418
+  },
+  "La Venta Aux 1": {
+    "auto": 120,
+    "5ejes": 417,
+    "6ejes": 349
+  },
+  "La Venta Aux 2": {
+    "auto": 164,
+    "5ejes": 296,
+    "6ejes": 465
+  },
+  "La Venta Aux 3": {
+    "auto": 113,
+    "5ejes": 368,
+    "6ejes": 446
+  },
+  "La Venta Aux 4": {
+    "auto": 101,
+    "5ejes": 227,
+    "6ejes": 295
+  },
+  "Lerma": {
+    "auto": 137,
+    "5ejes": 387,
+    "6ejes": 509
+  },
+  "Lerma Aux 1": {
+    "auto": 89,
+    "5ejes": 252,
+    "6ejes": 467
+  },
+  "Lerma Aux 2": {
+    "auto": 96,
+    "5ejes": 321,
+    "6ejes": 353
+  },
+  "Lerma Aux 3": {
+    "auto": 89,
+    "5ejes": 416,
+    "6ejes": 434
+  },
+  "Lerma Aux 4": {
+    "auto": 195,
+    "5ejes": 347,
+    "6ejes": 431
+  },
+  "Atlacomulco": {
+    "auto": 163,
+    "5ejes": 243,
+    "6ejes": 384
+  },
+  "Atlacomulco Aux 1": {
+    "auto": 100,
+    "5ejes": 271,
+    "6ejes": 454
+  },
+  "Atlacomulco Aux 2": {
+    "auto": 120,
+    "5ejes": 241,
+    "6ejes": 265
+  },
+  "Atlacomulco Aux 3": {
+    "auto": 159,
+    "5ejes": 360,
+    "6ejes": 394
+  },
+  "Atlacomulco Aux 4": {
+    "auto": 148,
+    "5ejes": 444,
+    "6ejes": 355
+  },
+  "Maravatio": {
+    "auto": 114,
+    "5ejes": 390,
+    "6ejes": 273
+  },
+  "Maravatio Aux 1": {
+    "auto": 180,
+    "5ejes": 217,
+    "6ejes": 308
+  },
+  "Maravatio Aux 2": {
+    "auto": 118,
+    "5ejes": 305,
+    "6ejes": 258
+  },
+  "Maravatio Aux 3": {
+    "auto": 183,
+    "5ejes": 247,
+    "6ejes": 511
+  },
+  "Maravatio Aux 4": {
+    "auto": 118,
+    "5ejes": 364,
+    "6ejes": 270
+  },
+  "Guadalajara": {
+    "auto": 116,
+    "5ejes": 349,
+    "6ejes": 336
+  },
+  "Guadalajara Aux 1": {
+    "auto": 166,
+    "5ejes": 258,
+    "6ejes": 326
+  },
+  "Guadalajara Aux 2": {
+    "auto": 110,
+    "5ejes": 316,
+    "6ejes": 264
+  },
+  "Guadalajara Aux 3": {
+    "auto": 193,
+    "5ejes": 421,
+    "6ejes": 381
+  },
+  "Guadalajara Aux 4": {
+    "auto": 175,
+    "5ejes": 447,
+    "6ejes": 356
+  },
+  "Durango": {
+    "auto": 178,
+    "5ejes": 234,
+    "6ejes": 488
+  },
+  "Durango Aux 1": {
+    "auto": 116,
+    "5ejes": 304,
+    "6ejes": 335
+  },
+  "Durango Aux 2": {
+    "auto": 193,
+    "5ejes": 354,
+    "6ejes": 347
+  },
+  "Durango Aux 3": {
+    "auto": 82,
+    "5ejes": 274,
+    "6ejes": 300
+  },
+  "Durango Aux 4": {
+    "auto": 137,
+    "5ejes": 429,
+    "6ejes": 417
+  },
+  "Mazatlan": {
+    "auto": 161,
+    "5ejes": 372,
+    "6ejes": 282
+  },
+  "Mazatlan Aux 1": {
+    "auto": 90,
+    "5ejes": 240,
+    "6ejes": 366
+  },
+  "Mazatlan Aux 2": {
+    "auto": 183,
+    "5ejes": 239,
+    "6ejes": 516
+  },
+  "Mazatlan Aux 3": {
+    "auto": 200,
+    "5ejes": 200,
+    "6ejes": 483
+  },
+  "Mazatlan Aux 4": {
+    "auto": 89,
+    "5ejes": 251,
+    "6ejes": 518
+  },
+  "Celaya": {
+    "auto": 111,
+    "5ejes": 240,
+    "6ejes": 305
+  },
+  "Celaya Aux 1": {
+    "auto": 89,
+    "5ejes": 259,
+    "6ejes": 375
+  },
+  "Celaya Aux 2": {
+    "auto": 150,
+    "5ejes": 433,
+    "6ejes": 433
+  },
+  "Celaya Aux 3": {
+    "auto": 155,
+    "5ejes": 368,
+    "6ejes": 469
+  },
+  "Celaya Aux 4": {
+    "auto": 169,
+    "5ejes": 414,
+    "6ejes": 377
+  },
+  "Salamanca": {
+    "auto": 181,
+    "5ejes": 324,
+    "6ejes": 448
+  },
+  "Salamanca Aux 1": {
+    "auto": 130,
+    "5ejes": 410,
+    "6ejes": 278
+  },
+  "Salamanca Aux 2": {
+    "auto": 109,
+    "5ejes": 304,
+    "6ejes": 265
+  },
+  "Salamanca Aux 3": {
+    "auto": 159,
+    "5ejes": 289,
+    "6ejes": 260
+  },
+  "Salamanca Aux 4": {
+    "auto": 96,
+    "5ejes": 268,
+    "6ejes": 354
+  },
+  "Irapuato": {
+    "auto": 187,
+    "5ejes": 420,
+    "6ejes": 273
+  },
+  "Irapuato Aux 1": {
+    "auto": 186,
+    "5ejes": 385,
+    "6ejes": 253
+  },
+  "Irapuato Aux 2": {
+    "auto": 200,
+    "5ejes": 376,
+    "6ejes": 420
+  },
+  "Irapuato Aux 3": {
+    "auto": 88,
+    "5ejes": 405,
+    "6ejes": 488
+  },
+  "Irapuato Aux 4": {
+    "auto": 88,
+    "5ejes": 299,
+    "6ejes": 421
+  },
+  "Leon": {
+    "auto": 143,
+    "5ejes": 253,
+    "6ejes": 261
+  },
+  "Leon Aux 1": {
+    "auto": 158,
+    "5ejes": 253,
+    "6ejes": 383
+  },
+  "Leon Aux 2": {
+    "auto": 100,
+    "5ejes": 245,
+    "6ejes": 403
+  },
+  "Leon Aux 3": {
+    "auto": 191,
+    "5ejes": 246,
+    "6ejes": 323
+  },
+  "Leon Aux 4": {
+    "auto": 136,
+    "5ejes": 420,
+    "6ejes": 351
+  },
+  "Lagos de Moreno": {
+    "auto": 157,
+    "5ejes": 347,
+    "6ejes": 425
+  },
+  "Lagos de Moreno Aux 1": {
+    "auto": 188,
+    "5ejes": 372,
+    "6ejes": 395
+  },
+  "Lagos de Moreno Aux 2": {
+    "auto": 198,
+    "5ejes": 241,
+    "6ejes": 429
+  },
+  "Lagos de Moreno Aux 3": {
+    "auto": 108,
+    "5ejes": 321,
+    "6ejes": 443
+  },
+  "Lagos de Moreno Aux 4": {
+    "auto": 150,
+    "5ejes": 391,
+    "6ejes": 297
+  },
+  "Tlalpan": {
+    "auto": 146,
+    "5ejes": 206,
+    "6ejes": 316
+  },
+  "Tlalpan Aux 1": {
+    "auto": 104,
+    "5ejes": 364,
+    "6ejes": 507
+  },
+  "Tlalpan Aux 2": {
+    "auto": 153,
+    "5ejes": 284,
+    "6ejes": 323
+  },
+  "Tlalpan Aux 3": {
+    "auto": 92,
+    "5ejes": 213,
+    "6ejes": 471
+  },
+  "Tlalpan Aux 4": {
+    "auto": 102,
+    "5ejes": 324,
+    "6ejes": 265
+  },
+  "Cuernavaca": {
+    "auto": 167,
+    "5ejes": 389,
+    "6ejes": 420
+  },
+  "Cuernavaca Aux 1": {
+    "auto": 113,
+    "5ejes": 360,
+    "6ejes": 475
+  },
+  "Cuernavaca Aux 2": {
+    "auto": 181,
+    "5ejes": 399,
+    "6ejes": 493
+  },
+  "Cuernavaca Aux 3": {
+    "auto": 115,
+    "5ejes": 420,
+    "6ejes": 382
+  },
+  "Cuernavaca Aux 4": {
+    "auto": 103,
+    "5ejes": 218,
+    "6ejes": 473
+  },
+  "Paso Morelos": {
+    "auto": 198,
+    "5ejes": 353,
+    "6ejes": 406
+  },
+  "Paso Morelos Aux 1": {
+    "auto": 113,
+    "5ejes": 340,
+    "6ejes": 344
+  },
+  "Paso Morelos Aux 2": {
+    "auto": 146,
+    "5ejes": 287,
+    "6ejes": 361
+  },
+  "Paso Morelos Aux 3": {
+    "auto": 118,
+    "5ejes": 203,
+    "6ejes": 383
+  },
+  "Paso Morelos Aux 4": {
+    "auto": 100,
+    "5ejes": 204,
+    "6ejes": 445
+  },
+  "Palo Blanco": {
+    "auto": 104,
+    "5ejes": 362,
+    "6ejes": 297
+  },
+  "Palo Blanco Aux 1": {
+    "auto": 182,
+    "5ejes": 266,
+    "6ejes": 361
+  },
+  "Palo Blanco Aux 2": {
+    "auto": 118,
+    "5ejes": 261,
+    "6ejes": 332
+  },
+  "Palo Blanco Aux 3": {
+    "auto": 88,
+    "5ejes": 217,
+    "6ejes": 342
+  },
+  "Palo Blanco Aux 4": {
+    "auto": 153,
+    "5ejes": 436,
+    "6ejes": 365
+  },
+  "La Venta Acapulco": {
+    "auto": 83,
+    "5ejes": 242,
+    "6ejes": 448
+  },
+  "La Venta Acapulco Aux 1": {
+    "auto": 115,
+    "5ejes": 299,
+    "6ejes": 490
+  },
+  "La Venta Acapulco Aux 2": {
+    "auto": 118,
+    "5ejes": 347,
+    "6ejes": 421
+  },
+  "La Venta Acapulco Aux 3": {
+    "auto": 140,
+    "5ejes": 367,
+    "6ejes": 283
+  },
+  "La Venta Acapulco Aux 4": {
+    "auto": 178,
+    "5ejes": 410,
+    "6ejes": 251
+  }
+}
