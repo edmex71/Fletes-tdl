@@ -31,9 +31,11 @@ function limpiar(n){
 
 }
 
+const RAMALES=["POLOTITLAN","JOROBAS"]
+
 function detectarCasetas(){
 
- const casetas=new Set()
+ const casetas=[]
 
  dataset_tolls.features.forEach(c=>{
 
@@ -41,12 +43,16 @@ function detectarCasetas(){
  const nombre=limpiar(c.properties?.name)
 
  if(!nombre) return
+ if(RAMALES.includes(nombre)) return
 
- currentRoute.forEach(p=>{
+ currentRoute.forEach((p,i)=>{
 
  if(dist(p,coord)<2){
 
- casetas.add(nombre)
+ casetas.push({
+  nombre:nombre,
+  pos:i
+ })
 
  }
 
@@ -54,6 +60,19 @@ function detectarCasetas(){
 
  })
 
- return [...casetas]
+ const mapUnique={}
+
+ casetas.forEach(c=>{
+
+ if(!mapUnique[c.nombre] || mapUnique[c.nombre].pos>c.pos)
+   mapUnique[c.nombre]=c
+
+ })
+
+ const arr=Object.values(mapUnique)
+
+ arr.sort((a,b)=>a.pos-b.pos)
+
+ return arr.map(x=>x.nombre)
 
 }
