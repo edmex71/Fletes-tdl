@@ -167,3 +167,10 @@ function borrar(){
  setEstado("Sistema listo")
 
 }
+
+function guardarHistorial(origen,destino,precio){
+ let h=JSON.parse(localStorage.getItem("historial")||"[]")
+ h.unshift({fecha:new Date().toISOString(),origen,destino,precio})
+ h=h.slice(0,10)
+ localStorage.setItem("historial",JSON.stringify(h))
+}
