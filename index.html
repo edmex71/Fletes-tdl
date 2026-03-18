@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<link rel="apple-touch-icon" href="logo.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flete TDL</title>
@@ -67,11 +68,13 @@
 <h3>PRECIO SUGERIDO
 
 <div id="precio_selector">
-<h3>PRECIO A ENVIAR</h3>
-<label><input type="radio" name="precio_envio" value="bajo"> Bajo</label><br>
-<label><input type="radio" name="precio_envio" value="medio" checked> Medio</label><br>
-<label><input type="radio" name="precio_envio" value="alto"> Alto</label><br>
-<label><input type="radio" name="precio_envio" value="km"> Por KM</label><br>
+<h3>PRECIO A ENVIAR
+<select id="precio_envio">
+<option value="bajo">Bajo</option>
+<option value="medio" selected>Medio</option>
+<option value="alto">Alto</option>
+<option value="km">Por KM</option>
+</select></label><br>
 </div>
 </h3>
 <div>Bajo: <span id="precio_bajo">$0.00</span></div>
