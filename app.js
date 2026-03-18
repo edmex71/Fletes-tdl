@@ -1,3 +1,5 @@
+let map;
+function initMap(){map=L.map('map').setView([19.4326,-99.1332],6);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);}window.onload=function(){initMap();};
 
 function initMapSafe(){
   try{
