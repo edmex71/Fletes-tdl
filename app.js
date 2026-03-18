@@ -1,4 +1,11 @@
 
+function initMapSafe(){
+  try{
+    if(typeof L === "undefined") return;
+    if(!document.getElementById("map")) return;
+  }catch(e){return;}
+}
+
 function precioPorKm(km){
  let tarifa=22
  if(km>300) tarifa=32
