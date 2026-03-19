@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flete TDL v30</title>
+<title>Flete TDL v31</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
 <style>
 body{font-family: Arial; margin:0; padding:10px;}
@@ -15,8 +17,7 @@ button{background:#4a67b3;color:white;border:none;}
 
 <body>
 
-<h2>Sistema listo</h2>
-<h1>Flete TDL v30</h1>
+<h1>Flete TDL v31</h1>
 
 <label>Origen</label>
 <input id="origen">
@@ -26,16 +27,10 @@ button{background:#4a67b3;color:white;border:none;}
 
 <button onclick="calcularRuta()">Calcular ruta</button>
 
-<div id="map">
-<iframe width="100%" height="100%" frameborder="0"
-src="https://www.openstreetmap.org/export/embed.html"></iframe>
-</div>
+<div id="map"></div>
 
 <label>Kilómetros</label>
 <input id="km" readonly>
-
-<label>Ejes</label>
-<select id="ejes"><option>5</option><option>6</option></select>
 
 <label>Rendimiento</label>
 <input id="rendimiento" value="2.3">
@@ -45,6 +40,7 @@ src="https://www.openstreetmap.org/export/embed.html"></iframe>
 
 <button onclick="calcularFlete()">Calcular Flete</button>
 
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="app.js"></script>
 
 </body>
