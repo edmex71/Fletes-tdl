@@ -4,10 +4,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 let rutaLayer;
 
 const CASETAS=[
-{nombre:"San Marcos",lat:19.36,lon:-98.9,costo:{5:92}},
-{nombre:"Tepotzotlan",lat:19.72,lon:-99.22,costo:{5:108}},
-{nombre:"Jorobas",lat:19.87,lon:-99.24,costo:{5:115}},
-{nombre:"Palmillas",lat:20.6,lon:-99.9,costo:{5:310}}
+{nombre:"Tepotzotlan",lat:19.72,lon:-99.22,costo:{1:70,3:95,5:108}},
+{nombre:"Jorobas",lat:19.87,lon:-99.24,costo:{1:80,3:100,5:115}},
+{nombre:"Palmillas",lat:20.6,lon:-99.9,costo:{1:250,3:280,5:310}}
 ];
 
 async function geocode(q){
@@ -47,8 +46,7 @@ CASETAS.forEach(c=>{
 coords.forEach(p=>{
 let dist=getDistance(p[1],p[0],c.lat,c.lon);
 if(dist<10){
-let costo=c.costo[ejes] || c.costo[5];
-set.set(c.nombre,costo);
+set.set(c.nombre,c.costo[ejes]);
 }
 });
 });
