@@ -1,5 +1,56 @@
-<html><head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flete TDL v32A</title>
+
 <link rel="manifest" href="manifest.json">
-</head><body>
-<h1>Flete TDL v32 FIX</h1>
-</body></html>
+<meta name="theme-color" content="#4a67b3">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<style>
+body{font-family: Arial; margin:0; padding:10px;}
+input, select, button{width:100%; margin:8px 0; padding:12px; border-radius:8px;}
+button{background:#4a67b3;color:white;border:none;}
+#map{height:300px;margin:15px 0;}
+</style>
+</head>
+
+<body>
+
+<h1>Flete TDL v32A</h1>
+
+<label>Origen</label>
+<input id="origen">
+
+<label>Destino</label>
+<input id="destino">
+
+<button onclick="calcularRuta()">Calcular ruta</button>
+
+<div id="map"></div>
+
+<label>Kilómetros</label>
+<input id="km" readonly>
+
+<label>Rendimiento</label>
+<input id="rendimiento" value="2.3">
+
+<label>Diesel</label>
+<input id="diesel" value="26">
+
+<button onclick="calcularFlete()">Calcular Flete</button>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="app.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
+</script>
+
+</body>
+</html>
