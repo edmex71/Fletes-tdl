@@ -3,6 +3,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 let rutaLayer;
 
+const CASETAS = [
+  {nombre:"San Marcos", lat:19.36, lon:-98.9},
+  {nombre:"San Martin Texmelucan", lat:19.28, lon:-98.43},
+  {nombre:"Tepotzotlan", lat:19.72, lon:-99.22},
+  {nombre:"Palmillas", lat:20.6, lon:-99.9}
+];
+
 async function geocode(q){
  let r = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${q}`);
  let j = await r.json();
@@ -26,8 +33,39 @@ async function calcularRuta(){
 
  if(rutaLayer) map.removeLayer(rutaLayer);
 
+ let coords = data.routes[0].geometry.coordinates;
+
  rutaLayer=L.geoJSON(data.routes[0].geometry).addTo(map);
  map.fitBounds(rutaLayer.getBounds());
+
+ detectarCasetas(coords);
+}
+
+function detectarCasetas(coords){
+ let lista=document.getElementById('casetas');
+ lista.innerHTML="";
+
+ CASETAS.forEach(c=>{
+   coords.forEach(p=>{
+     let dist = getDistance(p[1],p[0],c.lat,c.lon);
+     if(dist < 10){
+       let li=document.createElement("li");
+       li.innerText=c.nombre;
+       lista.appendChild(li);
+     }
+   });
+ });
+}
+
+function getDistance(lat1, lon1, lat2, lon2){
+ let R=6371;
+ let dLat=(lat2-lat1)*Math.PI/180;
+ let dLon=(lon2-lon1)*Math.PI/180;
+ let a=Math.sin(dLat/2)**2+
+       Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*
+       Math.sin(dLon/2)**2;
+ let c=2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+ return R*c;
 }
 
 function calcularFlete(){
