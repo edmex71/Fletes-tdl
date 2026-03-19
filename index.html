@@ -3,57 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flete TDL v33</title>
-
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#4a67b3">
-
+<title>Flete TDL v33.1</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-
 <style>
-body{font-family: Arial; margin:0; padding:10px;}
-input, select, button{width:100%; margin:8px 0; padding:12px; border-radius:8px;}
+body{font-family: Arial; padding:10px;}
+input,button{width:100%;margin:8px 0;padding:12px;border-radius:8px;}
 button{background:#4a67b3;color:white;border:none;}
 #map{height:300px;margin:15px 0;}
 </style>
 </head>
-
 <body>
-
-<h1>Flete TDL v33</h1>
-
-<label>Origen</label>
-<input id="origen">
-
-<label>Destino</label>
-<input id="destino">
-
+<h1>Flete TDL v33.1</h1>
+<input id="origen" placeholder="Origen">
+<input id="destino" placeholder="Destino">
 <button onclick="calcularRuta()">Calcular ruta</button>
-
 <div id="map"></div>
-
-<h3>Casetas detectadas</h3>
+<h3>Casetas (<span id="count">0</span>)</h3>
 <ul id="casetas"></ul>
-
-<label>Kilómetros</label>
-<input id="km" readonly>
-
-<label>Rendimiento</label>
+<input id="km" placeholder="KM" readonly>
 <input id="rendimiento" value="2.3">
-
-<label>Diesel</label>
 <input id="diesel" value="26">
-
 <button onclick="calcularFlete()">Calcular Flete</button>
-
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="app.js"></script>
-
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
-}
-</script>
-
 </body>
 </html>
