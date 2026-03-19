@@ -1,37 +1,32 @@
+async function geocode(ciudad){
+  let url = `https://nominatim.openstreetmap.org/search?format=json&q=${ciudad}`;
+  let res = await fetch(url);
+  let data = await res.json();
+  if(!data.length) throw "No encontrado";
+  return [data[0].lon, data[0].lat];
+}
+
 async function calcularRuta(){
   let o = document.getElementById('origen').value;
   let d = document.getElementById('destino').value;
 
-  if(!o || !d){alert("Falta origen/destino"); return;}
+  if(!o || !d){ alert("Falta origen/destino"); return; }
 
   try{
-    let r1 = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${o}`);
-    let r2 = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${d}`);
-    let j1 = await r1.json();
-    let j2 = await r2.json();
+    let c1 = await geocode(o);
+    let c2 = await geocode(d);
 
-    if(!j1.length || !j2.length){alert("No encontrado"); return;}
+    let url = `https://router.project-osrm.org/route/v1/driving/${c1[0]},${c1[1]};${c2[0]},${c2[1]}?overview=false`;
 
-    let lat1=j1[0].lat, lon1=j1[0].lon;
-    let lat2=j2[0].lat, lon2=j2[0].lon;
+    let res = await fetch(url);
+    let data = await res.json();
 
-    let km = getDistance(lat1,lon1,lat2,lon2);
+    let km = data.routes[0].distance / 1000;
     document.getElementById('km').value = Math.round(km);
 
   }catch(e){
-    alert("Error ruta");
+    alert("Error obteniendo ruta");
   }
-}
-
-function getDistance(lat1, lon1, lat2, lon2){
-  let R=6371;
-  let dLat=(lat2-lat1)*Math.PI/180;
-  let dLon=(lon2-lon1)*Math.PI/180;
-  let a=Math.sin(dLat/2)**2+
-        Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*
-        Math.sin(dLon/2)**2;
-  let c=2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
-  return R*c;
 }
 
 function calcularFlete(){
@@ -43,5 +38,7 @@ function calcularFlete(){
     let litros = km / rendimiento;
     let costo = litros * diesel;
     alert("Costo estimado: $" + Math.round(costo));
+  } else {
+    alert("Primero calcula la ruta");
   }
 }
