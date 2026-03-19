@@ -10,16 +10,17 @@ function precioPorKm(km){
 function filtrarCasetas(lista,ejes){
  const unicas={}
  lista.forEach(c=>{
-  
-const sel=document.getElementById("precio_envio")?.value||"medio";
-let precio=document.getElementById("precio_medio")?.innerText||"0";
-if(sel==="bajo") precio=document.getElementById("precio_bajo")?.innerText;
-if(sel==="alto") precio=document.getElementById("precio_alto")?.innerText;
-if(sel==="km"){
- const km=parseFloat(document.getElementById("km")?.value||0);
- precio="$"+precioPorKm(km).toLocaleString();
+  const precio=TARIFAS[c]?.[ejes]||0
+  if(precio>0 && !c.includes("KM")){
+   unicas[c]=precio
+  }
+ })
+ return Object.keys(unicas)
 }
 
+
+function formatoDinero(v){
+ return "$"+Math.ceil(v/100)*100 .toLocaleString ? "$"+(Math.ceil(v/100)*100).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}) : "$"+Math.ceil(v/100)*100;
 }
 
 function calcularPrecios(costo){
