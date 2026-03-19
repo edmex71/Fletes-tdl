@@ -1,18 +1,4 @@
 
-let map;
-
-function crearMapa(){
-  if(map){
-    map.remove();
-  }
-  map = L.map('map').setView([19.4326,-99.1332],6);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-    attribution:'© OpenStreetMap'
-  }).addTo(map);
-}
-let map;
-function initMap(){map=L.map('map').setView([19.4326,-99.1332],6);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);}
-
 function initMapSafe(){
   try{
     if(typeof L === "undefined") return;
