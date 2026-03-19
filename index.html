@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flete TDL v31</title>
+<title>Flete TDL v32</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4a67b3">
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
@@ -17,7 +20,7 @@ button{background:#4a67b3;color:white;border:none;}
 
 <body>
 
-<h1>Flete TDL v31</h1>
+<h1>Flete TDL v32</h1>
 
 <label>Origen</label>
 <input id="origen">
@@ -42,6 +45,12 @@ button{background:#4a67b3;color:white;border:none;}
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="app.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
+</script>
 
 </body>
 </html>
