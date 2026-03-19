@@ -1,11 +1,13 @@
 let map=L.map('map').setView([23,-102],5);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
 let rutaLayer;
 
 const CASETAS=[
-{nombre:"San Marcos",lat:19.36,lon:-98.9},
-{nombre:"San Martin",lat:19.28,lon:-98.43},
-{nombre:"Tepotzotlan",lat:19.72,lon:-99.22}
+{nombre:"San Marcos",lat:19.36,lon:-98.9,costo:92},
+{nombre:"San Martin Texmelucan",lat:19.28,lon:-98.43,costo:65},
+{nombre:"Tepotzotlan",lat:19.72,lon:-99.22,costo:102},
+{nombre:"Palmillas",lat:20.6,lon:-99.9,costo:310}
 ];
 
 async function geocode(q){
@@ -17,8 +19,10 @@ return [j[0].lon,j[0].lat];
 async function calcularRuta(){
 let o=document.getElementById('origen').value;
 let d=document.getElementById('destino').value;
+
 let c1=await geocode(o);
 let c2=await geocode(d);
+
 let res=await fetch(`https://router.project-osrm.org/route/v1/driving/${c1[0]},${c1[1]};${c2[0]},${c2[1]}?overview=full&geometries=geojson`);
 let data=await res.json();
 
@@ -36,22 +40,28 @@ detectarCasetas(coords);
 function detectarCasetas(coords){
 let lista=document.getElementById('casetas');
 lista.innerHTML="";
-let set=new Set();
+let set=new Map();
 
 CASETAS.forEach(c=>{
 coords.forEach(p=>{
 let dist=getDistance(p[1],p[0],c.lat,c.lon);
-if(dist<10){set.add(c.nombre);}
+if(dist<10){
+set.set(c.nombre,c.costo);
+}
 });
 });
 
-set.forEach(n=>{
+let total=0;
+
+set.forEach((costo,nombre)=>{
 let li=document.createElement("li");
-li.innerText=n;
+li.innerText=nombre+" → $"+costo;
 lista.appendChild(li);
+total+=costo;
 });
 
 document.getElementById('count').innerText=set.size;
+document.getElementById('totalCasetas').innerText=total;
 }
 
 function getDistance(a,b,c,d){
@@ -66,5 +76,10 @@ function calcularFlete(){
 let km=document.getElementById('km').value;
 let r=document.getElementById('rendimiento').value;
 let d=document.getElementById('diesel').value;
-alert("$"+Math.round((km/r)*d));
+let casetas=parseFloat(document.getElementById('totalCasetas').innerText);
+
+let diesel=(km/r)*d;
+let total=diesel+casetas;
+
+alert("Diesel: $"+Math.round(diesel)+"\nCasetas: $"+casetas+"\nTotal: $"+Math.round(total));
 }

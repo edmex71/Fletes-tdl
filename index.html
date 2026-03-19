@@ -3,28 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flete TDL v33.1</title>
+<title>Flete TDL v34</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 <style>
-body{font-family: Arial; padding:10px;}
+body{font-family:Arial;padding:10px;}
 input,button{width:100%;margin:8px 0;padding:12px;border-radius:8px;}
 button{background:#4a67b3;color:white;border:none;}
 #map{height:300px;margin:15px 0;}
 </style>
 </head>
 <body>
-<h1>Flete TDL v33.1</h1>
+
+<h1>Flete TDL v34</h1>
+
 <input id="origen" placeholder="Origen">
 <input id="destino" placeholder="Destino">
+
 <button onclick="calcularRuta()">Calcular ruta</button>
+
 <div id="map"></div>
+
 <h3>Casetas (<span id="count">0</span>)</h3>
 <ul id="casetas"></ul>
+
+<h3>Total casetas: $<span id="totalCasetas">0</span></h3>
+
 <input id="km" placeholder="KM" readonly>
 <input id="rendimiento" value="2.3">
 <input id="diesel" value="26">
+
 <button onclick="calcularFlete()">Calcular Flete</button>
+
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="app.js"></script>
+
 </body>
 </html>
