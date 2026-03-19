@@ -2,9 +2,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<link rel="apple-touch-icon" href="logo.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flete TDL</title>
+<title>Flete TDL v18</title>
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -15,7 +16,7 @@
 
 <header style="display:flex;align-items:center;gap:10px">
 <img src="logo.png" style="width:40px;height:40px">
-<h1>Flete TDL</h1>
+<h1>Flete TDL v18</h1>
 </header>
 
 <div class="container">
@@ -64,7 +65,18 @@
 
 
 <div id="precio_sugerido" style="margin-top:20px">
-<h3>PRECIO SUGERIDO</h3>
+<h3>PRECIO SUGERIDO
+
+<div id="precio_selector">
+<h3>PRECIO A ENVIAR
+<select id="precio_envio">
+<option value="bajo">Bajo</option>
+<option value="medio" selected>Medio</option>
+<option value="alto">Alto</option>
+<option value="km">Por KM</option>
+</select></label><br>
+</div>
+</h3>
 <div>Bajo: <span id="precio_bajo">$0.00</span></div>
 <div>Medio: <span id="precio_medio">$0.00</span></div>
 <div>Alto: <span id="precio_alto">$0.00</span></div>

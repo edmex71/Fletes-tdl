@@ -1,6 +1,32 @@
 
-function formatoDinero(v){
- return "$"+Math.ceil(v/100)*100 .toLocaleString ? "$"+(Math.ceil(v/100)*100).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}) : "$"+Math.ceil(v/100)*100;
+function initMapSafe(){
+  try{
+    if(typeof L === "undefined") return;
+    if(!document.getElementById("map")) return;
+  }catch(e){return;}
+}
+
+function precioPorKm(km){
+ let tarifa=22
+ if(km>300) tarifa=32
+ if(km>700) tarifa=38
+ return Math.ceil((km*tarifa)/100)*100
+}
+
+
+function filtrarCasetas(lista,ejes){
+ const unicas={}
+ lista.forEach(c=>{
+  
+const sel=document.getElementById("precio_envio")?.value||"medio";
+let precio=document.getElementById("precio_medio")?.innerText||"0";
+if(sel==="bajo") precio=document.getElementById("precio_bajo")?.innerText;
+if(sel==="alto") precio=document.getElementById("precio_alto")?.innerText;
+if(sel==="km"){
+ const km=parseFloat(document.getElementById("km")?.value||0);
+ precio="$"+precioPorKm(km).toLocaleString();
+}
+
 }
 
 function calcularPrecios(costo){
@@ -13,27 +39,61 @@ function calcularPrecios(costo){
  localStorage.setItem("ultimaCotizacion",JSON.stringify({fecha:new Date().toISOString(),costo}))
 }
 
+
+
 function generarImagen(){
- const ruta=document.getElementById("origen").value+" → "+document.getElementById("destino").value
- const precio=document.getElementById("precio_medio").innerText
+
+ const origen=document.getElementById("origen").value
+ const destino=document.getElementById("destino").value
+ const ruta=origen+" → "+destino
+ const km=document.getElementById("km").value
+
+ const precioSel=document.querySelector('input[name="precio_envio"]:checked')
+ let precio=""
+ if(precioSel.value==="bajo") precio=document.getElementById("precio_bajo").innerText
+ if(precioSel.value==="medio") precio=document.getElementById("precio_medio").innerText
+ if(precioSel.value==="alto") precio=document.getElementById("precio_alto").innerText
+ if(precioSel.value==="km") precio="$"+precioPorKm(km).toLocaleString()
+
  const canvas=document.createElement("canvas")
  canvas.width=800
- canvas.height=400
+ canvas.height=520
  const ctx=canvas.getContext("2d")
- ctx.fillStyle="#fff"
- ctx.fillRect(0,0,800,400)
+
+ ctx.fillStyle="#ffffff"
+ ctx.fillRect(0,0,800,520)
+
+ const logo=new Image()
+ logo.src="logo.png"
+
+ logo.onload=function(){
+
+ ctx.drawImage(logo,330,20,140,140)
+
  ctx.fillStyle="#000"
- ctx.font="28px Arial"
- ctx.fillText("🦁 Transporte D’Leon",40,80)
- ctx.font="22px Arial"
- ctx.fillText("Ruta: "+ruta,40,160)
- ctx.fillText("Precio: "+precio,40,220)
+ ctx.font="32px Arial"
+ ctx.fillText("Transporte D’Leon",240,200)
+
+ ctx.font="24px Arial"
+ ctx.fillText("Ruta:",100,280)
+ ctx.fillText(ruta,100,310)
+
+ ctx.fillText("Distancia:",100,350)
+ ctx.fillText(km+" km",100,380)
+
+ ctx.fillText("Precio:",100,430)
+ ctx.fillText(precio,100,460)
+
  const img=canvas.toDataURL("image/jpeg")
  const a=document.createElement("a")
  a.href=img
  a.download="cotizacion.jpg"
  a.click()
+
+ }
 }
+
+
 
 
 function formatoDinero(n){
@@ -62,7 +122,7 @@ function calcularFlete(){
  const rend=parseFloat(document.getElementById("rend").value)
  const ejes=document.getElementById("ejes").value
 
- const casetas=detectarCasetas()
+ let casetas=detectarCasetas(); casetas=filtrarCasetas(casetas,ejes)
 
  let totalCasetas=0
  let lista=""
@@ -77,6 +137,7 @@ function calcularFlete(){
 
  const litros=km/rend
  const dieselCosto=litros*diesel
+ const costoTotal=dieselCosto+totalCasetas
 
  const origen=document.getElementById("origen").value
  const destino=document.getElementById("destino").value
@@ -99,6 +160,7 @@ function calcularFlete(){
 
  document.getElementById("resultado").innerHTML=html
  setEstado("Casetas detectadas "+casetas.length)
+ calcularPrecios(costoTotal)
 
 }
 
@@ -110,4 +172,11 @@ function borrar(){
  document.getElementById("resultado").innerHTML=""
  setEstado("Sistema listo")
 
+}
+
+function guardarHistorial(origen,destino,precio){
+ let h=JSON.parse(localStorage.getItem("historial")||"[]")
+ h.unshift({fecha:new Date().toISOString(),origen,destino,precio})
+ h=h.slice(0,10)
+ localStorage.setItem("historial",JSON.stringify(h))
 }
