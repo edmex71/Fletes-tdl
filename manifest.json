@@ -2,7 +2,7 @@
 "name":"Flete TDL",
 "short_name":"FleteTDL",
 "display":"standalone",
-"start_url":".",
+"start_url":"./",
 "background_color":"#ffffff",
 "theme_color":"#4a67b3",
 "icons":[
