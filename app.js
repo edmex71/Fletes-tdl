@@ -4,10 +4,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 let rutaLayer;
 
 const CASETAS=[
-{nombre:"San Marcos",lat:19.36,lon:-98.9,costo:92},
-{nombre:"San Martin Texmelucan",lat:19.28,lon:-98.43,costo:65},
-{nombre:"Tepotzotlan",lat:19.72,lon:-99.22,costo:102},
-{nombre:"Palmillas",lat:20.6,lon:-99.9,costo:310}
+{nombre:"San Marcos",lat:19.36,lon:-98.9,costo:{1:50,3:80,5:92}},
+{nombre:"San Martin",lat:19.28,lon:-98.43,costo:{1:40,3:55,5:65}},
+{nombre:"Tepotzotlan",lat:19.72,lon:-99.22,costo:{1:70,3:90,5:102}},
+{nombre:"Palmillas",lat:20.6,lon:-99.9,costo:{1:200,3:260,5:310}}
 ];
 
 async function geocode(q){
@@ -19,6 +19,7 @@ return [j[0].lon,j[0].lat];
 async function calcularRuta(){
 let o=document.getElementById('origen').value;
 let d=document.getElementById('destino').value;
+let ejes=document.getElementById('ejes').value;
 
 let c1=await geocode(o);
 let c2=await geocode(d);
@@ -34,10 +35,10 @@ if(rutaLayer) map.removeLayer(rutaLayer);
 rutaLayer=L.geoJSON(data.routes[0].geometry).addTo(map);
 map.fitBounds(rutaLayer.getBounds());
 
-detectarCasetas(coords);
+detectarCasetas(coords,ejes);
 }
 
-function detectarCasetas(coords){
+function detectarCasetas(coords,ejes){
 let lista=document.getElementById('casetas');
 lista.innerHTML="";
 let set=new Map();
@@ -46,7 +47,7 @@ CASETAS.forEach(c=>{
 coords.forEach(p=>{
 let dist=getDistance(p[1],p[0],c.lat,c.lon);
 if(dist<10){
-set.set(c.nombre,c.costo);
+set.set(c.nombre,c.costo[ejes]);
 }
 });
 });

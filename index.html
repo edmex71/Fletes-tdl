@@ -3,21 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flete TDL v34</title>
+<title>Flete TDL v35</title>
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
 <style>
 body{font-family:Arial;padding:10px;}
-input,button{width:100%;margin:8px 0;padding:12px;border-radius:8px;}
+.header{display:flex;align-items:center;gap:10px;}
+.header img{width:50px;height:50px;}
+input,button,select{width:100%;margin:8px 0;padding:12px;border-radius:8px;}
 button{background:#4a67b3;color:white;border:none;}
 #map{height:300px;margin:15px 0;}
 </style>
 </head>
+
 <body>
 
-<h1>Flete TDL v34</h1>
+<div class="header">
+<img src="logo.png">
+<h1>Flete TDL v35</h1>
+</div>
 
 <input id="origen" placeholder="Origen">
 <input id="destino" placeholder="Destino">
+
+<select id="ejes">
+<option value="1">1 eje</option>
+<option value="3">3 ejes</option>
+<option value="5" selected>5 ejes</option>
+</select>
 
 <button onclick="calcularRuta()">Calcular ruta</button>
 
