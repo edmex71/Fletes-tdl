@@ -39,59 +39,8 @@
 <option value="5" selected>5</option>
 <option value="6">6</option>
 </select>
-
-<label>Rendimiento km/L</label>
-<input id="rend" value="2.3">
-
-<label>Precio Diesel</label>
-<input id="diesel" value="26">
-
-<button onclick="calcularFlete()">Calcular Flete</button>
-<button onclick="borrar()">Borrar</button>
-
-<div id="map"></div>
-<div id="resultado"></div>
-
-</div>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="dataset_tolls.js"></script>
-<script src="geocoder.js"></script>
-<script src="router.js"></script>
-<script src="toll_detector.js"></script>
-<script src="tariffs.js"></script>
-<script src="app.js"></script>
-
-
-<div id="precio_sugerido" style="margin-top:20px">
-<h3>PRECIO SUGERIDO
-
-<div id="precio_selector">
-<h3>
-<h3>PRECIO SUGERIDO
-
-<div id="bloque_precios">
-Bajo: <span id="precio_bajo">$0.00</span><br>
-Medio: <span id="precio_medio">$0.00</span><br>
-Alto: <span id="precio_alto">$0.00</span><br>
-Por KM: <span id="precio_km">$0.00</span><br>
-</div>
-
-<h3>PRECIO A ENVIAR</h3></h3>
-
-<select id="precio_envio">
-<option value="bajo">Bajo</option>
-<option value="medio">Medio</option>
-<option value="alto">Alto</option>
-<option value="km">Por KM</option>
-</select>
-</label><br>
-</div>
-</h3>
-<div>Bajo: <span id="precio_bajo">$0.00</span></div>
-<div>Medio: <span id="precio_medio">$0.00</span></div>
-<div>Alto: <span id="precio_alto">$0.00</span></div>
-<button onclick="generarImagen()">Generar imagen WhatsApp</button>
+<br>
+<button onclick="generarImagen()">Generar imagen WhatsApp</button></button>
 </div>
 
 </body>
