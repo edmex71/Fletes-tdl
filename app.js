@@ -182,23 +182,11 @@ function guardarHistorial(origen,destino,precio){
 }
 
 
-function formatoDineroCaseta(v){
- return "$"+Number(v).toLocaleString(
-  "en-US",
-  {
-   minimumFractionDigits:2,
-   maximumFractionDigits:2
-  }
- )
-}
-
-
-
 function detectarCasetas(){
 
  if(!window.rutaCoords) return []
 
- const detectadas=[]
+ const resultado=[]
 
  dataset_tolls.forEach(c=>{
 
@@ -209,9 +197,9 @@ function detectarCasetas(){
     (p[1]-c.lng)**2
    )
 
-   if(d<0.025){
+   if(d<0.02){
 
-    detectadas.push(c.nombre)
+    resultado.push(c.nombre)
 
    }
 
@@ -219,7 +207,7 @@ function detectarCasetas(){
 
  })
 
- return [...new Set(detectadas)]
+ return [...new Set(resultado)]
 
 }
 
