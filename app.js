@@ -23,13 +23,16 @@ function formatoDinero(v){
  return "$"+Math.ceil(v/100)*100 .toLocaleString ? "$"+(Math.ceil(v/100)*100).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}) : "$"+Math.ceil(v/100)*100;
 }
 
-function calcularPrecios(costo){
+function calcularPrecios(costo,km){
  const bajo=costo*1.15
  const medio=costo*1.30
  const alto=costo*1.45
  document.getElementById("precio_bajo").innerText=formatoDinero(bajo)
  document.getElementById("precio_medio").innerText=formatoDinero(medio)
- document.getElementById("precio_alto").innerText=formatoDinero(alto)
+ 
+document.getElementById("precio_alto").innerText=formatoDinero(alto)
+document.getElementById("precio_km").innerText=formatoDinero(precioPorKm(km))
+
  localStorage.setItem("ultimaCotizacion",JSON.stringify({fecha:new Date().toISOString(),costo}))
 }
 
@@ -42,12 +45,15 @@ function generarImagen(){
  const ruta=origen+" → "+destino
  const km=document.getElementById("km").value
 
- const precioSel=document.querySelector('input[name="precio_envio"]:checked')
- let precio=""
- if(precioSel.value==="bajo") precio=document.getElementById("precio_bajo").innerText
- if(precioSel.value==="medio") precio=document.getElementById("precio_medio").innerText
- if(precioSel.value==="alto") precio=document.getElementById("precio_alto").innerText
- if(precioSel.value==="km") precio="$"+precioPorKm(km).toLocaleString()
+ const precioSel=document.getElementById("precio_envio").value
+ 
+let precio=""
+
+if(precioSel==="bajo") precio=document.getElementById("precio_bajo").innerText
+if(precioSel==="medio") precio=document.getElementById("precio_medio").innerText
+if(precioSel==="alto") precio=document.getElementById("precio_alto").innerText
+if(precioSel==="km") precio=document.getElementById("precio_km").innerText
+
 
  const canvas=document.createElement("canvas")
  canvas.width=800
@@ -154,7 +160,7 @@ function calcularFlete(){
 
  document.getElementById("resultado").innerHTML=html
  setEstado("Casetas detectadas "+casetas.length)
- calcularPrecios(costoTotal)
+ calcularPrecios(costoTotal,km)
 
 }
 
@@ -174,5 +180,3 @@ function guardarHistorial(origen,destino,precio){
  h=h.slice(0,10)
  localStorage.setItem("historial",JSON.stringify(h))
 }
-
-function precioPorKM(km, tarifa){ return km * tarifa }
