@@ -174,3 +174,21 @@ function guardarHistorial(origen,destino,precio){
  h=h.slice(0,10)
  localStorage.setItem("historial",JSON.stringify(h))
 }
+
+
+const PRECIO_KM_DEFAULT = 20;
+
+function calcularPrecioPorKm(km){
+return km * PRECIO_KM_DEFAULT;
+}
+
+function aplicarSelectorPrecio(total, base, km){
+
+let s = document.getElementById("selectorPrecio");
+if(!s) return total;
+
+if(s.value=="sin_casetas") return base;
+if(s.value=="por_km") return calcularPrecioPorKm(km);
+
+return total;
+}

@@ -82,3 +82,14 @@ function detectarCasetas(){
  return arr.map(x=>x.nombre)
 
 }
+
+
+// mejora deteccion múltiples casetas
+function detectarMultiplesCasetas(ruta, lista){
+
+return lista.filter(c=>
+ruta.toLowerCase().includes(c.tramo?.toLowerCase()||"")||
+ruta.toLowerCase().includes(c.carretera?.toLowerCase()||"")
+);
+
+}
