@@ -84,12 +84,17 @@ function detectarCasetas(){
 }
 
 
-// mejora deteccion múltiples casetas
-function detectarMultiplesCasetas(ruta, lista){
+// deteccion amplia por coincidencia parcial nombre carretera
+function detectarCasetasRutaCompleta(ruta, dataset){
 
-return lista.filter(c=>
-ruta.toLowerCase().includes(c.tramo?.toLowerCase()||"")||
-ruta.toLowerCase().includes(c.carretera?.toLowerCase()||"")
-);
+return dataset.filter(c=>{
+
+let texto=ruta.toLowerCase();
+
+return texto.includes(c.nombre?.toLowerCase()||"") ||
+texto.includes(c.tramo?.toLowerCase()||"") ||
+texto.includes(c.carretera?.toLowerCase()||"");
+
+});
 
 }

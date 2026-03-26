@@ -176,19 +176,20 @@ function guardarHistorial(origen,destino,precio){
 }
 
 
-const PRECIO_KM_DEFAULT = 20;
+function obtenerPrecioSeleccionado(km){
 
-function calcularPrecioPorKm(km){
-return km * PRECIO_KM_DEFAULT;
+let s=document.getElementById("selectorPrecio").value;
+
+let bajo=parseFloat(document.getElementById("precio_bajo").value||0);
+let medio=parseFloat(document.getElementById("precio_medio").value||0);
+let alto=parseFloat(document.getElementById("precio_alto").value||0);
+let kmPrecio=parseFloat(document.getElementById("precio_km").value||0);
+
+if(s=="bajo") return bajo;
+if(s=="medio") return medio;
+if(s=="alto") return alto;
+if(s=="km") return km*kmPrecio;
+
+return bajo;
 }
 
-function aplicarSelectorPrecio(total, base, km){
-
-let s = document.getElementById("selectorPrecio");
-if(!s) return total;
-
-if(s.value=="sin_casetas") return base;
-if(s.value=="por_km") return calcularPrecioPorKm(km);
-
-return total;
-}
