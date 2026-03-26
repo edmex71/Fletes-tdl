@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flete TDL</title>
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+</head>
+<body>
+
+<div id="estado">Sistema listo</div>
+
+<header style="display:flex;align-items:center;gap:10px">
+<img src="logo.png" style="width:40px;height:40px">
+<h1>Flete TDL</h1>
+</header>
+
+<div class="container">
+
+<label>Origen</label>
+<input id="origen">
+
+<label>Destino</label>
+<input id="destino">
+
+<button onclick="calcularRuta()">Calcular ruta</button>
+
+<label>Kilómetros</label>
+<input id="km">
+
+<label>Ejes</label>
+<select id="ejes">
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5" selected>5</option>
+<option value="6">6</option>
+</select>
+
+<label>Rendimiento km/L</label>
+<input id="rend" value="2.3">
+
+<label>Precio Diesel</label>
+<input id="diesel" value="26">
+
+<button onclick="calcularFlete()">Calcular Flete</button>
+<button onclick="borrar()">Borrar</button>
+
+<div id="map"></div>
+<div id="resultado"></div>
+
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="dataset_tolls.js"></script>
+<script src="geocoder.js"></script>
+<script src="router.js"></script>
+<script src="toll_detector.js"></script>
+<script src="tariffs.js"></script>
+<script src="app.js"></script>
+
+
+<div id="precio_sugerido" style="margin-top:20px">
+<h3>PRECIO SUGERIDO
+
+<div id="precio_selector">
+<h3>PRECIO A ENVIAR</h3>
+<label><input type="radio" name="precio_envio" value="bajo"> Bajo</label><br>
+<label><input type="radio" name="precio_envio" value="medio" checked> Medio</label><br>
+<label><input type="radio" name="precio_envio" value="alto"> Alto</label><br>
+<label><input type="radio" name="precio_envio" value="km"> Por KM</label><br>
+</div>
+</h3>
+<div>Bajo: <span id="precio_bajo">$0.00</span></div>
+<div>Medio: <span id="precio_medio">$0.00</span></div>
+<div>Alto: <span id="precio_alto">$0.00</span></div>
+<button onclick="generarImagen()">
+<h3>PRECIO A ENVIAR</h3>
+
+<select id="selectorPrecio">
+<option value="bajo">Bajo</option>
+<option value="medio">Medio</option>
+<option value="alto">Alto</option>
+<option value="km">Por KM</option>
+</select>
+
+<button onclick="generarImagen()">Generar imagen WhatsApp</button>
+</button>
+</div>
+
+</body>
+</html>
