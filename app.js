@@ -180,34 +180,3 @@ function guardarHistorial(origen,destino,precio){
  h=h.slice(0,10)
  localStorage.setItem("historial",JSON.stringify(h))
 }
-
-
-function detectarCasetas(){
-
- if(!window.rutaCoords) return []
-
- const resultado=[]
-
- dataset_tolls.forEach(c=>{
-
-  window.rutaCoords.forEach(p=>{
-
-   const d=Math.sqrt(
-    (p[0]-c.lat)**2 +
-    (p[1]-c.lng)**2
-   )
-
-   if(d<0.02){
-
-    resultado.push(c.nombre)
-
-   }
-
-  })
-
- })
-
- return [...new Set(resultado)]
-
-}
-
