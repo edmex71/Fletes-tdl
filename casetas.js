@@ -1,1 +1,0 @@
-// deteccion casetas placeholder
