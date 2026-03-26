@@ -67,8 +67,26 @@
 <h3>PRECIO SUGERIDO
 
 <div id="precio_selector">
+<h3>
+
+<h3>PRECIOS</h3>
+
+Bajo: <input id="precio_bajo" type="number"><br>
+Medio: <input id="precio_medio" type="number"><br>
+Alto: <input id="precio_alto" type="number"><br>
+Por KM: <input id="precio_km" type="number"><br>
+
 <h3>PRECIO A ENVIAR</h3>
-<label><input type="radio" name="precio_envio" value="bajo"> Bajo</label><br>
+
+<select id="selectorPrecio">
+<option value="bajo">Bajo</option>
+<option value="medio">Medio</option>
+<option value="alto">Alto</option>
+<option value="km">Por KM</option>
+</select>
+
+</h3>
+<label><input type="radio" name="precio_envio" value="bajo"> <br>
 <label><input type="radio" name="precio_envio" value="medio" checked> Medio</label><br>
 <label><input type="radio" name="precio_envio" value="alto"> Alto</label><br>
 <label><input type="radio" name="precio_envio" value="km"> Por KM</label><br>

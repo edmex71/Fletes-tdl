@@ -176,20 +176,20 @@ function guardarHistorial(origen,destino,precio){
 }
 
 
-function obtenerPrecioSeleccionado(km){
+function precioSeleccionado(km){
 
-let s=document.getElementById("selectorPrecio").value;
+let tipo=document.getElementById("selectorPrecio").value;
 
 let bajo=parseFloat(document.getElementById("precio_bajo").value||0);
 let medio=parseFloat(document.getElementById("precio_medio").value||0);
 let alto=parseFloat(document.getElementById("precio_alto").value||0);
 let kmPrecio=parseFloat(document.getElementById("precio_km").value||0);
 
-if(s=="bajo") return bajo;
-if(s=="medio") return medio;
-if(s=="alto") return alto;
-if(s=="km") return km*kmPrecio;
+if(tipo=="bajo") return bajo;
+if(tipo=="medio") return medio;
+if(tipo=="alto") return alto;
+if(tipo=="km") return km*kmPrecio;
 
 return bajo;
-}
 
+}
