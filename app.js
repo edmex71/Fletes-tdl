@@ -176,16 +176,8 @@ function guardarHistorial(origen,destino,precio){
 }
 
 
-function obtenerPrecioEnvio(datos){
-
-let tipo=document.getElementById("selectorPrecio")?.value||"medio";
-
-if(tipo=="bajo") return datos.bajo;
-if(tipo=="medio") return datos.medio;
-if(tipo=="alto") return datos.alto;
-if(tipo=="km") return datos.km * datos.precio_km;
-
-return datos.medio;
-
+// precio por km calculado automaticamente
+function calcularPrecioKM(km, tarifa_km){
+return km * tarifa_km;
 }
 
