@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Tepotzotlan",
+    "lat": 19.715,
+    "lon": -99.224,
+    "cost_5": 489
+  },
+  {
+    "name": "Jorobas",
+    "lat": 19.856,
+    "lon": -99.237,
+    "cost_5": 336
+  },
+  {
+    "name": "Palmillas",
+    "lat": 20.525,
+    "lon": -99.891,
+    "cost_5": 611
+  },
+  {
+    "name": "San Marcos",
+    "lat": 19.357,
+    "lon": -98.901,
+    "cost_5": 156
+  },
+  {
+    "name": "Amozoc",
+    "lat": 19.056,
+    "lon": -98.045,
+    "cost_5": 177
+  },
+  {
+    "name": "Esperanza",
+    "lat": 18.866,
+    "lon": -97.366,
+    "cost_5": 192
+  },
+  {
+    "name": "Acatzingo",
+    "lat": 18.98,
+    "lon": -97.78,
+    "cost_5": 171
+  },
+  {
+    "name": "Tehuacan",
+    "lat": 18.462,
+    "lon": -97.392,
+    "cost_5": 208
+  }
+]

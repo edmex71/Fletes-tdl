@@ -1,176 +1,88 @@
 
-function precioPorKm(km){
- let tarifa=22
- if(km>300) tarifa=32
- if(km>700) tarifa=38
- return Math.ceil((km*tarifa)/100)*100
+let map=L.map('map').setView([23,-102],5)
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map)
+
+let rutaLayer
+
+async function geo(q){
+let r=await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${q}`)
+let j=await r.json()
+return [j[0].lon,j[0].lat]
 }
 
+async function ruta(){
 
-function filtrarCasetas(lista,ejes){
- const unicas={}
- lista.forEach(c=>{
-  const precio=TARIFAS[c]?.[ejes]||0
-  if(precio>0 && !c.includes("KM")){
-   unicas[c]=precio
-  }
- })
- return Object.keys(unicas)
+let o=document.getElementById("origen").value
+let d=document.getElementById("destino").value
+
+let c1=await geo(o)
+let c2=await geo(d)
+
+let r=await fetch(`https://router.project-osrm.org/route/v1/driving/${c1[0]},${c1[1]};${c2[0]},${c2[1]}?overview=full&geometries=geojson`)
+let data=await r.json()
+
+let km=data.routes[0].distance/1000
+document.getElementById("km").value=Math.round(km)
+
+if(rutaLayer)map.removeLayer(rutaLayer)
+rutaLayer=L.geoJSON(data.routes[0].geometry).addTo(map)
+map.fitBounds(rutaLayer.getBounds())
+
+detectar(data.routes[0].geometry.coordinates)
 }
 
+async function detectar(coords){
 
-function formatoDinero(v){
- return "$"+Math.ceil(v/100)*100 .toLocaleString ? "$"+(Math.ceil(v/100)*100).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}) : "$"+Math.ceil(v/100)*100;
-}
+let casetas=await fetch("casetas_nacional.json").then(r=>r.json())
 
-function calcularPrecios(costo){
- const bajo=costo*1.15
- const medio=costo*1.30
- const alto=costo*1.45
- document.getElementById("precio_bajo").innerText=formatoDinero(bajo)
- document.getElementById("precio_medio").innerText=formatoDinero(medio)
- document.getElementById("precio_alto").innerText=formatoDinero(alto)
- localStorage.setItem("ultimaCotizacion",JSON.stringify({fecha:new Date().toISOString(),costo}))
-}
+let usadas=new Map()
 
+casetas.forEach(c=>{
 
+coords.forEach(p=>{
 
-function generarImagen(){
+let d=dist(p[1],p[0],c.lat,c.lon)
 
- const origen=document.getElementById("origen").value
- const destino=document.getElementById("destino").value
- const ruta=origen+" → "+destino
- const km=document.getElementById("km").value
+if(d<8){
 
- const precioSel=document.querySelector('input[name="precio_envio"]:checked')
- let precio=""
- if(precioSel.value==="bajo") precio=document.getElementById("precio_bajo").innerText
- if(precioSel.value==="medio") precio=document.getElementById("precio_medio").innerText
- if(precioSel.value==="alto") precio=document.getElementById("precio_alto").innerText
- if(precioSel.value==="km") precio="$"+precioPorKm(km).toLocaleString()
-
- const canvas=document.createElement("canvas")
- canvas.width=800
- canvas.height=520
- const ctx=canvas.getContext("2d")
-
- ctx.fillStyle="#ffffff"
- ctx.fillRect(0,0,800,520)
-
- const logo=new Image()
- logo.src="logo.png"
-
- logo.onload=function(){
-
- ctx.drawImage(logo,330,20,140,140)
-
- ctx.fillStyle="#000"
- ctx.font="32px Arial"
- ctx.fillText("Transporte D’Leon",240,200)
-
- ctx.font="24px Arial"
- ctx.fillText("Ruta:",100,280)
- ctx.fillText(ruta,100,310)
-
- ctx.fillText("Distancia:",100,350)
- ctx.fillText(km+" km",100,380)
-
- ctx.fillText("Precio:",100,430)
- ctx.fillText(precio,100,460)
-
- const img=canvas.toDataURL("image/jpeg")
- const a=document.createElement("a")
- a.href=img
- a.download="cotizacion.jpg"
- a.click()
-
- }
-}
-
-
-
-
-function formatoDinero(n){
- const v=Math.ceil(n/100)*100
- return "$"+v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})
-}
-
-function calcularTiempo(km){
- const h=km/60
- const red=Math.ceil(h*2)/2
- const horas=Math.floor(red)
- const mins=(red-horas)*60
- return horas+" h "+(mins? "30 min":"")
-}
-
-window.onload=()=>initMap()
-
-function setEstado(t){
- document.getElementById("estado").innerText=t
-}
-
-function calcularFlete(){
-
- const km=parseFloat(document.getElementById("km").value)
- const diesel=parseFloat(document.getElementById("diesel").value)
- const rend=parseFloat(document.getElementById("rend").value)
- const ejes=document.getElementById("ejes").value
-
- let casetas=detectarCasetas(); casetas=filtrarCasetas(casetas,ejes)
-
- let totalCasetas=0
- let lista=""
-
- casetas.forEach(c=>{
-
- const precio=TARIFAS[c]?.[ejes]||0
- totalCasetas+=precio
- lista+=c+" "+formatoDinero(precio)+"<br>"
-
- })
-
- const litros=km/rend
- const dieselCosto=litros*diesel
- const costoTotal=dieselCosto+totalCasetas
-
- const origen=document.getElementById("origen").value
- const destino=document.getElementById("destino").value
- const tiempo=calcularTiempo(km)
-
- const html=`
- <h3>COSTO OPERATIVO</h3>
- Ruta: ${origen} → ${destino}<br>
- Tiempo estimado: ${tiempo}<br><br>
-
- <h3>COSTO OPERATIVO</h3>
- Km: ${km}<br>
- Rendimiento: ${rend} km/L<br>
- Litros: ${litros.toFixed(0)}<br>
- Diesel: ${formatoDinero(dieselCosto)}<br>
- Casetas: ${formatoDinero(totalCasetas)}<br><br>
- <b>Casetas</b><br>
- ${lista}
- `
-
- document.getElementById("resultado").innerHTML=html
- setEstado("Casetas detectadas "+casetas.length)
- calcularPrecios(costoTotal)
+usadas.set(c.name,c.cost_5)
 
 }
 
-function borrar(){
+})
 
- document.getElementById("origen").value=""
- document.getElementById("destino").value=""
- document.getElementById("km").value=""
- document.getElementById("resultado").innerHTML=""
- setEstado("Sistema listo")
+})
+
+let lista=document.getElementById("lista")
+lista.innerHTML=""
+
+let total=0
+
+usadas.forEach((precio,nombre)=>{
+
+let li=document.createElement("li")
+li.innerText=nombre+" $"+precio
+
+lista.appendChild(li)
+
+total+=precio
+
+})
+
+document.getElementById("totalCasetas").innerText=total
 
 }
 
-function guardarHistorial(origen,destino,precio){
- let h=JSON.parse(localStorage.getItem("historial")||"[]")
- h.unshift({fecha:new Date().toISOString(),origen,destino,precio})
- h=h.slice(0,10)
- localStorage.setItem("historial",JSON.stringify(h))
+function dist(a,b,c,d){
+
+let R=6371
+
+let dLat=(c-a)*Math.PI/180
+let dLon=(d-b)*Math.PI/180
+
+let x=Math.sin(dLat/2)**2+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dLon/2)**2
+
+return 2*R*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))
+
 }
