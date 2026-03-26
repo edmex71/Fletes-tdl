@@ -30,7 +30,10 @@ function calcularPrecios(costo,km){
  document.getElementById("precio_bajo").innerText=formatoDinero(bajo)
  document.getElementById("precio_medio").innerText=formatoDinero(medio)
  
+
 document.getElementById("precio_alto").innerText=formatoDinero(alto)
+document.getElementById("precio_km").innerText=formatoDinero(precioPorKm(km))
+
 document.getElementById("precio_km").innerText=formatoDinero(precioPorKm(km))
 
  localStorage.setItem("ultimaCotizacion",JSON.stringify({fecha:new Date().toISOString(),costo}))
