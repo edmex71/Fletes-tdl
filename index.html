@@ -4,45 +4,62 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Flete TDL v37</title>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-<style>
-body{font-family:Arial;margin:10px}
-input,select,button{width:100%;padding:10px;margin-top:8px;border-radius:8px}
-button{background:#4a67b3;color:white;border:0}
-#map{height:300px;margin-top:10px}
-</style>
+<link rel="stylesheet" href="css/styles.css"/>
 
 </head>
 
 <body>
 
+<header>
+<img src="img/icon.png" height="40">
 <h2>Flete TDL v37</h2>
+</header>
 
-<input id="origen" placeholder="Origen">
-<input id="destino" placeholder="Destino">
+<label>Origen</label>
+<input id="origen" placeholder="Ej: Puebla">
 
-<select id="precioSelect">
-<option value="bajo">Precio bajo</option>
-<option value="medio">Precio medio</option>
-<option value="alto">Precio alto</option>
-<option value="km">Precio por km</option>
+<label>Destino</label>
+<input id="destino" placeholder="Ej: Guadalajara">
+
+<label>Ejes</label>
+<select id="ejes">
+<option value="2">2 ejes</option>
+<option value="3">3 ejes</option>
+<option value="4">4 ejes</option>
+<option value="5" selected>5 ejes</option>
+<option value="6">6 ejes</option>
 </select>
 
-<button onclick="ruta()">Calcular ruta</button>
+<button onclick="calcularRuta()">Calcular ruta</button>
 
 <div id="map"></div>
 
+<h3>Kilómetros</h3>
+<input id="km">
+
 <h3>Casetas detectadas</h3>
-<ul id="lista"></ul>
+<ul id="listaCasetas"></ul>
 
-<h3>Total casetas: $<span id="totalCasetas">0</span></h3>
+<h3>Total casetas</h3>
+<input id="totalCasetas">
 
-<input id="km" placeholder="KM">
+<h3>Precio sugerido</h3>
+
+<select id="tipoPrecio">
+<option value="bajo">Bajo</option>
+<option value="medio">Medio</option>
+<option value="alto">Alto</option>
+<option value="km">Por KM</option>
+</select>
+
+<input id="precioFinal">
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="app.js"></script>
+<script src="js/app.js"></script>
 
 </body>
 </html>
