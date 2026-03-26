@@ -131,7 +131,7 @@ function calcularFlete(){
 
  const precio=TARIFAS[c]?.[ejes]||0
  totalCasetas+=precio
- lista+=c+" "+formatoDinero(precio)+"<br>"
+ lista+=c+" "+formatoDineroCaseta(precio)+"<br>"
 
  })
 
@@ -180,3 +180,34 @@ function guardarHistorial(origen,destino,precio){
  h=h.slice(0,10)
  localStorage.setItem("historial",JSON.stringify(h))
 }
+
+
+function detectarCasetas(){
+
+ if(!window.rutaCoords) return []
+
+ const resultado=[]
+
+ dataset_tolls.forEach(c=>{
+
+  window.rutaCoords.forEach(p=>{
+
+   const d=Math.sqrt(
+    Math.pow(p[0]-c.lat,2)+
+    Math.pow(p[1]-c.lng,2)
+   )
+
+   if(d<0.03){
+
+    resultado.push(c.nombre)
+
+   }
+
+  })
+
+ })
+
+ return [...new Set(resultado)]
+
+}
+
