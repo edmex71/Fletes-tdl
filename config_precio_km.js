@@ -1,0 +1,1 @@
+const PRECIO_KM_DEFAULT = 20;

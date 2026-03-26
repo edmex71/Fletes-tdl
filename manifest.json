@@ -1,4 +1,7 @@
 {
   "name": "Flete TDL",
-  "start_url": "."
+  "short_name": "FleteTDL",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff"
 }
