@@ -1,3 +1,4 @@
+const CASETAS = typeof CASETAS_NACIONALES !== 'undefined' ? CASETAS_NACIONALES : [];
 
 let map
 let routeLayer

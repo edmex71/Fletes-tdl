@@ -1,3 +1,4 @@
+const CASETAS = typeof CASETAS_NACIONALES !== 'undefined' ? CASETAS_NACIONALES : [];
 
 async function geocode(city){
  const url=`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}`
