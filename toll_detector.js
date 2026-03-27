@@ -42,14 +42,23 @@ const EXCLUIR=[
 "JOROBAS"
 ]
 
-
 function detectarCasetas(){
-   return {
-      total:0,
-      lista:[]
-   }
-}
-)
+
+ const detectadas=[]
+
+ dataset_tolls.features.forEach(c=>{
+
+ const coord=c.geometry.coordinates
+ const nombre=normalizar(c.properties?.name)
+
+ if(!nombre) return
+ if(EXCLUIR.includes(nombre)) return
+
+ currentRoute.forEach((p,i)=>{
+
+ if(dist(p,coord)<2){
+
+ detectadas.push({nombre:nombre,pos:i})
 
  }
 
