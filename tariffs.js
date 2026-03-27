@@ -18,13 +18,19 @@ const TARIFAS={
 
 function estimarCasetas(km){
 
- let factor = 2.3
+ let factor=2.6;
 
- if(km>250) factor = 2.5
- if(km>600) factor = 2.8
- if(km>900) factor = 3.1
- if(km>1200) factor = 3.4
+ if(km<200) factor=2.2;
+ else if(km<500) factor=2.5;
+ else if(km<900) factor=2.8;
+ else if(km<1400) factor=3.1;
+ else factor=3.4;
 
- return km * factor
+ return km*factor;
 
+}
+
+function obtenerCostoAdicional(){
+ let el=document.getElementById('costoAdicional');
+ return el?parseFloat(el.value||0):0;
 }

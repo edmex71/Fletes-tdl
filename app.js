@@ -122,11 +122,8 @@ function calcularFlete(){
  const rend=parseFloat(document.getElementById("rend").value)
  const ejes=document.getElementById("ejes").value
 
- let casetas= casetas=filtrarCasetas(casetas,ejes)
 
- let 
-totalCasetas = estimarCasetas(km);
-
+ let totalCasetas = estimarCasetas(km);
  let lista=""
 
  casetas.forEach(c=>{
@@ -139,8 +136,7 @@ totalCasetas = estimarCasetas(km);
 
  const litros=km/rend
  const dieselCosto=litros*diesel
- const extra=parseFloat(document.getElementById('extra')?.value||0)
-const costoTotal = dieselCosto + totalCasetas + extra
+ const costoTotal=dieselCosto+totalCasetas
 
  const origen=document.getElementById("origen").value
  const destino=document.getElementById("destino").value
@@ -187,13 +183,19 @@ function guardarHistorial(origen,destino,precio){
 
 function estimarCasetas(km){
 
- let factor = 2.3
+ let factor=2.6;
 
- if(km>250) factor = 2.5
- if(km>600) factor = 2.8
- if(km>900) factor = 3.1
- if(km>1200) factor = 3.4
+ if(km<200) factor=2.2;
+ else if(km<500) factor=2.5;
+ else if(km<900) factor=2.8;
+ else if(km<1400) factor=3.1;
+ else factor=3.4;
 
- return km * factor
+ return km*factor;
 
+}
+
+function obtenerCostoAdicional(){
+ let el=document.getElementById('costoAdicional');
+ return el?parseFloat(el.value||0):0;
 }
