@@ -42,11 +42,9 @@ const EXCLUIR=[
 "JOROBAS"
 ]
 
-function detectarCasetas(){
 
  const detectadas=[]
 
- dataset_tolls.features.forEach(c=>{
 
  const coord=c.geometry.coordinates
  const nombre=normalizar(c.properties?.name)
