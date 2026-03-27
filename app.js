@@ -122,12 +122,10 @@ function calcularFlete(){
  const rend=parseFloat(document.getElementById("rend").value)
  const ejes=document.getElementById("ejes").value
 
- let casetas=detectarCasetas(); casetas=filtrarCasetas(casetas,ejes)
 
  let totalCasetas = calcularCasetasEstimadas(km);
  let lista=""
 
- casetas.forEach(c=>{
 
  const precio=TARIFAS[c]?.[ejes]||0
  totalCasetas+=precio
@@ -159,7 +157,6 @@ function calcularFlete(){
  `
 
  document.getElementById("resultado").innerHTML=html
- setEstado("Casetas detectadas "+casetas.length)
  calcularPrecios(costoTotal,km)
 
 }
