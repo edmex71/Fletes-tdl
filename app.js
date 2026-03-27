@@ -122,7 +122,7 @@ function calcularFlete(){
  const rend=parseFloat(document.getElementById("rend").value)
  const ejes=document.getElementById("ejes").value
 
- let casetas=// detectarCasetas(); casetas=filtrarCasetas(casetas,ejes)
+ let casetas = []; casetas=filtrarCasetas(casetas,ejes)
 
  let totalCasetas = calcularCasetasEstimadas(km);
  let lista=""
