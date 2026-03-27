@@ -122,8 +122,9 @@ function calcularFlete(){
  const rend=parseFloat(document.getElementById("rend").value)
  const ejes=document.getElementById("ejes").value
 
+ let casetas=detectarCasetas(); casetas=filtrarCasetas(casetas,ejes)
 
- let totalCasetas = estimarCasetas(km);
+ let totalCasetas = calcularCasetasEstimadas(km);
  let lista=""
 
  casetas.forEach(c=>{
@@ -178,24 +179,4 @@ function guardarHistorial(origen,destino,precio){
  h.unshift({fecha:new Date().toISOString(),origen,destino,precio})
  h=h.slice(0,10)
  localStorage.setItem("historial",JSON.stringify(h))
-}
-
-
-function estimarCasetas(km){
-
- let factor=2.6;
-
- if(km<200) factor=2.2;
- else if(km<500) factor=2.5;
- else if(km<900) factor=2.8;
- else if(km<1400) factor=3.1;
- else factor=3.4;
-
- return km*factor;
-
-}
-
-function obtenerCostoAdicional(){
- let el=document.getElementById('costoAdicional');
- return el?parseFloat(el.value||0):0;
 }
