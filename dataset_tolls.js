@@ -10,3 +10,17 @@ TARIFAS["IRAPUATO"]={5:178,6:215}
 TARIFAS["LA BARCA"]={5:165,6:195}
 TARIFAS["OCOTLAN"]={5:110,6:135}
 
+
+
+function estimarCasetas(km){
+
+ let factor = 2.3
+
+ if(km>250) factor = 2.5
+ if(km>600) factor = 2.8
+ if(km>900) factor = 3.1
+ if(km>1200) factor = 3.4
+
+ return km * factor
+
+}

@@ -4,18 +4,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flete TDL</title>
+<title>Flete TDL v73</title>
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
 </head>
+
 <body>
 
 <div id="estado">Sistema listo</div>
 
 <header style="display:flex;align-items:center;gap:10px">
 <img src="logo.png" style="width:40px;height:40px">
-<h1>Flete TDL</h1>
+<h1>Flete TDL v73</h1>
 </header>
 
 <div class="container">
@@ -43,7 +47,11 @@
 <label>Rendimiento km/L</label>
 <input id="rend" value="2.3">
 
-<label>Precio Diesel</label>
+<label>Precio Diesel
+<br>
+<label>Costo adicional</label>
+<input id="extra" type="number" value="0">
+</label>
 <input id="diesel" value="26">
 
 <button onclick="calcularFlete()">Calcular Flete</button>
