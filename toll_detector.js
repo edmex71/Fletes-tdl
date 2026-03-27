@@ -42,7 +42,7 @@ const EXCLUIR=[
 "JOROBAS"
 ]
 
-function detectarCasetas(){
+function // detectarCasetas(){
 
  const detectadas=[]
 
