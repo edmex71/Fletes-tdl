@@ -15,6 +15,12 @@
 - Sin ruta calculada (km escritos a mano) usa el estimado por km de antes.
 - "Costo adicional" se suma al costo total antes de los márgenes de 15, 30 y 45 %.
 
+## Tiempo, chofer y precios
+- Velocidad promedio según ejes: 2 a 3 ejes, 90 km/h; 4 a 6 ejes, 65 km/h; 7 o más, 45 km/h. Se cambia en `velocidadPromedio()` de `app.js`.
+- Gastos de viaje y chofer: $1,800 por cada 12 h de viaje. Un bloque iniciado cuenta completo (12.1 h = 2 bloques = $3,600). Se suman al costo antes de los márgenes de 15, 30 y 45 %. Se cambian en `GASTO_CHOFER_POR_BLOQUE` y `HORAS_POR_BLOQUE`.
+- Precio por km: $22 hasta 300 km, $32 hasta 700 km y $42 arriba de 700 km.
+- Botón "Generar imagen de costos (uso interno)": imagen con el costo operativo, cada caseta con tarifa, una sola línea con la suma de las estimadas, y los precios sugeridos. No es para el cliente.
+
 ## Cómo actualizar tarifas
 Cuando salga un CSV nuevo:
 `python3 build_casetas.py tarifas.csv dataset_tolls.js casetas_data.js`
