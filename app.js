@@ -6,6 +6,13 @@ function escapar(s){
 const GASTO_CHOFER_POR_BLOQUE=1800 // gastos de viaje y chofer por cada bloque de horas
 const HORAS_POR_BLOQUE=12          // cada bloque, completo o iniciado, cuesta GASTO_CHOFER_POR_BLOQUE
 
+// Las tarifas de casetas son de ene-2025. En 2026 subieron entre 4.7 % y 9 %.
+// Solo se muestra como aviso; NO se suma al costo hasta tener una base actualizada.
+const AJUSTE_CASETAS_MIN=0.047
+const AJUSTE_CASETAS_MAX=0.09
+
+function porcentaje(x){ return +(x*100).toFixed(1) }
+
 // Velocidad promedio (km/h) según ejes
 function velocidadPromedio(ejes){
  if(ejes<=3) return 90 // 2 ejes: 90
@@ -21,7 +28,7 @@ function gastosChofer(horas){
 
 function precioPorKm(km){
  let tarifa=22
- if(km>300) tarifa=32
+ if(km>300) tarifa=38
  if(km>700) tarifa=42
  return Math.ceil((km*tarifa)/100)*100
 }
@@ -127,6 +134,17 @@ function calcularFlete(){
  const destino=document.getElementById("destino").value
  const tiempo=calcularTiempo(km,ejes)
 
+ // Aviso: cuánto representaría el aumento de 2026 sobre las casetas que salen de la base ene-2025
+ let avisoCasetas="", avisoCorto=""
+ const baseCasetas=totalTarifa+totalEst
+ if(!usoEstimadoPorKm && baseCasetas>0){
+  const sube1=baseCasetas*AJUSTE_CASETAS_MIN
+  const sube2=baseCasetas*AJUSTE_CASETAS_MAX
+  avisoCasetas=`⚠ Las tarifas de casetas son de ene-2025 y en 2026 subieron entre ${porcentaje(AJUSTE_CASETAS_MIN)}% y ${porcentaje(AJUSTE_CASETAS_MAX)}%: `+
+   `pueden costar de +${pesos(sube1)} hasta +${pesos(sube2)} más (hasta ${pesos(baseCasetas+sube2)} en casetas). No está sumado al costo total.`
+  avisoCorto=`Casetas: en 2026 pueden costar de +${porcentaje(AJUSTE_CASETAS_MIN)}% a +${porcentaje(AJUSTE_CASETAS_MAX)}% (+${pesos(sube1)} a +${pesos(sube2)}) sobre tarifas ene-2025.`
+ }
+
  const desgloseCasetas=usoEstimadoPorKm
   ? `Casetas (est. por km): ${pesos(totalCasetas)}`
   : `Casetas con tarifa: ${pesos(totalTarifa)} (${nTarifa})<br>`+
@@ -144,6 +162,7 @@ function calcularFlete(){
  Litros: ${litros.toFixed(0)}<br>
  Diesel: ${pesos(dieselCosto)}<br>
  ${desgloseCasetas}<br>
+ ${avisoCasetas?`<span class="est">${avisoCasetas}</span><br>`:""}
  Gastos de viaje y chofer: ${pesos(chofer.monto)} (${chofer.bloques} × ${pesos(GASTO_CHOFER_POR_BLOQUE)} por ${HORAS_POR_BLOQUE} h)<br>
  Costo adicional: ${pesos(adicional)}<br>
  <b>Costo total: ${pesos(costoTotal)}</b>
@@ -162,7 +181,7 @@ function calcularFlete(){
   casetasTarifa:det?det.con.map(c=>({nombre:c.nombre,monto:c.monto})):[],
   totalTarifa,nTarifa,totalEst,nEst,
   usoEstimadoPorKm,totalCasetasKm:usoEstimadoPorKm?totalCasetas:0,
-  chofer,adicional,costoTotal,precios
+  chofer,adicional,costoTotal,precios,avisoCorto
  }
 
  guardarHistorial(origen,destino,precioSeleccionado())
@@ -240,7 +259,7 @@ function generarImagenCostos(){
  filas.push(["Alto (+45%)",formatoDinero(c.precios.alto)])
  filas.push(["Por km",formatoDinero(c.precios.km)])
 
- const alto=Math.max(520,230+filas.length*34+60)
+ const alto=Math.max(520,230+filas.length*34+60)+(c.avisoCorto?26:0)
  const canvas=document.createElement("canvas")
  canvas.width=800
  canvas.height=alto
@@ -283,6 +302,7 @@ function generarImagenCostos(){
 
  ctx.fillStyle="#666"
  ctx.font="15px Arial"
+ if(c.avisoCorto) ctx.fillText(c.avisoCorto,30,alto-46,740)
  ctx.fillText("Tarifas red FONADIN ene-2025 (camión de "+c.ejes+" ejes). Las estimadas son aproximadas.",30,alto-20,740)
 
  entregarImagen(canvas,"costos.jpg","Costos del flete")
