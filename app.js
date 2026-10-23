@@ -27,7 +27,7 @@ function gastosChofer(horas){
 }
 
 function precioPorKm(km){
- let tarifa=22
+ let tarifa=32
  if(km>300) tarifa=38
  if(km>700) tarifa=42
  return Math.ceil((km*tarifa)/100)*100
