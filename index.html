@@ -1,99 +1,90 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flete TDL</title>
-<link rel="stylesheet" href="style.css">
+<link rel="apple-touch-icon" href="logo.png">
 <link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<link rel="icon" href="icon.png">
 </head>
 <body>
 
 <div id="estado">Sistema listo</div>
 
-<header style="display:flex;align-items:center;gap:10px">
-<img src="logo.png" style="width:40px;height:40px">
+<header class="header">
+<img src="logo.png" alt="">
 <h1>Flete TDL</h1>
 </header>
 
 <div class="container">
 
-<label>Origen</label>
-<input id="origen">
+<label for="origen">Origen</label>
+<input id="origen" autocomplete="off">
 
-<label>Destino</label>
-<input id="destino">
+<label for="destino">Destino</label>
+<input id="destino" autocomplete="off">
 
 <button onclick="calcularRuta()">Calcular ruta</button>
 
-<label>Kilómetros</label>
-<input id="km">
+<label for="km">Kilómetros</label>
+<input id="km" inputmode="decimal">
 
-<label>Ejes</label>
+<label for="ejes">Ejes</label>
 <select id="ejes">
 <option value="2">2</option>
 <option value="3">3</option>
 <option value="4">4</option>
 <option value="5" selected>5</option>
 <option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
 </select>
 
-<label>Rendimiento km/L</label>
-<input id="rend" value="2.3">
+<label for="rend">Rendimiento km/L</label>
+<input id="rend" value="2.3" inputmode="decimal">
 
-<label>
-Precio Diesel
-<br>
-<label>Costo adicional</label>
-<input id="costoAdicional" type="number" value="0">
-</label>
-<input id="diesel" value="26">
+<label for="diesel">Precio Diesel</label>
+<input id="diesel" value="26" inputmode="decimal">
+
+<label for="adicional">Costo adicional ($)</label>
+<input id="adicional" value="0" inputmode="decimal">
 
 <button onclick="calcularFlete()">Calcular Flete</button>
-<button onclick="borrar()">Borrar</button>
+<button class="sec" onclick="borrar()">Borrar</button>
 
 <div id="map"></div>
 <div id="resultado"></div>
 
-</div>
+<div id="precio_sugerido">
+<h3>PRECIO SUGERIDO</h3>
+<div>Bajo: <span id="precio_bajo">$0.00</span></div>
+<div>Medio: <span id="precio_medio">$0.00</span></div>
+<div>Alto: <span id="precio_alto">$0.00</span></div>
+<div>Por KM: <span id="precio_km">$0.00</span></div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="dataset_tolls.js"></script>
-<script src="geocoder.js"></script>
-<script src="router.js"></script>
-<script src="toll_detector.js"></script>
-<script src="tariffs.js"></script>
-<script src="app.js"></script>
-
-
-<div id="precio_sugerido" style="margin-top:20px">
-<h3>PRECIO SUGERIDO
-
-<div id="precio_selector">
-<h3>
-<h3>PRECIO SUGERIDO
-
-<div id="bloque_precios">
-Bajo: <span id="precio_bajo">$0.00</span><br>
-Medio: <span id="precio_medio">$0.00</span><br>
-Alto: <span id="precio_alto">$0.00</span><br>
-Por KM: <span id="precio_km">$0.00</span><br>
-</div>
-
-<h3>PRECIO A ENVIAR</h3></h3>
-
+<label for="precio_envio">PRECIO A ENVIAR</label>
 <select id="precio_envio">
 <option value="bajo">Bajo</option>
-<option value="medio">Medio</option>
+<option value="medio" selected>Medio</option>
 <option value="alto">Alto</option>
 <option value="km">Por KM</option>
 </select>
-<br><br>
-<button onclick="generarImagen()">Generar imagen WhatsApp</button></button>
+
+<button onclick="generarImagen()">Generar imagen WhatsApp</button>
 </div>
+
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="casetas_data.js"></script>
+<script src="geocoder.js"></script>
+<script src="router.js"></script>
+<script src="tariffs.js"></script>
+<script src="toll_detector.js"></script>
+<script src="app.js"></script>
 
 </body>
 </html>

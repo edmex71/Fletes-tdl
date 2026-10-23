@@ -1,60 +1,66 @@
-
-let map
-let routeLayer
+let map=null
+let routeLayer=null
 let currentRoute=[]
 
 function initMap(){
+ if(typeof L==="undefined"){
+  setEstado("Mapa no disponible (sin conexión). Puedes escribir los km a mano.")
+  return
+ }
  map=L.map('map').setView([23,-102],5)
- L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18}).addTo(map)
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+  maxZoom:18,
+  attribution:'© OpenStreetMap'
+ }).addTo(map)
 }
+
+function limpiarRuta(){
+ currentRoute=[]
+ if(map&&routeLayer){map.removeLayer(routeLayer);routeLayer=null}
+}
+
+const esperar=ms=>new Promise(r=>setTimeout(r,ms))
 
 async function calcularRuta(){
 
+ const origen=document.getElementById("origen").value.trim()
+ const destino=document.getElementById("destino").value.trim()
+ if(!origen||!destino){setEstado("Escribe origen y destino");return}
+
  try{
 
- setEstado("Calculando ruta...")
+  setEstado("Calculando ruta...")
 
- const o=await geocode(document.getElementById("origen").value)
- const d=await geocode(document.getElementById("destino").value)
+  const o=await geocode(origen)
+  await esperar(1100) // Nominatim permite 1 consulta por segundo
+  const d=await geocode(destino)
 
- const url=`https://router.project-osrm.org/route/v1/driving/${o[0]},${o[1]};${d[0]},${d[1]}?overview=full&geometries=geojson`
+  const url=`https://router.project-osrm.org/route/v1/driving/${o[0]},${o[1]};${d[0]},${d[1]}?overview=full&geometries=geojson`
 
- const r=await fetch(url)
- const data=await r.json()
+  const r=await fetch(url)
+  if(!r.ok) throw "El servicio de rutas no respondió ("+r.status+")"
+  const data=await r.json()
+  if(data.code!=="Ok"||!data.routes||!data.routes.length) throw "No se encontró ruta entre esos lugares"
 
- const route=data.routes[0]
+  const route=data.routes[0]
 
- const km=(route.distance/1000).toFixed(0)
- document.getElementById("km").value=km
+  const km=(route.distance/1000).toFixed(0)
+  document.getElementById("km").value=km
 
- if(routeLayer) map.removeLayer(routeLayer)
+  limpiarRuta()
+  currentRoute=route.geometry.coordinates
 
- routeLayer=L.geoJSON(route.geometry).addTo(map)
- map.fitBounds(routeLayer.getBounds())
+  if(map){
+   routeLayer=L.geoJSON(route.geometry).addTo(map)
+   map.fitBounds(routeLayer.getBounds())
+  }
 
- currentRoute=route.geometry.coordinates
-
- setEstado("Ruta calculada")
+  setEstado("Ruta calculada: "+km+" km")
 
  }catch(e){
 
- setEstado("Error "+e)
+  setEstado("Error: "+e)
 
  }
-
-}
-
-
-function calcularCasetasEstimadas(km){
-
- let factor = 2.6;
-
- if(km < 200) factor = 2.2;
- else if(km < 500) factor = 2.5;
- else if(km < 900) factor = 2.8;
- else if(km < 1400) factor = 3.1;
- else factor = 3.4;
-
- return km * factor;
 
 }
