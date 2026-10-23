@@ -259,27 +259,36 @@ function generarImagenCostos(){
  filas.push(["Alto (+45%)",formatoDinero(c.precios.alto)])
  filas.push(["Por km",formatoDinero(c.precios.km)])
 
- const alto=Math.max(520,230+filas.length*34+60)+(c.avisoCorto?26:0)
+ const alto=Math.max(520,280+filas.length*34+60)+(c.avisoCorto?26:0)
  const canvas=document.createElement("canvas")
  canvas.width=800
  canvas.height=alto
  const ctx=canvas.getContext("2d")
 
+ function dibujar(logo){
+
  ctx.fillStyle="#ffffff"
  ctx.fillRect(0,0,800,alto)
+
+ // Encabezado con logo
+ if(logo) ctx.drawImage(logo,30,12,96,96)
+ const xTitulo=logo?145:30
  ctx.fillStyle="#0b1f3a"
- ctx.fillRect(0,0,800,70)
- ctx.fillStyle="#fff"
- ctx.font="bold 28px Arial"
- ctx.fillText("Transporte D’Leon – Costos (uso interno)",30,45)
+ ctx.font="bold 30px Arial"
+ ctx.fillText("Transporte D’Leon",xTitulo,58)
+ ctx.fillStyle="#555"
+ ctx.font="20px Arial"
+ ctx.fillText("Costos del flete (uso interno)",xTitulo,90)
+ ctx.fillStyle="#0b1f3a"
+ ctx.fillRect(0,118,800,5)
 
  ctx.fillStyle="#000"
  ctx.font="22px Arial"
- ctx.fillText(c.origen+" → "+c.destino,30,110,740)
+ ctx.fillText(c.origen+" → "+c.destino,30,162,740)
  ctx.font="20px Arial"
- ctx.fillText(c.km+" km · "+c.ejes+" ejes · "+c.tiempo+" a "+c.vel+" km/h",30,142,740)
+ ctx.fillText(c.km+" km · "+c.ejes+" ejes · "+c.tiempo+" a "+c.vel+" km/h",30,194,740)
 
- let y=190
+ let y=240
  filas.forEach(f=>{
   if(f.t){
    y+=10
@@ -306,6 +315,12 @@ function generarImagenCostos(){
  ctx.fillText("Tarifas red FONADIN ene-2025 (camión de "+c.ejes+" ejes). Las estimadas son aproximadas.",30,alto-20,740)
 
  entregarImagen(canvas,"costos.jpg","Costos del flete")
+ }
+
+ const logo=new Image()
+ logo.onload=()=>dibujar(logo)
+ logo.onerror=()=>dibujar(null) // si el logo no carga, la imagen sale igual
+ logo.src="logo.png"
 }
 
 function entregarImagen(canvas,nombre="cotizacion.jpg",titulo="Cotización"){
