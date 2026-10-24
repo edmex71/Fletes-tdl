@@ -33,9 +33,19 @@ async function calcularRuta(){
 
   const o=await geocode(origen)
   await esperar(1100) // Nominatim permite 1 consulta por segundo
+  await esperar(1100)
   const d=await geocode(destino)
 
-  const url=`https://router.project-osrm.org/route/v1/driving/${o[0]},${o[1]};${d[0]},${d[1]}?overview=full&geometries=geojson`
+  // Puntos intermedios opcionales para forzar el camino (separados por ;)
+  const vias=[]
+  const viaTxt=(document.getElementById("via")||{value:""}).value
+  for(const v of viaTxt.split(";").map(x=>x.trim()).filter(Boolean)){
+   await esperar(1100)
+   vias.push(await geocode(v))
+  }
+  const puntos=[o,...vias,d].map(p=>p[0]+","+p[1]).join(";")
+
+  const url=`https://router.project-osrm.org/route/v1/driving/${puntos}?overview=full&geometries=geojson`
 
   const r=await fetch(url)
   if(!r.ok) throw "El servicio de rutas no respondió ("+r.status+")"

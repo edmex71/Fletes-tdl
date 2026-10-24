@@ -82,6 +82,13 @@ function detectarCasetas(ejes){
   if(r) est.push({nombre:pl.n,pos:r.pos,motivo:"sin tarifa en la base"})
  })
 
+ // Casetas cuyo cobro ya va incluido en el tramo directo de otra (Traza tu ruta no las suma aparte).
+ const INCLUIDAS={"San Marcos":["Chalco","Ixtapaluca"]}
+ const hay=n=>con.some(c=>c.nombre===n)
+ const incl=Object.keys(INCLUIDAS).filter(hay).flatMap(k=>INCLUIDAS[k].map(normalizarNombre))
+ for(let i=con.length-1;i>=0;i--) if(incl.includes(normalizarNombre(con[i].nombre))) con.splice(i,1)
+ for(let i=est.length-1;i>=0;i--) if(incl.some(x=>normalizarNombre(est[i].nombre).includes(x))) est.splice(i,1)
+
  con.sort((a,b)=>a.pos-b.pos)
  est.sort((a,b)=>a.pos-b.pos)
  return {con,est}
