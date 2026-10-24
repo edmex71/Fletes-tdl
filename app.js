@@ -358,6 +358,7 @@ function borrar(){
  ignoradas=new Set()
  document.getElementById("origen").value=""
  document.getElementById("destino").value=""
+ document.getElementById("via").value=""
  document.getElementById("km").value=""
  document.getElementById("adicional").value="0"
  document.getElementById("resultado").innerHTML=""
