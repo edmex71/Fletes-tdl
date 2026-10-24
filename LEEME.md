@@ -12,6 +12,8 @@
 - Con tarifa: 104 casetas de la red FONADIN y Fideicomiso 358 (CAPUFE), camión de 2 a 9 ejes, vigentes desde 13-abr-2026. 61 tienen ubicación en el mapa y se detectan; las demás (ver lista en la PR) aún no.
 - No incluida: Red Concesionada (tarifas de jul-2023), autopistas privadas y estatales: salen como estimadas si OpenStreetMap las tiene.
 - Sin tarifa: plazas de OpenStreetMap que cruza la ruta. Se estiman con la mediana de las tarifas conocidas para esos ejes y se marcan "(est.)".
+- "Pasar por (opcional)": ciudades intermedias separadas por `;` para obligar a la ruta a seguir otro camino (ej. `Acayucan` para ir por Veracruz en vez de Oaxaca).
+- San Marcos (México–San Martín Texmelucan) ya incluye Chalco e Ixtapaluca: si pasa por San Marcos no se suman aparte, igual que en Traza tu ruta.
 - Si una caseta cobra por varios tramos, usa el tramo de mayor precio y lo muestra en pantalla para que lo revises.
 - Sin ruta calculada (km escritos a mano) usa el estimado por km de antes.
 - "Costo adicional" se suma al costo total antes de los márgenes de 15, 30 y 45 %.

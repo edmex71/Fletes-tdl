@@ -29,7 +29,7 @@ n=0; omit=[]
 w=csv.writer(open(OUT,'w',newline='',encoding='utf-8')); w.writerow(cols)
 for r in R:
     if r['tipo'] not in('caseta','puente') or r['seccion'] not in('fonadin','fideicomiso358'): continue
-    if 'FORTIN' in r['tramo'].upper() or r['nombre']=='***': omit.append('Fortin (cerrada desde may-2023)'); continue
+    if r['nombre']=='***' and 'FORTIN' in r['tramo'].upper(): r=dict(r,nombre='Fortin')
     if all(r['C%d'%e] is None for e in range(2,10)): omit.append(r['nombre']+' | '+r['tramo']+' (sin tarifa C2-C9)'); continue
     nom = NOMBRES.get(r['nombre']) or titulo(r['nombre'])
     row=[nom, (titulo(r['tramo']) if not re.fullmatch(r'\(\d+\)',r['tramo'].strip()) else nom), 'Puente' if r['tipo']=='puente' else 'Camino','2026-04-13','',
