@@ -74,6 +74,15 @@ function calcularPrecios(costo,km){
 
 // Último cálculo, para generar la imagen de costos internos
 let ultimoCalculo=null
+// Casetas que el usuario desmarcó (falsas o ramales); se reinicia al calcular otra ruta
+let ignoradas=new Set()
+function alternarCaseta(k){
+ if(ignoradas.has(k)) ignoradas.delete(k); else ignoradas.add(k)
+ calcularFlete()
+}
+function filaCaseta(k,html,activa){
+ return `<label style="display:block${activa?"":";opacity:.5;text-decoration:line-through"}"><input type="checkbox" style="width:auto;margin:0 6px 0 0"${activa?" checked":""} onchange="alternarCaseta('${k.replace(/'/g,"")}')">${html}</label>`
+}
 
 function precioSeleccionado(){
  const sel=document.getElementById("precio_envio").value
@@ -101,17 +110,20 @@ function calcularFlete(){
  if(det){
   const montoEst=estimarPlaza(ejes)
 
+  const conOk=[]
   det.con.forEach(c=>{
-   totalTarifa+=c.monto
+   const k=c.nombre+"@"+Math.round(c.pos), act=!ignoradas.has(k)
+   if(act){totalTarifa+=c.monto;conOk.push(c)}
    const extra=c.multi?` <small>(tramo: ${escapar(c.tramo)})</small>`:""
-   lista+=`${escapar(c.nombre)}: ${pesos(c.monto)}${extra}<br>`
+   lista+=filaCaseta(k,`${escapar(c.nombre)}: ${pesos(c.monto)}${extra}`,act)
   })
   det.est.forEach(c=>{
-   totalEst+=montoEst
-   lista+=`<span class="est">${escapar(c.nombre)}: ~${pesos(montoEst)} (est., ${escapar(c.motivo)})</span><br>`
+   const k=c.nombre+"@"+Math.round(c.pos), act=!ignoradas.has(k)
+   if(act){totalEst+=montoEst;nEst++}
+   lista+=filaCaseta(k,`<span class="est">${escapar(c.nombre)}: ~${pesos(montoEst)} (est., ${escapar(c.motivo)})</span>`,act)
   })
-  nTarifa=det.con.length
-  nEst=det.est.length
+  det.con=conOk
+  nTarifa=conOk.length
   totalCasetas=totalTarifa+totalEst
  }else{
   usoEstimadoPorKm=true
@@ -164,6 +176,7 @@ function calcularFlete(){
  <b>Costo total: ${pesos(costoTotal)}</b>
 
  <h3>CASETAS EN RUTA</h3>
+ ${det&&(det.con.length||nEst||ignoradas.size)?"<small>Desmarca las que no correspondan a tu ruta (ramales o repetidas) y el total se recalcula.</small><br>":""}
  ${lista||"No se detectaron casetas en la ruta.<br>"}
  <small>Tarifas CAPUFE (FONADIN y Fideicomiso 358) vigentes desde abr-2026 para camión de ${ejes} ejes; pueden haber subido. Las marcadas (est.) son aproximadas.</small>
  `
@@ -342,6 +355,7 @@ function entregarImagen(canvas,nombre="cotizacion.jpg",titulo="Cotización"){
 }
 
 function borrar(){
+ ignoradas=new Set()
  document.getElementById("origen").value=""
  document.getElementById("destino").value=""
  document.getElementById("km").value=""
