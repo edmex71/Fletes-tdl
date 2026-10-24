@@ -6,9 +6,8 @@ function escapar(s){
 const GASTO_CHOFER_POR_BLOQUE=1800 // gastos de viaje y chofer por cada bloque de horas
 const HORAS_POR_BLOQUE=12          // cada bloque, completo o iniciado, cuesta GASTO_CHOFER_POR_BLOQUE
 
-// Las tarifas de casetas son de ene-2025. En 2026 subieron entre 4.7 % y 9 %.
+// Tarifas de casetas: CAPUFE vigentes desde 13-abr-2026. Las estimadas pueden variar hasta este %.
 // Solo se muestra como aviso; NO se suma al costo hasta tener una base actualizada.
-const AJUSTE_CASETAS_MIN=0.047
 const AJUSTE_CASETAS_MAX=0.09
 
 function porcentaje(x){ return +(x*100).toFixed(1) }
@@ -134,15 +133,12 @@ function calcularFlete(){
  const destino=document.getElementById("destino").value
  const tiempo=calcularTiempo(km,ejes)
 
- // Aviso: cuánto representaría el aumento de 2026 sobre las casetas que salen de la base ene-2025
+ // Aviso: las casetas con tarifa son de abr-2026 (CAPUFE). Solo las estimadas pueden estar desactualizadas.
  let avisoCasetas="", avisoCorto=""
- const baseCasetas=totalTarifa+totalEst
- if(!usoEstimadoPorKm && baseCasetas>0){
-  const sube1=baseCasetas*AJUSTE_CASETAS_MIN
-  const sube2=baseCasetas*AJUSTE_CASETAS_MAX
-  avisoCasetas=`⚠ Las tarifas de casetas son de ene-2025 y en 2026 subieron entre ${porcentaje(AJUSTE_CASETAS_MIN)}% y ${porcentaje(AJUSTE_CASETAS_MAX)}%: `+
-   `pueden costar de +${pesos(sube1)} hasta +${pesos(sube2)} más (hasta ${pesos(baseCasetas+sube2)} en casetas). No está sumado al costo total.`
-  avisoCorto=`Casetas: en 2026 pueden costar de +${porcentaje(AJUSTE_CASETAS_MIN)}% a +${porcentaje(AJUSTE_CASETAS_MAX)}% (+${pesos(sube1)} a +${pesos(sube2)}) sobre tarifas ene-2025.`
+ if(!usoEstimadoPorKm && totalEst>0){
+  const sube2=totalEst*AJUSTE_CASETAS_MAX
+  avisoCasetas=`⚠ Las casetas marcadas (est.) son aproximadas (no hay tarifa en la base) y pueden costar hasta ${porcentaje(AJUSTE_CASETAS_MAX)}% más: hasta +${pesos(sube2)} (${pesos(totalEst+sube2)} en estimadas). No está sumado al costo total.`
+  avisoCorto=`Casetas (est.): pueden costar hasta +${porcentaje(AJUSTE_CASETAS_MAX)}% (+${pesos(sube2)}).`
  }
 
  const desgloseCasetas=usoEstimadoPorKm
@@ -169,7 +165,7 @@ function calcularFlete(){
 
  <h3>CASETAS EN RUTA</h3>
  ${lista||"No se detectaron casetas en la ruta.<br>"}
- <small>Tarifas de la red FONADIN vigentes a ene-2025 para camión de ${ejes} ejes; pueden haber subido. Las marcadas (est.) son aproximadas.</small>
+ <small>Tarifas CAPUFE (FONADIN y Fideicomiso 358) vigentes desde abr-2026 para camión de ${ejes} ejes; pueden haber subido. Las marcadas (est.) son aproximadas.</small>
  `
 
  document.getElementById("resultado").innerHTML=html
@@ -312,7 +308,7 @@ function generarImagenCostos(){
  ctx.fillStyle="#666"
  ctx.font="15px Arial"
  if(c.avisoCorto) ctx.fillText(c.avisoCorto,30,alto-46,740)
- ctx.fillText("Tarifas red FONADIN ene-2025 (camión de "+c.ejes+" ejes). Las estimadas son aproximadas.",30,alto-20,740)
+ ctx.fillText("Tarifas CAPUFE abr-2026 (camión de "+c.ejes+" ejes). Las estimadas son aproximadas.",30,alto-20,740)
 
  entregarImagen(canvas,"costos.jpg","Costos del flete")
  }
