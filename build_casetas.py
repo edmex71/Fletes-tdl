@@ -36,8 +36,8 @@ HINT = {
 # El CSV usa el mismo nombre para dos plazas distintas: se separan por tramo.
 SPLIT = {
     'Esperanza': [
-        ('Esperanza (Sonora)', lambda tr: tr.startswith('Cd Obregon'), (-109.939, 27.604)),
-        ('Esperanza (Puebla)', lambda tr: not tr.startswith('Cd Obregon'), (-97.386, 18.871)),
+        ('Esperanza (Sonora)', lambda tr: tr.lower().startswith(('cd','ciudad')) and 'obregon' in tr.lower(), (-109.939, 27.604)),
+        ('Esperanza (Puebla)', lambda tr: not (tr.lower().startswith(('cd','ciudad')) and 'obregon' in tr.lower()), (-97.386, 18.871)),
     ],
 }
 
