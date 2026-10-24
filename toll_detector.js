@@ -1,7 +1,8 @@
 // Detección de casetas sobre la ruta.
 // Mide la distancia de cada caseta al SEGMENTO más cercano de la ruta (no a los vértices).
 
-const RADIO_KM=0.35 // una caseta cuenta si está a menos de 350 m de la ruta
+const RADIO_KM=0.15 // una caseta cuenta si está a menos de 150 m de la ruta (más lejos suelen ser ramales o incorporaciones)
+const DIST_MIN_ENTRE_ESTIMADAS_KM=3 // una estimada a menos de esto de otra caseta detectada se considera la misma
 
 // Solo aplica a plazas de OpenStreetMap sin tarifa en la base (las que se estiman).
 const EXCLUIR_PLAZAS_SIN_TARIFA=["CHALCO","VIA ATLIXCAYOTL","POLOTITLAN","JOROBAS"]
@@ -27,7 +28,13 @@ function prepararRuta(coords){
    l.push(i)
   }
  }
- return {c:coords,grid,largos}
+ const cum=[0]
+ for(let i=0;i<coords.length-1;i++){
+  const a=coords[i], b=coords[i+1]
+  const kx=111.32*Math.cos(a[1]*Math.PI/180)
+  cum.push(cum[i]+Math.hypot((b[0]-a[0])*kx,(b[1]-a[1])*110.57))
+ }
+ return {c:coords,grid,largos,cum}
 }
 
 // Distancia en km del punto (px,py) al segmento a-b, con proyección local plana.
@@ -41,6 +48,12 @@ function distKmASegmento(px,py,ax,ay,bx,by){
  let t=l2?Math.max(0,Math.min(1,-(x1*dx+y1*dy)/l2)):0
  const cx=x1+t*dx, cy=y1+t*dy
  return {d:Math.hypot(cx,cy),t}
+}
+
+// Kilómetro sobre la ruta para una posición fraccionaria (índice+t).
+function kmEnRuta(R,pos){
+ const i=Math.min(Math.floor(pos),R.cum.length-2)
+ return R.cum[i]+(pos-i)*(R.cum[i+1]-R.cum[i])
 }
 
 // Devuelve {d,pos} si el punto está a <= radioKm de la ruta; pos = avance a lo largo de la ruta.
@@ -91,5 +104,17 @@ function detectarCasetas(ejes){
 
  con.sort((a,b)=>a.pos-b.pos)
  est.sort((a,b)=>a.pos-b.pos)
- return {con,est}
+
+ // Quitar estimadas repetidas: mismo nombre, o muy cerca (a lo largo de la ruta) de otra caseta ya detectada.
+ const kms=con.map(c=>kmEnRuta(R,c.pos))
+ const est2=[]
+ est.forEach(e=>{
+  const k=kmEnRuta(R,e.pos)
+  const nom=normalizarNombre(e.nombre)
+  const rep=(nom&&!/SIN NOMBRE/.test(nom)&&est2.some(x=>normalizarNombre(x.nombre)===nom))
+  const cerca=kms.some(x=>Math.abs(x-k)<DIST_MIN_ENTRE_ESTIMADAS_KM)
+  if(rep||cerca) return
+  kms.push(k); est2.push(e)
+ })
+ return {con,est:est2}
 }

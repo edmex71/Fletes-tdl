@@ -59,6 +59,7 @@ async function calcularRuta(){
 
   limpiarRuta()
   currentRoute=route.geometry.coordinates
+  if(typeof ignoradas!=="undefined") ignoradas=new Set()
 
   if(map){
    routeLayer=L.geoJSON(route.geometry).addTo(map)
