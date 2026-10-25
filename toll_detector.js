@@ -107,6 +107,17 @@ function detectarCasetas(ejes){
 
  // Plazas de OpenStreetMap sin tarifa en la base: ya no se estiman (daban falsos positivos). Solo cuentan casetas con tarifa.
 
+ // Casetas sin ubicación en el mapa que se cobran seguro si la ruta pasa por las dos de sus lados
+ // (ej. Fortín está entre Esperanza y Cuitláhuac en la 150D).
+ const IMPLICITAS=[{n:"Fortin",entre:["Esperanza (Puebla)","Cuitlahuac"]}]
+ IMPLICITAS.forEach(r=>{
+  const a=con.find(c=>c.nombre===r.entre[0]), b=con.find(c=>c.nombre===r.entre[1])
+  const rec=CASETAS_TARIFA.find(c=>c.n===r.n)
+  if(!a||!b||!rec||con.some(c=>c.nombre===r.n)) return
+  const tf=tarifaCaseta(rec,ejes)
+  if(tf) con.push({nombre:rec.n,monto:tf.monto,tramo:tf.tramo,desde:tf.desde,multi:tf.multi,aprox:tf.aprox,pos:(a.pos+b.pos)/2})
+ })
+
  // Casetas cuyo cobro ya va incluido en el tramo directo de otra (Traza tu ruta no las suma aparte).
  const INCLUIDAS={"San Marcos":["Chalco","Ixtapaluca"]}
  const hay=n=>con.some(c=>c.nombre===n)

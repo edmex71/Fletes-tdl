@@ -17,11 +17,13 @@
 - Las estimadas a menos de 3 km de otra caseta detectada, o con el mismo nombre, se descartan por repetidas.
 - "Pasar por (opcional)": ciudades intermedias separadas por `;` para obligar a la ruta a seguir otro camino (ej. `Acayucan` para ir por Veracruz en vez de Oaxaca).
 - Desde CDMX a la zona de Guadalajara la ruta se fuerza por Palmillas, Apaseo el Grande y Salamanca (como Traza tu ruta); la lógica está en `guadalajaraDesdeCdmx()` de `router.js`.
+- Origen, destino y "Pasar por" aceptan coordenadas copiadas de Google Maps, ej. `29.4387748, -106.4221653` (latitud, longitud), sin buscar la dirección.
 - En "Pasar por" también puedes escribir nombres de casetas de la base (ej. `Palmillas; Chichimequillas`).
 - Desde CDMX hacia el norte (Bajío, SLP, Monterrey, Reynosa, Torreón, Chihuahua, Juárez) la ruta se fuerza por la autopista México–Querétaro, pasando por Palmillas y Chichimequillas; el Arco Norte solo se usa viniendo de Puebla. Si escribes tus propios puntos en "Pasar por", no se agrega nada automático. La regla está en `norteDesdeCdmx()` de `router.js`.
 - Solo se cobran casetas con tarifa en la base. Las plazas de OpenStreetMap sin tarifa ya no se estiman (daban falsos positivos); si falta una caseta, se agrega a `tarifas_extra.json`.
 - Atlacomulco/Querétaro no se cobra saliendo de CDMX (es una incorporación a la 57D); sí viniendo de Toluca. Pendiente: revisar la ruta CDMX–Tijuana por el Pacífico, que según el usuario sigue la 57D hasta Apaseo el Grande.
 - Agualeguas y Vallecitos (Mex 85D) no se suman: el cobro de Sabinas ya es el de toda la autopista.
+- Fortín (sin ubicación en el mapa) se cobra siempre que la ruta pase por Esperanza (Puebla) y Cuitláhuac; la regla está en `IMPLICITAS` de `toll_detector.js`.
 - Incorporaciones y anexos (Jorobas, Polotitlán, Huachichil, Querétaro Bis) no se cobran en ruta por la autopista principal. Jorobas, Polotitlán y Huachichil solo cuentan si el viaje sale o llega a menos de 10 km de ellas; Querétaro Bis nunca. Se cambia en `INCORPORACIONES` de `toll_detector.js`.
 - San Marcos (México–San Martín Texmelucan) ya incluye Chalco e Ixtapaluca: si pasa por San Marcos no se suman aparte, igual que en Traza tu ruta.
 - Si una caseta cobra por varios tramos, usa el tramo de mayor precio y lo muestra en pantalla para que lo revises.

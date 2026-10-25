@@ -57,8 +57,7 @@ async function calcularRuta(){
   setEstado("Calculando ruta...")
 
   const o=await geocode(origen)
-  await esperar(1100) // Nominatim permite 1 consulta por segundo
-  await esperar(1100)
+  if(!leerCoordenadas(origen)&&!leerCoordenadas(destino)) await esperar(1100) // Nominatim permite 1 consulta por segundo
   const d=await geocode(destino)
 
   // Puntos intermedios para forzar el camino. Se pueden escribir ciudades o nombres de casetas, separados por ;
@@ -67,7 +66,7 @@ async function calcularRuta(){
   for(const v of viaTxt.split(";").map(x=>x.trim()).filter(Boolean)){
    const pc=puntoCaseta(v)
    if(pc){vias.push(pc);continue}
-   await esperar(1100)
+   if(!leerCoordenadas(v)) await esperar(1100)
    vias.push(await geocode(v))
   }
   // Desde CDMX hacia el norte se va por la autopista México-Querétaro (Palmillas y Chichimequillas),
