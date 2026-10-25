@@ -17,6 +17,7 @@
 - Las estimadas a menos de 3 km de otra caseta detectada, o con el mismo nombre, se descartan por repetidas.
 - "Pasar por (opcional)": ciudades intermedias separadas por `;` para obligar a la ruta a seguir otro camino (ej. `Acayucan` para ir por Veracruz en vez de Oaxaca).
 - Desde CDMX a la zona de Guadalajara la ruta se fuerza por Palmillas, Apaseo el Grande y Salamanca (como Traza tu ruta); la lógica está en `guadalajaraDesdeCdmx()` de `router.js`.
+- Origen, destino y "Pasar por" aceptan coordenadas copiadas de Google Maps, ej. `29.4387748, -106.4221653` (latitud, longitud), sin buscar la dirección.
 - En "Pasar por" también puedes escribir nombres de casetas de la base (ej. `Palmillas; Chichimequillas`).
 - Desde CDMX hacia el norte (Bajío, SLP, Monterrey, Reynosa, Torreón, Chihuahua, Juárez) la ruta se fuerza por la autopista México–Querétaro, pasando por Palmillas y Chichimequillas; el Arco Norte solo se usa viniendo de Puebla. Si escribes tus propios puntos en "Pasar por", no se agrega nada automático. La regla está en `norteDesdeCdmx()` de `router.js`.
 - Solo se cobran casetas con tarifa en la base. Las plazas de OpenStreetMap sin tarifa ya no se estiman (daban falsos positivos); si falta una caseta, se agrega a `tarifas_extra.json`.
