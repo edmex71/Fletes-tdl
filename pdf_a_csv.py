@@ -2,7 +2,7 @@
 import json, csv, re, sys
 R = json.load(open(sys.argv[1])); OUT = sys.argv[2]
 NOMBRES = {  # nombre PDF -> nombre usado por la base (igual al de 2025 cuando es la misma plaza)
- 'ACAYUCAN (SAYULA)':'Sayula','ESTACION DON':'Estacion Don (La Jaula)','LA VENTA (AGUADULCE)':'Sanchez Magallanes (Aguadulce)',
+ 'ACAYUCAN (SAYULA)':'Acayucan','ESTACION DON':'Estacion Don (La Jaula)','LA VENTA (AGUADULCE)':'Sanchez Magallanes (Aguadulce)',
  'LIB. CD. OBREGON (LICO)':'Libramiento de Cd. Obregon (Lico)','TRES MARIAS "A" Y "B"':'Tres Marias "A"',
  'JOROBAS (CEM)':'Jorobas','SAN MARTIN':'San Martin a Puebla','ENT. AMOZOC III':'Amozoc-Perote','HUITZO DIRECTA':'Huitzo',
  'HUITZO INTERMEDIA':'Huitzo','HUITZO BIS':'Huitzo','PLAYAS':'Playas de Tijuana','CABO SAN LUCAS':'San Lucas',

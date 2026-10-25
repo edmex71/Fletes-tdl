@@ -473,6 +473,64 @@
     19.24
    ],
    "radio": 0.05
+  },
+  {
+   "n": "Acayucan",
+   "tramo": "Ent. Isla - Cosoleacaque",
+   "c5": 543,
+   "osm": "ACAYUCAN",
+   "cerca": [
+    -94.94,
+    17.91
+   ],
+   "radio": 0.05
+  },
+  {
+   "n": "Puente Dovalí",
+   "tramo": "Ent. Minatitlán - Nuevo Teapa",
+   "c5": 65,
+   "osm": "DOVALI",
+   "cerca": [
+    -94.44,
+    18.01
+   ],
+   "radio": 0.05
+  },
+  {
+   "n": "El Zacatal",
+   "tramo": "Zacatal - Cd. del Carmen",
+   "c5": 407,
+   "osm": "DOVALI BIS",
+   "cerca": [
+    -91.86,
+    18.61
+   ],
+   "radio": 0.05
+  },
+  {
+   "n": "Puente La Unidad",
+   "tramo": "Puente La Unidad",
+   "c5": 485,
+   "osm": "UNIDAD",
+   "cerca": [
+    -91.49,
+    18.79
+   ],
+   "radio": 0.05
+  },
+  {
+   "n": "Pisté",
+   "tramo": "Lib. Kantunil - Ent. Valladolid",
+   "c5": 1080
+  },
+  {
+   "n": "Xcan",
+   "tramo": "Ent. Valladolid - Aeropuerto Cancún",
+   "c5": 1843,
+   "xy": [
+    -87.439,
+    20.895
+   ]
   }
  ]
 }
