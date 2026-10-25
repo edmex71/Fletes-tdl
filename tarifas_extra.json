@@ -531,6 +531,37 @@
     -87.439,
     20.895
    ]
+  },
+  {
+   "n": "Ojo Laguna",
+   "tramo": "Ent. Ricardo Flores Magón - Ent. Ojo Laguna",
+   "c5": 224,
+   "osm": "OJO LAGUNA",
+   "cerca": [
+    -106.407,
+    29.482
+   ],
+   "radio": 0.05
+  },
+  {
+   "n": "Vergel",
+   "tramo": "Lib. Norte de La Laguna (Ent. El Vergel - Ent. San Pedro)",
+   "c5": 194
+  },
+  {
+   "n": "Matamoros (Coah.)",
+   "tramo": "Lib. Norte de La Laguna (Ent. San Pedro - Ent. Lib. Laguna)",
+   "c5": 259
+  },
+  {
+   "n": "General Bravo",
+   "tramo": "Ent. Cadereyta - Ent. La Sierrita",
+   "c5": 700
+  },
+  {
+   "n": "Apodaca",
+   "tramo": "Lib. Monterrey (camiones exentos)",
+   "c5": 0
   }
  ]
 }
