@@ -377,6 +377,55 @@
     30.437
    ],
    "radio": 0.08
+  },
+  {
+   "n": "San Nicolás de los Jassos",
+   "tramo": "Libramiento de San Luis Potosí",
+   "c5": 299,
+   "osm": "LIBRAMIENTO ORIENTE DE SAN LUIS POTOSI",
+   "cerca": [
+    -100.825,
+    22.13
+   ],
+   "radio": 0.05
+  },
+  {
+   "n": "Matehuala",
+   "tramo": "Libramiento de Matehuala",
+   "c5": 125,
+   "osm": "MATEHUALA",
+   "cerca": [
+    -100.607,
+    23.664
+   ],
+   "radio": 0.05
+  },
+  {
+   "n": "Ojo Caliente",
+   "tramo": "Libramiento de Saltillo (camiones exentos)",
+   "c5": 0,
+   "osm": "LA CARBONERA",
+   "cerca": [
+    -100.868,
+    25.511
+   ],
+   "radio": 0.05
+  },
+  {
+   "n": "Lincoln",
+   "tramo": "Lib. Monterrey (camiones exentos)",
+   "c5": 0
+  },
+  {
+   "n": "Sabinas",
+   "tramo": "Mty. (Ent. Aeropuerto) - La Gloria",
+   "c5": 658,
+   "osm": "SABINAS",
+   "cerca": [
+    -100.007,
+    26.512
+   ],
+   "radio": 0.05
   }
  ]
 }

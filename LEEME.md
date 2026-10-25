@@ -18,6 +18,7 @@
 - "Pasar por (opcional)": ciudades intermedias separadas por `;` para obligar a la ruta a seguir otro camino (ej. `Acayucan` para ir por Veracruz en vez de Oaxaca).
 - En "Pasar por" también puedes escribir nombres de casetas de la base (ej. `Palmillas; Chichimequillas`).
 - Desde CDMX hacia el norte (Bajío, SLP, Monterrey, Reynosa, Torreón, Chihuahua, Juárez) la ruta se fuerza por la autopista México–Querétaro, pasando por Palmillas y Chichimequillas; el Arco Norte solo se usa viniendo de Puebla. Si escribes tus propios puntos en "Pasar por", no se agrega nada automático. La regla está en `norteDesdeCdmx()` de `router.js`.
+- Incorporaciones y anexos (Jorobas, Polotitlán, Huachichil, Querétaro Bis) no se cobran en ruta por la autopista principal. Jorobas, Polotitlán y Huachichil solo cuentan si el viaje sale o llega a menos de 10 km de ellas; Querétaro Bis nunca. Se cambia en `INCORPORACIONES` de `toll_detector.js`.
 - San Marcos (México–San Martín Texmelucan) ya incluye Chalco e Ixtapaluca: si pasa por San Marcos no se suman aparte, igual que en Traza tu ruta.
 - Si una caseta cobra por varios tramos, usa el tramo de mayor precio y lo muestra en pantalla para que lo revises.
 - Sin ruta calculada (km escritos a mano) usa el estimado por km de antes.
