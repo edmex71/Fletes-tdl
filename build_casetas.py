@@ -58,7 +58,7 @@ for (c, tramo), r in sorted(latest.items()):
     if c in SPLIT:
         for nombre, test, hint in SPLIT[c]:
             if test(tramo):
-                casetas.setdefault(nombre, []).append(item); HINT[strip(nombre)] = hint; break
+                casetas.setdefault(nombre, []).append(item); HINT[nombre] = hint; break
     else:
         casetas.setdefault(c, []).append(item)
 
@@ -98,10 +98,11 @@ for c, tr in sorted(casetas.items(), key=lambda kv: pre[kv[0]][1] != 'exacto'):
     if how == 'parcial':   # no reutilizar puntos ya asignados a otra caseta (evita cobrar dos veces)
         ms = [o for o in ms if id(o) not in usados]
     k0 = strip(c); chosen = ms; flag = None
+    hk = c if c in HINT else k0
     cls = spatial_clusters(ms)
     if len(cls) > 1:
-        if k0 in HINT:
-            cls.sort(key=lambda cl: min(hav(HINT[k0], m['xy']) for m in cl))
+        if hk in HINT:
+            cls.sort(key=lambda cl: min(hav(HINT[hk], m['xy']) for m in cl))
             chosen = cls[0]; flag = 'ubicacion elegida entre %d sitios con el mismo nombre' % len(cls)
         else:
             flag = 'mismo nombre en %d sitios distintos: se aceptan todos' % len(cls)
