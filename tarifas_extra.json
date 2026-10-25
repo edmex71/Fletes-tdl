@@ -262,15 +262,6 @@
    "c5": 256
   },
   {
-   "n": "Fundición",
-   "tramo": "Navojoa - Fundición",
-   "c5": 287,
-   "xy": [
-    -109.71974,
-    27.32042
-   ]
-  },
-  {
    "n": "Calera",
    "tramo": "Lib. de Víctor Rosales",
    "c5": 127,
@@ -690,6 +681,14 @@
    "xy": [
     -96.92794,
     15.90769
+   ]
+  },
+  {
+   "n": "Fundicion",
+   "solo_xy": true,
+   "xy": [
+    -109.71974,
+    27.32042
    ]
   }
  ]
