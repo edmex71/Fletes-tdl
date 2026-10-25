@@ -167,7 +167,7 @@ for cl in clusters:
     names = [m['name'] for m in cl if m['name']]
     nm = collections.Counter(names).most_common(1)[0][0] if names else None
     lon = sum(m['xy'][0] for m in cl)/len(cl); lat = sum(m['xy'][1] for m in cl)/len(cl)
-    if not nm: continue  # plazas sin nombre en OSM: casi siempre ramales, se descartan
+    continue  # las plazas de OSM sin tarifa ya no se usan (daban falsos positivos)
     plazas.append({'n': re.sub(r'\s+', ' ', nm).strip(), 'p': [round(lon, 5), round(lat, 5)]})
 
 js = '// Generado por build_casetas.py - NO editar a mano\n'
