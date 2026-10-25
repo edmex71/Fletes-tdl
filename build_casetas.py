@@ -22,9 +22,9 @@ ALIAS = {  # clave CSV normalizada -> clave OSM normalizada
     'SAN MARTIN A PUEBLA': 'SAN MARTIN TEXMELUCAN',
     'LA CARBONERA': 'LA CARBONERA',
     'TAXCO': 'C BIS TAXCO',
-    'LA CALERA': 'CALERA',
     'TRES MARIAS A': 'BIS TRES MARIA CA',
     'TAMPICO': 'PUENTE TAMPICO',
+    'QUERETARO BIS': 'ZZ SIN COORDENADAS',  # el sitio OSM cercano es la caseta de Jilotepec (Atlacomulco/Queretaro)
 }
 # Ubicacion elegida cuando el mismo nombre existe en varios lugares (lon,lat). Revisar con SICT.
 HINT = {
@@ -132,7 +132,7 @@ EXTRA_NAMES = []
 for x in _ex['casetas']:
     t = {e: float(round(x['c5'] * _rat[e])) for e in range(2, 10)}; t[5] = float(x['c5'])
     item = {'tramo': x['tramo'], 'desde': _ex['desde'], 't': t, 'a': 1}
-    pts = []
+    pts = [tuple(x['xy'])] if x.get('xy') else []
     if x.get('osm'):
         k = strip(x['osm']); r = x.get('radio', 0.08)
         ms = [o for o in osm if id(o) not in usados and o['k'] and (k in o['k'] or o['k'] in k)

@@ -5,7 +5,7 @@ const RADIO_KM=0.15 // una caseta cuenta si está a menos de 150 m de la ruta (m
 const DIST_MIN_ENTRE_ESTIMADAS_KM=3 // una estimada a menos de esto de otra caseta detectada se considera la misma
 
 // Solo aplica a plazas de OpenStreetMap sin tarifa en la base (las que se estiman).
-const EXCLUIR_PLAZAS_SIN_TARIFA=["CHALCO","VIA ATLIXCAYOTL","POLOTITLAN","JOROBAS"]
+const EXCLUIR_PLAZAS_SIN_TARIFA=["CHALCO","VIA ATLIXCAYOTL","POLOTITLAN","JOROBAS","JILOTEPEC"]
 
 function normalizarNombre(n){
  return (n||"").toUpperCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
