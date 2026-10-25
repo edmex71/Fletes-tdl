@@ -1,0 +1,33 @@
+{
+ "fuente": "Traza tu ruta (SICT/CAPUFE), consulta del 24-oct-2026, camión de 5 ejes. Los demás ejes se estiman con la proporción mediana de las tarifas CAPUFE.",
+ "desde": "2026-10-24",
+ "casetas": [
+  {"n": "Atlacomulco/Querétaro", "tramo": "Lib. N. Cd. México (Jilotepec - Atlacomulco)", "c5": 382, "osm": "ATLACOMULCO II", "cerca": [-99.853, 19.912]},
+  {"n": "San Juanico", "tramo": "Ent. Atlacomulco - Ent. Temascalcingo", "c5": 227},
+  {"n": "Contepec", "tramo": "Ent. Tlalpujahua - Contepec", "c5": 227, "osm": "CONTEPEC", "cerca": [-100.18, 19.877]},
+  {"n": "Zinapécuaro", "tramo": "Ent. Maravatío - Ent. Morelia", "c5": 554, "osm": "ZINAPECUARO", "cerca": [-100.789, 19.902]},
+  {"n": "Panindícuaro", "tramo": "Ent. Morelia - Ent. Churintzio", "c5": 776, "osm": "PANINDICUARO", "cerca": [-101.757, 19.972]},
+  {"n": "Ecuandureo", "tramo": "Ent. Churintzio - Ent. La Barca", "c5": 409, "osm": "ECUANDUREO", "cerca": [-102.191, 20.175]},
+  {"n": "Ocotlán", "tramo": "Ent. La Barca - Ent. Guadalajara", "c5": 533, "osm": "OCOTLAN", "cerca": [-102.739, 20.406]},
+  {"n": "La Joya", "tramo": "Ent. Guadalajara - Ent. Tonalá", "c5": 251, "osm": "LA JOYA", "cerca": [-103.139, 20.605]},
+  {"n": "Arenal", "tramo": "Ent. Ameca - Ent. Magdalena", "c5": 413, "osm": "EL ARENAL", "cerca": [-103.662, 20.779]},
+  {"n": "Plan de Barrancas", "tramo": "Ent. Magdalena - Ent. Ixtlán del Río", "c5": 274, "osm": "PLAN DE BARRANCAS", "cerca": [-104.144, 21.005], "radio": 0.05},
+  {"n": "Santa María del Oro", "tramo": "Ent. Ixtlán del Río - Tepic", "c5": 202},
+  {"n": "Trapichillo", "tramo": "Tepic - Crucero de San Blas", "c5": 438, "osm": "TRAPICHILLO", "cerca": [-104.987, 21.572]},
+  {"n": "Ruiz", "tramo": "Crucero de San Blas - Ent. Rosamorada", "c5": 602, "osm": "RUIZ", "cerca": [-105.118, 21.952]},
+  {"n": "Acaponeta", "tramo": "Ent. Rosamorada - Ent. Piedritas", "c5": 1272, "osm": "ACAPONETA", "cerca": [-105.421, 22.454]},
+  {"n": "Rosario", "tramo": "Ent. Piedritas - Ent. Caleritas", "c5": 647, "osm": "ROSARIO", "cerca": [-105.877, 22.985]},
+  {"n": "Mármol", "tramo": "El Venadillo - Ent. La Cruz", "c5": 421, "osm": "MARMOL", "cerca": [-106.57, 23.471]},
+  {"n": "Costa Rica", "tramo": "Ent. La Cruz - Ent. Costa Rica", "c5": 456, "osm": "COSTA RICA", "cerca": [-107.43, 24.57]},
+  {"n": "San Pedro (Lib. Culiacán)", "tramo": "Libramiento de Culiacán", "c5": 106, "osm": "LIBRAMIENTO DE CULIACAN", "cerca": [-107.569, 24.749]},
+  {"n": "Culiacán", "tramo": "Ent. La Curva - Ent. El Zapotillo", "c5": 155},
+  {"n": "Las Brisas", "tramo": "Ent. El Zapotillo - Ent. Las Brisas", "c5": 155},
+  {"n": "San Miguel", "tramo": "San Miguel Zapotitlán - Gustavo Díaz Ordaz", "c5": 269},
+  {"n": "Santa Ana", "tramo": "Santa Ana - Altar", "c5": 347},
+  {"n": "San Luis Río Colorado", "tramo": "San Luis Río Colorado - Ent. Cuernavaca", "c5": 69, "osm": "SAN LUIS RIO COLORADO", "cerca": [-114.808, 32.491]},
+  {"n": "Mexicali", "tramo": "Libramiento de Mexicali", "c5": 302, "osm": "MEXICALI OMEGA", "cerca": [-115.42, 32.533]},
+  {"n": "La Rumorosa", "tramo": "Flor del Desierto - Ent. La Rumorosa", "c5": 227, "osm": "RUMOROSA", "cerca": [-116.04, 32.559], "radio": 0.1},
+  {"n": "Tijuana (Tecate)", "tramo": "Lib. de Tecate - Ent. Tijuana", "c5": 485, "osm": "TIJUANA-TECATE", "cerca": [-116.852, 32.546]},
+  {"n": "Guaymas", "tramo": "Libramiento de Guaymas (SICT)", "c5": 256}
+ ]
+}

@@ -117,6 +117,35 @@ for c, tr in sorted(casetas.items(), key=lambda kv: pre[kv[0]][1] != 'exacto'):
     if flag: revisar.append((c, flag, how))
     elif how == 'parcial': revisar.append((c, 'nombre parcial', how))
 
+# ---------- casetas extra (privadas/concesionadas) tomadas de Traza tu ruta, solo 5 ejes
+import os, statistics
+_ex = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tarifas_extra.json'), encoding='utf-8'))
+_rat = {}
+for e in range(2, 10):
+    rs = []
+    for tr in casetas.values():
+        for it in tr:
+            if it['t'].get(5) and it['t'].get(e): rs.append(it['t'][e] / it['t'][5])
+    _rat[e] = statistics.median(rs)
+print('proporciones vs 5 ejes:', {e: round(v, 2) for e, v in _rat.items()})
+EXTRA_NAMES = []
+for x in _ex['casetas']:
+    t = {e: float(round(x['c5'] * _rat[e])) for e in range(2, 10)}; t[5] = float(x['c5'])
+    item = {'tramo': x['tramo'], 'desde': _ex['desde'], 't': t, 'a': 1}
+    pts = []
+    if x.get('osm'):
+        k = strip(x['osm']); r = x.get('radio', 0.08)
+        ms = [o for o in osm if id(o) not in usados and o['k'] and (k in o['k'] or o['k'] in k)
+              and abs(o['xy'][0]-x['cerca'][0]) < r and abs(o['xy'][1]-x['cerca'][1]) < r]
+        for o in ms: usados.add(id(o))
+        for o in ms:
+            if not any(hav(o['xy'], q) < 0.06 for q in pts): pts.append(o['xy'])
+        if not pts: print('EXTRA sin puntos OSM:', x['n'])
+    ex = next((c for c in out if c['n'] == x['n']), None)
+    if ex: ex['tr'].append(item); ex['pts'] += [[round(a, 5), round(b, 5)] for a, b in pts if [round(a, 5), round(b, 5)] not in ex['pts']]
+    else: out.append({'n': x['n'], 'tr': [item], 'pts': [[round(a, 5), round(b, 5)] for a, b in pts]})
+    if not pts and not ex: sin.append(x['n'])
+
 # ---------- plazas OSM sin tarifa
 tar_pts = [p for c in out for p in c['pts']]
 rest = [o for o in osm if id(o) not in usados and not any(hav(o['xy'], p) < 0.8 for p in tar_pts)]

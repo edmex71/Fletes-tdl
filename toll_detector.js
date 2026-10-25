@@ -84,7 +84,7 @@ function detectarCasetas(ejes){
   })
   if(!mejor) return
   const t=tarifaCaseta(c,ejes)
-  if(t) con.push({nombre:c.n,monto:t.monto,tramo:t.tramo,desde:t.desde,multi:t.multi,pos:mejor.pos})
+  if(t) con.push({nombre:c.n,monto:t.monto,tramo:t.tramo,desde:t.desde,multi:t.multi,aprox:t.aprox,pos:mejor.pos})
   else est.push({nombre:c.n,pos:mejor.pos,motivo:"sin tarifa para "+ejes+" ejes"})
  })
 

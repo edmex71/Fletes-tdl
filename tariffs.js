@@ -7,7 +7,7 @@ function tarifaCaseta(c, ejes){
  c.tr.forEach(t=>{
   const v=t.t[ejes]
   if(v!=null && (mejor===null || v>mejor.monto)){
-   mejor={monto:v,tramo:t.tramo,desde:t.desde,multi:c.tr.length>1}
+   mejor={monto:v,tramo:t.tramo,desde:t.desde,multi:c.tr.length>1,aprox:!!t.a&&ejes!==5}
   }
  })
  return mejor
