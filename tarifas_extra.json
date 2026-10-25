@@ -262,15 +262,6 @@
    "c5": 256
   },
   {
-   "n": "Fundición",
-   "tramo": "Navojoa - Fundición",
-   "c5": 287,
-   "xy": [
-    -109.71974,
-    27.32042
-   ]
-  },
-  {
    "n": "Calera",
    "tramo": "Lib. de Víctor Rosales",
    "c5": 127,
@@ -521,7 +512,11 @@
   {
    "n": "Pisté",
    "tramo": "Lib. Kantunil - Ent. Valladolid",
-   "c5": 1080
+   "c5": 1080,
+   "xy": [
+    -88.58319,
+    20.72869
+   ]
   },
   {
    "n": "Xcan",
@@ -556,12 +551,145 @@
   {
    "n": "General Bravo",
    "tramo": "Ent. Cadereyta - Ent. La Sierrita",
-   "c5": 700
+   "c5": 700,
+   "xy": [
+    -99.16956,
+    25.81356
+   ]
   },
   {
    "n": "Apodaca",
    "tramo": "Lib. Monterrey (camiones exentos)",
    "c5": 0
+  },
+  {
+   "n": "Fortin",
+   "tramo": "Fortín (D) Cd. Mendoza-Córdoba (SICT)",
+   "c5": 180,
+   "xy": [
+    -96.989312,
+    18.906062
+   ]
+  },
+  {
+   "n": "Iguala",
+   "solo_xy": true,
+   "xy": [
+    -99.50831,
+    18.33619
+   ]
+  },
+  {
+   "n": "Paso Morelos",
+   "solo_xy": true,
+   "xy": [
+    -99.21544,
+    18.23169
+   ]
+  },
+  {
+   "n": "Libramiento de Villahermosa",
+   "solo_xy": true,
+   "xy": [
+    -92.93081,
+    18.07569
+   ]
+  },
+  {
+   "n": "Paso del Toro",
+   "solo_xy": true,
+   "xy": [
+    -96.19844,
+    19.08169
+   ]
+  },
+  {
+   "n": "Libramiento Oriente de Chihuahua",
+   "solo_xy": true,
+   "xy": [
+    -106.13931,
+    28.79044
+   ]
+  },
+  {
+   "n": "Lagos de Moreno",
+   "solo_xy": true,
+   "xy": [
+    -101.76331,
+    21.49044
+   ]
+  },
+  {
+   "n": "Libramiento de Cd. Obregon (Lico)",
+   "solo_xy": true,
+   "xy": [
+    -109.89956,
+    27.60469
+   ]
+  },
+  {
+   "n": "Matamoros (Coah.)",
+   "solo_xy": true,
+   "xy": [
+    -103.30394,
+    25.44419
+   ]
+  },
+  {
+   "n": "Santa Ana",
+   "solo_xy": true,
+   "xy": [
+    -110.51856,
+    30.59356
+   ]
+  },
+  {
+   "n": "Vergel",
+   "solo_xy": true,
+   "xy": [
+    -103.36919,
+    25.65056
+   ]
+  },
+  {
+   "n": "La Venta",
+   "solo_xy": true,
+   "xy": [
+    -99.80194,
+    16.92844
+   ]
+  },
+  {
+   "n": "Libramiento Poniente de Acapulco",
+   "solo_xy": true,
+   "xy": [
+    -99.82019,
+    16.93869
+   ]
+  },
+  {
+   "n": "Barranca Larga",
+   "solo_xy": true,
+   "xy": [
+    -96.74581,
+    16.46719
+   ]
+  },
+  {
+   "n": "Ventanilla",
+   "solo_xy": true,
+   "xy": [
+    -96.92794,
+    15.90769
+   ]
+  },
+  {
+   "n": "Fundicion",
+   "solo_xy": true,
+   "xy": [
+    -109.71974,
+    27.32042
+   ]
   }
  ]
 }
