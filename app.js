@@ -75,7 +75,7 @@ function calcularPrecios(costo,km){
 // Último cálculo, para generar la imagen de costos internos
 let ultimoCalculo=null
 // Casetas que el usuario desmarcó (falsas o ramales); se reinicia al calcular otra ruta
-let ignoradas=new Set()
+let ignoradas=new Set() // casetas cuyo estado el usuario invirtió respecto al predeterminado
 function alternarCaseta(k){
  if(ignoradas.has(k)) ignoradas.delete(k); else ignoradas.add(k)
  calcularFlete()
@@ -118,7 +118,9 @@ function calcularFlete(){
    lista+=filaCaseta(k,`${escapar(c.nombre)}: ${pesos(c.monto)}${extra}`,act)
   })
   det.est.forEach(c=>{
-   const k=c.nombre+"@"+Math.round(c.pos), act=!ignoradas.has(k)
+   // Las plazas sin nombre en OpenStreetMap suelen ser ramales: empiezan desmarcadas
+   const porDefecto=!/sin nombre/i.test(c.nombre)
+   const k=c.nombre+"@"+Math.round(c.pos), act=porDefecto!==ignoradas.has(k)
    if(act){totalEst+=montoEst;nEst++}
    lista+=filaCaseta(k,`<span class="est">${escapar(c.nombre)}: ~${pesos(montoEst)} (est., ${escapar(c.motivo)})</span>`,act)
   })
@@ -176,7 +178,7 @@ function calcularFlete(){
  <b>Costo total: ${pesos(costoTotal)}</b>
 
  <h3>CASETAS EN RUTA</h3>
- ${det&&(det.con.length||nEst||ignoradas.size)?"<small>Desmarca las que no correspondan a tu ruta (ramales o repetidas) y el total se recalcula.</small><br>":""}
+ ${det&&(det.con.length||nEst||ignoradas.size)?"<small>Desmarca las que no correspondan a tu ruta; marca las \"sin nombre\" que sí cobren. El total se recalcula.</small><br>":""}
  ${lista||"No se detectaron casetas en la ruta.<br>"}
  <small>Tarifas CAPUFE (FONADIN y Fideicomiso 358) vigentes desde abr-2026 para camión de ${ejes} ejes; pueden haber subido. Las marcadas (est.) son aproximadas.</small>
  `

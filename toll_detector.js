@@ -10,7 +10,7 @@ const EXCLUIR_PLAZAS_SIN_TARIFA=["CHALCO","VIA ATLIXCAYOTL","POLOTITLAN","JOROBA
 // Plazas que son incorporaciones o anexos de otra carretera: no se cobran si vas en ruta por la autopista principal.
 // Solo cuentan si el viaje empieza o termina cerca de ellas (ej. sales de Huehuetoca y te incorporas a la 57 por Jorobas).
 // null = nunca se cobran (anexos de otra caseta).
-const INCORPORACIONES={"JOROBAS":10,"POLOTITLAN":10,"HUACHICHIL":10,"QUERETARO BIS":null}
+const INCORPORACIONES={"JOROBAS":10,"POLOTITLAN":10,"HUACHICHIL":10,"QUERETARO BIS":null,"AGUALEGUAS":null,"VALLECITOS":null}
 
 function normalizarNombre(n){
  return (n||"").toUpperCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
@@ -119,6 +119,13 @@ function detectarCasetas(ejes){
  const incl=Object.keys(INCLUIDAS).filter(hay).flatMap(k=>INCLUIDAS[k].map(normalizarNombre))
  for(let i=con.length-1;i>=0;i--) if(incl.includes(normalizarNombre(con[i].nombre))) con.splice(i,1)
  for(let i=est.length-1;i>=0;i--) if(incl.some(x=>normalizarNombre(est[i].nombre).includes(x))) est.splice(i,1)
+
+ // Saliendo de CDMX por la 57D (pasa por Palmillas), Atlacomulco/Querétaro es una incorporación y no se cobra.
+ // En la ruta al Pacífico (Jilotepec-Atlacomulco, sin Palmillas) sí se cobra; viniendo de Toluca también.
+ const sale=extremos[0][0]>-99.45&&extremos[0][0]<-98.9&&extremos[0][1]>19.15&&extremos[0][1]<19.75
+ if(sale&&con.some(c=>normalizarNombre(c.nombre)==='PALMILLAS')){
+  for(let i=con.length-1;i>=0;i--) if(normalizarNombre(con[i].nombre).includes('ATLACOMULCO')) con.splice(i,1)
+ }
 
  con.sort((a,b)=>a.pos-b.pos)
  est.sort((a,b)=>a.pos-b.pos)
