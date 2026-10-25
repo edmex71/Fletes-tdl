@@ -619,6 +619,78 @@
     -106.13931,
     28.79044
    ]
+  },
+  {
+   "n": "Lagos de Moreno",
+   "solo_xy": true,
+   "xy": [
+    -101.76331,
+    21.49044
+   ]
+  },
+  {
+   "n": "Libramiento de Cd. Obregon (Lico)",
+   "solo_xy": true,
+   "xy": [
+    -109.89956,
+    27.60469
+   ]
+  },
+  {
+   "n": "Matamoros (Coah.)",
+   "solo_xy": true,
+   "xy": [
+    -103.30394,
+    25.44419
+   ]
+  },
+  {
+   "n": "Santa Ana",
+   "solo_xy": true,
+   "xy": [
+    -110.51856,
+    30.59356
+   ]
+  },
+  {
+   "n": "Vergel",
+   "solo_xy": true,
+   "xy": [
+    -103.36919,
+    25.65056
+   ]
+  },
+  {
+   "n": "La Venta",
+   "solo_xy": true,
+   "xy": [
+    -99.80194,
+    16.92844
+   ]
+  },
+  {
+   "n": "Libramiento Poniente de Acapulco",
+   "solo_xy": true,
+   "xy": [
+    -99.82019,
+    16.93869
+   ]
+  },
+  {
+   "n": "Barranca Larga",
+   "solo_xy": true,
+   "xy": [
+    -96.74581,
+    16.46719
+   ]
+  },
+  {
+   "n": "Ventanilla",
+   "solo_xy": true,
+   "xy": [
+    -96.92794,
+    15.90769
+   ]
   }
  ]
 }
