@@ -19,7 +19,7 @@
 - Desde CDMX a la zona de Guadalajara la ruta se fuerza por Palmillas, Apaseo el Grande y Salamanca (como Traza tu ruta); la lógica está en `guadalajaraDesdeCdmx()` de `router.js`.
 - En "Pasar por" también puedes escribir nombres de casetas de la base (ej. `Palmillas; Chichimequillas`).
 - Desde CDMX hacia el norte (Bajío, SLP, Monterrey, Reynosa, Torreón, Chihuahua, Juárez) la ruta se fuerza por la autopista México–Querétaro, pasando por Palmillas y Chichimequillas; el Arco Norte solo se usa viniendo de Puebla. Si escribes tus propios puntos en "Pasar por", no se agrega nada automático. La regla está en `norteDesdeCdmx()` de `router.js`.
-- Las plazas "sin nombre" de OpenStreetMap salen desmarcadas (suelen ser ramales); márcalas si sí cobran.
+- Las plazas "sin nombre" de OpenStreetMap se descartan por completo (casi siempre eran ramales).
 - Atlacomulco/Querétaro no se cobra saliendo de CDMX (es una incorporación a la 57D); sí viniendo de Toluca. Pendiente: revisar la ruta CDMX–Tijuana por el Pacífico, que según el usuario sigue la 57D hasta Apaseo el Grande.
 - Agualeguas y Vallecitos (Mex 85D) no se suman: el cobro de Sabinas ya es el de toda la autopista.
 - Incorporaciones y anexos (Jorobas, Polotitlán, Huachichil, Querétaro Bis) no se cobran en ruta por la autopista principal. Jorobas, Polotitlán y Huachichil solo cuentan si el viaje sale o llega a menos de 10 km de ellas; Querétaro Bis nunca. Se cambia en `INCORPORACIONES` de `toll_detector.js`.
