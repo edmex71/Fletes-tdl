@@ -10,7 +10,7 @@ NOMBRES = {  # nombre PDF -> nombre usado por la base (igual al de 2025 cuando e
  'SAYULA TRONCAL':'Sayula Troncal','SAYULA REMOTA':'Sayula Remota','LIBRAMIENTO PONIENTE DE ACAPULCO':'Libramiento Poniente de Acapulco',
  'LIBRAMIENTO DE VILLAHERMOSA':'Libramiento de Villahermosa','LIBRAMIENTO ORIENTE DE CHIHUAHUA':'Libramiento Oriente de Chihuahua',
  'CIUDAD VALLES-TAMUÍN':'Ciudad Valles-Tamuin','LECHERIA RETORNO':'Lecheria Retorno','RETORNO':'Lecheria Retorno',
- 'ACATLÁN':'Acatlan','OCOZOCOAUTLA (OCUILAPA)':'Ocozocoautla (Ocuilapa)',
+ 'ACATLÁN':'Acatlan','LA CALERA':'La Calera Tamuin','OCOZOCOAUTLA (OCUILAPA)':'Ocozocoautla (Ocuilapa)',
 }
 MIN = {'de','del','la','las','los','el','y','a','al'}
 def titulo(s):

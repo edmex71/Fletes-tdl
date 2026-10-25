@@ -5,7 +5,12 @@ const RADIO_KM=0.15 // una caseta cuenta si está a menos de 150 m de la ruta (m
 const DIST_MIN_ENTRE_ESTIMADAS_KM=3 // una estimada a menos de esto de otra caseta detectada se considera la misma
 
 // Solo aplica a plazas de OpenStreetMap sin tarifa en la base (las que se estiman).
-const EXCLUIR_PLAZAS_SIN_TARIFA=["CHALCO","VIA ATLIXCAYOTL","POLOTITLAN","JOROBAS"]
+const EXCLUIR_PLAZAS_SIN_TARIFA=["CHALCO","VIA ATLIXCAYOTL","POLOTITLAN","JOROBAS","JILOTEPEC"]
+
+// Plazas que son incorporaciones o anexos de otra carretera: no se cobran si vas en ruta por la autopista principal.
+// Solo cuentan si el viaje empieza o termina cerca de ellas (ej. sales de Huehuetoca y te incorporas a la 57 por Jorobas).
+// null = nunca se cobran (anexos de otra caseta).
+const INCORPORACIONES={"JOROBAS":10,"POLOTITLAN":10,"HUACHICHIL":10,"QUERETARO BIS":null}
 
 function normalizarNombre(n){
  return (n||"").toUpperCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
@@ -70,13 +75,25 @@ function cercaDeRuta(R,lon,lat,radioKm){
  return mejor
 }
 
+function coords0(c){return [c[0],c[1]]}
+
 // Devuelve null si no hay ruta. Si hay: {con:[casetas con tarifa], est:[casetas sin tarifa]}
 function detectarCasetas(ejes){
  if(!currentRoute||currentRoute.length<2) return null
  const R=prepararRuta(currentRoute)
  const con=[], est=[]
+ const extremos=[coords0(R.c[0]), coords0(R.c[R.c.length-1])]
+ function incorporacionOk(nombre,pts){
+  const nom=normalizarNombre(nombre)
+  const k=Object.keys(INCORPORACIONES).find(x=>nom.includes(x))
+  if(!k) return true
+  const r=INCORPORACIONES[k]
+  if(r===null) return false
+  return extremos.some(e=>pts.some(p=>distKmASegmento(p[0],p[1],e[0],e[1],e[0],e[1]).d<=r))
+ }
 
  CASETAS_TARIFA.forEach(c=>{
+  if(!incorporacionOk(c.n,c.pts)) return
   let mejor=null
   c.pts.forEach(p=>{
    const r=cercaDeRuta(R,p[0],p[1],RADIO_KM)
@@ -91,6 +108,7 @@ function detectarCasetas(ejes){
  PLAZAS_SIN_TARIFA.forEach(pl=>{
   const nom=normalizarNombre(pl.n)
   if(EXCLUIR_PLAZAS_SIN_TARIFA.some(x=>nom.includes(x))) return
+  if(!incorporacionOk(pl.n,[pl.p])) return
   const r=cercaDeRuta(R,pl.p[0],pl.p[1],RADIO_KM)
   if(r) est.push({nombre:pl.n,pos:r.pos,motivo:"sin tarifa en la base"})
  })
