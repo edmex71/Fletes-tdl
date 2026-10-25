@@ -562,6 +562,15 @@
    "n": "Apodaca",
    "tramo": "Lib. Monterrey (camiones exentos)",
    "c5": 0
+  },
+  {
+   "n": "Fortin",
+   "tramo": "Fortín (D) Cd. Mendoza-Córdoba (SICT)",
+   "c5": 180,
+   "xy": [
+    -96.989312,
+    18.906062
+   ]
   }
  ]
 }
