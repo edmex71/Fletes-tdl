@@ -10,6 +10,7 @@
 ## Cómo funciona el costo de casetas
 - Detecta las casetas a menos de 150 m de la ruta (más lejos suelen ser ramales o incorporaciones) (mide contra el trazo, no contra puntos sueltos).
 - Con tarifa: 104 casetas de la red FONADIN y Fideicomiso 358 (CAPUFE), camión de 2 a 9 ejes, vigentes desde 13-abr-2026. 61 tienen ubicación en el mapa y se detectan; las demás (ver lista en la PR) aún no.
+- Extras de Traza tu ruta (`tarifas_extra.json`): casetas de la ruta México–Tijuana por el Pacífico (consulta 24-oct-2026, solo 5 ejes). Para los demás ejes el precio se estima con la proporción mediana de CAPUFE y se marca "precio estimado". Para agregar más, se añade la caseta al JSON (nombre, tramo, precio de 5 ejes, nombre en OpenStreetMap y coordenada aproximada).
 - No incluida: Red Concesionada (tarifas de jul-2023), autopistas privadas y estatales: salen como estimadas si OpenStreetMap las tiene.
 - Sin tarifa: plazas de OpenStreetMap que cruza la ruta. Se estiman con la mediana de las tarifas conocidas para esos ejes y se marcan "(est.)".
 - En "Casetas en ruta" cada caseta tiene una casilla: desmarca las que no correspondan (ramal, repetida) y el costo y los precios se recalculan; la imagen de costos solo incluye las marcadas.

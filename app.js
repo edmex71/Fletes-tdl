@@ -114,7 +114,7 @@ function calcularFlete(){
   det.con.forEach(c=>{
    const k=c.nombre+"@"+Math.round(c.pos), act=!ignoradas.has(k)
    if(act){totalTarifa+=c.monto;conOk.push(c)}
-   const extra=c.multi?` <small>(tramo: ${escapar(c.tramo)})</small>`:""
+   const extra=(c.multi?` <small>(tramo: ${escapar(c.tramo)})</small>`:"")+(c.aprox?` <small>(precio estimado para ${ejes} ejes)</small>`:"")
    lista+=filaCaseta(k,`${escapar(c.nombre)}: ${pesos(c.monto)}${extra}`,act)
   })
   det.est.forEach(c=>{
