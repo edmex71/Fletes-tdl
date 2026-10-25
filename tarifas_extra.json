@@ -521,7 +521,11 @@
   {
    "n": "Pisté",
    "tramo": "Lib. Kantunil - Ent. Valladolid",
-   "c5": 1080
+   "c5": 1080,
+   "xy": [
+    -88.58319,
+    20.72869
+   ]
   },
   {
    "n": "Xcan",
@@ -556,7 +560,11 @@
   {
    "n": "General Bravo",
    "tramo": "Ent. Cadereyta - Ent. La Sierrita",
-   "c5": 700
+   "c5": 700,
+   "xy": [
+    -99.16956,
+    25.81356
+   ]
   },
   {
    "n": "Apodaca",
@@ -570,6 +578,46 @@
    "xy": [
     -96.989312,
     18.906062
+   ]
+  },
+  {
+   "n": "Iguala",
+   "solo_xy": true,
+   "xy": [
+    -99.50831,
+    18.33619
+   ]
+  },
+  {
+   "n": "Paso Morelos",
+   "solo_xy": true,
+   "xy": [
+    -99.21544,
+    18.23169
+   ]
+  },
+  {
+   "n": "Libramiento de Villahermosa",
+   "solo_xy": true,
+   "xy": [
+    -92.93081,
+    18.07569
+   ]
+  },
+  {
+   "n": "Paso del Toro",
+   "solo_xy": true,
+   "xy": [
+    -96.19844,
+    19.08169
+   ]
+  },
+  {
+   "n": "Libramiento Oriente de Chihuahua",
+   "solo_xy": true,
+   "xy": [
+    -106.13931,
+    28.79044
    ]
   }
  ]
