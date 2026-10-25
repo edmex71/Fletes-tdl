@@ -107,6 +107,7 @@ function detectarCasetas(ejes){
 
  PLAZAS_SIN_TARIFA.forEach(pl=>{
   const nom=normalizarNombre(pl.n)
+  if(!nom||/SIN NOMBRE/.test(nom)) return
   if(EXCLUIR_PLAZAS_SIN_TARIFA.some(x=>nom.includes(x))) return
   if(!incorporacionOk(pl.n,[pl.p])) return
   const r=cercaDeRuta(R,pl.p[0],pl.p[1],RADIO_KM)

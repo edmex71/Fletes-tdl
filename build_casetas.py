@@ -167,7 +167,8 @@ for cl in clusters:
     names = [m['name'] for m in cl if m['name']]
     nm = collections.Counter(names).most_common(1)[0][0] if names else None
     lon = sum(m['xy'][0] for m in cl)/len(cl); lat = sum(m['xy'][1] for m in cl)/len(cl)
-    plazas.append({'n': (re.sub(r'\s+', ' ', nm).strip() if nm else 'Caseta sin nombre'), 'p': [round(lon, 5), round(lat, 5)]})
+    if not nm: continue  # plazas sin nombre en OSM: casi siempre ramales, se descartan
+    plazas.append({'n': re.sub(r'\s+', ' ', nm).strip(), 'p': [round(lon, 5), round(lat, 5)]})
 
 js = '// Generado por build_casetas.py - NO editar a mano\n'
 js += '// Tarifas: red FONADIN (camion 2-9 ejes), vigencia mas reciente por tramo (campo "desde").\n'
