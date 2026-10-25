@@ -29,6 +29,12 @@ function puntoCaseta(nombre){
  return c?c.pts[0]:null
 }
 
+// ¿Sale de CDMX y va a la zona de Guadalajara?
+function guadalajaraDesdeCdmx(o,d){
+ const sale=o[0]>-99.45&&o[0]<-98.9&&o[1]>19.15&&o[1]<19.75
+ return sale&&d[0]>-104&&d[0]<-102.6&&d[1]>20.2&&d[1]<21.1
+}
+
 // ¿Sale de CDMX y va al norte por la 57D? (Bajío, SLP, Monterrey, Reynosa, Torreón, Chihuahua, Juárez...)
 function norteDesdeCdmx(o,d){
  const sale=o[0]>-99.45&&o[0]<-98.9&&o[1]>19.15&&o[1]<19.75
@@ -70,6 +76,10 @@ async function calcularRuta(){
   if(!vias.length && norteDesdeCdmx(o,d)){
    const a=puntoCaseta("Palmillas"), b=puntoCaseta("Chichimequillas")
    if(a&&b){vias.push(a,b);viaAuto=true}
+  }else if(!vias.length && guadalajaraDesdeCdmx(o,d)){
+   // CDMX-Guadalajara: 57D hasta Apaseo el Grande (por libre), Salamanca, La Piedad y La Barca
+   const a=puntoCaseta("Palmillas")
+   if(a){vias.push(a,[-100.689,20.547],[-101.195,20.573]);viaAuto=true}
   }
   const puntos=[o,...vias,d].map(p=>p[0]+","+p[1]).join(";")
 
@@ -94,7 +104,7 @@ async function calcularRuta(){
    map.fitBounds(routeLayer.getBounds())
   }
 
-  setEstado("Ruta calculada: "+km+" km"+(viaAuto?" (por autopista México–Querétaro: Palmillas y Chichimequillas)":""))
+  setEstado("Ruta calculada: "+km+" km"+(viaAuto?" (ruta forzada por la autopista México–Querétaro)":""))
 
  }catch(e){
 

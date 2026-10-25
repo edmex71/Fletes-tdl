@@ -426,6 +426,42 @@
     26.512
    ],
    "radio": 0.05
+  },
+  {
+   "n": "Queretaro",
+   "tramo": "Querétaro - Celaya (SICT)",
+   "c5": 425,
+   "xy": [
+    -100.48085,
+    20.57115
+   ]
+  },
+  {
+   "n": "Cerro Gordo",
+   "tramo": "Celaya - Cerro Gordo A1 (SICT)",
+   "c5": 378
+  },
+  {
+   "n": "La Calera (La Piedad)",
+   "tramo": "Libramiento de La Piedad",
+   "c5": 184,
+   "osm": "LA PIEDAD",
+   "cerca": [
+    -101.998,
+    20.395
+   ],
+   "radio": 0.03
+  },
+  {
+   "n": "Vista Hermosa",
+   "tramo": "Ent. Vista Hermosa - La Barca",
+   "c5": 96,
+   "osm": "VISTA HERMOSA",
+   "cerca": [
+    -102.443,
+    20.269
+   ],
+   "radio": 0.05
   }
  ]
 }
