@@ -120,10 +120,9 @@ function detectarCasetas(ejes){
  for(let i=con.length-1;i>=0;i--) if(incl.includes(normalizarNombre(con[i].nombre))) con.splice(i,1)
  for(let i=est.length-1;i>=0;i--) if(incl.some(x=>normalizarNombre(est[i].nombre).includes(x))) est.splice(i,1)
 
- // Saliendo de CDMX por la 57D (pasa por Palmillas), Atlacomulco/Querétaro es una incorporación y no se cobra.
- // En la ruta al Pacífico (Jilotepec-Atlacomulco, sin Palmillas) sí se cobra; viniendo de Toluca también.
+ // Saliendo de CDMX, Atlacomulco/Querétaro es una incorporación a la 57D y no se cobra (viniendo de Toluca sí).
  const sale=extremos[0][0]>-99.45&&extremos[0][0]<-98.9&&extremos[0][1]>19.15&&extremos[0][1]<19.75
- if(sale&&con.some(c=>normalizarNombre(c.nombre)==='PALMILLAS')){
+ if(sale){
   for(let i=con.length-1;i>=0;i--) if(normalizarNombre(con[i].nombre).includes('ATLACOMULCO')) con.splice(i,1)
  }
 
