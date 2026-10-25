@@ -462,6 +462,17 @@
     20.269
    ],
    "radio": 0.05
+  },
+  {
+   "n": "San Martin a Puebla",
+   "tramo": "San Martín - Puebla (SICT)",
+   "c5": 261,
+   "osm": "SAN MARTIN",
+   "cerca": [
+    -98.39,
+    19.24
+   ],
+   "radio": 0.05
   }
  ]
 }
