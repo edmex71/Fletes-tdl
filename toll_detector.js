@@ -105,14 +105,7 @@ function detectarCasetas(ejes){
   else est.push({nombre:c.n,pos:mejor.pos,motivo:"sin tarifa para "+ejes+" ejes"})
  })
 
- PLAZAS_SIN_TARIFA.forEach(pl=>{
-  const nom=normalizarNombre(pl.n)
-  if(!nom||/SIN NOMBRE/.test(nom)) return
-  if(EXCLUIR_PLAZAS_SIN_TARIFA.some(x=>nom.includes(x))) return
-  if(!incorporacionOk(pl.n,[pl.p])) return
-  const r=cercaDeRuta(R,pl.p[0],pl.p[1],RADIO_KM)
-  if(r) est.push({nombre:pl.n,pos:r.pos,motivo:"sin tarifa en la base"})
- })
+ // Plazas de OpenStreetMap sin tarifa en la base: ya no se estiman (daban falsos positivos). Solo cuentan casetas con tarifa.
 
  // Casetas cuyo cobro ya va incluido en el tramo directo de otra (Traza tu ruta no las suma aparte).
  const INCLUIDAS={"San Marcos":["Chalco","Ixtapaluca"]}
