@@ -1394,6 +1394,35 @@
     "9": 486
    },
    "real": true
+  },
+  {
+   "n": "Entronque Ex Garita",
+   "tramo": "Autopista Monterrey - Nuevo Laredo (Plaza Entronque Ex Garita, km 192+139)",
+   "c5": 231,
+   "t": {
+    "2": 171,
+    "3": 171,
+    "4": 171,
+    "5": 231,
+    "6": 231,
+    "7": 263,
+    "8": 263,
+    "9": 263
+   },
+   "real": true,
+   "xy": [
+    -99.61531,
+    27.26894
+   ]
+  },
+  {
+   "n": "Cadereyta",
+   "tramo": "Cadereyta - Ent. Cadereyta",
+   "c5": 26,
+   "xy": [
+    -100.00119,
+    25.60744
+   ]
   }
  ]
 }
