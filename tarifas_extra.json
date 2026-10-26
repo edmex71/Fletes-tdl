@@ -1266,6 +1266,70 @@
     -99.30669,
     19.34894
    ]
+  },
+  {
+   "n": "Aeropuerto",
+   "solo_xy": true,
+   "xy": [
+    -99.21981,
+    18.80269
+   ]
+  },
+  {
+   "n": "Amozoc-Perote",
+   "solo_xy": true,
+   "xy": [
+    -98.03231,
+    19.04981
+   ]
+  },
+  {
+   "n": "La Pera A - Cuautla A (circuito Cerrado)",
+   "solo_xy": true,
+   "xy": [
+    -99.11244,
+    18.98681
+   ]
+  },
+  {
+   "n": "Oaxtepec",
+   "solo_xy": true,
+   "xy": [
+    -98.98531,
+    18.90344
+   ]
+  },
+  {
+   "n": "Ozumba",
+   "solo_xy": true,
+   "xy": [
+    -98.82819,
+    19.04606
+   ]
+  },
+  {
+   "n": "Aeropuerto los Cabos",
+   "solo_xy": true,
+   "xy": [
+    -109.74056,
+    23.15044
+   ]
+  },
+  {
+   "n": "Cabo Real",
+   "solo_xy": true,
+   "xy": [
+    -109.71969,
+    23.05006
+   ]
+  },
+  {
+   "n": "El Mangle",
+   "solo_xy": true,
+   "xy": [
+    -109.97419,
+    22.95394
+   ]
   }
  ]
 }
