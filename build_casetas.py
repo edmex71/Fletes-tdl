@@ -192,7 +192,8 @@ js += 'const CASETAS_TARIFA=' + json.dumps(out, ensure_ascii=False, separators=(
 js += 'const PLAZAS_SIN_TARIFA=' + json.dumps(plazas, ensure_ascii=False, separators=(',', ':')) + ';\n'
 open(OUT, 'w', encoding='utf-8').write(js)
 
-print('casetas con tarifa:', len(out), '| con coordenadas:', len(out)-len(sin), '| sin coordenadas:', len(sin))
+_sinp = [c['n'] for c in out if not c['pts']]
+print('casetas con tarifa:', len(out), '| con coordenadas:', len(out)-len(_sinp), '| sin coordenadas:', len(_sinp))
 print('plazas OSM sin tarifa (estimadas):', len(plazas), '| con nombre:', sum(p['n'] != 'Caseta sin nombre' for p in plazas))
 print('\nSIN COORDENADAS (no se pueden detectar):', ', '.join(sin))
 print('\nA REVISAR:')
