@@ -10,7 +10,7 @@ const EXCLUIR_PLAZAS_SIN_TARIFA=["CHALCO","VIA ATLIXCAYOTL","POLOTITLAN","JOROBA
 // Plazas que son incorporaciones o anexos de otra carretera: no se cobran si vas en ruta por la autopista principal.
 // Solo cuentan si el viaje empieza o termina cerca de ellas (ej. sales de Huehuetoca y te incorporas a la 57 por Jorobas).
 // null = nunca se cobran (anexos de otra caseta).
-const INCORPORACIONES={"JOROBAS":10,"POLOTITLAN":10,"HUACHICHIL":10,"QUERETARO BIS":null,"AGUALEGUAS":null,"VALLECITOS":null}
+const INCORPORACIONES={"JOROBAS":10,"POLOTITLAN":10,"HUACHICHIL":10,"QUERETARO BIS":null,"AGUALEGUAS":null,"VALLECITOS":null,"TRES MARIAS":10,"XOCHITEPEC":10,"ALPUYECA":10,"CIUDAD VALLES-TAMUIN":null,"IXTAPALUCA":null}
 
 function normalizarNombre(n){
  return (n||"").toUpperCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
@@ -106,6 +106,31 @@ function detectarCasetas(ejes){
  })
 
  // Plazas de OpenStreetMap sin tarifa en la base: ya no se estiman (daban falsos positivos). Solo cuentan casetas con tarifa.
+
+ // Autopista Chamapa–Lechería: red cerrada con boleto. Se cobra UNA sola vez, la tarifa del par entrada–salida
+ // (primer y último nodo que toca la ruta); las casetas intermedias no se suman. Con un solo nodo no se cobra nada.
+ const RED_CHAMAPA=["La Venta (Huixquilucan)","Interlomas","Huixquilucan","Chamapa","Cipreses","San Mateo Nopala","Lomas Verdes","Madin","Atizapan","Lago de Guadalupe","Lecheria"]
+ const nodosRed=con.filter(c=>RED_CHAMAPA.includes(c.nombre)).sort((a,b)=>a.pos-b.pos)
+ if(nodosRed.length){
+  for(let i=con.length-1;i>=0;i--) if(RED_CHAMAPA.includes(con[i].nombre)) con.splice(i,1)
+  if(nodosRed.length>=2){
+   const a=nodosRed[0], b=nodosRed[nodosRed.length-1]
+   const par=(x,y)=>{
+    let v=null,tr=null
+    CASETAS_TARIFA.forEach(r=>{
+     if(!RED_CHAMAPA.includes(r.n)) return
+     r.tr.forEach(t=>{
+      const m=t.tramo.split("-"); if(m.length!==2) return
+      const p=m[0].trim(), q=m[1].trim()
+      if((p===x&&q===y)||(p===y&&q===x)){ if(t.t[ejes]!=null){v=t.t[ejes];tr=t} }
+     })
+    })
+    return v==null?null:{v,tr}
+   }
+   const r=par(a.nombre,b.nombre)
+   if(r) con.push({nombre:"Chamapa–Lechería: "+a.nombre+" → "+b.nombre,monto:r.v,tramo:r.tr.tramo,desde:r.tr.desde,multi:false,aprox:!!r.tr.a&&ejes!==5,pos:a.pos})
+  }
+ }
 
  // Casetas sin ubicación en el mapa que se cobran seguro si la ruta pasa por las dos de sus lados
  // (ej. Fortín está entre Esperanza y Cuitláhuac en la 150D).
