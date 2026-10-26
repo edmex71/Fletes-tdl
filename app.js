@@ -188,6 +188,8 @@ function calcularFlete(){
  ultimoCalculo={
   origen,destino,km,ejes,vel,tiempo,rend,litros,dieselCosto,
   casetasTarifa:det?det.con.map(c=>({nombre:c.nombre,monto:c.monto})):[],
+  ruta:currentRoute,
+  casetasMapa:det?det.con.map(c=>{const p=currentRoute[Math.min(currentRoute.length-1,Math.round(c.pos))];return {lon:p[0],lat:p[1]}}):[],
   totalTarifa,nTarifa,totalEst,nEst,
   usoEstimadoPorKm,totalCasetasKm:usoEstimadoPorKm?totalCasetas:0,
   chofer,adicional,costoTotal,precios,avisoCorto
@@ -197,7 +199,24 @@ function calcularFlete(){
 
 }
 
-function generarImagen(){
+function cargarLogo(){
+ return new Promise(res=>{
+  const logo=new Image()
+  logo.onload=()=>res(logo)
+  logo.onerror=()=>res(null) // si el logo no carga, la imagen sale igual
+  logo.src="logo.png"
+ })
+}
+
+// Mapa para las imágenes: null si no hay ruta calculada o si algo falla (la imagen sale igual, sin mapa)
+async function mapaParaImagen(ruta,w,h,casetas){
+ try{
+  if(typeof crearMapaCanvas!=="function") return null
+  return await crearMapaCanvas(ruta,w,h,casetas)
+ }catch(e){return null}
+}
+
+async function generarImagen(){
 
  const origen=document.getElementById("origen").value
  const destino=document.getElementById("destino").value
@@ -206,46 +225,50 @@ function generarImagen(){
  const ruta=origen+" → "+destino
  const precio=precioSeleccionado()
 
+ setEstado("Generando imagen…")
+ const HM=380
+ const [logo,mapa]=await Promise.all([cargarLogo(),mapaParaImagen(currentRoute,740,HM,null)])
+ const alto=mapa?520+HM+30:520
+
  const canvas=document.createElement("canvas")
  canvas.width=800
- canvas.height=520
+ canvas.height=alto
  const ctx=canvas.getContext("2d")
 
- function dibujar(logo){
+ ctx.fillStyle="#ffffff"
+ ctx.fillRect(0,0,800,alto)
 
-  ctx.fillStyle="#ffffff"
-  ctx.fillRect(0,0,800,520)
+ if(logo) ctx.drawImage(logo,330,20,140,140)
 
-  if(logo) ctx.drawImage(logo,330,20,140,140)
+ ctx.fillStyle="#000"
+ ctx.font="32px Arial"
+ ctx.fillText("Transporte D’Leon",240,200)
 
-  ctx.fillStyle="#000"
-  ctx.font="32px Arial"
-  ctx.fillText("Transporte D’Leon",240,200)
+ ctx.font="24px Arial"
+ ctx.fillText("Ruta:",100,280)
+ ctx.fillText(ruta,100,310,600)
 
-  ctx.font="24px Arial"
-  ctx.fillText("Ruta:",100,280)
-  ctx.fillText(ruta,100,310,600)
+ ctx.fillText("Distancia:",100,350)
+ ctx.fillText(km+" km",100,380)
 
-  ctx.fillText("Distancia:",100,350)
-  ctx.fillText(km+" km",100,380)
+ ctx.fillText("Precio:",100,430)
+ ctx.fillText(precio,100,460)
 
-  ctx.fillText("Precio:",100,430)
-  ctx.fillText(precio,100,460)
+ if(mapa) ctx.drawImage(mapa,30,500)
 
-  entregarImagen(canvas)
- }
-
- const logo=new Image()
- logo.onload=()=>dibujar(logo)
- logo.onerror=()=>dibujar(null)
- logo.src="logo.png"
+ setEstado("Imagen lista")
+ entregarImagen(canvas)
 }
 
 // Imagen con el desglose de costos y precios sugeridos (uso interno, no para el cliente)
-function generarImagenCostos(){
+async function generarImagenCostos(){
 
  const c=ultimoCalculo
  if(!c){setEstado("Primero calcula el flete");return}
+
+ setEstado("Generando imagen…")
+ const HM=360
+ const [logo,mapa]=await Promise.all([cargarLogo(),mapaParaImagen(c.ruta,740,HM,c.casetasMapa)])
 
  // Filas: [etiqueta, monto] normales; {t:"..."} encabezado de sección; {n:"..."} nota
  const filas=[
@@ -256,7 +279,7 @@ function generarImagenCostos(){
   filas.push(["Casetas (est. por km)",pesos(c.totalCasetasKm)])
  }else{
   if(!c.casetasTarifa.length) filas.push(["Casetas con tarifa","$0"])
-  c.casetasTarifa.forEach(x=>filas.push([x.nombre,pesos(x.monto)]))
+  c.casetasTarifa.forEach((x,i)=>filas.push([(mapa?(i+1)+". ":"")+x.nombre,pesos(x.monto)]))
   filas.push(["Casetas estimadas ("+c.nEst+")",pesos(c.totalEst)])
  }
  filas.push(["Gastos de viaje y chofer ("+c.chofer.bloques+" × "+pesos(GASTO_CHOFER_POR_BLOQUE)+")",pesos(c.chofer.monto)])
@@ -268,13 +291,12 @@ function generarImagenCostos(){
  filas.push(["Alto (+45%)",formatoDinero(c.precios.alto)])
  filas.push(["Por km",formatoDinero(c.precios.km)])
 
- const alto=Math.max(520,280+filas.length*34+60)+(c.avisoCorto?26:0)
+ const dMapa=mapa?HM+20:0
+ const alto=Math.max(520,280+filas.length*34+60)+(c.avisoCorto?26:0)+dMapa
  const canvas=document.createElement("canvas")
  canvas.width=800
  canvas.height=alto
  const ctx=canvas.getContext("2d")
-
- function dibujar(logo){
 
  ctx.fillStyle="#ffffff"
  ctx.fillRect(0,0,800,alto)
@@ -297,7 +319,9 @@ function generarImagenCostos(){
  ctx.font="20px Arial"
  ctx.fillText(c.km+" km · "+c.ejes+" ejes · "+c.tiempo+" a "+c.vel+" km/h",30,194,740)
 
- let y=240
+ if(mapa) ctx.drawImage(mapa,30,210)
+
+ let y=240+dMapa
  filas.forEach(f=>{
   if(f.t){
    y+=10
@@ -323,13 +347,8 @@ function generarImagenCostos(){
  if(c.avisoCorto) ctx.fillText(c.avisoCorto,30,alto-46,740)
  ctx.fillText("Tarifas CAPUFE abr-2026 (camión de "+c.ejes+" ejes). Las estimadas son aproximadas.",30,alto-20,740)
 
+ setEstado("Imagen lista")
  entregarImagen(canvas,"costos.jpg","Costos del flete")
- }
-
- const logo=new Image()
- logo.onload=()=>dibujar(logo)
- logo.onerror=()=>dibujar(null) // si el logo no carga, la imagen sale igual
- logo.src="logo.png"
 }
 
 function entregarImagen(canvas,nombre="cotizacion.jpg",titulo="Cotización"){
