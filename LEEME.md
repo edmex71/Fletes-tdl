@@ -51,3 +51,5 @@ Cuando salga un PDF nuevo de CAPUFE:
 - Aeropuerto y Central de Abastos (Cuernavaca) son ramales junto a la 95D: solo cuentan si el viaje sale o llega a menos de 5 km de ellas. Las claves de `INCORPORACIONES` que empiezan con `=` buscan el nombre exacto (para no confundir Aeropuerto con Aeropuerto Los Cabos).
 
 - La caseta de $222 que CAPUFE llama Ing. Francisco Velasco Durán se muestra como "Alpuyeca (95D)" (así la llama Traza tu ruta); `RENOMBRAR` en `build_casetas.py`. "Alpuyeca" a secas (tramos de $153 y $50) es la incorporación.
+
+- Origen, Destino y "Pasar por" aceptan Plus Codes de Google: completos (`76F2GP97+MG`, sin buscar nada) o cortos con la localidad que muestra Google (`H25W+RH6 Chihuahua`; la localidad se busca en el mapa y se calcula el punto exacto). Un código corto sin localidad da un aviso. Código en `geocoder.js`.
