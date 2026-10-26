@@ -698,6 +698,46 @@
     -103.57631,
     20.37344
    ]
+  },
+  {
+   "n": "Coscomate",
+   "solo_xy": true,
+   "xy": [
+    -105.57131,
+    23.70631
+   ]
+  },
+  {
+   "n": "Llano Grande",
+   "solo_xy": true,
+   "xy": [
+    -105.19144,
+    23.87081
+   ]
+  },
+  {
+   "n": "Sayula Remota",
+   "solo_xy": true,
+   "xy": [
+    -103.51931,
+    19.87919
+   ]
+  },
+  {
+   "n": "Sayula Troncal",
+   "solo_xy": true,
+   "xy": [
+    -103.53019,
+    19.93331
+   ]
+  },
+  {
+   "n": "Ciudad Valles-Tamuin",
+   "solo_xy": true,
+   "xy": [
+    -98.95581,
+    21.90431
+   ]
   }
  ]
 }
