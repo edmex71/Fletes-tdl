@@ -44,4 +44,4 @@ Cuando salga un PDF nuevo de CAPUFE:
 2. `python3 pdf_a_csv.py rows.json tarifas.csv` lo convierte al CSV (nombres de plazas en `NOMBRES`).
 3. `python3 build_casetas.py tarifas.csv dataset_tolls.js casetas_data.js` genera los datos de la app (`dataset_tolls.js` es la base de OpenStreetMap).
 
-- Palmillas Bis, Querétaro Bis y San Marcos Bis (casetas complementarias que se abren para desahogar tráfico) no están en la base: se excluyen en `EXCLUIR` de `build_casetas.py`.
+- Palmillas Bis, Querétaro Bis y San Marcos Bis (casetas complementarias que se abren para desahogar tráfico), Chamapa–Lechería (nombre de la autopista) y Lechería Retorno no están en la base: se excluyen en `EXCLUIR` de `build_casetas.py`.
