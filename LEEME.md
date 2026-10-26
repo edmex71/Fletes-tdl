@@ -45,3 +45,5 @@ Cuando salga un PDF nuevo de CAPUFE:
 3. `python3 build_casetas.py tarifas.csv dataset_tolls.js casetas_data.js` genera los datos de la app (`dataset_tolls.js` es la base de OpenStreetMap).
 
 - Palmillas Bis, Querétaro Bis y San Marcos Bis (casetas complementarias que se abren para desahogar tráfico), Chamapa–Lechería (nombre de la autopista) y Lechería Retorno no están en la base: se excluyen en `EXCLUIR` de `build_casetas.py`.
+
+- Las imágenes (costos y cotización) incluyen un mapa de la ruta con fondo de calles de OpenStreetMap (`mapa_imagen.js`). Los mosaicos se bajan en el momento; si no cargan, el mapa sale con fondo liso. En la imagen de costos las casetas cobradas van numeradas en el mapa y en la lista.
