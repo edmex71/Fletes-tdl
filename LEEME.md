@@ -47,3 +47,5 @@ Cuando salga un PDF nuevo de CAPUFE:
 - Palmillas Bis, Querétaro Bis y San Marcos Bis (casetas complementarias que se abren para desahogar tráfico), Chamapa–Lechería (nombre de la autopista) y Lechería Retorno no están en la base: se excluyen en `EXCLUIR` de `build_casetas.py`.
 
 - Las imágenes (costos y cotización) incluyen un mapa de la ruta con fondo de calles de OpenStreetMap (`mapa_imagen.js`). Los mosaicos se bajan en el momento; si no cargan, el mapa sale con fondo liso. En la imagen de costos las casetas cobradas van numeradas en el mapa y en la lista.
+
+- Aeropuerto y Central de Abastos (Cuernavaca) son ramales junto a la 95D: solo cuentan si el viaje sale o llega a menos de 5 km de ellas. Las claves de `INCORPORACIONES` que empiezan con `=` buscan el nombre exacto (para no confundir Aeropuerto con Aeropuerto Los Cabos).

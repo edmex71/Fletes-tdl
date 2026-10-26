@@ -10,7 +10,7 @@ const EXCLUIR_PLAZAS_SIN_TARIFA=["CHALCO","VIA ATLIXCAYOTL","POLOTITLAN","JOROBA
 // Plazas que son incorporaciones o anexos de otra carretera: no se cobran si vas en ruta por la autopista principal.
 // Solo cuentan si el viaje empieza o termina cerca de ellas (ej. sales de Huehuetoca y te incorporas a la 57 por Jorobas).
 // null = nunca se cobran (anexos de otra caseta).
-const INCORPORACIONES={"JOROBAS":10,"POLOTITLAN":10,"HUACHICHIL":10,"AGUALEGUAS":null,"VALLECITOS":null,"TRES MARIAS":10,"XOCHITEPEC":10,"ALPUYECA":10,"CIUDAD VALLES-TAMUIN":null,"IXTAPALUCA":null}
+const INCORPORACIONES={"JOROBAS":10,"POLOTITLAN":10,"HUACHICHIL":10,"AGUALEGUAS":null,"VALLECITOS":null,"TRES MARIAS":10,"XOCHITEPEC":10,"ALPUYECA":10,"CIUDAD VALLES-TAMUIN":null,"IXTAPALUCA":null,"=AEROPUERTO":5,"=CENTRAL DE ABASTOS":5}
 
 function normalizarNombre(n){
  return (n||"").toUpperCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
@@ -85,7 +85,7 @@ function detectarCasetas(ejes){
  const extremos=[coords0(R.c[0]), coords0(R.c[R.c.length-1])]
  function incorporacionOk(nombre,pts){
   const nom=normalizarNombre(nombre)
-  const k=Object.keys(INCORPORACIONES).find(x=>nom.includes(x))
+  const k=Object.keys(INCORPORACIONES).find(x=>x[0]==="="?nom===x.slice(1):nom.includes(x)) // "=" al inicio: nombre exacto
   if(!k) return true
   const r=INCORPORACIONES[k]
   if(r===null) return false
