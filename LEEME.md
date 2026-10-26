@@ -53,3 +53,5 @@ Cuando salga un PDF nuevo de CAPUFE:
 - La caseta de $222 que CAPUFE llama Ing. Francisco Velasco Durán se muestra como "Alpuyeca (95D)" (así la llama Traza tu ruta); `RENOMBRAR` en `build_casetas.py`. "Alpuyeca" a secas (tramos de $153 y $50) es la incorporación.
 
 - Origen, Destino y "Pasar por" aceptan Plus Codes de Google: completos (`76F2GP97+MG`, sin buscar nada) o cortos con la localidad que muestra Google (`H25W+RH6 Chihuahua`; la localidad se busca en el mapa y se calcula el punto exacto). Un código corto sin localidad da un aviso. Código en `geocoder.js`.
+
+- Rutas sin cruzar a EE.UU.: entre Baja California/noroeste de Sonora y Ciudad Juárez la ruta se fuerza por México (Mexicali, San Luis Río Colorado, Santa Ana, Magdalena, Cananea, Agua Prieta, Janos y Nuevo Casas Grandes), como Traza tu ruta. Además, si origen y destino están en México y el trazo entra a EE.UU., el estado avisa "La ruta cruza a EE.UU." (frontera aproximada de Tijuana a Cd. Juárez). Código en `router.js`.

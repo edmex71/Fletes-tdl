@@ -46,6 +46,44 @@ function norteDesdeCdmx(o,d){
  return false
 }
 
+// ---- Rutas que no deben cruzar a EE.UU. (un tráiler solo cruza la frontera si el destino está fuera de México)
+
+// Frontera norte (aprox.) de Tijuana a Ciudad Juárez, como latitud según la longitud
+const FRONTERA_NORTE=[[-117.125,32.535],[-114.72,32.718],[-114.7199,32.495],[-111.07,31.33],[-108.21,31.33],[-108.2099,31.78],[-106.53,31.78]]
+function latFrontera(lon){
+ const f=FRONTERA_NORTE
+ if(lon<f[0][0]||lon>f[f.length-1][0]) return null
+ for(let i=0;i<f.length-1;i++){
+  if(lon>=f[i][0]&&lon<=f[i+1][0]){
+   const t=(lon-f[i][0])/(f[i+1][0]-f[i][0])
+   return f[i][1]+t*(f[i+1][1]-f[i][1])
+  }
+ }
+ return null
+}
+// ¿Está el punto [lon,lat] del lado de EE.UU. (más de ~4 km al norte de la frontera)?
+function enEstadosUnidos(p){
+ const b=latFrontera(p[0])
+ return b!==null&&p[1]>b+0.04
+}
+function rutaCruzaFrontera(coords,o,d){
+ if(enEstadosUnidos(o)||enEstadosUnidos(d)) return false // el viaje mismo es hacia/desde EE.UU.
+ return coords.some(enEstadosUnidos)
+}
+
+// Baja California / noroeste de Sonora ↔ Ciudad Juárez: por México es por Mexicali, San Luis Río Colorado,
+// Santa Ana y Magdalena (como Traza tu ruta) y luego Mex 2 por Cananea, Agua Prieta, Janos y Nuevo Casas Grandes.
+function bajaYJuarez(o,d){
+ const oeste=p=>p[0]<-114&&p[1]>30&&p[1]<33
+ const juarez=p=>p[0]>-107.2&&p[0]<-106&&p[1]>31.2&&p[1]<32.2
+ return (oeste(o)&&juarez(d))?1:((oeste(d)&&juarez(o))?-1:0)
+}
+function viasBajaJuarez(){
+ const pts=[puntoCaseta("Mexicali"),puntoCaseta("San Luis Río Colorado"),puntoCaseta("Santa Ana"),puntoCaseta("Magdalena"),
+  [-110.30,31.00],[-109.55,31.32],[-108.19,30.89],[-107.91,30.42]]
+ return pts.every(Boolean)?pts:null
+}
+
 async function calcularRuta(){
 
  const origen=document.getElementById("origen").value.trim()
@@ -75,6 +113,9 @@ async function calcularRuta(){
   if(!vias.length && norteDesdeCdmx(o,d)){
    const a=puntoCaseta("Palmillas"), b=puntoCaseta("Chichimequillas")
    if(a&&b){vias.push(a,b);viaAuto=true}
+  }else if(!vias.length && bajaYJuarez(o,d)){
+   const v=viasBajaJuarez()
+   if(v){vias.push(...(bajaYJuarez(o,d)>0?v:v.slice().reverse()));viaAuto="juarez"}
   }else if(!vias.length && guadalajaraDesdeCdmx(o,d)){
    // CDMX-Guadalajara: 57D hasta Apaseo el Grande (por libre), Salamanca, La Piedad y La Barca
    const a=puntoCaseta("Palmillas")
@@ -103,7 +144,8 @@ async function calcularRuta(){
    map.fitBounds(routeLayer.getBounds())
   }
 
-  setEstado("Ruta calculada: "+km+" km"+(viaAuto?" (ruta forzada por la autopista México–Querétaro)":""))
+  const aviso=rutaCruzaFrontera(currentRoute,o,d)?" ⚠ La ruta cruza a EE.UU. Agrega ciudades mexicanas en «Pasar por» para evitarlo.":""
+  setEstado("Ruta calculada: "+km+" km"+(viaAuto==="juarez"?" (ruta forzada por México, sin cruzar la frontera)":(viaAuto?" (ruta forzada por la autopista México–Querétaro)":""))+aviso)
 
  }catch(e){
 
