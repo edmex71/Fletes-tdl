@@ -72,7 +72,7 @@ function rutaCruzaFrontera(coords,o,d){
 }
 
 // Baja California / noroeste de Sonora ↔ Ciudad Juárez: por México es por Mexicali, San Luis Río Colorado,
-// Santa Ana y Magdalena (como Traza tu ruta) y luego Mex 2 por Cananea, Agua Prieta, Janos y Nuevo Casas Grandes.
+// Santa Ana y Magdalena (como Traza tu ruta) y luego Mex 2 por Cananea, Agua Prieta, Janos y Ascensión.
 function bajaYJuarez(o,d){
  const oeste=p=>p[0]<-114&&p[1]>30&&p[1]<33
  const juarez=p=>p[0]>-107.2&&p[0]<-106&&p[1]>31.2&&p[1]<32.2
@@ -80,7 +80,7 @@ function bajaYJuarez(o,d){
 }
 function viasBajaJuarez(){
  const pts=[puntoCaseta("Mexicali"),puntoCaseta("San Luis Río Colorado"),puntoCaseta("Santa Ana"),puntoCaseta("Magdalena"),
-  [-110.30,31.00],[-109.55,31.32],[-108.19,30.89],[-107.91,30.42]]
+  [-110.30,31.00],[-109.55,31.32],[-108.19,30.89],[-107.99,31.10]]
  return pts.every(Boolean)?pts:null
 }
 
