@@ -109,7 +109,7 @@ function detectarCasetas(ejes){
 
  // Autopista Chamapa–Lechería: red cerrada con boleto. Se cobra UNA sola vez, la tarifa del par entrada–salida
  // (primer y último nodo que toca la ruta); las casetas intermedias no se suman. Con un solo nodo no se cobra nada.
- const RED_CHAMAPA=["Chamapa","Cipreses","San Mateo Nopala","Lomas Verdes","Madin","Atizapan","Lago de Guadalupe","Lecheria"]
+ const RED_CHAMAPA=["La Venta (Huixquilucan)","Interlomas","Huixquilucan","Chamapa","Cipreses","San Mateo Nopala","Lomas Verdes","Madin","Atizapan","Lago de Guadalupe","Lecheria"]
  const nodosRed=con.filter(c=>RED_CHAMAPA.includes(c.nombre)).sort((a,b)=>a.pos-b.pos)
  if(nodosRed.length){
   for(let i=con.length-1;i>=0;i--) if(RED_CHAMAPA.includes(con[i].nombre)) con.splice(i,1)

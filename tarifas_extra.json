@@ -3,6 +3,438 @@
  "desde": "2026-10-24",
  "casetas": [
   {
+   "n": "La Venta (Huixquilucan)",
+   "tramo": "La Venta (Huixquilucan)-Huixquilucan",
+   "c5": 394,
+   "t": {
+    "2": 156,
+    "3": 226,
+    "4": 283,
+    "5": 394,
+    "6": 443,
+    "7": 554,
+    "8": 624,
+    "9": 664
+   },
+   "real": true
+  },
+  {
+   "n": "La Venta (Huixquilucan)",
+   "tramo": "La Venta (Huixquilucan)-Chamapa",
+   "c5": 523,
+   "t": {
+    "2": 207,
+    "3": 300,
+    "4": 375,
+    "5": 523,
+    "6": 587,
+    "7": 735,
+    "8": 828,
+    "9": 880
+   },
+   "real": true
+  },
+  {
+   "n": "La Venta (Huixquilucan)",
+   "tramo": "La Venta (Huixquilucan)-Cipreses",
+   "c5": 539,
+   "t": {
+    "2": 218,
+    "3": 311,
+    "4": 386,
+    "5": 539,
+    "6": 603,
+    "7": 758,
+    "8": 851,
+    "9": 903
+   },
+   "real": true
+  },
+  {
+   "n": "La Venta (Huixquilucan)",
+   "tramo": "La Venta (Huixquilucan)-San Mateo Nopala",
+   "c5": 562,
+   "t": {
+    "2": 229,
+    "3": 322,
+    "4": 397,
+    "5": 562,
+    "6": 626,
+    "7": 785,
+    "8": 878,
+    "9": 930
+   },
+   "real": true
+  },
+  {
+   "n": "La Venta (Huixquilucan)",
+   "tramo": "La Venta (Huixquilucan)-Lomas Verdes",
+   "c5": 629,
+   "t": {
+    "2": 277,
+    "3": 370,
+    "4": 445,
+    "5": 629,
+    "6": 693,
+    "7": 876,
+    "8": 969,
+    "9": 1021
+   },
+   "real": true
+  },
+  {
+   "n": "La Venta (Huixquilucan)",
+   "tramo": "La Venta (Huixquilucan)-Madin",
+   "c5": 604,
+   "t": {
+    "2": 263,
+    "3": 356,
+    "4": 431,
+    "5": 604,
+    "6": 668,
+    "7": 852,
+    "8": 945,
+    "9": 997
+   },
+   "real": true
+  },
+  {
+   "n": "La Venta (Huixquilucan)",
+   "tramo": "La Venta (Huixquilucan)-Atizapan",
+   "c5": 644,
+   "t": {
+    "2": 285,
+    "3": 378,
+    "4": 453,
+    "5": 644,
+    "6": 708,
+    "7": 898,
+    "8": 991,
+    "9": 1043
+   },
+   "real": true
+  },
+  {
+   "n": "La Venta (Huixquilucan)",
+   "tramo": "La Venta (Huixquilucan)-Lago de Guadalupe",
+   "c5": 676,
+   "t": {
+    "2": 313,
+    "3": 406,
+    "4": 481,
+    "5": 676,
+    "6": 740,
+    "7": 931,
+    "8": 1024,
+    "9": 1076
+   },
+   "real": true
+  },
+  {
+   "n": "La Venta (Huixquilucan)",
+   "tramo": "La Venta (Huixquilucan)-Lecheria",
+   "c5": 706,
+   "t": {
+    "2": 326,
+    "3": 419,
+    "4": 494,
+    "5": 706,
+    "6": 770,
+    "7": 963,
+    "8": 1056,
+    "9": 1108
+   },
+   "real": true
+  },
+  {
+   "n": "Interlomas",
+   "tramo": "Interlomas-La Venta (Huixquilucan)",
+   "c5": 275,
+   "t": {
+    "2": 109,
+    "3": 158,
+    "4": 197,
+    "5": 275,
+    "6": 309,
+    "7": 386,
+    "8": 435,
+    "9": 463
+   },
+   "real": true
+  },
+  {
+   "n": "Interlomas",
+   "tramo": "Interlomas-Huixquilucan",
+   "c5": 119,
+   "t": {
+    "2": 47,
+    "3": 68,
+    "4": 86,
+    "5": 119,
+    "6": 134,
+    "7": 168,
+    "8": 189,
+    "9": 201
+   },
+   "real": true
+  },
+  {
+   "n": "Interlomas",
+   "tramo": "Interlomas-Chamapa",
+   "c5": 248,
+   "t": {
+    "2": 98,
+    "3": 142,
+    "4": 178,
+    "5": 248,
+    "6": 278,
+    "7": 349,
+    "8": 393,
+    "9": 417
+   },
+   "real": true
+  },
+  {
+   "n": "Interlomas",
+   "tramo": "Interlomas-Cipreses",
+   "c5": 264,
+   "t": {
+    "2": 109,
+    "3": 153,
+    "4": 189,
+    "5": 264,
+    "6": 294,
+    "7": 372,
+    "8": 416,
+    "9": 440
+   },
+   "real": true
+  },
+  {
+   "n": "Interlomas",
+   "tramo": "Interlomas-San Mateo Nopala",
+   "c5": 287,
+   "t": {
+    "2": 120,
+    "3": 164,
+    "4": 200,
+    "5": 287,
+    "6": 317,
+    "7": 399,
+    "8": 443,
+    "9": 467
+   },
+   "real": true
+  },
+  {
+   "n": "Interlomas",
+   "tramo": "Interlomas-Lomas Verdes",
+   "c5": 354,
+   "t": {
+    "2": 168,
+    "3": 212,
+    "4": 248,
+    "5": 354,
+    "6": 384,
+    "7": 490,
+    "8": 534,
+    "9": 558
+   },
+   "real": true
+  },
+  {
+   "n": "Interlomas",
+   "tramo": "Interlomas-Madin",
+   "c5": 329,
+   "t": {
+    "2": 154,
+    "3": 198,
+    "4": 234,
+    "5": 329,
+    "6": 359,
+    "7": 466,
+    "8": 510,
+    "9": 534
+   },
+   "real": true
+  },
+  {
+   "n": "Interlomas",
+   "tramo": "Interlomas-Atizapan",
+   "c5": 369,
+   "t": {
+    "2": 176,
+    "3": 220,
+    "4": 256,
+    "5": 369,
+    "6": 399,
+    "7": 512,
+    "8": 556,
+    "9": 580
+   },
+   "real": true
+  },
+  {
+   "n": "Interlomas",
+   "tramo": "Interlomas-Lago de Guadalupe",
+   "c5": 401,
+   "t": {
+    "2": 204,
+    "3": 248,
+    "4": 284,
+    "5": 401,
+    "6": 431,
+    "7": 545,
+    "8": 589,
+    "9": 613
+   },
+   "real": true
+  },
+  {
+   "n": "Interlomas",
+   "tramo": "Interlomas-Lecheria",
+   "c5": 431,
+   "t": {
+    "2": 217,
+    "3": 261,
+    "4": 297,
+    "5": 431,
+    "6": 461,
+    "7": 577,
+    "8": 621,
+    "9": 645
+   },
+   "real": true
+  },
+  {
+   "n": "Huixquilucan",
+   "tramo": "Huixquilucan-Chamapa",
+   "c5": 129,
+   "t": {
+    "2": 51,
+    "3": 74,
+    "4": 92,
+    "5": 129,
+    "6": 144,
+    "7": 181,
+    "8": 204,
+    "9": 216
+   },
+   "real": true
+  },
+  {
+   "n": "Huixquilucan",
+   "tramo": "Huixquilucan-Cipreses",
+   "c5": 145,
+   "t": {
+    "2": 62,
+    "3": 85,
+    "4": 103,
+    "5": 145,
+    "6": 160,
+    "7": 204,
+    "8": 227,
+    "9": 239
+   },
+   "real": true
+  },
+  {
+   "n": "Huixquilucan",
+   "tramo": "Huixquilucan-San Mateo Nopala",
+   "c5": 168,
+   "t": {
+    "2": 73,
+    "3": 96,
+    "4": 114,
+    "5": 168,
+    "6": 183,
+    "7": 231,
+    "8": 254,
+    "9": 266
+   },
+   "real": true
+  },
+  {
+   "n": "Huixquilucan",
+   "tramo": "Huixquilucan-Lomas Verdes",
+   "c5": 235,
+   "t": {
+    "2": 121,
+    "3": 144,
+    "4": 162,
+    "5": 235,
+    "6": 250,
+    "7": 322,
+    "8": 345,
+    "9": 357
+   },
+   "real": true
+  },
+  {
+   "n": "Huixquilucan",
+   "tramo": "Huixquilucan-Madin",
+   "c5": 210,
+   "t": {
+    "2": 107,
+    "3": 130,
+    "4": 148,
+    "5": 210,
+    "6": 225,
+    "7": 298,
+    "8": 321,
+    "9": 333
+   },
+   "real": true
+  },
+  {
+   "n": "Huixquilucan",
+   "tramo": "Huixquilucan-Atizapan",
+   "c5": 250,
+   "t": {
+    "2": 129,
+    "3": 152,
+    "4": 170,
+    "5": 250,
+    "6": 265,
+    "7": 344,
+    "8": 367,
+    "9": 379
+   },
+   "real": true
+  },
+  {
+   "n": "Huixquilucan",
+   "tramo": "Huixquilucan-Lago de Guadalupe",
+   "c5": 282,
+   "t": {
+    "2": 157,
+    "3": 180,
+    "4": 198,
+    "5": 282,
+    "6": 297,
+    "7": 377,
+    "8": 400,
+    "9": 412
+   },
+   "real": true
+  },
+  {
+   "n": "Huixquilucan",
+   "tramo": "Huixquilucan-Lecheria",
+   "c5": 312,
+   "t": {
+    "2": 170,
+    "3": 193,
+    "4": 211,
+    "5": 312,
+    "6": 327,
+    "7": 409,
+    "8": 432,
+    "9": 444
+   },
+   "real": true
+  },
+  {
    "n": "Atlacomulco/Querétaro",
    "tramo": "Lib. N. Cd. México (Jilotepec - Atlacomulco)",
    "c5": 382,
@@ -809,6 +1241,14 @@
    "xy": [
     -99.30994,
     19.48719
+   ]
+  },
+  {
+   "n": "Interlomas",
+   "solo_xy": true,
+   "xy": [
+    -99.29556,
+    19.39494
    ]
   }
  ]

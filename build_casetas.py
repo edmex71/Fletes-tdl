@@ -135,8 +135,11 @@ for x in _ex['casetas']:
         ex = next(c for c in out if c['n'] == x['n']); q = [round(x['xy'][0], 5), round(x['xy'][1], 5)]
         if q not in ex['pts']: ex['pts'].append(q)
         continue
-    t = {e: float(round(x['c5'] * _rat[e])) for e in range(2, 10)}; t[5] = float(x['c5'])
-    item = {'tramo': x['tramo'], 'desde': _ex['desde'], 't': t, 'a': 1}
+    if x.get('real'):
+        t = {int(e): float(v) for e, v in x['t'].items()}; item = {'tramo': x['tramo'], 'desde': _ex['desde'], 't': t}
+    else:
+        t = {e: float(round(x['c5'] * _rat[e])) for e in range(2, 10)}; t[5] = float(x['c5'])
+        item = {'tramo': x['tramo'], 'desde': _ex['desde'], 't': t, 'a': 1}
     pts = [tuple(x['xy'])] if x.get('xy') else []
     if x.get('osm'):
         k = strip(x['osm']); r = x.get('radio', 0.08)
