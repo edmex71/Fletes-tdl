@@ -49,3 +49,5 @@ Cuando salga un PDF nuevo de CAPUFE:
 - Las imágenes (costos y cotización) incluyen un mapa de la ruta con fondo de calles de OpenStreetMap (`mapa_imagen.js`). Los mosaicos se bajan en el momento; si no cargan, el mapa sale con fondo liso. En la imagen de costos las casetas cobradas van numeradas en el mapa y en la lista.
 
 - Aeropuerto y Central de Abastos (Cuernavaca) son ramales junto a la 95D: solo cuentan si el viaje sale o llega a menos de 5 km de ellas. Las claves de `INCORPORACIONES` que empiezan con `=` buscan el nombre exacto (para no confundir Aeropuerto con Aeropuerto Los Cabos).
+
+- La caseta de $222 que CAPUFE llama Ing. Francisco Velasco Durán se muestra como "Alpuyeca (95D)" (así la llama Traza tu ruta); `RENOMBRAR` en `build_casetas.py`. "Alpuyeca" a secas (tramos de $153 y $50) es la incorporación.

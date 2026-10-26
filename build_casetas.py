@@ -184,6 +184,10 @@ for cl in clusters:
 js = '// Generado por build_casetas.py - NO editar a mano\n'
 js += '// Tarifas: red FONADIN (camion 2-9 ejes), vigencia mas reciente por tramo (campo "desde").\n'
 js += '// Coordenadas: OpenStreetMap (ODbL).\n'
+# Nombre con el que se muestra la caseta (el de CAPUFE puede confundir con el que usa Traza tu ruta)
+RENOMBRAR = {'Ing. Francisco Velasco Durán': 'Alpuyeca (95D)'}
+for _c in out:
+    _c['n'] = RENOMBRAR.get(_c['n'], _c['n'])
 js += 'const CASETAS_TARIFA=' + json.dumps(out, ensure_ascii=False, separators=(',', ':')) + ';\n'
 js += 'const PLAZAS_SIN_TARIFA=' + json.dumps(plazas, ensure_ascii=False, separators=(',', ':')) + ';\n'
 open(OUT, 'w', encoding='utf-8').write(js)
