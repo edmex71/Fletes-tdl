@@ -1394,6 +1394,15 @@
     "9": 486
    },
    "real": true
+  },
+  {
+   "n": "Cadereyta",
+   "tramo": "Cadereyta - Ent. Cadereyta",
+   "c5": 26,
+   "xy": [
+    -100.00119,
+    25.60744
+   ]
   }
  ]
 }
