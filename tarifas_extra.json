@@ -1362,6 +1362,38 @@
     -98.88181,
     19.29194
    ]
+  },
+  {
+   "n": "San Lucas",
+   "solo_xy": true,
+   "xy": [
+    -109.9173,
+    22.92429
+   ]
+  },
+  {
+   "n": "El Mangle",
+   "solo_xy": true,
+   "xy": [
+    -109.97424,
+    22.9539
+   ]
+  },
+  {
+   "n": "Aeropuerto los Cabos",
+   "tramo": "Aeropuerto los Cabos-Cabo San Lucas",
+   "c5": 486,
+   "t": {
+    "2": 304,
+    "3": 304,
+    "4": 486,
+    "5": 486,
+    "6": 486,
+    "7": 486,
+    "8": 486,
+    "9": 486
+   },
+   "real": true
   }
  ]
 }
