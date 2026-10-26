@@ -52,7 +52,10 @@ def num(v):
     v = (v or '').strip()
     return float(v) if v else None
 casetas = collections.OrderedDict()
+# Casetas complementarias (se abren solo para desahogar tráfico): no van en la base
+EXCLUIR = {'Palmillas Bis', 'Queretaro Bis', 'San Marcos Bis', 'Chamapa-Lecheria', 'Lecheria Retorno'}
 for (c, tramo), r in sorted(latest.items()):
+    if c in EXCLUIR: continue
     t = {e: num(r['camion_%d_ejes' % e]) for e in range(2, 10)}
     item = {'tramo': tramo, 'desde': r['en_vigor_partir_de'], 't': t}
     if c in SPLIT:
