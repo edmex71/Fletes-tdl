@@ -754,6 +754,62 @@
     -98.95456,
     21.90406
    ]
+  },
+  {
+   "n": "Atizapan",
+   "solo_xy": true,
+   "xy": [
+    -99.27106,
+    19.58256
+   ]
+  },
+  {
+   "n": "Cipreses",
+   "solo_xy": true,
+   "xy": [
+    -99.31131,
+    19.46919
+   ]
+  },
+  {
+   "n": "Lago de Guadalupe",
+   "solo_xy": true,
+   "xy": [
+    -99.23644,
+    19.60994
+   ]
+  },
+  {
+   "n": "Lecheria",
+   "solo_xy": true,
+   "xy": [
+    -99.20581,
+    19.60481
+   ]
+  },
+  {
+   "n": "Lomas Verdes",
+   "solo_xy": true,
+   "xy": [
+    -99.28619,
+    19.51919
+   ]
+  },
+  {
+   "n": "Madin",
+   "solo_xy": true,
+   "xy": [
+    -99.27694,
+    19.54544
+   ]
+  },
+  {
+   "n": "San Mateo Nopala",
+   "solo_xy": true,
+   "xy": [
+    -99.30994,
+    19.48719
+   ]
   }
  ]
 }
