@@ -77,3 +77,8 @@ Amozoc-Perote ($64) no se cobra en la ruta CDMX–Puebla–Veracruz/sureste (Tra
 ## Viaje redondo e historial (PR 40)
 - Casilla «Viaje redondo (ida y vuelta)»: duplica km, diésel, casetas (misma ruta de regreso), tiempo y bloques de gastos de viaje. El precio por km usa los km totales. Los reportes dicen «ida y vuelta» y las casetas «(×2)».
 - Historial de cotizaciones (hasta 50, guardado solo en el teléfono, localStorage): se guarda al generar la imagen para el cliente o con «Guardar en historial» (no duplica la misma cotización). Campo opcional «Cliente / nota». «Abrir» recarga los datos y recalcula ruta y tarifas con los datos actuales; «Borrar» y «Borrar todo». Las entradas viejas del historial (sin id) se ignoran.
+
+## CDMX / Tijuana → La Paz (PR 41)
+- Atlacomulco/Querétaro ($382) sí se cobra saliendo de CDMX cuando la ruta sigue por la Mex 126D (San Juanico/Contepec), como Traza; solo se omite rumbo a Querétaro por la 57D.
+- Nodo Popotla ($113) no se cobra (Traza no lo lista; se trata como incorporación).
+- Tijuana ↔ Baja California Sur: se agrega automáticamente el punto «Playas de Tijuana» para tomar la autopista de cuota desde el inicio.

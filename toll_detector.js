@@ -10,7 +10,7 @@ const EXCLUIR_PLAZAS_SIN_TARIFA=["CHALCO","VIA ATLIXCAYOTL","POLOTITLAN","JOROBA
 // Plazas que son incorporaciones o anexos de otra carretera: no se cobran si vas en ruta por la autopista principal.
 // Solo cuentan si el viaje empieza o termina cerca de ellas (ej. sales de Huehuetoca y te incorporas a la 57 por Jorobas).
 // null = nunca se cobran (anexos de otra caseta).
-const INCORPORACIONES={"JOROBAS":10,"POLOTITLAN":10,"HUACHICHIL":10,"AGUALEGUAS":null,"VALLECITOS":null,"TRES MARIAS":10,"XOCHITEPEC":10,"=ALPUYECA":10,"CIUDAD VALLES-TAMUIN":null,"IXTAPALUCA":null,"=AEROPUERTO":5,"=CENTRAL DE ABASTOS":5,"=AMOZOC-PEROTE":null}
+const INCORPORACIONES={"JOROBAS":10,"POLOTITLAN":10,"HUACHICHIL":10,"AGUALEGUAS":null,"VALLECITOS":null,"TRES MARIAS":10,"XOCHITEPEC":10,"=ALPUYECA":10,"CIUDAD VALLES-TAMUIN":null,"IXTAPALUCA":null,"=AEROPUERTO":5,"=CENTRAL DE ABASTOS":5,"=AMOZOC-PEROTE":null,"=NODO POPOTLA":null}
 
 function normalizarNombre(n){
  return (n||"").toUpperCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
@@ -159,7 +159,9 @@ function detectarCasetas(ejes){
  // Saliendo de CDMX, Atlacomulco/Querétaro es una incorporación a la 57D y no se cobra (viniendo de Toluca sí).
  const sale=extremos[0][0]>-99.45&&extremos[0][0]<-98.9&&extremos[0][1]>19.15&&extremos[0][1]<19.75
  if(sale){
-  for(let i=con.length-1;i>=0;i--) if(normalizarNombre(con[i].nombre).includes('ATLACOMULCO')) con.splice(i,1)
+  // (salvo que siga por la Mex 126D hacia San Juanico/Contepec: ahí sí se usa el Libramiento Norte y se cobra, como Traza)
+  const porLibramientoNorte=con.some(c=>c.nombre==='San Juanico'||c.nombre==='Contepec')
+  if(!porLibramientoNorte) for(let i=con.length-1;i>=0;i--) if(normalizarNombre(con[i].nombre).includes('ATLACOMULCO')) con.splice(i,1)
  }
 
  con.sort((a,b)=>a.pos-b.pos)
