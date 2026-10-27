@@ -159,6 +159,20 @@ function viasBajaJuarez(){
  return pts.every(Boolean)?pts:null
 }
 
+// Baja California / noroeste de Sonora → Chihuahua y el centro/noreste del país (Torreón, Monterrey, Tamaulipas...):
+// misma ruta por México de Traza tu ruta: Mexicali, San Luis Río Colorado, Santa Ana, Magdalena, Mex 2 (Cananea,
+// Agua Prieta, Janos), Galeana, Ojo Laguna, Sacramento y Chihuahua. De ahí en adelante el trazo normal ya es por México.
+function bajaYNoreste(o,d){
+ const oeste=p=>p[0]<-114&&p[1]>30&&p[1]<33
+ const este=p=>p[0]>-108&&!(p[0]>-107.2&&p[0]<-106&&p[1]>31.2&&p[1]<32.2)&&(p[1]<30.5||p[0]>-105)
+ return (oeste(o)&&este(d))?1:((oeste(d)&&este(o))?-1:0)
+}
+function viasBajaNoreste(){
+ const pts=[puntoCaseta("Mexicali"),puntoCaseta("San Luis Río Colorado"),puntoCaseta("Santa Ana"),puntoCaseta("Magdalena"),
+  [-110.30,31.00],[-109.55,31.32],[-108.19,30.89],puntoCaseta("Galeana"),puntoCaseta("Ojo Laguna"),puntoCaseta("Sacramento")]
+ return pts.every(Boolean)?pts:null
+}
+
 async function calcularRuta(){
 
  const origen=document.getElementById("origen").value.trim()
@@ -191,6 +205,9 @@ async function calcularRuta(){
   }else if(!vias.length && bajaYJuarez(o,d)){
    const v=viasBajaJuarez()
    if(v){vias.push(...(bajaYJuarez(o,d)>0?v:v.slice().reverse()));viaAuto="juarez"}
+  }else if(!vias.length && bajaYNoreste(o,d)){
+   const v=viasBajaNoreste()
+   if(v){vias.push(...(bajaYNoreste(o,d)>0?v:v.slice().reverse()));viaAuto="juarez"}
   }else if(!vias.length && guadalajaraDesdeCdmx(o,d)){
    // CDMX-Guadalajara: 57D hasta Apaseo el Grande (por libre), Salamanca, La Piedad y La Barca
    const a=puntoCaseta("Palmillas")
