@@ -58,3 +58,6 @@ Cuando salga un PDF nuevo de CAPUFE:
 
 ## No cruzar a EE.UU. (PR 33)
 Si origen y destino están en México y el trazo de OSRM entra a EE.UU. (se compara contra la frontera completa, Tijuana–Matamoros, con margen de 8 km), la app agrega como puntos de paso las ciudades fronterizas/de enlace cercanas al tramo (lista `CIUDADES_FRONTERA` en router.js) y recalcula, hasta 3 intentos, conservando la ruta con menos puntos en EE.UU. Si aun así cruza, muestra la advertencia. Los puntos de «Pasar por» del usuario se respetan. La frontera es aproximada.
+
+## Baja California → noreste/Chihuahua (PR 34)
+Ensenada/Tijuana/Mexicali → Chihuahua, Torreón, Monterrey, Tamaulipas (y al revés) se fuerzan por México como Traza tu ruta: Mexicali, San Luis Río Colorado, Santa Ana, Magdalena, Cananea, Agua Prieta, Janos, Galeana, Ojo Laguna, Sacramento (`bajaYNoreste`). Se agregaron las casetas Galeana ($232) y Nuevo Progreso ($293), que faltaban.

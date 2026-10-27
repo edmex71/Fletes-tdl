@@ -1423,6 +1423,24 @@
     -100.00119,
     25.60744
    ]
+  },
+  {
+   "n": "Galeana",
+   "tramo": "Vado de Santa María - Ent. El Berrendo",
+   "c5": 232,
+   "xy": [
+    -107.2425,
+    30.00435
+   ]
+  },
+  {
+   "n": "Nuevo Progreso",
+   "tramo": "Río Bravo - Ent. Anáhuac",
+   "c5": 293,
+   "xy": [
+    -97.95443,
+    26.0362
+   ]
   }
  ]
 }
