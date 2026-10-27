@@ -1441,6 +1441,60 @@
     -97.95443,
     26.0362
    ]
+  },
+  {
+   "n": "Ocozocuautla",
+   "tramo": "Ent. Montes Azules - Ent. Ocozocuautla",
+   "c5": 184,
+   "xy": [
+    -93.40679,
+    16.86314
+   ]
+  },
+  {
+   "n": "Jiquipilas",
+   "tramo": "Ent. Jiquipilas - Ent. Montes Azules",
+   "c5": 95,
+   "xy": [
+    -93.60211,
+    16.62052
+   ]
+  },
+  {
+   "n": "La Antigua",
+   "tramo": "Ent. San Julián - José Cardel",
+   "c5": 314,
+   "xy": [
+    -96.3108,
+    19.32039
+   ]
+  },
+  {
+   "n": "Nautla",
+   "tramo": "Nautla - Casitas",
+   "c5": 93,
+   "xy": [
+    -96.77873,
+    20.21022
+   ]
+  },
+  {
+   "n": "Tecolutla",
+   "tramo": "Ent. Gutiérrez Zamora - Gutiérrez Zamora",
+   "c5": 89,
+   "xy": [
+    -97.0865,
+    20.43778
+   ]
+  },
+  {
+   "n": "Puente Tampico",
+   "tramo": "Anáhuac - Tampico",
+   "c5": 140,
+   "xy": [
+    -97.82478,
+    22.21836
+   ]
   }
  ]
 }

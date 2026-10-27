@@ -231,7 +231,18 @@ async function calcularRuta(){
   if(!enEstadosUnidos(o)&&!enEstadosUnidos(d)){
    let viasAct=vias.slice(), mejorN=puntosEnEE(route.geometry.coordinates)
    for(let it=0;it<3&&mejorN>0;it++){
-    const nv=viasParaEvitarEE(route.geometry.coordinates,o,d,viasAct)
+    let nv=null
+    if(it===0){
+     // Con puntos del usuario no se aplicó el corredor por México: se combinan con el corredor, ordenados por distancia al origen.
+     const cor=bajaYJuarez(o,d)?viasBajaJuarez():(bajaYNoreste(o,d)?viasBajaNoreste():null)
+     if(cor){
+      const todos=viasAct.map(p=>({p,u:true}))
+      cor.forEach(p=>{if(!todos.some(t=>kmEntre(t.p,p)<20)) todos.push({p})})
+      todos.sort((x,y)=>kmEntre(o,x.p)-kmEntre(o,y.p))
+      if(todos.length>viasAct.length) nv=todos.map(t=>t.p)
+     }
+    }
+    if(!nv) nv=viasParaEvitarEE(route.geometry.coordinates,o,d,viasAct)
     if(!nv) break
     let nr
     try{nr=await pedirRuta(nv)}catch(e){break}

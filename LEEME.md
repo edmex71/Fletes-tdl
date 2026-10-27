@@ -61,3 +61,9 @@ Si origen y destino están en México y el trazo de OSRM entra a EE.UU. (se comp
 
 ## Baja California → noreste/Chihuahua (PR 34)
 Ensenada/Tijuana/Mexicali → Chihuahua, Torreón, Monterrey, Tamaulipas (y al revés) se fuerzan por México como Traza tu ruta: Mexicali, San Luis Río Colorado, Santa Ana, Magdalena, Cananea, Agua Prieta, Janos, Galeana, Ojo Laguna, Sacramento (`bajaYNoreste`). Se agregaron las casetas Galeana ($232) y Nuevo Progreso ($293), que faltaban.
+
+## Tapachula → Tijuana (PR 36)
+- Con puntos en «Pasar por» (ej. Villahermosa, Matamoros) y destino al noroeste, si el trazo entra a EE.UU. se combinan esos puntos con el corredor por México (ordenados por distancia al origen) y se recalcula.
+- Casetas agregadas (precios 5 ejes de Traza): Jiquipilas $95, Ocozocuautla $184 (antes iba mezclada con Ocuilapa $264), La Antigua $314, Nautla $93, Tecolutla $89, Puente Tampico $140. «Tampico» ($127) pasó a ser el Libramiento Poniente de Tampico.
+- Malpasito: solo el tramo Raudales–Malpasito ($125). Paso del Toro: $243 si el viaje sigue al norte por Cardel; $288 solo si llega a Veracruz.
+- Faltan ubicaciones (Plus Codes): Arriaga $173, Tierra y Libertad $331, Tuxpam $273.

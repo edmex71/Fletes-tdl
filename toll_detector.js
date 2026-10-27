@@ -100,7 +100,13 @@ function detectarCasetas(ejes){
    if(r && (mejor===null||r.pos<mejor.pos)) mejor=r
   })
   if(!mejor) return
-  const t=tarifaCaseta(c,ejes)
+  let t=tarifaCaseta(c,ejes)
+  // Paso del Toro: el tramo La Tinaja–Veracruz (más caro) solo aplica si el viaje llega a Veracruz; si sigue al norte
+  // por Cardel (Mex 180) se cobra La Tinaja–Paso del Toro, como Traza tu ruta.
+  if(c.n==="Paso del Toro"&&!extremos.some(e=>kmEntre(e,[-96.134,19.19])<45)){
+   const alt=c.tr.find(x=>x.tramo==="La Tinaja-Paso del Toro")
+   if(alt&&alt.t[ejes]!=null) t={monto:alt.t[ejes],tramo:alt.tramo,desde:alt.desde,multi:true,aprox:!!alt.a&&ejes!==5}
+  }
   if(t) con.push({nombre:c.n,monto:t.monto,tramo:t.tramo,desde:t.desde,multi:t.multi,aprox:t.aprox,pos:mejor.pos})
   else est.push({nombre:c.n,pos:mejor.pos,motivo:"sin tarifa para "+ejes+" ejes"})
  })
