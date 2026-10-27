@@ -167,6 +167,13 @@ function bajaYNoreste(o,d){
  const este=p=>p[0]>-108&&!(p[0]>-107.2&&p[0]<-106&&p[1]>31.2&&p[1]<32.2)&&(p[1]<30.5||p[0]>-105)
  return (oeste(o)&&este(d))?1:((oeste(d)&&este(o))?-1:0)
 }
+// Como bajaYNoreste, pero para cualquier punto de la península (Baja California y Baja California Sur).
+// Solo se usa como reparación cuando el trazo normal se mete a EE.UU. (ej. Monterrey → Los Cabos).
+function bajaPeninsulaYNoreste(o,d){
+ const pen=p=>enBcs(p)||(p[1]>=28&&p[1]<33&&p[0]<-113.5)
+ const este=p=>p[0]>-108&&!(p[0]>-107.2&&p[0]<-106&&p[1]>31.2&&p[1]<32.2)&&(p[1]<30.5||p[0]>-105)
+ return (pen(o)&&este(d))?1:((pen(d)&&este(o))?-1:0)
+}
 function viasBajaNoreste(){
  const pts=[puntoCaseta("Mexicali"),puntoCaseta("San Luis Río Colorado"),puntoCaseta("Santa Ana"),puntoCaseta("Magdalena"),
   [-110.30,31.00],[-109.55,31.32],[-108.19,30.89],puntoCaseta("Galeana"),puntoCaseta("Ojo Laguna"),puntoCaseta("Sacramento")]
@@ -187,7 +194,12 @@ const PUERTOS_FERRY={
  mazatlan:{nombre:"Mazatlán",xy:[-106.4338,23.1760]}
 }
 const PUERTO_LA_PAZ=[-110.3217,24.2750] // terminal de Pichilingue
-function enBcs(p){return p[0]>-115.2&&p[0]<-109.3&&p[1]>22.6&&p[1]<28.0}
+// Baja California Sur: al oeste del Golfo de California. El límite con la costa de Sonora/Sinaloa baja en diagonal
+// (de -109.3° en Los Cabos a -111.6° a los 28° N) para no confundir Guaymas, Cd. Obregón o Navojoa con BCS.
+function enBcs(p){
+ if(p[1]<=22.6||p[1]>=28.0||p[0]<=-115.2) return false
+ return p[0]<-109.3-(p[1]-22.8)*(2.3/5.2)
+}
 function mostrarFerry(visible){
  const b=document.getElementById("ferry_box")
  if(b) b.style.display=visible?"block":"none"
@@ -280,7 +292,7 @@ async function calcularRuta(){
     let nv=null
     if(it===0){
      // Con puntos del usuario no se aplicó el corredor por México: se combinan con el corredor, ordenados por distancia al origen.
-     const cor=bajaYJuarez(o,d)?viasBajaJuarez():(bajaYNoreste(o,d)?viasBajaNoreste():null)
+     const cor=bajaYJuarez(o,d)?viasBajaJuarez():(bajaYNoreste(o,d)?viasBajaNoreste():(bajaPeninsulaYNoreste(o,d)?viasBajaNoreste():null))
      if(cor){
       const todos=viasAct.map(p=>({p,u:true}))
       cor.forEach(p=>{if(!todos.some(t=>kmEntre(t.p,p)<20)) todos.push({p})})
