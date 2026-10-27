@@ -23,7 +23,7 @@ ALIAS = {  # clave CSV normalizada -> clave OSM normalizada
     'LA CARBONERA': 'LA CARBONERA',
     'TAXCO': 'C BIS TAXCO',
     'TRES MARIAS A': 'BIS TRES MARIA CA',
-    'TAMPICO': 'PUENTE TAMPICO',
+    'TAMPICO': 'LIBRAMIENTO PONIENTE TAMPICO',  # Libramiento de Tampico (Mex 180D) $127; el Puente Tampico ($140) va en tarifas_extra.json
     'QUERETARO BIS': 'ZZ SIN COORDENADAS',  # el sitio OSM cercano es la caseta de Jilotepec (Atlacomulco/Queretaro)
 }
 # Ubicacion elegida cuando el mismo nombre existe en varios lugares (lon,lat). Revisar con SICT.
@@ -32,6 +32,7 @@ HINT = {
     'QUERETARO BIS': (-100.473, 20.572),
     'ALPUYECA': (-99.26, 18.723),
     'SAN MARTIN A PUEBLA': (-98.41, 19.302),
+    'Ocozocoautla (Ocuilapa)': (-93.40038, 16.73849),  # es la plaza de Ocuilapa (km 89+400); Ocozocuautla va aparte
 }
 # El CSV usa el mismo nombre para dos plazas distintas: se separan por tramo.
 SPLIT = {
@@ -53,9 +54,12 @@ def num(v):
     return float(v) if v else None
 casetas = collections.OrderedDict()
 # Casetas complementarias (se abren solo para desahogar tráfico): no van en la base
+# Tramos que no corresponden a la ruta que se usa en la practica (la plaza cobra el tramo directo desde Raudales)
+DROP_TRAMOS = {'Malpasito': ['Ent. Nuevo Sacrificio - Ent. Malpasito', 'Ent. Nuevo Sacrificio - Ent. Raudales']}
 EXCLUIR = {'Palmillas Bis', 'Queretaro Bis', 'San Marcos Bis', 'Chamapa-Lecheria', 'Lecheria Retorno'}
 for (c, tramo), r in sorted(latest.items()):
     if c in EXCLUIR: continue
+    if tramo in DROP_TRAMOS.get(c, []): continue
     t = {e: num(r['camion_%d_ejes' % e]) for e in range(2, 10)}
     item = {'tramo': tramo, 'desde': r['en_vigor_partir_de'], 't': t}
     if c in SPLIT:
@@ -185,7 +189,7 @@ js = '// Generado por build_casetas.py - NO editar a mano\n'
 js += '// Tarifas: red FONADIN (camion 2-9 ejes), vigencia mas reciente por tramo (campo "desde").\n'
 js += '// Coordenadas: OpenStreetMap (ODbL).\n'
 # Nombre con el que se muestra la caseta (el de CAPUFE puede confundir con el que usa Traza tu ruta)
-RENOMBRAR = {'Ing. Francisco Velasco Durán': 'Alpuyeca (95D)'}
+RENOMBRAR = {'Ing. Francisco Velasco Durán': 'Alpuyeca (95D)', 'Ocozocoautla (Ocuilapa)': 'Ocuilapa'}
 for _c in out:
     _c['n'] = RENOMBRAR.get(_c['n'], _c['n'])
 js += 'const CASETAS_TARIFA=' + json.dumps(out, ensure_ascii=False, separators=(',', ':')) + ';\n'
