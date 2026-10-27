@@ -70,3 +70,6 @@ Ensenada/Tijuana/Mexicali → Chihuahua, Torreón, Monterrey, Tamaulipas (y al r
 
 ## Diésel (PR 39)
 El precio del diésel por defecto al abrir la app es $29/L (antes $26).
+
+## CDMX → Cancún (PR 39)
+Amozoc-Perote ($64) no se cobra en la ruta CDMX–Puebla–Veracruz/sureste (Traza no la lista); se agregó a las incorporaciones (nunca se cobra). Pendiente: ubicación correcta de Xcan ($1,843).
