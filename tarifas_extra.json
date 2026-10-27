@@ -1495,6 +1495,24 @@
     -97.82478,
     22.21836
    ]
+  },
+  {
+   "n": "Arriaga",
+   "tramo": "Ent. Arriaga - Ent. Tierra y Libertad",
+   "c5": 173,
+   "xy": [
+    -93.87544,
+    16.25719
+   ]
+  },
+  {
+   "n": "Tuxpam",
+   "tramo": "Entronque Tihuatlán - Tuxpam",
+   "c5": 273,
+   "xy": [
+    -97.48269,
+    20.75306
+   ]
   }
  ]
 }
