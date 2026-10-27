@@ -180,6 +180,29 @@ function tijuanaBajaSur(o,d){
  return (tij(o)&&sur(d))||(tij(d)&&sur(o))
 }
 
+// ---- Ferry a Baja California Sur (opcional; solo aparece si origen o destino está en BCS) ----
+let ferryInfo=null // {puerto, caja, ...} de la última ruta calculada con ferry; null si fue por carretera
+const PUERTOS_FERRY={
+ topolobampo:{nombre:"Topolobampo",xy:[-109.0508,25.6006]},
+ mazatlan:{nombre:"Mazatlán",xy:[-106.4338,23.1760]}
+}
+const PUERTO_LA_PAZ=[-110.3217,24.2750] // terminal de Pichilingue
+function enBcs(p){return p[0]>-115.2&&p[0]<-109.3&&p[1]>22.6&&p[1]<28.0}
+function mostrarFerry(visible){
+ const b=document.getElementById("ferry_box")
+ if(b) b.style.display=visible?"block":"none"
+ if(!visible){const s=document.getElementById("ferry_puerto"); if(s) s.value=""}
+}
+// Tramo simple por carretera entre dos puntos (sin puntos de paso)
+async function pedirTramo(a,b){
+ const url=`https://router.project-osrm.org/route/v1/driving/${a[0]},${a[1]};${b[0]},${b[1]}?overview=full&geometries=geojson`
+ const r=await fetch(url)
+ if(!r.ok) throw "El servicio de rutas no respondió ("+r.status+")"
+ const data=await r.json()
+ if(data.code!=="Ok"||!data.routes||!data.routes.length) throw "No se encontró ruta hacia/desde el puerto del ferry"
+ return data.routes[0]
+}
+
 async function calcularRuta(){
 
  const origen=document.getElementById("origen").value.trim()
@@ -190,9 +213,22 @@ async function calcularRuta(){
 
   setEstado("Calculando ruta...")
 
-  const o=await geocode(origen)
+  ferryInfo=null
+  let o=await geocode(origen)
   if(requiereBusqueda(origen)&&requiereBusqueda(destino)) await esperar(1100) // Nominatim permite 1 consulta por segundo
-  const d=await geocode(destino)
+  let d=await geocode(destino)
+
+  // Ferry: solo si se eligió un puerto y un extremo está en Baja California Sur y el otro no.
+  // La ruta se calcula por carretera hasta el puerto (o desde él); el ferry cruza a La Paz (Pichilingue).
+  const hayBcs=enBcs(o)!==enBcs(d)
+  mostrarFerry(hayBcs)
+  const puertoSel=hayBcs?((document.getElementById("ferry_puerto")||{value:""}).value):""
+  let tramoFerry=null // {antes:bool, a, b}: tramo por carretera dentro de BCS
+  if(puertoSel&&PUERTOS_FERRY[puertoSel]){
+   const px=PUERTOS_FERRY[puertoSel].xy
+   if(enBcs(d)){tramoFerry={antes:false,a:PUERTO_LA_PAZ,b:d};d=px}
+   else{tramoFerry={antes:true,a:o,b:PUERTO_LA_PAZ};o=px}
+  }
 
   // Puntos intermedios para forzar el camino. Se pueden escribir ciudades o nombres de casetas, separados por ;
   const vias=[]
@@ -261,21 +297,31 @@ async function calcularRuta(){
    }
   }
 
-  const km=(route.distance/1000).toFixed(0)
+  const rutaContinente=route.geometry.coordinates
+  let coordsTotal=rutaContinente, distTotal=route.distance, geomTotal=route.geometry
+  if(tramoFerry){
+   const extra=await pedirTramo(tramoFerry.a,tramoFerry.b)
+   coordsTotal=tramoFerry.antes?extra.geometry.coordinates.concat(rutaContinente):rutaContinente.concat(extra.geometry.coordinates)
+   distTotal=route.distance+extra.distance
+   geomTotal={type:"LineString",coordinates:coordsTotal}
+   ferryInfo={puerto:puertoSel,nombre:PUERTOS_FERRY[puertoSel].nombre}
+  }
+
+  const km=(distTotal/1000).toFixed(0)
   document.getElementById("km").value=km
 
   limpiarRuta()
-  currentRoute=route.geometry.coordinates
+  currentRoute=coordsTotal
   if(typeof ignoradas!=="undefined") ignoradas=new Set()
 
   if(map){
-   routeLayer=L.geoJSON(route.geometry).addTo(map)
+   routeLayer=L.geoJSON(geomTotal).addTo(map)
    map.fitBounds(routeLayer.getBounds())
   }
 
-  const cruza=rutaCruzaFrontera(currentRoute,o,d)
+  const cruza=rutaCruzaFrontera(rutaContinente,o,d)
   const aviso=cruza?" ⚠ La ruta cruza a EE.UU. Agrega ciudades mexicanas en «Pasar por» para evitarlo.":(corregida?" (ruta ajustada para no cruzar a EE.UU.)":"")
-  setEstado("Ruta calculada: "+km+" km"+(viaAuto==="juarez"?" (ruta forzada por México, sin cruzar la frontera)":(viaAuto?" (ruta forzada por la autopista México–Querétaro)":""))+aviso)
+  setEstado("Ruta calculada: "+km+" km"+(viaAuto==="juarez"?" (ruta forzada por México, sin cruzar la frontera)":(viaAuto?" (ruta forzada por la autopista México–Querétaro)":""))+aviso+(ferryInfo?" · Con ferry "+ferryInfo.nombre+" ↔ La Paz (los km son por carretera)":(hayBcs?" · ¿Cruzar en ferry? Elígelo arriba y vuelve a calcular la ruta.":"")))
 
  }catch(e){
 

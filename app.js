@@ -84,6 +84,26 @@ function filaCaseta(k,html,activa){
  return `<label style="display:block${activa?"":";opacity:.5;text-decoration:line-through"}"><input type="checkbox" style="width:auto;margin:0 6px 0 0"${activa?" checked":""} onchange="alternarCaseta('${k.replace(/'/g,"")}')">${html}</label>`
 }
 
+// ---- Ferry (Baja Ferries, tarifas de vehículos de carga con IVA vigentes desde el 15-oct-2026, viaje sencillo) ----
+const FERRY_TARIFAS={
+ topolobampo:{tractor:11400,thorton:16300,caja137:23150,caja169:25200},
+ mazatlan:{tractor:15600,thorton:22300,caja137:29400,caja169:33100}
+}
+// Menos de 5 ejes: Thorton. 5 y 6 ejes: tractor + 1 caja. 7 o más: tractor + 2 cajas.
+function costoFerry(info,ejes,redondo){
+ const t=FERRY_TARIFAS[info.puerto]; if(!t) return null
+ const cajaSel=(document.getElementById("ferry_caja")||{value:"caja137"}).value
+ const caja=t[cajaSel]||t.caja137
+ const ivSel=(document.getElementById("ferry_iv")||{checked:true}).checked
+ const veces=(ivSel||redondo)?2:1
+ let partes, base
+ if(ejes<=4){base=t.thorton;partes="Thorton "+pesos(t.thorton)}
+ else if(ejes<=6){base=t.tractor+caja;partes="tractor "+pesos(t.tractor)+" + caja "+pesos(caja)}
+ else{base=t.tractor+2*caja;partes="tractor "+pesos(t.tractor)+" + 2 cajas "+pesos(2*caja)}
+ return {monto:base*veces,base,veces,partes,nombre:info.nombre,
+  texto:"Ferry "+info.nombre+" ↔ La Paz"+(veces===2?" (ida y vuelta)":" (sencillo)")}
+}
+
 function precioSeleccionado(){
  const sel=document.getElementById("precio_envio").value
  return document.getElementById("precio_"+sel).innerText
@@ -142,7 +162,8 @@ function calcularFlete(){
  const chofer=gastosChofer(horas)
 
  // Todo esto se suma ANTES de aplicar los porcentajes de Bajo, Medio y Alto
- const costoTotal=dieselCosto+totalCasetas+adicional+chofer.monto
+ const ferry=ferryInfo?costoFerry(ferryInfo,ejes,redondo):null
+ const costoTotal=dieselCosto+totalCasetas+adicional+chofer.monto+(ferry?ferry.monto:0)
 
  const origen=document.getElementById("origen").value
  const destino=document.getElementById("destino").value
@@ -174,6 +195,7 @@ function calcularFlete(){
  Diesel: ${pesos(dieselCosto)}<br>
  ${desgloseCasetas}<br>
  ${avisoCasetas?`<span class="est">${avisoCasetas}</span><br>`:""}
+ ${ferry?`${escapar(ferry.texto)}: ${pesos(ferry.monto)} <small>(${ferry.partes}${ferry.veces===2?" × 2":""})</small><br>`:""}
  Gastos de viaje y chofer: ${pesos(chofer.monto)} (${chofer.bloques} × ${pesos(GASTO_CHOFER_POR_BLOQUE)} por ${HORAS_POR_BLOQUE} h)<br>
  Costo adicional: ${pesos(adicional)}<br>
  <b>Costo total: ${pesos(costoTotal)}</b>
@@ -195,7 +217,7 @@ function calcularFlete(){
   casetasMapa:det?det.con.map(c=>{const p=currentRoute[Math.min(currentRoute.length-1,Math.round(c.pos))];return {lon:p[0],lat:p[1]}}):[],
   totalTarifa,nTarifa,totalEst,nEst,
   usoEstimadoPorKm,totalCasetasKm:usoEstimadoPorKm?totalCasetas:0,
-  chofer,adicional,costoTotal,precios,avisoCorto
+  chofer,adicional,costoTotal,precios,avisoCorto,ferry
  }
 
 
@@ -286,6 +308,7 @@ async function generarImagenCostos(){
   c.casetasTarifa.forEach((x,i)=>filas.push([(mapa?(i+1)+". ":"")+x.nombre,pesos(x.monto)]))
   filas.push(["Casetas estimadas ("+c.nEst+")",pesos(c.totalEst)])
  }
+ if(c.ferry) filas.push([c.ferry.texto+" · "+c.ferry.partes+(c.ferry.veces===2?" × 2":""),pesos(c.ferry.monto)])
  filas.push(["Gastos de viaje y chofer ("+c.chofer.bloques+" × "+pesos(GASTO_CHOFER_POR_BLOQUE)+")",pesos(c.chofer.monto)])
  if(c.adicional) filas.push(["Costo adicional",pesos(c.adicional)])
  filas.push(["COSTO TOTAL",pesos(c.costoTotal),true])
@@ -386,6 +409,8 @@ function borrar(){
  document.getElementById("adicional").value="0"
  document.getElementById("cliente").value=""
  document.getElementById("redondo").checked=false
+ ferryInfo=null
+ if(typeof mostrarFerry==="function") mostrarFerry(false)
  document.getElementById("resultado").innerHTML=""
  ultimoCalculo=null
  limpiarRuta()
@@ -412,10 +437,11 @@ function guardarCotizacion(manual){
   km:c.kmIda,ejes:c.ejes,redondo:c.redondo,rend:c.rend,
   diesel:parseFloat(document.getElementById("diesel").value)||0,
   adicional:c.adicional,costo:Math.round(c.costoTotal),
-  tipo:sel,precio:precioSeleccionado()
+  tipo:sel,precio:precioSeleccionado(),
+  ferry:ferryInfo?ferryInfo.puerto:"",ferryCaja:(document.getElementById("ferry_caja")||{}).value||"",ferryIv:(document.getElementById("ferry_iv")||{checked:true}).checked
  }
  const h=leerHistorial()
- const igual=h.findIndex(x=>x.origen===reg.origen&&x.destino===reg.destino&&x.via===reg.via&&x.km===reg.km&&x.redondo===reg.redondo&&x.ejes===reg.ejes&&x.tipo===reg.tipo&&x.precio===reg.precio&&x.cliente===reg.cliente&&x.diesel===reg.diesel&&x.adicional===reg.adicional)
+ const igual=h.findIndex(x=>x.origen===reg.origen&&x.destino===reg.destino&&x.via===reg.via&&x.km===reg.km&&x.redondo===reg.redondo&&x.ejes===reg.ejes&&x.tipo===reg.tipo&&x.precio===reg.precio&&x.cliente===reg.cliente&&x.diesel===reg.diesel&&x.adicional===reg.adicional&&(x.ferry||"")===reg.ferry&&(x.ferryCaja||"")===reg.ferryCaja&&x.ferryIv===reg.ferryIv)
  if(igual>=0){
   if(manual) setEstado("Esta cotización ya está en el historial")
   return
@@ -435,7 +461,7 @@ function mostrarHistorial(){
   const f=new Date(x.fecha)
   const fecha=isNaN(f)?"":f.toLocaleDateString("es-MX",{day:"2-digit",month:"short",year:"numeric"})
   return `<div style="background:white;border-radius:8px;padding:10px;margin:8px 0;line-height:1.4">
-   <b>${escapar(x.origen)} ${x.redondo?"↔":"→"} ${escapar(x.destino)}</b>${x.redondo?" <small>(ida y vuelta)</small>":""}<br>
+   <b>${escapar(x.origen)} ${x.redondo?"↔":"→"} ${escapar(x.destino)}</b>${x.redondo?" <small>(ida y vuelta)</small>":""}${x.ferry?" <small>(ferry "+(x.ferry==="mazatlan"?"Mazatlán":"Topolobampo")+")</small>":""}<br>
    <small>${fecha}${x.cliente?" · "+escapar(x.cliente):""} · ${escapar(x.km||"")} km${x.redondo?" × 2":""} · ${x.ejes} ejes</small><br>
    Enviado (${nombres[x.tipo]||""}): <b>${escapar(x.precio||"")}</b> <small>· costo ${pesos(x.costo||0)}</small>
    <div style="display:flex;gap:8px"><button style="margin:6px 0 0" onclick="abrirCotizacion(${x.id})">Abrir</button><button class="sec" style="margin:6px 0 0" onclick="borrarCotizacion(${x.id})">Borrar</button></div>
@@ -451,6 +477,7 @@ async function abrirCotizacion(id){
  set("rend",x.rend);set("diesel",x.diesel||29);set("adicional",x.adicional||0);set("cliente",x.cliente||"")
  document.getElementById("redondo").checked=!!x.redondo
  set("precio_envio",x.tipo||"medio")
+ set("ferry_puerto",x.ferry||"");set("ferry_caja",x.ferryCaja||"caja137");document.getElementById("ferry_iv").checked=x.ferryIv!==false
  window.scrollTo({top:0,behavior:"smooth"})
  await calcularRuta()
  if(document.getElementById("km").value) calcularFlete()

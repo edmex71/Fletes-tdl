@@ -82,3 +82,10 @@ Amozoc-Perote ($64) no se cobra en la ruta CDMX–Puebla–Veracruz/sureste (Tra
 - Atlacomulco/Querétaro ($382) sí se cobra saliendo de CDMX cuando la ruta sigue por la Mex 126D (San Juanico/Contepec), como Traza; solo se omite rumbo a Querétaro por la 57D.
 - Nodo Popotla ($113) no se cobra (Traza no lo lista; se trata como incorporación).
 - Tijuana ↔ Baja California Sur: se agrega automáticamente el punto «Playas de Tijuana» para tomar la autopista de cuota desde el inicio.
+
+## Ferry a La Paz / Los Cabos (PR 43)
+- Solo aparece (caja «Ferry a Baja California Sur») cuando origen o destino está en BCS y el otro no. Por defecto va por carretera; nunca se usa el ferry solo.
+- Al elegir Topolobampo o Mazatlán y volver a calcular, la ruta se arma por carretera hasta el puerto (o desde La Paz/Pichilingue al destino) y los km son solo por carretera.
+- Tarifas Baja Ferries (carga, IVA incluido, vigentes 15-oct-2026, viaje sencillo): Topolobampo tractor $11,400 / Thorton $16,300 / caja ≤13.7 m $23,150 / caja 13.8–16.9 m $25,200; Mazatlán tractor $15,600 / Thorton $22,300 / caja $29,400 / $33,100.
+- Cobro por ejes: ≤4 ejes Thorton; 5–6 tractor + 1 caja; 7 o más tractor + 2 cajas. Se cobra ida y vuelta (×2) por defecto; casilla «Ferry ida y vuelta» para quitarlo. Con «Viaje redondo» el ferry sigue siendo ×2 (no ×4).
+- No incluye ayudante de operador ($1,500 / $1,800) ni metro extra ($2,150 / $2,300), ni el tiempo de cruce.
