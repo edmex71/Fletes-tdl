@@ -173,6 +173,13 @@ function viasBajaNoreste(){
  return pts.every(Boolean)?pts:null
 }
 
+// Tijuana ↔ Baja California Sur: se sale por la autopista de cuota (Playas de Tijuana), como Traza tu ruta.
+function tijuanaBajaSur(o,d){
+ const tij=p=>p[0]>-117.2&&p[0]<-116.8&&p[1]>32.4&&p[1]<32.6
+ const sur=p=>p[0]<-109&&p[1]<31.5
+ return (tij(o)&&sur(d))||(tij(d)&&sur(o))
+}
+
 async function calcularRuta(){
 
  const origen=document.getElementById("origen").value.trim()
@@ -208,6 +215,9 @@ async function calcularRuta(){
   }else if(!vias.length && bajaYNoreste(o,d)){
    const v=viasBajaNoreste()
    if(v){vias.push(...(bajaYNoreste(o,d)>0?v:v.slice().reverse()));viaAuto="juarez"}
+  }else if(!vias.length && tijuanaBajaSur(o,d)){
+   const a=puntoCaseta("Playas de Tijuana")
+   if(a) vias.push(a)
   }else if(!vias.length && guadalajaraDesdeCdmx(o,d)){
    // CDMX-Guadalajara: 57D hasta Apaseo el Grande (por libre), Salamanca, La Piedad y La Barca
    const a=puntoCaseta("Palmillas")
