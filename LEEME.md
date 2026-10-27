@@ -89,3 +89,6 @@ Amozoc-Perote ($64) no se cobra en la ruta CDMX–Puebla–Veracruz/sureste (Tra
 - Tarifas Baja Ferries (carga, IVA incluido, vigentes 15-oct-2026, viaje sencillo): Topolobampo tractor $11,400 / Thorton $16,300 / caja ≤13.7 m $23,150 / caja 13.8–16.9 m $25,200; Mazatlán tractor $15,600 / Thorton $22,300 / caja $29,400 / $33,100.
 - Cobro por ejes: ≤4 ejes Thorton; 5–6 tractor + 1 caja; 7 o más tractor + 2 cajas. Se cobra ida y vuelta (×2) por defecto; casilla «Ferry ida y vuelta» para quitarlo. Con «Viaje redondo» el ferry sigue siendo ×2 (no ×4).
 - No incluye ayudante de operador ($1,500 / $1,800) ni metro extra ($2,150 / $2,300), ni el tiempo de cruce.
+
+## Ferry: largo de caja en pies (PR 44)
+El selector muestra pies: 40 o 45 pies = tarifa hasta 13.7 m; 48 o 53 pies = tarifa de 13.8 a 16.9 m.
