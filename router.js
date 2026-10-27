@@ -52,8 +52,8 @@ function norteDesdeCdmx(o,d){
 const FRONTERA_NORTE=[[-117.125,32.535],[-114.72,32.718],[-114.72,32.495],[-111.07,31.33],[-108.21,31.33],[-108.21,31.78],
  [-106.53,31.78],[-106.33,31.65],[-105.80,31.25],[-105.0,30.65],[-104.68,30.12],[-104.37,29.56],[-103.78,29.26],[-103.2,29.0],
  [-102.95,29.18],[-102.35,29.75],[-101.55,29.80],[-101.0,29.37],[-100.92,29.32],[-100.50,28.71],[-100.30,28.20],[-99.55,27.55],
- [-99.45,27.20],[-99.15,26.65],[-98.82,26.35],[-98.25,26.05],[-97.50,25.87],[-97.15,25.96]]
-const MARGEN_FRONTERA_KM=8 // la frontera dibujada es aproximada: dentro de este margen se considera México
+ [-99.45,27.20],[-99.15,26.65],[-98.82,26.35],[-98.25,26.09],[-97.95,26.08],[-97.75,26.04],[-97.55,25.90],[-97.15,25.96]]
+const MARGEN_FRONTERA_KM=12 // la frontera dibujada es aproximada: dentro de este margen se considera México
 
 // Distancia con signo (km) del punto [lon,lat] a la frontera: positiva = lado de EE.UU., negativa = México.
 function distanciaFrontera(p){
