@@ -15,7 +15,7 @@
 
 <header class="header">
 <img src="logo.png" alt="">
-<h1>Flete TDL <small id="version" style="font-size:12px;font-weight:normal;opacity:.7">PR 42</small></h1>
+<h1>Flete TDL <small id="version" style="font-size:12px;font-weight:normal;opacity:.7">PR 43</small></h1>
 </header>
 
 <div class="container">
@@ -28,6 +28,22 @@
 
 <label for="via">Pasar por (opcional)</label>
 <input id="via" autocomplete="off" placeholder="Ej: Acayucan; Tuxtla Gutiérrez">
+
+<div id="ferry_box" style="display:none">
+<label for="ferry_puerto">Ferry a Baja California Sur (opcional)</label>
+<select id="ferry_puerto">
+<option value="">No, por carretera</option>
+<option value="topolobampo">Ferry Topolobampo ↔ La Paz</option>
+<option value="mazatlan">Ferry Mazatlán ↔ La Paz</option>
+</select>
+<small style="color:#555">Al elegirlo, vuelve a pulsar «Calcular ruta»: los km son por carretera hasta el puerto y desde La Paz.</small>
+<label for="ferry_caja">Largo de la caja</label>
+<select id="ferry_caja" onchange="if(ultimoCalculo)calcularFlete()">
+<option value="caja137">Hasta 13.7 m</option>
+<option value="caja169">De 13.8 a 16.9 m</option>
+</select>
+<label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="ferry_iv" checked style="width:auto;margin:0" onchange="if(ultimoCalculo)calcularFlete()">Ferry ida y vuelta</label>
+</div>
 
 <button onclick="calcularRuta()">Calcular ruta</button>
 
