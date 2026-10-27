@@ -55,3 +55,6 @@ Cuando salga un PDF nuevo de CAPUFE:
 - Origen, Destino y "Pasar por" aceptan Plus Codes de Google: completos (`76F2GP97+MG`, sin buscar nada) o cortos con la localidad que muestra Google (`H25W+RH6 Chihuahua`; la localidad se busca en el mapa y se calcula el punto exacto). Un código corto sin localidad da un aviso. Código en `geocoder.js`.
 
 - Rutas sin cruzar a EE.UU.: entre Baja California/noroeste de Sonora y Ciudad Juárez la ruta se fuerza por México (Mexicali, San Luis Río Colorado, Santa Ana, Magdalena, Cananea, Agua Prieta, Janos y Ascensión), como Traza tu ruta. Además, si origen y destino están en México y el trazo entra a EE.UU., el estado avisa "La ruta cruza a EE.UU." (frontera aproximada de Tijuana a Cd. Juárez). Código en `router.js`.
+
+## No cruzar a EE.UU. (PR 33)
+Si origen y destino están en México y el trazo de OSRM entra a EE.UU. (se compara contra la frontera completa, Tijuana–Matamoros, con margen de 8 km), la app agrega como puntos de paso las ciudades fronterizas/de enlace cercanas al tramo (lista `CIUDADES_FRONTERA` en router.js) y recalcula, hasta 3 intentos, conservando la ruta con menos puntos en EE.UU. Si aun así cruza, muestra la advertencia. Los puntos de «Pasar por» del usuario se respetan. La frontera es aproximada.
