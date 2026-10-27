@@ -67,3 +67,6 @@ Ensenada/Tijuana/Mexicali → Chihuahua, Torreón, Monterrey, Tamaulipas (y al r
 - Casetas agregadas (precios 5 ejes de Traza): Jiquipilas $95, Ocozocuautla $184 (antes iba mezclada con Ocuilapa $264), La Antigua $314, Nautla $93, Tecolutla $89, Puente Tampico $140. «Tampico» ($127) pasó a ser el Libramiento Poniente de Tampico.
 - Malpasito: solo el tramo Raudales–Malpasito ($125). Paso del Toro: $243 si el viaje sigue al norte por Cardel; $288 solo si llega a Veracruz.
 - Arriaga $173 (7688644W+MG) y Tierra y Libertad $331 (744F+VR y 64V7+GH; Google no la marca, se asignó por orden en la 190D) y Tuxpam $273 (QG38+6W).
+
+## Diésel (PR 39)
+El precio del diésel por defecto al abrir la app es $29/L (antes $26).
