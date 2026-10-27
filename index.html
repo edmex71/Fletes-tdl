@@ -15,7 +15,7 @@
 
 <header class="header">
 <img src="logo.png" alt="">
-<h1>Flete TDL <small id="version" style="font-size:12px;font-weight:normal;opacity:.7">PR 39</small></h1>
+<h1>Flete TDL <small id="version" style="font-size:12px;font-weight:normal;opacity:.7">PR 40</small></h1>
 </header>
 
 <div class="container">
@@ -55,6 +55,12 @@
 <label for="adicional">Costo adicional ($)</label>
 <input id="adicional" value="0" inputmode="decimal">
 
+<label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="redondo" style="width:auto;margin:0">Viaje redondo (ida y vuelta)</label>
+<small style="color:#555">Duplica km, diésel, casetas y gastos de viaje, con la misma ruta de regreso.</small>
+
+<label for="cliente">Cliente / nota (opcional)</label>
+<input id="cliente" autocomplete="off" placeholder="Para el historial">
+
 <button onclick="calcularFlete()">Calcular Flete</button>
 <button class="sec" onclick="borrar()">Borrar</button>
 
@@ -76,9 +82,13 @@
 <option value="km">Por KM</option>
 </select>
 
+<button class="sec" onclick="guardarCotizacion(true)">Guardar en historial</button>
 <button onclick="generarImagen()">Generar imagen WhatsApp</button>
 <button class="sec" onclick="generarImagenCostos()">Generar imagen de costos (uso interno)</button>
 </div>
+
+<h3 style="margin-top:24px">Historial de cotizaciones</h3>
+<div id="historial"></div>
 
 </div>
 

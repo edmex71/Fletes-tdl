@@ -96,6 +96,8 @@ function calcularFlete(){
  const rend=parseFloat(document.getElementById("rend").value)
  const ejes=parseInt(document.getElementById("ejes").value,10)
  const adicional=parseFloat(document.getElementById("adicional").value)||0
+ const redondo=document.getElementById("redondo").checked
+ const f=redondo?2:1 // ida y vuelta: todo se duplica (misma ruta de regreso)
 
  if(!(km>0)){setEstado("Falta calcular la ruta o escribir los kilómetros");return}
  if(!(rend>0)){setEstado("El rendimiento debe ser mayor a 0");return}
@@ -113,29 +115,30 @@ function calcularFlete(){
   const conOk=[]
   det.con.forEach(c=>{
    const k=c.nombre+"@"+Math.round(c.pos), act=!ignoradas.has(k)
-   if(act){totalTarifa+=c.monto;conOk.push(c)}
-   const extra=(c.multi?` <small>(tramo: ${escapar(c.tramo)})</small>`:"")+(c.aprox?` <small>(precio estimado para ${ejes} ejes)</small>`:"")
-   lista+=filaCaseta(k,`${escapar(c.nombre)}: ${pesos(c.monto)}${extra}`,act)
+   if(act){totalTarifa+=c.monto*f;conOk.push(c)}
+   const extra=(redondo?` <small>(×2 ida y vuelta)</small>`:"")+(c.multi?` <small>(tramo: ${escapar(c.tramo)})</small>`:"")+(c.aprox?` <small>(precio estimado para ${ejes} ejes)</small>`:"")
+   lista+=filaCaseta(k,`${escapar(c.nombre)}: ${pesos(c.monto*f)}${extra}`,act)
   })
   det.est.forEach(c=>{
    const k=c.nombre+"@"+Math.round(c.pos), act=!ignoradas.has(k)
-   if(act){totalEst+=montoEst;nEst++}
-   lista+=filaCaseta(k,`<span class="est">${escapar(c.nombre)}: ~${pesos(montoEst)} (est., ${escapar(c.motivo)})</span>`,act)
+   if(act){totalEst+=montoEst*f;nEst++}
+   lista+=filaCaseta(k,`<span class="est">${escapar(c.nombre)}: ~${pesos(montoEst*f)} (est., ${escapar(c.motivo)})</span>`,act)
   })
   det.con=conOk
   nTarifa=conOk.length
   totalCasetas=totalTarifa+totalEst
  }else{
   usoEstimadoPorKm=true
-  totalCasetas=calcularCasetasEstimadas(km)
+  totalCasetas=calcularCasetasEstimadas(km)*f
   lista='<span class="est">Sin ruta calculada: casetas estimadas por km (orientativo).</span><br>'
  }
 
- const litros=km/rend
+ const kmTotal=km*f
+ const litros=kmTotal/rend
  const dieselCosto=litros*diesel
 
  const vel=velocidadPromedio(ejes)
- const horas=km/vel
+ const horas=kmTotal/vel
  const chofer=gastosChofer(horas)
 
  // Todo esto se suma ANTES de aplicar los porcentajes de Bajo, Medio y Alto
@@ -143,7 +146,7 @@ function calcularFlete(){
 
  const origen=document.getElementById("origen").value
  const destino=document.getElementById("destino").value
- const tiempo=calcularTiempo(km,ejes)
+ const tiempo=calcularTiempo(kmTotal,ejes)
 
  // Aviso: las casetas con tarifa son de abr-2026 (CAPUFE). Solo las estimadas pueden estar desactualizadas.
  let avisoCasetas="", avisoCorto=""
@@ -163,8 +166,8 @@ function calcularFlete(){
  ${escapar(origen)} → ${escapar(destino)}<br>
  Tiempo estimado: ${tiempo} (a ${vel} km/h)<br>
 
- <h3>COSTO OPERATIVO</h3>
- Km: ${km}<br>
+ <h3>COSTO OPERATIVO${redondo?" (IDA Y VUELTA)":""}</h3>
+ Km: ${kmTotal}${redondo?` (${km} × 2)`:""}<br>
  Ejes: ${ejes}<br>
  Rendimiento: ${rend} km/L<br>
  Litros: ${litros.toFixed(0)}<br>
@@ -183,11 +186,11 @@ function calcularFlete(){
 
  document.getElementById("resultado").innerHTML=html
  setEstado(usoEstimadoPorKm?"Calculado sin ruta (casetas por km)":`Casetas detectadas: ${nTarifa} con tarifa, ${nEst} estimadas`)
- const precios=calcularPrecios(costoTotal,km)
+ const precios=calcularPrecios(costoTotal,kmTotal)
 
  ultimoCalculo={
-  origen,destino,km,ejes,vel,tiempo,rend,litros,dieselCosto,
-  casetasTarifa:det?det.con.map(c=>({nombre:c.nombre,monto:c.monto})):[],
+  origen,destino,km:kmTotal,kmIda:km,redondo,ejes,vel,tiempo,rend,litros,dieselCosto,
+  casetasTarifa:det?det.con.map(c=>({nombre:c.nombre+(redondo?" (×2)":""),monto:c.monto*f})):[],
   ruta:currentRoute,
   casetasMapa:det?det.con.map(c=>{const p=currentRoute[Math.min(currentRoute.length-1,Math.round(c.pos))];return {lon:p[0],lat:p[1]}}):[],
   totalTarifa,nTarifa,totalEst,nEst,
@@ -195,7 +198,6 @@ function calcularFlete(){
   chofer,adicional,costoTotal,precios,avisoCorto
  }
 
- guardarHistorial(origen,destino,precioSeleccionado())
 
 }
 
@@ -220,10 +222,12 @@ async function generarImagen(){
 
  const origen=document.getElementById("origen").value
  const destino=document.getElementById("destino").value
- const km=document.getElementById("km").value
+ const km=ultimoCalculo?String(ultimoCalculo.km):document.getElementById("km").value
  if(!km){setEstado("Primero calcula el flete");return}
- const ruta=origen+" → "+destino
+ const redondoImg=document.getElementById("redondo").checked
+ const ruta=origen+(redondoImg?" ↔ ":" → ")+destino+(redondoImg?" (ida y vuelta)":"")
  const precio=precioSeleccionado()
+ guardarCotizacion(false) // lo que se envía al cliente queda en el historial
 
  setEstado("Generando imagen…")
  const HM=380
@@ -315,7 +319,7 @@ async function generarImagenCostos(){
 
  ctx.fillStyle="#000"
  ctx.font="22px Arial"
- ctx.fillText(c.origen+" → "+c.destino,30,162,740)
+ ctx.fillText(c.origen+(c.redondo?" ↔ ":" → ")+c.destino+(c.redondo?" (ida y vuelta)":""),30,162,740)
  ctx.font="20px Arial"
  ctx.fillText(c.km+" km · "+c.ejes+" ejes · "+c.tiempo+" a "+c.vel+" km/h",30,194,740)
 
@@ -380,19 +384,85 @@ function borrar(){
  document.getElementById("via").value=""
  document.getElementById("km").value=""
  document.getElementById("adicional").value="0"
+ document.getElementById("cliente").value=""
+ document.getElementById("redondo").checked=false
  document.getElementById("resultado").innerHTML=""
  ultimoCalculo=null
  limpiarRuta()
  setEstado("Sistema listo")
 }
 
-function guardarHistorial(origen,destino,precio){
- try{
-  let h=JSON.parse(localStorage.getItem("historial")||"[]")
-  h.unshift({fecha:new Date().toISOString(),origen,destino,precio})
-  h=h.slice(0,10)
-  localStorage.setItem("historial",JSON.stringify(h))
- }catch(e){}
+// ---- Historial de cotizaciones (se guarda solo en este teléfono) ----
+const HISTORIAL_MAX=50
+function leerHistorial(){
+ try{return JSON.parse(localStorage.getItem("historial")||"[]").filter(x=>x&&typeof x==="object"&&x.id)}catch(e){return []}
+}
+function escribirHistorial(h){
+ try{localStorage.setItem("historial",JSON.stringify(h.slice(0,HISTORIAL_MAX)))}catch(e){}
+}
+// manual=true: avisa en pantalla. La imagen para el cliente guarda sola (sin duplicar si es la misma cotización).
+function guardarCotizacion(manual){
+ const c=ultimoCalculo
+ if(!c){if(manual) setEstado("Primero calcula el flete");return}
+ const sel=document.getElementById("precio_envio").value
+ const reg={
+  id:Date.now(),fecha:new Date().toISOString(),
+  cliente:document.getElementById("cliente").value.trim(),
+  origen:c.origen,destino:c.destino,via:document.getElementById("via").value.trim(),
+  km:c.kmIda,ejes:c.ejes,redondo:c.redondo,rend:c.rend,
+  diesel:parseFloat(document.getElementById("diesel").value)||0,
+  adicional:c.adicional,costo:Math.round(c.costoTotal),
+  tipo:sel,precio:precioSeleccionado()
+ }
+ const h=leerHistorial()
+ const igual=h.findIndex(x=>x.origen===reg.origen&&x.destino===reg.destino&&x.via===reg.via&&x.km===reg.km&&x.redondo===reg.redondo&&x.ejes===reg.ejes&&x.tipo===reg.tipo&&x.precio===reg.precio&&x.cliente===reg.cliente&&x.diesel===reg.diesel&&x.adicional===reg.adicional)
+ if(igual>=0){
+  if(manual) setEstado("Esta cotización ya está en el historial")
+  return
+ }
+ h.unshift(reg)
+ escribirHistorial(h)
+ mostrarHistorial()
+ if(manual) setEstado("Cotización guardada en el historial")
+}
+function mostrarHistorial(){
+ const cont=document.getElementById("historial")
+ if(!cont) return
+ const h=leerHistorial()
+ if(!h.length){cont.innerHTML='<small>Aún no hay cotizaciones guardadas. Se guardan al generar la imagen para el cliente o con «Guardar en historial».</small>';return}
+ const nombres={bajo:"Bajo",medio:"Medio",alto:"Alto",km:"Por km"}
+ cont.innerHTML=h.map(x=>{
+  const f=new Date(x.fecha)
+  const fecha=isNaN(f)?"":f.toLocaleDateString("es-MX",{day:"2-digit",month:"short",year:"numeric"})
+  return `<div style="background:white;border-radius:8px;padding:10px;margin:8px 0;line-height:1.4">
+   <b>${escapar(x.origen)} ${x.redondo?"↔":"→"} ${escapar(x.destino)}</b>${x.redondo?" <small>(ida y vuelta)</small>":""}<br>
+   <small>${fecha}${x.cliente?" · "+escapar(x.cliente):""} · ${escapar(x.km||"")} km${x.redondo?" × 2":""} · ${x.ejes} ejes</small><br>
+   Enviado (${nombres[x.tipo]||""}): <b>${escapar(x.precio||"")}</b> <small>· costo ${pesos(x.costo||0)}</small>
+   <div style="display:flex;gap:8px"><button style="margin:6px 0 0" onclick="abrirCotizacion(${x.id})">Abrir</button><button class="sec" style="margin:6px 0 0" onclick="borrarCotizacion(${x.id})">Borrar</button></div>
+  </div>`
+ }).join("")+'<button class="sec" onclick="borrarHistorial()">Borrar todo el historial</button>'
+}
+// Vuelve a cargar los datos de una cotización y recalcula (la ruta y las tarifas se calculan de nuevo con los datos de hoy)
+async function abrirCotizacion(id){
+ const x=leerHistorial().find(r=>r.id===id)
+ if(!x) return
+ const set=(i,v)=>{document.getElementById(i).value=v}
+ set("origen",x.origen);set("destino",x.destino);set("via",x.via||"");set("ejes",x.ejes)
+ set("rend",x.rend);set("diesel",x.diesel||29);set("adicional",x.adicional||0);set("cliente",x.cliente||"")
+ document.getElementById("redondo").checked=!!x.redondo
+ set("precio_envio",x.tipo||"medio")
+ window.scrollTo({top:0,behavior:"smooth"})
+ await calcularRuta()
+ if(document.getElementById("km").value) calcularFlete()
+}
+function borrarCotizacion(id){
+ escribirHistorial(leerHistorial().filter(r=>r.id!==id))
+ mostrarHistorial()
+}
+function borrarHistorial(){
+ if(!confirm("¿Borrar todo el historial de cotizaciones?")) return
+ escribirHistorial([])
+ mostrarHistorial()
 }
 
-window.onload=()=>initMap()
+window.onload=()=>{initMap();mostrarHistorial()}
