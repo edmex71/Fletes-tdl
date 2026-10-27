@@ -66,4 +66,4 @@ Ensenada/Tijuana/Mexicali → Chihuahua, Torreón, Monterrey, Tamaulipas (y al r
 - Con puntos en «Pasar por» (ej. Villahermosa, Matamoros) y destino al noroeste, si el trazo entra a EE.UU. se combinan esos puntos con el corredor por México (ordenados por distancia al origen) y se recalcula.
 - Casetas agregadas (precios 5 ejes de Traza): Jiquipilas $95, Ocozocuautla $184 (antes iba mezclada con Ocuilapa $264), La Antigua $314, Nautla $93, Tecolutla $89, Puente Tampico $140. «Tampico» ($127) pasó a ser el Libramiento Poniente de Tampico.
 - Malpasito: solo el tramo Raudales–Malpasito ($125). Paso del Toro: $243 si el viaje sigue al norte por Cardel; $288 solo si llega a Veracruz.
-- Arriaga $173 y Tuxpam $273 agregadas con Plus Code (744F+VR, QG38+6W). Falta ubicar Tierra y Libertad $331.
+- Arriaga $173 (7688644W+MG) y Tierra y Libertad $331 (744F+VR y 64V7+GH; Google no la marca, se asignó por orden en la 190D) y Tuxpam $273 (QG38+6W).

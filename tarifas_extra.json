@@ -1501,8 +1501,8 @@
    "tramo": "Ent. Arriaga - Ent. Tierra y Libertad",
    "c5": 173,
    "xy": [
-    -93.87544,
-    16.25719
+    -93.85369,
+    16.20669
    ]
   },
   {
@@ -1512,6 +1512,23 @@
    "xy": [
     -97.48269,
     20.75306
+   ]
+  },
+  {
+   "n": "Tierra y Libertad",
+   "tramo": "Ent. Tierra y Libertad - Ent. Jiquipilas",
+   "c5": 331,
+   "xy": [
+    -93.87544,
+    16.25719
+   ]
+  },
+  {
+   "n": "Tierra y Libertad",
+   "solo_xy": true,
+   "xy": [
+    -93.88606,
+    16.24381
    ]
   }
  ]
