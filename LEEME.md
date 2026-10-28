@@ -119,3 +119,7 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 ## Cotización Word: ferry y limpieza (PR 51)
 - Si la ruta usa ferry, "Incluye" agrega "ferry (nombre)" (se puede editar; no se guarda como predeterminado).
 - Al generar el documento se vacían y ocultan los campos del formulario.
+
+## Caseta Cuyutlán (PR 52)
+- Faltaba la caseta Cuyutlán (Mex 200D, Armería–Manzanillo): $694 camión de 5 ejes según Traza (24-oct-2026). Coordenadas de OSM (Caseta Cuyutlan km 61+350). Base: 169 casetas.
+- Ruta Fuente Petróleos→Manzanillo (Traza): $5,614 con 13 casetas. La app puede dar menos si OSRM toma carretera libre entre Ocotlán y Colima (sin Ocotlán, La Joya, Acatlán, Sayula, San Marcos): en ese caso poner "Guadalajara" en Pasar por.
