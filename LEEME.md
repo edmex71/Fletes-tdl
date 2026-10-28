@@ -108,3 +108,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 - Botón "Descargar historial en Excel" arriba del historial. Genera un .xlsx real (sin librerías, `xlsx_min.js`) con una fila por cotización guardada.
 - Columnas: Fecha, Cliente / nota, Origen, Destino, Pasar por, Ida y vuelta, Km (un sentido), Km totales, Ejes, Rendimiento, Diésel, Costo adicional, Ferry, Costo total, Precio enviado (tipo), Precio enviado.
 - En el celular abre la hoja de compartir (o descarga el archivo). Nombre: historial_cotizaciones_AAAA-MM-DD.xlsx.
+
+## Botón Actualizar (PR 49)
+- Botón "↻ Actualizar" junto a la etiqueta de PR: vuelve a descargar todos los archivos de la app saltándose la caché y recarga. Sirve cuando el ícono de la pantalla de inicio del iPhone se queda con una versión vieja. No borra el historial.
