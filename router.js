@@ -200,11 +200,14 @@ function enBcs(p){
  if(p[1]<=22.6||p[1]>=28.0||p[0]<=-115.2) return false
  return p[0]<-109.3-(p[1]-22.8)*(2.3/5.2)
 }
-function mostrarFerry(visible){
- const b=document.getElementById("ferry_box")
- if(b) b.style.display=visible?"block":"none"
- if(!visible){const s=document.getElementById("ferry_puerto"); if(s) s.value=""}
+function mostrarFerry(bcs,cozumel){
+ const m=(id,v)=>{const b=document.getElementById(id); if(b) b.style.display=v?"block":"none"}
+ m("ferry_box",bcs); m("cozumel_box",!!cozumel); m("ferry_comun",bcs||!!cozumel)
+ if(!bcs){const s=document.getElementById("ferry_puerto"); if(s) s.value=""}
 }
+// Isla de Cozumel: solo se llega en ferry (Transcaribe, desde Punta Venado)
+function enCozumel(p){return p[0]>-87.05&&p[0]<-86.65&&p[1]>20.2&&p[1]<20.65}
+const PUNTA_VENADO=[-87.12431,20.57519]
 // Tramo simple por carretera entre dos puntos (sin puntos de paso)
 async function pedirTramo(a,b){
  const url=`https://router.project-osrm.org/route/v1/driving/${a[0]},${a[1]};${b[0]},${b[1]}?overview=full&geometries=geojson`
@@ -233,9 +236,16 @@ async function calcularRuta(){
   // Ferry: solo si se eligió un puerto y un extremo está en Baja California Sur y el otro no.
   // La ruta se calcula por carretera hasta el puerto (o desde él); el ferry cruza a La Paz (Pichilingue).
   const hayBcs=enBcs(o)!==enBcs(d)
-  mostrarFerry(hayBcs)
+  const hayCozumel=enCozumel(o)!==enCozumel(d)
+  mostrarFerry(hayBcs,hayCozumel)
   const puertoSel=hayBcs?((document.getElementById("ferry_puerto")||{value:""}).value):""
   let tramoFerry=null // {antes:bool, a, b}: tramo por carretera dentro de BCS
+  let cozumelDestino=null // punto de la isla (extremo de la ruta que se acorta hasta Punta Venado)
+  let cozumelAntes=false
+  if(hayCozumel){
+   if(enCozumel(d)){cozumelDestino=d;d=PUNTA_VENADO}
+   else{cozumelDestino=o;cozumelAntes=true;o=PUNTA_VENADO}
+  }
   if(puertoSel&&PUERTOS_FERRY[puertoSel]){
    const px=PUERTOS_FERRY[puertoSel].xy
    if(enBcs(d)){tramoFerry={antes:false,a:PUERTO_LA_PAZ,b:d};d=px}
@@ -319,6 +329,13 @@ async function calcularRuta(){
    ferryInfo={puerto:puertoSel,nombre:PUERTOS_FERRY[puertoSel].nombre}
   }
 
+  if(cozumelDestino){
+   // La isla se une con una línea recta de cruce (solo dibujo; no suma km ni casetas)
+   coordsTotal=cozumelAntes?[cozumelDestino].concat(coordsTotal):coordsTotal.concat([cozumelDestino])
+   geomTotal={type:"LineString",coordinates:coordsTotal}
+   ferryInfo={puerto:"cozumel",nombre:"Punta Venado ↔ Cozumel"}
+  }
+
   const km=(distTotal/1000).toFixed(0)
   document.getElementById("km").value=km
 
@@ -333,7 +350,7 @@ async function calcularRuta(){
 
   const cruza=rutaCruzaFrontera(rutaContinente,o,d)
   const aviso=cruza?" ⚠ La ruta cruza a EE.UU. Agrega ciudades mexicanas en «Pasar por» para evitarlo.":(corregida?" (ruta ajustada para no cruzar a EE.UU.)":"")
-  setEstado("Ruta calculada: "+km+" km"+(viaAuto==="juarez"?" (ruta forzada por México, sin cruzar la frontera)":(viaAuto?" (ruta forzada por la autopista México–Querétaro)":""))+aviso+(ferryInfo?" · Con ferry "+ferryInfo.nombre+" ↔ La Paz (los km son por carretera)":(hayBcs?" · ¿Cruzar en ferry? Elígelo arriba y vuelve a calcular la ruta.":"")))
+  setEstado("Ruta calculada: "+km+" km"+(viaAuto==="juarez"?" (ruta forzada por México, sin cruzar la frontera)":(viaAuto?" (ruta forzada por la autopista México–Querétaro)":""))+aviso+(ferryInfo?" · Con ferry "+(ferryInfo.puerto==="cozumel"?ferryInfo.nombre:ferryInfo.nombre+" ↔ La Paz")+" (los km son por carretera)":(hayBcs?" · ¿Cruzar en ferry? Elígelo arriba y vuelve a calcular la ruta.":"")))
 
  }catch(e){
 
