@@ -123,3 +123,7 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 ## Caseta Cuyutlán (PR 52)
 - Faltaba la caseta Cuyutlán (Mex 200D, Armería–Manzanillo): $694 camión de 5 ejes según Traza (24-oct-2026). Coordenadas de OSM (Caseta Cuyutlan km 61+350). Base: 169 casetas.
 - Ruta Fuente Petróleos→Manzanillo (Traza): $5,614 con 13 casetas. La app puede dar menos si OSRM toma carretera libre entre Ocotlán y Colima (sin Ocotlán, La Joya, Acatlán, Sayula, San Marcos): en ese caso poner "Guadalajara" en Pasar por.
+
+## Macrolibramiento de Guadalajara (PR 53)
+- Escribir "Macrolibramiento de Guadalajara" en Pasar por ya no usa un punto suelto (la ruta se desviaba y regresaba). Se convierte en sus salidas: Santa Cecilia (CFP6+3P4, hacia Colima/Manzanillo) o El Arenal (Q7CQ+8GJ, hacia Tepic y el Pacífico), según de qué lado esté el destino; si origen y destino están a los dos lados, pone ambas en orden.
+- Las casetas propias del macrolibramiento no están en la base (falta una consulta Traza que las muestre).
