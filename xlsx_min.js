@@ -10,7 +10,7 @@ function xlsxZip(archivos){
  let pos=0
  const u16=n=>[n&255,(n>>>8)&255], u32=n=>[n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255]
  archivos.forEach(([nombre,texto])=>{
-  const nb=enc.encode(nombre),datos=enc.encode(texto),crc=xlsxCrc32(datos)
+  const nb=enc.encode(nombre),datos=typeof texto==="string"?enc.encode(texto):texto,crc=xlsxCrc32(datos)
   const loc=new Uint8Array([0x50,0x4b,3,4,...u16(20),...u16(0x0800),...u16(0),...u16(0),...u16(0x21),...u32(crc),...u32(datos.length),...u32(datos.length),...u16(nb.length),...u16(0)])
   partes.push(loc,nb,datos)
   central.push(new Uint8Array([0x50,0x4b,1,2,...u16(20),...u16(20),...u16(0x0800),...u16(0),...u16(0),...u16(0x21),...u32(crc),...u32(datos.length),...u32(datos.length),...u16(nb.length),...u16(0),...u16(0),...u16(0),...u16(0),...u32(0),...u32(pos)]),nb)

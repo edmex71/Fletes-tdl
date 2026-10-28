@@ -15,7 +15,7 @@
 
 <header class="header">
 <img src="logo.png" alt="">
-<h1>Flete TDL <small id="version" style="font-size:12px;font-weight:normal;opacity:.7">PR 49</small> <button type="button" onclick="actualizarApp(this)" style="font-size:12px;padding:2px 8px;margin-left:6px;width:auto;display:inline-block">↻ Actualizar</button></h1>
+<h1>Flete TDL <small id="version" style="font-size:12px;font-weight:normal;opacity:.7">PR 50</small> <button type="button" onclick="actualizarApp(this)" style="font-size:12px;padding:2px 8px;margin-left:6px;width:auto;display:inline-block">↻ Actualizar</button></h1>
 </header>
 
 <div class="container">
@@ -116,6 +116,31 @@
 <button class="sec" onclick="guardarCotizacion(true)">Guardar en historial</button>
 <button onclick="generarImagen()">Generar imagen WhatsApp</button>
 <button class="sec" onclick="generarImagenCostos()">Generar imagen de costos (uso interno)</button>
+<button onclick="abrirFormCotizacion()">Cotización formal en Word</button>
+<div id="cot_form" style="display:none;border:1px solid #ccc;border-radius:8px;padding:10px;margin-top:8px">
+<small style="color:#555">Origen, destino, unidad y precio se toman de la cotización actual. Llena solo lo que quieras cambiar.</small>
+<label for="cot_atencion">Dirigida a</label>
+<input id="cot_atencion" autocomplete="off" placeholder="A QUIEN CORRESPONDA">
+<label for="cot_origen">Origen (dirección completa si quieres)</label>
+<input id="cot_origen" autocomplete="off">
+<label for="cot_destino">Destino</label>
+<input id="cot_destino" autocomplete="off">
+<label for="cot_fecha">Fecha estimada de carga (opcional)</label>
+<input id="cot_fecha" autocomplete="off" placeholder="Ej: 17 de julio de 2026">
+<label for="cot_unidad">Unidad</label>
+<input id="cot_unidad" autocomplete="off">
+<label for="cot_merc">Mercancía (opcional, un renglón por partida)</label>
+<textarea id="cot_merc" rows="3" placeholder="Ej: 13 tarimas | 2,700 kg"></textarea>
+<label for="cot_incluye">Incluye</label>
+<input id="cot_incluye" autocomplete="off">
+<label for="cot_vigencia">Vigencia</label>
+<input id="cot_vigencia" autocomplete="off">
+<label for="cot_pago">Condiciones de pago</label>
+<input id="cot_pago" autocomplete="off">
+<label for="cot_ciudad">Ciudad de emisión</label>
+<input id="cot_ciudad" autocomplete="off">
+<button onclick="generarCotizacionWord()">Descargar cotización (.docx)</button>
+</div>
 </div>
 
 <h3 style="margin-top:24px">Historial de cotizaciones</h3>
@@ -132,6 +157,7 @@
 <script src="toll_detector.js"></script>
 <script src="mapa_imagen.js"></script>
 <script src="xlsx_min.js"></script>
+<script src="docx_min.js"></script>
 <script src="app.js"></script>
 
 </body>

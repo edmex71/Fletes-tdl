@@ -111,3 +111,7 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## Botón Actualizar (PR 49)
 - Botón "↻ Actualizar" junto a la etiqueta de PR: vuelve a descargar todos los archivos de la app saltándose la caché y recarga. Sirve cuando el ícono de la pantalla de inicio del iPhone se queda con una versión vieja. No borra el historial.
+
+## Cotización formal en Word (PR 50)
+- Botón "Cotización formal en Word" (bajo PRECIO A ENVIAR). Toma origen, destino, ejes y el precio seleccionado; pide solo: dirigida a, fecha de carga, mercancía (opcionales), unidad, incluye, vigencia, pago y ciudad. Incluye, vigencia, pago y ciudad se recuerdan para la próxima vez.
+- Genera un .docx real (`docx_min.js`, usa `xlsxZip`) con logo, secciones numeradas como la cotización de ejemplo, precio con letra y datos fiscales/domicilio de TDL. El precio se presenta "MÁS IVA" y "No incluye" empieza con IVA. Sin firma ni sello. Guarda la cotización en el historial.

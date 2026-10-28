@@ -554,10 +554,54 @@ async function entregarArchivo(blob,nombre,titulo){
  setTimeout(()=>URL.revokeObjectURL(a.href),5000)
 }
 
+const COT_DEF={incluye:"Flete, casetas y combustible",vigencia:"3 días hábiles",pago:"50% anticipo, 50% contra entrega",ciudad:"Naucalpan, Estado de México"}
+function cotGuardado(){try{return JSON.parse(localStorage.getItem("cot_defaults")||"{}")}catch(e){return {}}}
+function abrirFormCotizacion(){
+ const c=ultimoCalculo
+ if(!c){setEstado("Primero calcula el flete");return}
+ const g=cotGuardado(),set=(i,v)=>{document.getElementById(i).value=v}
+ set("cot_atencion",document.getElementById("cliente").value.trim())
+ set("cot_origen",c.origen);set("cot_destino",c.destino)
+ set("cot_unidad","Tráiler de "+c.ejes+" ejes")
+ set("cot_incluye",g.incluye!==undefined?g.incluye:COT_DEF.incluye)
+ set("cot_vigencia",g.vigencia||COT_DEF.vigencia)
+ set("cot_pago",g.pago!==undefined?g.pago:COT_DEF.pago)
+ set("cot_ciudad",g.ciudad||COT_DEF.ciudad)
+ const f=document.getElementById("cot_form");f.style.display="block";f.scrollIntoView({behavior:"smooth",block:"nearest"})
+}
+async function generarCotizacionWord(){
+ const c=ultimoCalculo
+ if(!c){setEstado("Primero calcula el flete");return}
+ const v=i=>document.getElementById(i).value.trim()
+ const precio=parseFloat(precioSeleccionado().replace(/[^0-9.]/g,""))||0
+ if(!precio){setEstado("No hay precio para cotizar");return}
+ try{localStorage.setItem("cot_defaults",JSON.stringify({incluye:v("cot_incluye"),vigencia:v("cot_vigencia"),pago:v("cot_pago"),ciudad:v("cot_ciudad")}))}catch(e){}
+ let logo=null
+ try{const r=await fetch("logo.png");if(r.ok) logo=new Uint8Array(await r.arrayBuffer())}catch(e){}
+ const meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"]
+ const hoy=new Date()
+ const origen=v("cot_origen")||c.origen,destino=v("cot_destino")||c.destino
+ const d={
+  ciudad:v("cot_ciudad")||COT_DEF.ciudad,
+  fechaTexto:hoy.getDate()+" de "+meses[hoy.getMonth()]+" de "+hoy.getFullYear(),
+  atencion:(v("cot_atencion")||"A QUIEN CORRESPONDA").toUpperCase(),
+  asunto:"Cotización de transporte "+c.origen+" → "+c.destino,
+  origen,destino,fechaCarga:v("cot_fecha"),unidad:v("cot_unidad")||"Tráiler de "+c.ejes+" ejes",
+  mercancia:document.getElementById("cot_merc").value.split("\n").map(x=>x.trim()).filter(Boolean),
+  precio,incluye:v("cot_incluye"),vigencia:v("cot_vigencia")||COT_DEF.vigencia,pago:v("cot_pago"),
+  noIncluye:"IVA, maniobras especiales, permisos extraordinarios, gastos por demoras no imputables al transportista",
+  redondo:!!c.redondo
+ }
+ const bytes=crearDocxCotizacion(d,logo)
+ const blob=new Blob([bytes],{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"})
+ const nombre="Cotizacion_"+(c.origen+"_"+c.destino).replace(/[^A-Za-z0-9]+/g,"_").slice(0,50)+"_"+hoy.toISOString().slice(0,10)+".docx"
+ await entregarArchivo(blob,nombre,"Cotización Transportes D' León")
+ guardarCotizacion(false)
+}
 async function actualizarApp(btn){
   if(btn){btn.disabled=true;btn.textContent="Actualizando..."}
   try{
-    const archivos=["index.html","style.css","casetas_data.js","geocoder.js","router.js","tariffs.js","toll_detector.js","mapa_imagen.js","xlsx_min.js","app.js","manifest.json"];
+    const archivos=["index.html","style.css","casetas_data.js","geocoder.js","router.js","tariffs.js","toll_detector.js","mapa_imagen.js","xlsx_min.js","docx_min.js","app.js","manifest.json"];
     await Promise.all(archivos.map(f=>fetch(f+"?v="+Date.now(),{cache:"reload"}).then(()=>fetch(f,{cache:"reload"}))));
   }catch(e){}
   location.reload();
