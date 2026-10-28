@@ -59,7 +59,7 @@ function crearDocxCotizacion(d,logoBytes){
  }
  const monto=d.precio.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})
  b+=titulo(n++ +". PRECIO Y CONDICIONES COMERCIALES")
- b+=vineta(run("Precio total del servicio: $"+monto+" MXN ("+numeroALetras(d.precio)+") MÁS IVA"))
+ b+=vineta(run("Precio total del servicio: ")+run("$"+monto+" MXN ("+numeroALetras(d.precio)+") MÁS IVA",{b:1}))
  if(d.incluye) b+=vineta(run("Incluye: "+d.incluye))
  b+=vineta(run("Vigencia de la cotización: "+d.vigencia+" a partir de la fecha de emisión"))
  if(d.pago) b+=vineta(run("Condiciones de pago: "+d.pago))

@@ -589,7 +589,7 @@ async function generarCotizacionWord(){
   origen,destino,fechaCarga:v("cot_fecha"),unidad:v("cot_unidad")||"Tráiler de "+c.ejes+" ejes",
   mercancia:document.getElementById("cot_merc").value.split("\n").map(x=>x.trim()).filter(Boolean),
   precio,incluye:v("cot_incluye"),vigencia:v("cot_vigencia")||COT_DEF.vigencia,pago:v("cot_pago"),
-  noIncluye:"IVA, maniobras especiales, permisos extraordinarios, gastos por demoras no imputables al transportista",
+  noIncluye:"Maniobras especiales, permisos extraordinarios, gastos por demoras no imputables al transportista",
   redondo:!!c.redondo
  }
  const bytes=crearDocxCotizacion(d,logo)
