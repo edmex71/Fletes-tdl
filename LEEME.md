@@ -149,3 +149,7 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 ## Libramiento de Tampico obligatorio (PR 59)
 - Los tractocamiones no tienen acceso directo a la ciudad de Tampico: llegando, saliendo o pasando deben ir por el Libramiento (caseta Libramiento Poniente, 74G4+4J = -97.89344, 22.27531, $127 5 ejes).
 - Si la ruta calculada pasa a menos de 6 km del centro de Tampico o de Cd. Madero y no pasa por la caseta del libramiento, se agrega el libramiento como punto de paso (en el orden del recorrido) y se recalcula. El estado dice "(por el Libramiento de Tampico)". No actúa en rutas que no tocan la zona (ej. Cd. Victoria–Altamira).
+
+## Libramiento Norte de San Luis Potosí (PR 60)
+- Caseta agregada (datos del usuario, casetas.com.mx vigentes desde 13-abr-2026): 2 ejes $171, 5 ejes $279, 7 o más $437. Ubicación: 72XH+WG Ejido de Moras (-100.97119, 22.29981).
+- Los precios de 3, 4, 6, 8 y 9 ejes son estimados (3 = 2 ejes; 4 ≈ +12%; 6 = 5 ejes; 8 y 9 = 7 ejes) porque la fuente no los da.
