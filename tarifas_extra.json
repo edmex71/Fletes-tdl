@@ -1539,6 +1539,66 @@
     -104.0815136,
     18.9277842
    ]
+  },
+  {
+   "n": "La Laja (Macrolibramiento)",
+   "tramo": "Ent. Zapotlanejo-Guadalajara a Chapala (La Laja)",
+   "c5": 190,
+   "t": {
+    "2": 124,
+    "3": 124,
+    "4": 124,
+    "5": 190,
+    "6": 190,
+    "7": 207,
+    "8": 207,
+    "9": 207
+   },
+   "real": true,
+   "xy": [
+    -103.10156,
+    20.57281
+   ]
+  },
+  {
+   "n": "Chapala (Macrolibramiento)",
+   "tramo": "Chapala-Santa Cecilia",
+   "c5": 236,
+   "t": {
+    "2": 154,
+    "3": 154,
+    "4": 154,
+    "5": 236,
+    "6": 236,
+    "7": 265,
+    "8": 265,
+    "9": 265
+   },
+   "real": true,
+   "xy": [
+    -103.30219,
+    20.39019
+   ]
+  },
+  {
+   "n": "Santa Cecilia (Macrolibramiento)",
+   "tramo": "Santa Cecilia-Magdalena",
+   "c5": 586,
+   "t": {
+    "2": 389,
+    "3": 389,
+    "4": 389,
+    "5": 586,
+    "6": 586,
+    "7": 648,
+    "8": 648,
+    "9": 648
+   },
+   "real": true,
+   "xy": [
+    -103.54581,
+    20.44256
+   ]
   }
  ]
 }

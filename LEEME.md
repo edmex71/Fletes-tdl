@@ -127,3 +127,11 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 ## Macrolibramiento de Guadalajara (PR 53)
 - Escribir "Macrolibramiento de Guadalajara" en Pasar por ya no usa un punto suelto (la ruta se desviaba y regresaba). Se convierte en sus salidas: Santa Cecilia (CFP6+3P4, hacia Colima/Manzanillo) o El Arenal (Q7CQ+8GJ, hacia Tepic y el Pacífico), según de qué lado esté el destino; si origen y destino están a los dos lados, pone ambas en orden.
 - Las casetas propias del macrolibramiento no están en la base (falta una consulta Traza que las muestre).
+
+## Casetas del Macrolibramiento (PR 54)
+- Tarifas de autopistaguadalajaratepic.com.mx (con IVA, consulta 28-oct-2026; 2-4 / 5-6 / 7-9 ejes del PDF). Coordenadas: Plus Codes que dio el usuario.
+  - La Laja (HVFX+49 La Mezquitera): Ent. Zapotlanejo–Guadalajara a Chapala, $190 (5 ejes).
+  - Chapala (9MRX+34 Jocotepec): Chapala–Santa Cecilia, $236.
+  - Santa Cecilia (CFV3+2M): Santa Cecilia–Magdalena, $586.
+- Suposición: se asignó cada tarifa al punto según el nombre del tramo; pendiente confirmar con una consulta Traza.
+- No agregadas: "Remota La Laja" ($21, México–Guadalajara a Zapotlanejo, sin ubicación) y el primer bloque del PDF sin nombre ($82). Los demás tramos de la autopista a Tepic ya estaban (Arenal $413).
