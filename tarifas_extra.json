@@ -1655,6 +1655,60 @@
     -100.97119,
     22.29981
    ]
+  },
+  {
+   "n": "Zirahuén",
+   "tramo": "Las Trojes-Ent. Zirahuén",
+   "c5": 170,
+   "xy": [
+    -101.65935,
+    19.50555
+   ]
+  },
+  {
+   "n": "Zurumucapío",
+   "tramo": "Ent. Zirahuén-Ent. Zirimícuaro",
+   "c5": 281,
+   "xy": [
+    -101.88224,
+    19.44127
+   ]
+  },
+  {
+   "n": "Taretán",
+   "tramo": "Ent. Zirimícuaro-Ent. Los Cajones",
+   "c5": 246,
+   "xy": [
+    -101.91799,
+    19.35543
+   ]
+  },
+  {
+   "n": "Santa Casilda",
+   "tramo": "Ent. Los Cajones-Ent. Nueva Italia",
+   "c5": 246,
+   "xy": [
+    -101.97608,
+    19.15641
+   ]
+  },
+  {
+   "n": "Las Cañas",
+   "tramo": "Ent. Nueva Italia-Ent. Las Cañas",
+   "c5": 464,
+   "xy": [
+    -101.97019,
+    18.55431
+   ]
+  },
+  {
+   "n": "Feliciano",
+   "tramo": "Ent. Las Cañas-El Naranjito",
+   "c5": 695,
+   "xy": [
+    -101.96173,
+    18.00643
+   ]
   }
  ]
 }
