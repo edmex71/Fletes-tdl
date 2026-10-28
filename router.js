@@ -153,6 +153,16 @@ function bajaYJuarez(o,d){
  const juarez=p=>p[0]>-107.2&&p[0]<-106&&p[1]>31.2&&p[1]<32.2
  return (oeste(o)&&juarez(d))?1:((oeste(d)&&juarez(o))?-1:0)
 }
+// Macrolibramiento de Guadalajara: sus dos salidas. Santa Cecilia (CFP6+3P4) = salida hacia Colima/Manzanillo;
+// El Arenal (Q7CQ+8GJ) = fin del macro hacia Tepic y el Pacífico. Se elige la salida según de qué lado están origen y destino.
+const MACRO_SANTA_CECILIA=[-103.53817,20.43514], MACRO_ARENAL=[-103.71123,20.77084]
+function viasMacrolibramiento(o,d){
+ const dist=(a,b)=>Math.pow(a[0]-b[0],2)+Math.pow(a[1]-b[1],2)
+ const lado=p=>p[0]>-103.1?null:(dist(p,MACRO_ARENAL)<dist(p,MACRO_SANTA_CECILIA)?MACRO_ARENAL:MACRO_SANTA_CECILIA)
+ const r=[]
+ for(const p of [o,d]){const l=lado(p);if(l&&r[r.length-1]!==l) r.push(l)}
+ return r.length?r:[MACRO_SANTA_CECILIA]
+}
 function viasBajaJuarez(){
  const pts=[puntoCaseta("Mexicali"),puntoCaseta("San Luis Río Colorado"),puntoCaseta("Santa Ana"),puntoCaseta("Magdalena"),
   [-110.30,31.00],[-109.55,31.32],[-108.19,30.89],[-107.99,31.10]]
@@ -256,6 +266,7 @@ async function calcularRuta(){
   const vias=[]
   const viaTxt=(document.getElementById("via")||{value:""}).value
   for(const v of viaTxt.split(";").map(x=>x.trim()).filter(Boolean)){
+   if(/macro\s*-?\s*libramiento/i.test(v)&&!/arenal|cecilia/i.test(v)){vias.push(...viasMacrolibramiento(o,d));continue}
    const pc=puntoCaseta(v)
    if(pc){vias.push(pc);continue}
    if(requiereBusqueda(v)) await esperar(1100)
