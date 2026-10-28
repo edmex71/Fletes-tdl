@@ -162,3 +162,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 - Agregadas con tarifa de la Traza (5 ejes, 28-oct-2026) y ubicación de OpenStreetMap: Zirahuén $170, Zurumucapío $281, Taretán $246, Santa Casilda $246, Las Cañas $464, Feliciano $695.
 - Las Cañas $464 (H23H+PW, -101.97019, 18.55431).
 - Si la ruta del servicio va por la carretera libre (Mex 14/37) en vez de la autopista 37D, no pasa por estas casetas.
+
+## Santa Casilda: segunda ubicación (PR 63)
+- OpenStreetMap tiene dos sitios para la caseta (-101.97608, 19.15641) y (-101.97812, 19.15295, "Nro 175"), a unos 400 m. La ruta pasaba por el segundo y no la detectaba; ahora están los dos.
