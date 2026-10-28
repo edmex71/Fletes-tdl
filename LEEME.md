@@ -114,4 +114,4 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## Cotización formal en Word (PR 50)
 - Botón "Cotización formal en Word" (bajo PRECIO A ENVIAR). Toma origen, destino, ejes y el precio seleccionado; pide solo: dirigida a, fecha de carga, mercancía (opcionales), unidad, incluye, vigencia, pago y ciudad. Incluye, vigencia, pago y ciudad se recuerdan para la próxima vez.
-- Genera un .docx real (`docx_min.js`, usa `xlsxZip`) con logo, secciones numeradas como la cotización de ejemplo, precio con letra y datos fiscales/domicilio de TDL. Sin firma ni sello. Guarda la cotización en el historial.
+- Genera un .docx real (`docx_min.js`, usa `xlsxZip`) con logo, secciones numeradas como la cotización de ejemplo, precio con letra y datos fiscales/domicilio de TDL. El precio se presenta "MÁS IVA" y "No incluye" empieza con IVA. Sin firma ni sello. Guarda la cotización en el historial.
