@@ -93,8 +93,8 @@ const FERRY_TARIFAS={
 // Menos de 5 ejes: Thorton. 5 y 6 ejes: tractor + 1 caja. 7 o más: tractor + 2 cajas.
 // Transcaribe (Punta Venado ↔ Cozumel): tarifa por unidad completa, viaje sencillo (el redondo es el doble).
 // Hasta 4 ejes: Torton. 5 y 6 ejes: tráiler según la caja. 7 o más: Full extra largo.
-// 53 pies no está en la tabla: se cobra como 48 pies + 2 m adicionales ($800 por metro).
-const TRANSCARIBE={torton:7500,p40:14150,p45:16030,p48:21000,metro:800,fullExtra:29000}
+// 53 pies no está en la tabla: se cobra como Tráiler extralargo (nivel 20, hasta 25 m).
+const TRANSCARIBE={torton:7500,p40:14150,p45:16030,p48:21000,extralargo:26010,fullExtra:29000}
 function costoFerryCozumel(ejes,redondo){
  const t=TRANSCARIBE
  const caja=(document.getElementById("cozumel_caja")||{value:"p45"}).value
@@ -103,7 +103,7 @@ function costoFerryCozumel(ejes,redondo){
  let base,partes
  if(ejes<=4){base=t.torton;partes="Torton "+pesos(base)}
  else if(ejes<=6){
-  if(caja==="p53"){base=t.p48+2*t.metro;partes="tráiler de 53 pies: 48 pies "+pesos(t.p48)+" + 2 m × "+pesos(t.metro)}
+  if(caja==="p53"){base=t.extralargo;partes="tráiler extralargo (caja de 53 pies) "+pesos(base)}
   else{base=t[caja]||t.p45;partes="tráiler con caja de "+caja.slice(1)+" pies "+pesos(base)}
  }else{base=t.fullExtra;partes="Full extra largo "+pesos(base)}
  return {monto:base*veces,base,veces,partes,nombre:"Cozumel",
