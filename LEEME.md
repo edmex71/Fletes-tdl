@@ -103,3 +103,8 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 - Si origen o destino está en la isla de Cozumel, la ruta llega por carretera a Punta Venado (HVGG+37) y el ferry Transcaribe se suma al costo; no es opcional (a la isla solo se llega en ferry). La isla se dibuja con una línea recta de cruce que no suma km.
 - Tarifas Transcaribe (unidad completa, viaje sencillo; redondo = ×2, que es el valor por defecto): hasta 4 ejes Torton $7,500; 5–6 ejes tráiler con caja de 40 pies $14,150, 45 pies $16,030, 48 pies $21,000, 53 pies = tráiler extralargo $26,010 (la caja de 53 no está en su tabla); 7 o más ejes Full extra largo $29,000.
 - «Por km» con ferry suma el ferry + 30% del ferry, igual que en La Paz.
+
+## Historial a Excel (PR 48)
+- Botón "Descargar historial en Excel" arriba del historial. Genera un .xlsx real (sin librerías, `xlsx_min.js`) con una fila por cotización guardada.
+- Columnas: Fecha, Cliente / nota, Origen, Destino, Pasar por, Ida y vuelta, Km (un sentido), Km totales, Ejes, Rendimiento, Diésel, Costo adicional, Ferry, Costo total, Precio enviado (tipo), Precio enviado.
+- En el celular abre la hoja de compartir (o descarga el archivo). Nombre: historial_cotizaciones_AAAA-MM-DD.xlsx.
