@@ -69,6 +69,8 @@ function recuperarOLC(codigo,ref){
 async function geocode(lugar){
  const c=leerCoordenadas(lugar)
  if(c) return c
+ // "Veracruz" a secas devolvía un punto del estado (cerca de Xalapa): se toma la ciudad y puerto de Veracruz
+ if(/^(puerto\s+de\s+)?veracruz(,?\s*(ver\.?|veracruz))?$/i.test(lugar.trim())) return [-96.1342,19.1738]
  const pc=leerPlusCode(lugar)
  if(pc){
   if(pc.completo) return decodificarOLC(pc.codigo)
