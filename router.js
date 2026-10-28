@@ -265,8 +265,22 @@ async function calcularRuta(){
   // Puntos intermedios para forzar el camino. Se pueden escribir ciudades o nombres de casetas, separados por ;
   const vias=[]
   const viaTxt=(document.getElementById("via")||{value:""}).value
+  // "Macrolibramiento de Guadalajara" puede venir pegado a otros lugares con coma ("Salamanca, Macrolibramiento guadalajara"):
+  // se separa en su propio paso para no perder los demás.
+  const RE_MACRO=/macro\s*-?\s*libramiento(\s+de)?(\s+guadalajara)?/i
+  const pasos=[]
   for(const v of viaTxt.split(";").map(x=>x.trim()).filter(Boolean)){
-   if(/macro\s*-?\s*libramiento/i.test(v)&&!/arenal|cecilia/i.test(v)){vias.push(...viasMacrolibramiento(o,d));continue}
+   const m=RE_MACRO.exec(v)
+   if(m&&!/arenal|cecilia/i.test(v)){
+    const limpia=t=>t.replace(/^[\s,]+|[\s,]+$/g,"")
+    const antes=limpia(v.slice(0,m.index)),despues=limpia(v.slice(m.index+m[0].length))
+    if(antes) pasos.push(antes)
+    pasos.push(null)
+    if(despues) pasos.push(despues)
+   }else pasos.push(v)
+  }
+  for(const v of pasos){
+   if(v===null){vias.push(...viasMacrolibramiento(o,d));continue}
    const pc=puntoCaseta(v)
    if(pc){vias.push(pc);continue}
    if(requiereBusqueda(v)) await esperar(1100)

@@ -141,3 +141,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## Entrada oriente del macrolibramiento (PR 56)
 - Desde el oriente (CDMX, La Barca, Ocotlán) el macro ahora se toma por su entrada La Laja (HVFX+49 La Mezquitera, -103.10156, 20.57281): "Macrolibramiento de Guadalajara" en Pasar por agrega esa entrada y después la salida (Santa Cecilia/El Arenal). Así cobra La Laja ($190, 5 ejes). Al regreso va al revés.
+
+## Pasar por: macrolibramiento junto a otros lugares (PR 57)
+- "Salamanca, Macrolibramiento guadalajara" (con coma) ya no ignora Salamanca: el macro se separa de lo escrito antes o después y cada lugar es su propio paso, en el orden escrito. También se puede separar con punto y coma.
