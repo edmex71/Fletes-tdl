@@ -163,6 +163,17 @@ function viasMacrolibramiento(o,d){
  for(const p of [o,d]){const l=lado(p);if(l&&r[r.length-1]!==l) r.push(l)}
  return r.length>1||r[0]!==MACRO_ENTRADA?r:[MACRO_ENTRADA,MACRO_SANTA_CECILIA]
 }
+// Tampico: los tractocamiones no tienen acceso directo a la ciudad; llegando, saliendo o pasando por la zona
+// van por el Libramiento (caseta Libramiento Poniente, 74G4+4J).
+const LIBRAMIENTO_TAMPICO=[-97.89344,22.27531], TAMPICO_CENTRO=[-97.86,22.23], MADERO_CENTRO=[-97.835,22.27]
+function ajustarLibramientoTampico(coords){
+ let cerca=false,pasa=false
+ for(const c of coords){
+  if(!cerca&&(kmEntre(c,TAMPICO_CENTRO)<6||kmEntre(c,MADERO_CENTRO)<6)) cerca=true
+  if(!pasa&&kmEntre(c,LIBRAMIENTO_TAMPICO)<0.4) pasa=true
+ }
+ return cerca&&!pasa
+}
 function viasBajaJuarez(){
  const pts=[puntoCaseta("Mexicali"),puntoCaseta("San Luis Río Colorado"),puntoCaseta("Santa Ana"),puntoCaseta("Magdalena"),
   [-110.30,31.00],[-109.55,31.32],[-108.19,30.89],[-107.99,31.10]]
@@ -307,6 +318,7 @@ async function calcularRuta(){
   // Si el viaje es dentro de México y el trazo se mete a EE.UU., se agregan ciudades mexicanas de la frontera
   // como puntos de paso y se recalcula (hasta 3 intentos); se conserva la ruta con menos puntos en EE.UU.
   let corregida=false
+  let viasUsadas=vias.slice()
   if(!enEstadosUnidos(o)&&!enEstadosUnidos(d)){
    let viasAct=vias.slice(), mejorN=puntosEnEE(route.geometry.coordinates)
    for(let it=0;it<3&&mejorN>0;it++){
@@ -326,8 +338,21 @@ async function calcularRuta(){
     let nr
     try{nr=await pedirRuta(nv)}catch(e){break}
     const n=puntosEnEE(nr.geometry.coordinates)
-    if(n<mejorN){route=nr;mejorN=n;viasAct=nv;corregida=true}else break
+    if(n<mejorN){route=nr;mejorN=n;viasAct=nv;viasUsadas=nv;corregida=true}else break
    }
+  }
+
+  // Tampico: se agrega el libramiento como punto de paso (en su lugar según el orden del recorrido) y se recalcula
+  let viaTampico=false
+  if(ajustarLibramientoTampico(route.geometry.coordinates)){
+   const cs=route.geometry.coordinates
+   const todos=viasUsadas.map(p=>({p,i:indiceCercano(cs,p)}))
+   todos.push({p:LIBRAMIENTO_TAMPICO,i:indiceCercano(cs,LIBRAMIENTO_TAMPICO)})
+   todos.sort((x,y)=>x.i-y.i)
+   try{
+    const nr=await pedirRuta(todos.map(t=>t.p))
+    if(!ajustarLibramientoTampico(nr.geometry.coordinates)||nr.geometry.coordinates.some(c=>kmEntre(c,LIBRAMIENTO_TAMPICO)<0.4)){route=nr;viaTampico=true}
+   }catch(e){}
   }
 
   const rutaContinente=route.geometry.coordinates
@@ -361,7 +386,7 @@ async function calcularRuta(){
 
   const cruza=rutaCruzaFrontera(rutaContinente,o,d)
   const aviso=cruza?" ⚠ La ruta cruza a EE.UU. Agrega ciudades mexicanas en «Pasar por» para evitarlo.":(corregida?" (ruta ajustada para no cruzar a EE.UU.)":"")
-  setEstado("Ruta calculada: "+km+" km"+(viaAuto==="juarez"?" (ruta forzada por México, sin cruzar la frontera)":(viaAuto?" (ruta forzada por la autopista México–Querétaro)":""))+aviso+(ferryInfo?" · Con ferry "+(ferryInfo.puerto==="cozumel"?ferryInfo.nombre:ferryInfo.nombre+" ↔ La Paz")+" (los km son por carretera)":(hayBcs?" · ¿Cruzar en ferry? Elígelo arriba y vuelve a calcular la ruta.":"")))
+  setEstado("Ruta calculada: "+km+" km"+(viaTampico?" (por el Libramiento de Tampico)":"")+(viaAuto==="juarez"?" (ruta forzada por México, sin cruzar la frontera)":(viaAuto?" (ruta forzada por la autopista México–Querétaro)":""))+aviso+(ferryInfo?" · Con ferry "+(ferryInfo.puerto==="cozumel"?ferryInfo.nombre:ferryInfo.nombre+" ↔ La Paz")+" (los km son por carretera)":(hayBcs?" · ¿Cruzar en ferry? Elígelo arriba y vuelve a calcular la ruta.":"")))
 
  }catch(e){
 

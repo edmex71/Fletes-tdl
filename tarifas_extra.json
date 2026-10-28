@@ -1599,6 +1599,42 @@
     -103.54581,
     20.44256
    ]
+  },
+  {
+   "n": "Ecatepec",
+   "tramo": "Ent. San Cristóbal-Ent. Tepexpan",
+   "c5": 543,
+   "xy": [
+    -99.02694,
+    19.61169
+   ]
+  },
+  {
+   "n": "Asunción",
+   "tramo": "Libramiento de Tulancingo (Ent. Tulancingo-Ent. Tejocotal)",
+   "c5": 81,
+   "xy": [
+    -98.28714,
+    20.14681
+   ]
+  },
+  {
+   "n": "Nuevo Necaxa",
+   "tramo": "Ent. Tejocotal-Ent. Nuevo Necaxa",
+   "c5": 65,
+   "xy": [
+    -98.12256,
+    20.13606
+   ]
+  },
+  {
+   "n": "Miahuapan",
+   "tramo": "Ent. Ávila Camacho-Ent. Tihuatlán",
+   "c5": 1254,
+   "xy": [
+    -97.61456,
+    20.61119
+   ]
   }
  ]
 }

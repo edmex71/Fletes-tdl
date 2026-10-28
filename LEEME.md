@@ -141,3 +141,11 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## Entrada oriente del macrolibramiento (PR 56)
 - Desde el oriente (CDMX, La Barca, Ocotlán) el macro ahora se toma por su entrada La Laja (HVFX+49 La Mezquitera, -103.10156, 20.57281): "Macrolibramiento de Guadalajara" en Pasar por agrega esa entrada y después la salida (Santa Cecilia/El Arenal). Así cobra La Laja ($190, 5 ejes). Al regreso va al revés.
+
+## Casetas México–Tuxpan / Tulancingo (PR 58)
+- Agregadas (Traza 28-oct-2026, 5 ejes; ubicaciones por Plus Codes/coordenadas del usuario): Ecatepec $543 (JX6F+M6), Asunción $81 (20.14681, -98.28714, Libramiento de Tulancingo), Nuevo Necaxa $65 (4VPG+CX El Tejocotal), Miahuapan $1,254 (J96P+F5 Tihuatlán). Base: 176 casetas.
+- Suposición: 4VPG+CX es Nuevo Necaxa y J96P+F5 es Miahuapan (por el orden a lo largo de la ruta).
+- Libramiento de Tampico ($127) se cobra solo si la ruta pasa por él (poner "Libramiento Tampico" en Pasar por).
+## Libramiento de Tampico obligatorio (PR 59)
+- Los tractocamiones no tienen acceso directo a la ciudad de Tampico: llegando, saliendo o pasando deben ir por el Libramiento (caseta Libramiento Poniente, 74G4+4J = -97.89344, 22.27531, $127 5 ejes).
+- Si la ruta calculada pasa a menos de 6 km del centro de Tampico o de Cd. Madero y no pasa por la caseta del libramiento, se agrega el libramiento como punto de paso (en el orden del recorrido) y se recalcula. El estado dice "(por el Libramiento de Tampico)". No actúa en rutas que no tocan la zona (ej. Cd. Victoria–Altamira).
