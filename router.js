@@ -35,6 +35,13 @@ function guadalajaraDesdeCdmx(o,d){
  return sale&&d[0]>-104&&d[0]<-102.6&&d[1]>20.2&&d[1]<21.1
 }
 
+// ¿Sale de CDMX y va a Veracruz puerto / Boca del Río? (a menos que el usuario ponga sus propios puntos, va por la 150D:
+// Puebla, Esperanza, Córdoba y Cuitláhuac)
+function veracruzDesdeCdmx(o,d){
+ const sale=o[0]>-99.45&&o[0]<-98.9&&o[1]>19.15&&o[1]<19.75
+ return sale&&kmEntre(d,[-96.1342,19.1738])<25
+}
+
 // ¿Sale de CDMX y va al norte por la 57D? (Bajío, SLP, Monterrey, Reynosa, Torreón, Chihuahua, Juárez...)
 function norteDesdeCdmx(o,d){
  const sale=o[0]>-99.45&&o[0]<-98.9&&o[1]>19.15&&o[1]<19.75
@@ -297,6 +304,9 @@ async function calcularRuta(){
    if(v){vias.push(...(bajaYNoreste(o,d)>0?v:v.slice().reverse()));viaAuto="juarez"}
   }else if(!vias.length && tijuanaBajaSur(o,d)){
    const a=puntoCaseta("Playas de Tijuana")
+   if(a) vias.push(a)
+  }else if(!vias.length && veracruzDesdeCdmx(o,d)){
+   const a=puntoCaseta("Cuitláhuac")
    if(a) vias.push(a)
   }else if(!vias.length && guadalajaraDesdeCdmx(o,d)){
    // CDMX-Guadalajara: 57D hasta Apaseo el Grande (por libre), Salamanca, La Piedad y La Barca

@@ -153,3 +153,7 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 ## Libramiento Norte de San Luis Potosí (PR 60)
 - Caseta agregada (datos del usuario, casetas.com.mx vigentes desde 13-abr-2026): 2 ejes $171, 5 ejes $279, 7 o más $437. Ubicación: 72XH+WG Ejido de Moras (-100.97119, 22.29981).
 - Los precios de 3, 4, 6, 8 y 9 ejes son estimados (3 = 2 ejes; 4 ≈ +12%; 6 = 5 ejes; 8 y 9 = 7 ejes) porque la fuente no los da.
+
+## Veracruz puerto (PR 61)
+- Escribir "Veracruz" (o "Puerto de Veracruz", "Veracruz, Ver.") ahora busca la ciudad y puerto de Veracruz; antes daba un punto del estado cerca de Xalapa y la ruta iba por Tlaxcala–Xalapa.
+- CDMX → Veracruz/Boca del Río (a menos de 25 km de la ciudad) va por la 150D (Puebla, Esperanza, Córdoba, Cuitláhuac) pasando por Cuitláhuac. Si el usuario escribe sus propios puntos en Pasar por (por ejemplo Tlaxcala), la regla no actúa.
