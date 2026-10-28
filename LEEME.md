@@ -159,6 +159,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 - CDMX → Veracruz/Boca del Río (a menos de 25 km de la ciudad) va por la 150D (Puebla, Esperanza, Córdoba, Cuitláhuac) pasando por Cuitláhuac. Si el usuario escribe sus propios puntos en Pasar por (por ejemplo Tlaxcala), la regla no actúa.
 
 ## Autopista Siglo XXI (Morelia–Lázaro Cárdenas) (PR 62)
-- Agregadas con tarifa de la Traza (5 ejes, 28-oct-2026) y ubicación de OpenStreetMap: Zirahuén $170, Zurumucapío $281, Taretán $246, Santa Casilda $246, Feliciano $695.
-- Las Cañas $464 tiene tarifa pero aún no ubicación (no se detecta hasta tener su Plus Code).
+- Agregadas con tarifa de la Traza (5 ejes, 28-oct-2026) y ubicación de OpenStreetMap: Zirahuén $170, Zurumucapío $281, Taretán $246, Santa Casilda $246, Las Cañas $464, Feliciano $695.
+- Las Cañas $464 (H23H+PW, -101.97019, 18.55431).
 - Si la ruta del servicio va por la carretera libre (Mex 14/37) en vez de la autopista 37D, no pasa por estas casetas.

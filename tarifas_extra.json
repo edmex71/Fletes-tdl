@@ -1695,7 +1695,11 @@
   {
    "n": "Las Cañas",
    "tramo": "Ent. Nueva Italia-Ent. Las Cañas",
-   "c5": 464
+   "c5": 464,
+   "xy": [
+    -101.97019,
+    18.55431
+   ]
   },
   {
    "n": "Feliciano",
