@@ -91,7 +91,26 @@ const FERRY_TARIFAS={
  mazatlan:{tractor:15600,thorton:22300,caja137:29400,caja169:33100}
 }
 // Menos de 5 ejes: Thorton. 5 y 6 ejes: tractor + 1 caja. 7 o más: tractor + 2 cajas.
+// Transcaribe (Punta Venado ↔ Cozumel): tarifa por unidad completa, viaje sencillo (el redondo es el doble).
+// Hasta 4 ejes: Torton. 5 y 6 ejes: tráiler según la caja. 7 o más: Full extra largo.
+// 53 pies no está en la tabla: se cobra como Tráiler extralargo (nivel 20, hasta 25 m).
+const TRANSCARIBE={torton:7500,p40:14150,p45:16030,p48:21000,extralargo:26010,fullExtra:29000}
+function costoFerryCozumel(ejes,redondo){
+ const t=TRANSCARIBE
+ const caja=(document.getElementById("cozumel_caja")||{value:"p45"}).value
+ const ivSel=(document.getElementById("ferry_iv")||{checked:true}).checked
+ const veces=(ivSel||redondo)?2:1
+ let base,partes
+ if(ejes<=4){base=t.torton;partes="Torton "+pesos(base)}
+ else if(ejes<=6){
+  if(caja==="p53"){base=t.extralargo;partes="tráiler extralargo (caja de 53 pies) "+pesos(base)}
+  else{base=t[caja]||t.p45;partes="tráiler con caja de "+caja.slice(1)+" pies "+pesos(base)}
+ }else{base=t.fullExtra;partes="Full extra largo "+pesos(base)}
+ return {monto:base*veces,base,veces,partes,nombre:"Cozumel",
+  texto:"Ferry Punta Venado ↔ Cozumel"+(veces===2?" (ida y vuelta)":" (sencillo)")}
+}
 function costoFerry(info,ejes,redondo){
+ if(info.puerto==="cozumel") return costoFerryCozumel(ejes,redondo)
  const t=FERRY_TARIFAS[info.puerto]; if(!t) return null
  const cajaSel=(document.getElementById("ferry_caja")||{value:"caja137"}).value
  const caja=t[cajaSel]||t.caja137
@@ -440,10 +459,10 @@ function guardarCotizacion(manual){
   diesel:parseFloat(document.getElementById("diesel").value)||0,
   adicional:c.adicional,costo:Math.round(c.costoTotal),
   tipo:sel,precio:precioSeleccionado(),
-  ferry:ferryInfo?ferryInfo.puerto:"",ferryCaja:(document.getElementById("ferry_caja")||{}).value||"",ferryIv:(document.getElementById("ferry_iv")||{checked:true}).checked
+  ferry:ferryInfo?ferryInfo.puerto:"",ferryCaja:(document.getElementById("ferry_caja")||{}).value||"",cozumelCaja:(document.getElementById("cozumel_caja")||{}).value||"",ferryIv:(document.getElementById("ferry_iv")||{checked:true}).checked
  }
  const h=leerHistorial()
- const igual=h.findIndex(x=>x.origen===reg.origen&&x.destino===reg.destino&&x.via===reg.via&&x.km===reg.km&&x.redondo===reg.redondo&&x.ejes===reg.ejes&&x.tipo===reg.tipo&&x.precio===reg.precio&&x.cliente===reg.cliente&&x.diesel===reg.diesel&&x.adicional===reg.adicional&&(x.ferry||"")===reg.ferry&&(x.ferryCaja||"")===reg.ferryCaja&&x.ferryIv===reg.ferryIv)
+ const igual=h.findIndex(x=>x.origen===reg.origen&&x.destino===reg.destino&&x.via===reg.via&&x.km===reg.km&&x.redondo===reg.redondo&&x.ejes===reg.ejes&&x.tipo===reg.tipo&&x.precio===reg.precio&&x.cliente===reg.cliente&&x.diesel===reg.diesel&&x.adicional===reg.adicional&&(x.ferry||"")===reg.ferry&&(x.ferryCaja||"")===reg.ferryCaja&&(x.cozumelCaja||"")===reg.cozumelCaja&&x.ferryIv===reg.ferryIv)
  if(igual>=0){
   if(manual) setEstado("Esta cotización ya está en el historial")
   return
@@ -463,7 +482,7 @@ function mostrarHistorial(){
   const f=new Date(x.fecha)
   const fecha=isNaN(f)?"":f.toLocaleDateString("es-MX",{day:"2-digit",month:"short",year:"numeric"})
   return `<div style="background:white;border-radius:8px;padding:10px;margin:8px 0;line-height:1.4">
-   <b>${escapar(x.origen)} ${x.redondo?"↔":"→"} ${escapar(x.destino)}</b>${x.redondo?" <small>(ida y vuelta)</small>":""}${x.ferry?" <small>(ferry "+(x.ferry==="mazatlan"?"Mazatlán":"Topolobampo")+")</small>":""}<br>
+   <b>${escapar(x.origen)} ${x.redondo?"↔":"→"} ${escapar(x.destino)}</b>${x.redondo?" <small>(ida y vuelta)</small>":""}${x.ferry?" <small>(ferry "+(x.ferry==="mazatlan"?"Mazatlán":(x.ferry==="cozumel"?"Cozumel":"Topolobampo"))+")</small>":""}<br>
    <small>${fecha}${x.cliente?" · "+escapar(x.cliente):""} · ${escapar(x.km||"")} km${x.redondo?" × 2":""} · ${x.ejes} ejes</small><br>
    Enviado (${nombres[x.tipo]||""}): <b>${escapar(x.precio||"")}</b> <small>· costo ${pesos(x.costo||0)}</small>
    <div style="display:flex;gap:8px"><button style="margin:6px 0 0" onclick="abrirCotizacion(${x.id})">Abrir</button><button class="sec" style="margin:6px 0 0" onclick="borrarCotizacion(${x.id})">Borrar</button></div>
@@ -479,7 +498,7 @@ async function abrirCotizacion(id){
  set("rend",x.rend);set("diesel",x.diesel||29);set("adicional",x.adicional||0);set("cliente",x.cliente||"")
  document.getElementById("redondo").checked=!!x.redondo
  set("precio_envio",x.tipo||"medio")
- set("ferry_puerto",x.ferry||"");set("ferry_caja",x.ferryCaja||"caja137");document.getElementById("ferry_iv").checked=x.ferryIv!==false
+ set("ferry_puerto",(x.ferry==="topolobampo"||x.ferry==="mazatlan")?x.ferry:"");set("ferry_caja",x.ferryCaja||"caja137");set("cozumel_caja",x.cozumelCaja||"p45");document.getElementById("ferry_iv").checked=x.ferryIv!==false
  window.scrollTo({top:0,behavior:"smooth"})
  await calcularRuta()
  if(document.getElementById("km").value) calcularFlete()

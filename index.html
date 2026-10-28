@@ -15,7 +15,7 @@
 
 <header class="header">
 <img src="logo.png" alt="">
-<h1>Flete TDL <small id="version" style="font-size:12px;font-weight:normal;opacity:.7">PR 46</small></h1>
+<h1>Flete TDL <small id="version" style="font-size:12px;font-weight:normal;opacity:.7">PR 47</small></h1>
 </header>
 
 <div class="container">
@@ -42,6 +42,21 @@
 <option value="caja137">40 o 45 pies (hasta 13.7 m)</option>
 <option value="caja169">48 o 53 pies (13.8 a 16.9 m)</option>
 </select>
+</div>
+
+<div id="cozumel_box" style="display:none">
+<b>Cozumel: cruce en ferry Transcaribe desde Punta Venado</b><br>
+<small style="color:#555">La ruta llega por carretera a Punta Venado; el ferry se suma al costo.</small>
+<label for="cozumel_caja">Caja del tráiler (pies)</label>
+<select id="cozumel_caja" onchange="if(ultimoCalculo)calcularFlete()">
+<option value="p40">40 pies</option>
+<option value="p45" selected>45 pies</option>
+<option value="p48">48 pies</option>
+<option value="p53">53 pies</option>
+</select>
+</div>
+
+<div id="ferry_comun" style="display:none">
 <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="ferry_iv" checked style="width:auto;margin:0" onchange="if(ultimoCalculo)calcularFlete()">Ferry ida y vuelta</label>
 </div>
 

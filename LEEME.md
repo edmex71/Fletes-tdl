@@ -98,3 +98,8 @@ Si el trazo normal se mete a EE.UU. (ej. Monterrey → Los Cabos), la reparació
 
 ## Precio Por km con ferry (PR 46)
 Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carretera) + costo del ferry + 30% del costo del ferry (el ferry ya incluye ida y vuelta si está marcado). Bajo, Medio y Alto no cambian (ya incluyen el ferry en el costo total).
+
+## Cozumel (PR 47)
+- Si origen o destino está en la isla de Cozumel, la ruta llega por carretera a Punta Venado (HVGG+37) y el ferry Transcaribe se suma al costo; no es opcional (a la isla solo se llega en ferry). La isla se dibuja con una línea recta de cruce que no suma km.
+- Tarifas Transcaribe (unidad completa, viaje sencillo; redondo = ×2, que es el valor por defecto): hasta 4 ejes Torton $7,500; 5–6 ejes tráiler con caja de 40 pies $14,150, 45 pies $16,030, 48 pies $21,000, 53 pies = tráiler extralargo $26,010 (la caja de 53 no está en su tabla); 7 o más ejes Full extra largo $29,000.
+- «Por km» con ferry suma el ferry + 30% del ferry, igual que en La Paz.
