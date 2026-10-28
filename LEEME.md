@@ -135,3 +135,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
   - Santa Cecilia (CFV3+2M): Santa Cecilia–Magdalena, $586.
 - Suposición: se asignó cada tarifa al punto según el nombre del tramo; pendiente confirmar con una consulta Traza.
 - No agregadas: "Remota La Laja" ($21, México–Guadalajara a Zapotlanejo, sin ubicación) y el primer bloque del PDF sin nombre ($82). Los demás tramos de la autopista a Tepic ya estaban (Arenal $413).
+
+## Salida del macrolibramiento hacia Colima (PR 55)
+- El punto de paso hacia Colima/Manzanillo ahora es la incorporación directa 75GRCC8V+95 (-103.55706, 20.41594), unos 2.7 km más adelante que CFP6+3P4. Con el punto anterior la ruta se subía a la carretera Jiquilpan–Guadalajara (10D) para salir del macro.
