@@ -155,13 +155,13 @@ function bajaYJuarez(o,d){
 }
 // Macrolibramiento de Guadalajara: sus dos salidas. incorporación directa hacia Colima/Manzanillo (75GRCC8V+95);
 // El Arenal (Q7CQ+8GJ) = fin del macro hacia Tepic y el Pacífico. Se elige la salida según de qué lado están origen y destino.
-const MACRO_SANTA_CECILIA=[-103.55706,20.41594], MACRO_ARENAL=[-103.71123,20.77084]
+const MACRO_SANTA_CECILIA=[-103.55706,20.41594], MACRO_ARENAL=[-103.71123,20.77084], MACRO_ENTRADA=[-103.10156,20.57281] // entrada oriente (La Laja, HVFX+49 La Mezquitera)
 function viasMacrolibramiento(o,d){
  const dist=(a,b)=>Math.pow(a[0]-b[0],2)+Math.pow(a[1]-b[1],2)
- const lado=p=>p[0]>-103.1?null:(dist(p,MACRO_ARENAL)<dist(p,MACRO_SANTA_CECILIA)?MACRO_ARENAL:MACRO_SANTA_CECILIA)
+ const lado=p=>p[0]>-103.1?MACRO_ENTRADA:(dist(p,MACRO_ARENAL)<dist(p,MACRO_SANTA_CECILIA)?MACRO_ARENAL:MACRO_SANTA_CECILIA)
  const r=[]
  for(const p of [o,d]){const l=lado(p);if(l&&r[r.length-1]!==l) r.push(l)}
- return r.length?r:[MACRO_SANTA_CECILIA]
+ return r.length>1||r[0]!==MACRO_ENTRADA?r:[MACRO_ENTRADA,MACRO_SANTA_CECILIA]
 }
 function viasBajaJuarez(){
  const pts=[puntoCaseta("Mexicali"),puntoCaseta("San Luis Río Colorado"),puntoCaseta("Santa Ana"),puntoCaseta("Magdalena"),

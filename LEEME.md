@@ -138,3 +138,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## Salida del macrolibramiento hacia Colima (PR 55)
 - El punto de paso hacia Colima/Manzanillo ahora es la incorporación directa 75GRCC8V+95 (-103.55706, 20.41594), unos 2.7 km más adelante que CFP6+3P4. Con el punto anterior la ruta se subía a la carretera Jiquilpan–Guadalajara (10D) para salir del macro.
+
+## Entrada oriente del macrolibramiento (PR 56)
+- Desde el oriente (CDMX, La Barca, Ocotlán) el macro ahora se toma por su entrada La Laja (HVFX+49 La Mezquitera, -103.10156, 20.57281): "Macrolibramiento de Guadalajara" en Pasar por agrega esa entrada y después la salida (Santa Cecilia/El Arenal). Así cobra La Laja ($190, 5 ejes). Al regreso va al revés.
