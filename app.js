@@ -554,4 +554,12 @@ async function entregarArchivo(blob,nombre,titulo){
  setTimeout(()=>URL.revokeObjectURL(a.href),5000)
 }
 
+async function actualizarApp(btn){
+  if(btn){btn.disabled=true;btn.textContent="Actualizando..."}
+  try{
+    const archivos=["index.html","style.css","casetas_data.js","geocoder.js","router.js","tariffs.js","toll_detector.js","mapa_imagen.js","xlsx_min.js","app.js","manifest.json"];
+    await Promise.all(archivos.map(f=>fetch(f+"?v="+Date.now(),{cache:"reload"}).then(()=>fetch(f,{cache:"reload"}))));
+  }catch(e){}
+  location.reload();
+}
 window.onload=()=>{initMap();mostrarHistorial()}
