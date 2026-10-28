@@ -55,12 +55,13 @@ function setEstado(t){
  document.getElementById("estado").innerText=t
 }
 
-function calcularPrecios(costo,km){
+// extraKm: monto que se suma solo al precio «Por km» (ferry + 30% del ferry)
+function calcularPrecios(costo,km,extraKm=0){
  const p={
   bajo:Math.ceil(costo*1.15/100)*100,
   medio:Math.ceil(costo*1.30/100)*100,
   alto:Math.ceil(costo*1.45/100)*100,
-  km:precioPorKm(km)
+  km:Math.ceil((precioPorKm(km)+extraKm)/100)*100
  }
  document.getElementById("precio_bajo").innerText=formatoDinero(p.bajo)
  document.getElementById("precio_medio").innerText=formatoDinero(p.medio)
@@ -208,7 +209,8 @@ function calcularFlete(){
 
  document.getElementById("resultado").innerHTML=html
  setEstado(usoEstimadoPorKm?"Calculado sin ruta (casetas por km)":`Casetas detectadas: ${nTarifa} con tarifa, ${nEst} estimadas`)
- const precios=calcularPrecios(costoTotal,kmTotal)
+ // Con ferry, el precio «Por km» suma el costo del ferry más 30% de ese costo
+ const precios=calcularPrecios(costoTotal,kmTotal,ferry?ferry.monto*1.3:0)
 
  ultimoCalculo={
   origen,destino,km:kmTotal,kmIda:km,redondo,ejes,vel,tiempo,rend,litros,dieselCosto,
@@ -316,7 +318,7 @@ async function generarImagenCostos(){
  filas.push(["Bajo (+15%)",formatoDinero(c.precios.bajo)])
  filas.push(["Medio (+30%)",formatoDinero(c.precios.medio)])
  filas.push(["Alto (+45%)",formatoDinero(c.precios.alto)])
- filas.push(["Por km",formatoDinero(c.precios.km)])
+ filas.push([c.ferry?"Por km + ferry (ferry +30%)":"Por km",formatoDinero(c.precios.km)])
 
  const dMapa=mapa?HM+20:0
  const alto=Math.max(520,280+filas.length*34+60)+(c.avisoCorto?26:0)+dMapa

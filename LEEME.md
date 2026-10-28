@@ -95,3 +95,6 @@ El selector muestra pies: 40 o 45 pies = tarifa hasta 13.7 m; 48 o 53 pies = tar
 
 ## Península de Baja California desde el noreste (PR 45)
 Si el trazo normal se mete a EE.UU. (ej. Monterrey → Los Cabos), la reparación aplica el corredor por México (Sacramento, Ojo Laguna, Galeana, Janos, Agua Prieta, Cananea, Magdalena, Santa Ana, SLRC, Mexicali) para cualquier punto de la península, no solo el norte de BC. Solo es reparación: CDMX → La Paz sigue el camino del servicio (costa del Pacífico). También se corrigió «Baja California Sur» para que Guaymas, Cd. Obregón o Navojoa ya no cuenten como BCS (el cuadro del ferry no debe aparecer ahí).
+
+## Precio Por km con ferry (PR 46)
+Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carretera) + costo del ferry + 30% del costo del ferry (el ferry ya incluye ida y vuelta si está marcado). Bajo, Medio y Alto no cambian (ya incluyen el ferry en el costo total).
