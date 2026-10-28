@@ -563,7 +563,7 @@ function abrirFormCotizacion(){
  set("cot_atencion",document.getElementById("cliente").value.trim())
  set("cot_origen",c.origen);set("cot_destino",c.destino)
  set("cot_unidad","Tráiler de "+c.ejes+" ejes")
- set("cot_incluye",g.incluye!==undefined?g.incluye:COT_DEF.incluye)
+ set("cot_incluye",(g.incluye!==undefined?g.incluye:COT_DEF.incluye)+(c.ferry?(((g.incluye!==undefined?g.incluye:COT_DEF.incluye)?", ":"")+"ferry"+(ferryInfo&&ferryInfo.nombre?" ("+ferryInfo.nombre+")":"")):""))
  set("cot_vigencia",g.vigencia||COT_DEF.vigencia)
  set("cot_pago",g.pago!==undefined?g.pago:COT_DEF.pago)
  set("cot_ciudad",g.ciudad||COT_DEF.ciudad)
@@ -575,7 +575,7 @@ async function generarCotizacionWord(){
  const v=i=>document.getElementById(i).value.trim()
  const precio=parseFloat(precioSeleccionado().replace(/[^0-9.]/g,""))||0
  if(!precio){setEstado("No hay precio para cotizar");return}
- try{localStorage.setItem("cot_defaults",JSON.stringify({incluye:v("cot_incluye"),vigencia:v("cot_vigencia"),pago:v("cot_pago"),ciudad:v("cot_ciudad")}))}catch(e){}
+ try{localStorage.setItem("cot_defaults",JSON.stringify({incluye:v("cot_incluye").replace(/,?\s*ferry\b.*$/i,"").trim(),vigencia:v("cot_vigencia"),pago:v("cot_pago"),ciudad:v("cot_ciudad")}))}catch(e){}
  let logo=null
  try{const r=await fetch("logo.png");if(r.ok) logo=new Uint8Array(await r.arrayBuffer())}catch(e){}
  const meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"]
@@ -597,6 +597,8 @@ async function generarCotizacionWord(){
  const nombre="Cotizacion_"+(c.origen+"_"+c.destino).replace(/[^A-Za-z0-9]+/g,"_").slice(0,50)+"_"+hoy.toISOString().slice(0,10)+".docx"
  await entregarArchivo(blob,nombre,"Cotización Transportes D' León")
  guardarCotizacion(false)
+;["cot_atencion","cot_origen","cot_destino","cot_fecha","cot_unidad","cot_merc","cot_incluye","cot_vigencia","cot_pago","cot_ciudad"].forEach(i=>{document.getElementById(i).value=""})
+ document.getElementById("cot_form").style.display="none"
 }
 async function actualizarApp(btn){
   if(btn){btn.disabled=true;btn.textContent="Actualizando..."}
