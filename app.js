@@ -513,4 +513,45 @@ function borrarHistorial(){
  mostrarHistorial()
 }
 
+// ---- Exportar el historial a Excel (.xlsx) ----
+function exportarHistorialExcel(){
+ const h=leerHistorial()
+ if(!h.length){setEstado("No hay cotizaciones en el historial para exportar");return}
+ if(typeof crearXlsx!=="function"){setEstado("No se pudo generar el Excel");return}
+ const nombres={bajo:"Bajo",medio:"Medio",alto:"Alto",km:"Por km"}
+ const ferries={mazatlan:"Mazatlán",topolobampo:"Topolobampo",cozumel:"Cozumel (Punta Venado)"}
+ const num=s=>{const n=parseFloat(String(s||"").replace(/[^0-9.]/g,""));return isNaN(n)?"":{n}}
+ const dinero=v=>({n:v})
+ const enc=["Fecha","Cliente / nota","Origen","Destino","Pasar por","Ida y vuelta","Km (un sentido)","Km totales","Ejes","Rendimiento (km/L)","Diésel ($/L)","Costo adicional","Ferry","Costo total","Precio enviado (tipo)","Precio enviado"]
+ const filas=h.map(x=>{
+  const f=new Date(x.fecha)
+  const fecha=isNaN(f)?"":f.toLocaleString("es-MX",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:false})
+  const km=parseFloat(x.km)||0
+  return [fecha,x.cliente||"",x.origen||"",x.destino||"",x.via||"",x.redondo?"Sí":"No",km,km*(x.redondo?2:1),x.ejes,x.rend,x.diesel,dinero(x.adicional||0),ferries[x.ferry]||"",dinero(x.costo||0),nombres[x.tipo]||"",num(x.precio)]
+ })
+ const bytes=crearXlsx("Cotizaciones",enc,filas,[17,22,22,22,22,12,14,12,8,14,12,14,22,14,16,16])
+ const hoy=new Date().toISOString().slice(0,10)
+ const nombre="historial_cotizaciones_"+hoy+".xlsx"
+ const blob=new Blob([bytes],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"})
+ entregarArchivo(blob,nombre,"Historial de cotizaciones")
+}
+async function entregarArchivo(blob,nombre,titulo){
+ const file=new File([blob],nombre,{type:blob.type})
+ try{
+  if(navigator.canShare&&navigator.canShare({files:[file]})){
+   await navigator.share({files:[file],title:titulo})
+   return
+  }
+ }catch(e){
+  if(e&&e.name==="AbortError") return
+ }
+ const a=document.createElement("a")
+ a.href=URL.createObjectURL(blob)
+ a.download=nombre
+ document.body.appendChild(a)
+ a.click()
+ a.remove()
+ setTimeout(()=>URL.revokeObjectURL(a.href),5000)
+}
+
 window.onload=()=>{initMap();mostrarHistorial()}
