@@ -173,3 +173,7 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## Matamoros (Coah.) corregida (PR 65)
 - La caseta Matamoros (Lib. Norte de La Laguna, $259 5 ejes) estaba ubicada en otro punto y no se detectaba en Cd. Juárez→Monterrey. Ahora usa MJ2G+GF (-103.37381, 25.65131), dado por el usuario.
+
+## Cd. Juárez ↔ Monterrey por México (PR 66)
+- Desde Cd. Juárez hacia Monterrey, Saltillo, Reynosa y alrededores (y al revés) el servicio de rutas prefería El Paso–San Antonio–Acuña. Ahora, sin puntos del usuario en «Pasar por», se fuerza por México con las casetas Sacramento, Jiménez y Matamoros (Coah.) (Villa Ahumada, Chihuahua, La Laguna, Saltillo). El estado dice "ruta forzada por México, sin cruzar la frontera".
+- No actúa si el destino es Torreón o más al oeste/sur (ahí la ruta natural ya es por México).

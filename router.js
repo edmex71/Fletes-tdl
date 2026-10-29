@@ -190,6 +190,17 @@ function viasBajaJuarez(){
 // Baja California / noroeste de Sonora → Chihuahua y el centro/noreste del país (Torreón, Monterrey, Tamaulipas...):
 // misma ruta por México de Traza tu ruta: Mexicali, San Luis Río Colorado, Santa Ana, Magdalena, Mex 2 (Cananea,
 // Agua Prieta, Janos), Galeana, Ojo Laguna, Sacramento y Chihuahua. De ahí en adelante el trazo normal ya es por México.
+// Cd. Juárez ↔ Monterrey/Saltillo/Reynosa y alrededores: por México, sin salir a EE.UU. (Villa Ahumada, Chihuahua, Jiménez, La Laguna y Saltillo).
+// Sin esto el servicio de rutas prefiere El Paso–San Antonio–Laredo/Acuña. Solo si el usuario no puso sus propios puntos.
+function juarezANoreste(o,d){
+ const juarez=p=>p[0]>-106.9&&p[0]<-106.1&&p[1]>31.4&&p[1]<32.0
+ const noreste=p=>p[0]>-103&&p[0]<-97&&p[1]>24.5&&p[1]<27
+ return (juarez(o)&&noreste(d))?1:((juarez(d)&&noreste(o))?-1:0)
+}
+function viasJuarezNoreste(){
+ const v=["Sacramento","Jiménez","Matamoros (Coah.)"].map(puntoCaseta)
+ return v.every(Boolean)?v:null
+}
 function bajaYNoreste(o,d){
  const oeste=p=>p[0]<-114&&p[1]>30&&p[1]<33
  const este=p=>p[0]>-108&&!(p[0]>-107.2&&p[0]<-106&&p[1]>31.2&&p[1]<32.2)&&(p[1]<30.5||p[0]>-105)
@@ -302,6 +313,9 @@ async function calcularRuta(){
   }else if(!vias.length && bajaYNoreste(o,d)){
    const v=viasBajaNoreste()
    if(v){vias.push(...(bajaYNoreste(o,d)>0?v:v.slice().reverse()));viaAuto="juarez"}
+  }else if(!vias.length && juarezANoreste(o,d)){
+   const v=viasJuarezNoreste()
+   if(v){vias.push(...(juarezANoreste(o,d)>0?v:v.slice().reverse()));viaAuto="juarez"}
   }else if(!vias.length && tijuanaBajaSur(o,d)){
    const a=puntoCaseta("Playas de Tijuana")
    if(a) vias.push(a)
