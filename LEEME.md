@@ -181,3 +181,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 ## Sonora ↔ Monterrey/Reynosa por México (PR 67)
 - Desde Sonoyta, Nogales, Cananea o Agua Prieta hacia Monterrey, Saltillo, Reynosa y alrededores (y al revés) el trazo se iba por Arizona–Texas. Sin puntos del usuario en «Pasar por» se fuerza por México con los puntos de la ruta de Baja a Chihuahua que están al oriente de la salida (Santa Ana, Magdalena, Cananea, Agua Prieta, Janos, Galeana, Ojo Laguna, Sacramento) y después Jiménez y Matamoros (Coah.).
 - No actúa para destinos de Torreón hacia el oeste.
+
+## Fondo del sistema (PR 68)
+- Imagen de fondo `fondo.jpg` (camión al atardecer, 247 KB). Va en una capa fija (`body::before` en style.css) para que funcione en iPhone; el contenido queda en un panel blanco al 80% con un poco de desenfoque para que se lea. Para cambiarla basta reemplazar `fondo.jpg`.
