@@ -170,3 +170,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 - Botón "Importar historial desde Excel": lee el .xlsx que exporta la app (o uno guardado de nuevo en Excel, con compresión) por el nombre de las columnas y lo une al historial. Las cotizaciones repetidas (misma fecha, origen, destino, km, tipo y precio) se omiten; se guardan las 50 más recientes.
 - No viajan en el Excel: el largo de caja de ferry y el ferry de Cozumel/ferry común; al abrir una cotización importada con ferry se usan los valores por omisión.
 - Lector en `xlsx_min.js` (`leerXlsx`); usa DecompressionStream para archivos comprimidos.
+
+## Matamoros (Coah.) corregida (PR 65)
+- La caseta Matamoros (Lib. Norte de La Laguna, $259 5 ejes) estaba ubicada en otro punto y no se detectaba en Cd. Juárez→Monterrey. Ahora usa MJ2G+GF (-103.37381, 25.65131), dado por el usuario.
