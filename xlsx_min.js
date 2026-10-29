@@ -45,3 +45,58 @@ function crearXlsx(nombreHoja,encabezados,filas,anchos){
   ["xl/worksheets/sheet1.xml",hoja]
  ])
 }
+
+// ---- Lectura de .xlsx (los que genera esta app y los guardados por Excel, con compresión) ----
+// leerXlsx(ArrayBuffer) -> Promise<Array<Array<string|number>>> (filas de la primera hoja; celdas vacías = "")
+async function leerXlsx(buf){
+ const dv=new DataView(buf),u8=new Uint8Array(buf),dec=new TextDecoder()
+ let eocd=-1
+ for(let i=buf.byteLength-22;i>=Math.max(0,buf.byteLength-70000);i--){if(dv.getUint32(i,true)===0x06054b50){eocd=i;break}}
+ if(eocd<0) throw new Error("El archivo no es un Excel (.xlsx)")
+ const n=dv.getUint16(eocd+10,true);let p=dv.getUint32(eocd+16,true)
+ const entradas={}
+ for(let k=0;k<n;k++){
+  if(dv.getUint32(p,true)!==0x02014b50) break
+  const metodo=dv.getUint16(p+10,true),comp=dv.getUint32(p+20,true),nl=dv.getUint16(p+28,true),el=dv.getUint16(p+30,true),cl=dv.getUint16(p+32,true),off=dv.getUint32(p+42,true)
+  entradas[dec.decode(u8.subarray(p+46,p+46+nl))]={metodo,comp,off}
+  p+=46+nl+el+cl
+ }
+ const leer=async nombre=>{
+  const e=entradas[nombre];if(!e) return null
+  const nl=dv.getUint16(e.off+26,true),el=dv.getUint16(e.off+28,true),ini=e.off+30+nl+el
+  let datos=u8.subarray(ini,ini+e.comp)
+  if(e.metodo===8){
+   if(typeof DecompressionStream==="undefined") throw new Error("Este navegador no puede abrir ese Excel; usa el archivo tal como se descargó de la app")
+   datos=new Uint8Array(await new Response(new Blob([datos]).stream().pipeThrough(new DecompressionStream("deflate-raw"))).arrayBuffer())
+  }else if(e.metodo!==0) throw new Error("Formato de compresión no compatible")
+  return dec.decode(datos)
+ }
+ const hojas=Object.keys(entradas).filter(x=>/^xl\/worksheets\/sheet\d+\.xml$/.test(x)).sort((a,b)=>parseInt(a.match(/\d+/)[0])-parseInt(b.match(/\d+/)[0]))
+ if(!hojas.length) throw new Error("El Excel no tiene hojas")
+ const parse=t=>new DOMParser().parseFromString(t,"application/xml")
+ const compartidas=[]
+ const sst=await leer("xl/sharedStrings.xml")
+ if(sst) Array.from(parse(sst).getElementsByTagName("si")).forEach(si=>{compartidas.push(Array.from(si.getElementsByTagName("t")).map(t=>t.textContent).join(""))})
+ const doc=parse(await leer(hojas[0]))
+ const filas=[]
+ Array.from(doc.getElementsByTagName("row")).forEach(row=>{
+  const fila=[]
+  Array.from(row.getElementsByTagName("c")).forEach(c=>{
+   const m=(c.getAttribute("r")||"").match(/^([A-Z]+)/);if(!m) return
+   let col=0;for(const ch of m[1]) col=col*26+ch.charCodeAt(0)-64
+   col--
+   const t=c.getAttribute("t"),v=c.getElementsByTagName("v")[0]
+   let val=""
+   if(t==="inlineStr") val=Array.from(c.getElementsByTagName("t")).map(x=>x.textContent).join("")
+   else if(v){
+    if(t==="s") val=compartidas[parseInt(v.textContent)]||""
+    else if(t==="str"||t==="b"||t==="e") val=v.textContent
+    else{const x=parseFloat(v.textContent);val=isNaN(x)?v.textContent:x}
+   }
+   fila[col]=val
+  })
+  for(let i=0;i<fila.length;i++) if(fila[i]===undefined) fila[i]=""
+  filas.push(fila)
+ })
+ return filas
+}

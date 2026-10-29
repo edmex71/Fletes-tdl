@@ -535,6 +535,61 @@ function exportarHistorialExcel(){
  const blob=new Blob([bytes],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"})
  entregarArchivo(blob,nombre,"Historial de cotizaciones")
 }
+
+// Importa un Excel como el que exporta esta app (también si lo guardaste de nuevo en Excel)
+async function importarHistorialExcel(input){
+ const archivo=input.files&&input.files[0]
+ input.value=""
+ if(!archivo) return
+ try{
+  if(typeof leerXlsx!=="function") throw new Error("No se pudo leer el Excel")
+  const filas=await leerXlsx(await archivo.arrayBuffer())
+  if(filas.length<2) throw new Error("El Excel no tiene cotizaciones")
+  const quitar=t=>String(t||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim()
+  const enc=filas[0].map(quitar)
+  const col=(...nombres)=>{for(const n of nombres){const i=enc.findIndex(e=>e===n);if(i>=0) return i}for(const n of nombres){const i=enc.findIndex(e=>e.startsWith(n));if(i>=0) return i}return -1}
+  const C={fecha:col("fecha"),cliente:col("cliente"),origen:col("origen"),destino:col("destino"),via:col("pasar por"),redondo:col("ida y vuelta"),km:col("km (un sentido)"),ejes:col("ejes"),rend:col("rendimiento"),diesel:col("diesel"),adicional:col("costo adicional"),ferry:col("ferry"),costo:col("costo total"),tipo:col("precio enviado (tipo)"),precio:col("precio enviado")}
+  if(C.origen<0||C.destino<0) throw new Error("No encontré las columnas Origen y Destino; usa el Excel que descargó la app")
+  const val=(f,k)=>C[k]>=0&&f[C[k]]!==undefined?f[C[k]]:""
+  const num=v=>{const n=typeof v==="number"?v:parseFloat(String(v).replace(/[^0-9.\-]/g,""));return isNaN(n)?0:n}
+  const tipos={bajo:"bajo",medio:"medio",alto:"alto","por km":"km",km:"km"}
+  const ferries={mazatlan:"mazatlan",topolobampo:"topolobampo",cozumel:"cozumel"}
+  const fmt=d=>d.toLocaleString("es-MX",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:false})
+  const fechaDe=v=>{
+   if(typeof v==="number"&&v>20000) return new Date(Math.round((v-25569)*86400000)+new Date().getTimezoneOffset()*60000)
+   const m=String(v).match(/(\d{1,2})\/(\d{1,2})\/(\d{4})(?:[, ]+(\d{1,2}):(\d{2}))?/)
+   if(m) return new Date(+m[3],+m[2]-1,+m[1],+(m[4]||0),+(m[5]||0))
+   return new Date()
+  }
+  const h=leerHistorial()
+  const clave=(f,o,d,km,t,pr)=>[fmt(f),quitar(o),quitar(d),Math.round(km),t,Math.round(pr)].join("|")
+  const vistos=new Set(h.map(x=>clave(new Date(x.fecha),x.origen,x.destino,parseFloat(x.km)||0,x.tipo,num(x.precio))))
+  const base=Date.now()
+  let nuevas=0,repetidas=0
+  filas.slice(1).forEach((f,i)=>{
+   const origen=String(val(f,"origen")).trim(),destino=String(val(f,"destino")).trim()
+   if(!origen||!destino) return
+   const fecha=fechaDe(val(f,"fecha"))
+   const tipo=tipos[quitar(val(f,"tipo"))]||"medio"
+   const precioNum=num(val(f,"precio"))
+   const km=num(val(f,"km"))
+   const k=clave(fecha,origen,destino,km,tipo,precioNum)
+   if(vistos.has(k)){repetidas++;return}
+   vistos.add(k)
+   const fer=quitar(val(f,"ferry"))
+   const ferry=Object.keys(ferries).find(n=>fer.startsWith(n))||""
+   h.push({id:base+i,fecha:fecha.toISOString(),cliente:String(val(f,"cliente")).trim(),origen,destino,via:String(val(f,"via")).trim(),km,ejes:num(val(f,"ejes"))||5,redondo:/^s/.test(quitar(val(f,"redondo"))),rend:num(val(f,"rend"))||2.3,diesel:num(val(f,"diesel"))||29,adicional:num(val(f,"adicional")),costo:Math.round(num(val(f,"costo"))),tipo,precio:"$"+precioNum.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}),ferry})
+   nuevas++
+  })
+  h.sort((a,b)=>new Date(b.fecha)-new Date(a.fecha))
+  escribirHistorial(h)
+  mostrarHistorial()
+  const perdidas=Math.max(0,h.length-HISTORIAL_MAX)
+  setEstado("Historial importado: "+nuevas+" nuevas"+(repetidas?", "+repetidas+" ya estaban":"")+(perdidas?" (el historial guarda las "+HISTORIAL_MAX+" más recientes)":""))
+ }catch(e){
+  setEstado("No se pudo importar: "+(e&&e.message?e.message:e))
+ }
+}
 async function entregarArchivo(blob,nombre,titulo){
  const file=new File([blob],nombre,{type:blob.type})
  try{

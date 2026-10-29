@@ -165,3 +165,8 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## Santa Casilda: segunda ubicación (PR 63)
 - OpenStreetMap tiene dos sitios para la caseta (-101.97608, 19.15641) y (-101.97812, 19.15295, "Nro 175"), a unos 400 m. La ruta pasaba por el segundo y no la detectaba; ahora están los dos.
+
+## Importar historial desde Excel (PR 64)
+- Botón "Importar historial desde Excel": lee el .xlsx que exporta la app (o uno guardado de nuevo en Excel, con compresión) por el nombre de las columnas y lo une al historial. Las cotizaciones repetidas (misma fecha, origen, destino, km, tipo y precio) se omiten; se guardan las 50 más recientes.
+- No viajan en el Excel: el largo de caja de ferry y el ferry de Cozumel/ferry común; al abrir una cotización importada con ferry se usan los valores por omisión.
+- Lector en `xlsx_min.js` (`leerXlsx`); usa DecompressionStream para archivos comprimidos.
