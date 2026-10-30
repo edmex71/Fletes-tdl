@@ -244,6 +244,14 @@ function calcularFlete(){
 
 }
 
+function cargarFondo(){
+ return new Promise(res=>{
+  const f=new Image()
+  f.onload=()=>res(f)
+  f.onerror=()=>res(null) // si el fondo no carga, la imagen sale con fondo blanco
+  f.src="fondo.jpg"
+ })
+}
 function cargarLogo(){
  return new Promise(res=>{
   const logo=new Image()
@@ -274,7 +282,7 @@ async function generarImagen(){
 
  setEstado("Generando imagen…")
  const HM=380
- const [logo,mapa]=await Promise.all([cargarLogo(),mapaParaImagen(currentRoute,740,HM,null)])
+ const [logo,mapa,fondo]=await Promise.all([cargarLogo(),mapaParaImagen(currentRoute,740,HM,null),cargarFondo()])
  const alto=mapa?520+HM+30:520
 
  const canvas=document.createElement("canvas")
@@ -284,6 +292,16 @@ async function generarImagen(){
 
  ctx.fillStyle="#ffffff"
  ctx.fillRect(0,0,800,alto)
+ if(fondo){
+  // Foto del camión como fondo (recortada para cubrir) y un panel blanco translúcido para que se lea el contenido
+  const e=Math.max(800/fondo.width,alto/fondo.height),w=fondo.width*e,h=fondo.height*e
+  ctx.drawImage(fondo,(800-w)/2,(alto-h)/2,w,h)
+  ctx.fillStyle="rgba(255,255,255,0.86)"
+  const x=18,y=14,pw=764,ph=alto-28,r=18
+  ctx.beginPath()
+  ctx.moveTo(x+r,y);ctx.arcTo(x+pw,y,x+pw,y+ph,r);ctx.arcTo(x+pw,y+ph,x,y+ph,r);ctx.arcTo(x,y+ph,x,y,r);ctx.arcTo(x,y,x+pw,y,r)
+  ctx.closePath();ctx.fill()
+ }
 
  if(logo) ctx.drawImage(logo,330,20,140,140)
 
