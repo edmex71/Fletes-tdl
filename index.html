@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flete TDL</title>
-<link rel="apple-touch-icon" href="logo.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Flete TDL">
+<meta name="theme-color" content="#0b1f3a">
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -15,7 +19,7 @@
 
 <header class="header">
 <img src="logo.png" alt="">
-<h1>Flete TDL <small id="version" style="font-size:12px;font-weight:normal;opacity:.7">PR 69</small> <button type="button" onclick="actualizarApp(this)" style="font-size:12px;padding:2px 8px;margin-left:6px;width:auto;display:inline-block">↻ Actualizar</button></h1>
+<h1>Flete TDL <small id="version" style="font-size:12px;font-weight:normal;opacity:.7">PR 70</small> <button type="button" onclick="actualizarApp(this)" style="font-size:12px;padding:2px 8px;margin-left:6px;width:auto;display:inline-block">↻ Actualizar</button> <button type="button" id="btn_instalar" onclick="instalarApp()" style="display:none;font-size:12px;padding:2px 8px;margin-left:6px;width:auto">⬇ Instalar app</button></h1>
 </header>
 
 <div class="container">
@@ -160,6 +164,15 @@
 <script src="mapa_imagen.js"></script>
 <script src="xlsx_min.js"></script>
 <script src="docx_min.js"></script>
+<div id="guia_ios" style="display:none">
+<div class="guia_fondo" onclick="cerrarGuiaIOS()"></div>
+<div class="guia_caja">
+<h3>Instala Flete TDL en tu iPhone</h3>
+<div class="guia_paso"><span class="guia_n">1</span><span>Toca el botón Compartir <span class="guia_ic">&#11014;&#65038;</span> de Safari, abajo en la pantalla.</span></div>
+<div class="guia_paso"><span class="guia_n">2</span><span>Elige <b>«Agregar a pantalla de inicio»</b> y toca <b>Agregar</b>.</span></div>
+<button class="sec" onclick="cerrarGuiaIOS()">Ahora no</button>
+</div>
+</div>
 <script src="app.js"></script>
 
 </body>

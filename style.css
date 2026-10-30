@@ -25,3 +25,11 @@ button.sec{background:#6b7280}
 #resultado h3{margin:14px 0 4px}
 #resultado .est{color:#9a5b00}
 #precio_sugerido{margin-top:20px}
+
+/* Guía para instalar en iPhone */
+#guia_ios .guia_fondo{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:2000}
+#guia_ios .guia_caja{position:fixed;left:14px;right:14px;bottom:78px;background:#fff;border-radius:16px;padding:16px;box-shadow:0 8px 30px rgba(0,0,0,.4);z-index:2001;max-width:520px;margin:0 auto}
+#guia_ios h3{margin:0 0 8px;font-size:18px}
+.guia_paso{display:flex;gap:10px;align-items:center;margin:10px 0}
+.guia_n{background:#3f63c6;color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex:none;font-weight:bold}
+.guia_ic{display:inline-block;border:1.5px solid #3f63c6;border-radius:6px;padding:0 6px;color:#3f63c6}
