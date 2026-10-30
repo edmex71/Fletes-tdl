@@ -201,6 +201,18 @@ function viasJuarezNoreste(){
  const v=["Sacramento","Jiménez","Matamoros (Coah.)"].map(puntoCaseta)
  return v.every(Boolean)?v:null
 }
+// Frontera de Sonora (Sonoyta, Nogales, Cananea, Agua Prieta...) ↔ Monterrey, Saltillo, Reynosa y alrededores: por México
+// (Mex 2 hasta Agua Prieta y Janos, Ojo Laguna, Chihuahua, Jiménez, La Laguna y Saltillo). Sin esto el trazo se va por Arizona–Texas.
+function sonoraANoreste(o,d){
+ const sonora=p=>p[0]>-113.3&&p[0]<-107.5&&p[1]>30.3&&p[1]<32.2
+ const noreste=p=>p[0]>-103&&p[0]<-97&&p[1]>24.5&&p[1]<27
+ return (sonora(o)&&noreste(d))?1:((sonora(d)&&noreste(o))?-1:0)
+}
+function viasSonoraANoreste(sonora){
+ const base=viasBajaNoreste(),cola=[puntoCaseta("Jiménez"),puntoCaseta("Matamoros (Coah.)")]
+ if(!base||!cola.every(Boolean)) return null
+ return base.filter(p=>p[0]>sonora[0]+0.1).concat(cola) // solo los puntos al oriente de la salida
+}
 function bajaYNoreste(o,d){
  const oeste=p=>p[0]<-114&&p[1]>30&&p[1]<33
  const este=p=>p[0]>-108&&!(p[0]>-107.2&&p[0]<-106&&p[1]>31.2&&p[1]<32.2)&&(p[1]<30.5||p[0]>-105)
@@ -316,6 +328,9 @@ async function calcularRuta(){
   }else if(!vias.length && juarezANoreste(o,d)){
    const v=viasJuarezNoreste()
    if(v){vias.push(...(juarezANoreste(o,d)>0?v:v.slice().reverse()));viaAuto="juarez"}
+  }else if(!vias.length && sonoraANoreste(o,d)){
+   const sg=sonoraANoreste(o,d),v=viasSonoraANoreste(sg>0?o:d)
+   if(v){vias.push(...(sg>0?v:v.slice().reverse()));viaAuto="juarez"}
   }else if(!vias.length && tijuanaBajaSur(o,d)){
    const a=puntoCaseta("Playas de Tijuana")
    if(a) vias.push(a)

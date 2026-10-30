@@ -1,4 +1,6 @@
-body{font-family:Arial,sans-serif;margin:0;background:#f2f2f2}
+body{font-family:Arial,sans-serif;margin:0;background:#1b1230}
+/* Fondo del sistema (camión al atardecer). Capa fija aparte para que funcione también en iPhone. */
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:url(fondo.jpg) center/cover no-repeat}
 
 .header{
 background:#0b1f3a;
@@ -11,7 +13,7 @@ padding:10px;
 .header h1{margin:0;font-size:22px}
 .header img{width:40px;height:40px}
 
-.container{padding:15px;max-width:640px;margin:0 auto}
+.container{padding:15px;max-width:640px;margin:12px auto;background:rgba(255,255,255,.80);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 label{display:block;margin-top:8px;font-weight:bold}
 input,select,button{width:100%;padding:10px;margin:5px 0;box-sizing:border-box;font-size:16px}
 button{background:#3f63c6;color:white;border:none;border-radius:6px}
