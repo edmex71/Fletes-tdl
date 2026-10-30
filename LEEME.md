@@ -184,3 +184,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## Fondo del sistema (PR 68)
 - Imagen de fondo `fondo.jpg` (camión al atardecer, 247 KB). Va en una capa fija (`body::before` en style.css) para que funcione en iPhone; el contenido queda en un panel blanco al 80% con un poco de desenfoque para que se lea. Para cambiarla basta reemplazar `fondo.jpg`.
+
+## Fondo en la imagen para WhatsApp (PR 69)
+- La imagen que se manda al cliente usa la foto del camión (`fondo.jpg`) de fondo, recortada para cubrir, con un panel blanco translúcido detrás del texto y el mapa. La imagen de costos de uso interno sigue con fondo blanco. Si `fondo.jpg` no carga, la imagen sale con fondo blanco como antes.
