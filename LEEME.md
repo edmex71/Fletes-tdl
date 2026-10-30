@@ -187,3 +187,9 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## Fondo en la imagen para WhatsApp (PR 69)
 - La imagen que se manda al cliente usa la foto del camión (`fondo.jpg`) de fondo, recortada para cubrir, con un panel blanco translúcido detrás del texto y el mapa. La imagen de costos de uso interno sigue con fondo blanco. Si `fondo.jpg` no carga, la imagen sale con fondo blanco como antes.
+
+## Instalar como app (PR 70)
+- Botón "⬇ Instalar app" en el encabezado: en Android/Windows (Chrome, Edge) lanza la instalación directa; en iPhone abre una guía de dos pasos (Compartir → Agregar a pantalla de inicio). La guía sale sola la primera vez en iPhone fuera de la app instalada; "Ahora no" la cierra y no vuelve a salir sola. Una vez instalada, el botón desaparece.
+- `sw.js` (service worker): red primero (siempre la versión más nueva, revalidando) y, sin internet, la última copia guardada de los archivos de la app, así abre sin conexión. Rutas, búsquedas y mapas siguen necesitando internet.
+- "↻ Actualizar" también borra las copias guardadas por el service worker.
+- Manifest con idioma y alcance; meta tags para iPhone (modo app, título, ícono apple-touch-icon.png).

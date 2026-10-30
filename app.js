@@ -673,12 +673,44 @@ async function generarCotizacionWord(){
 ;["cot_atencion","cot_origen","cot_destino","cot_fecha","cot_unidad","cot_merc","cot_incluye","cot_vigencia","cot_pago","cot_ciudad"].forEach(i=>{document.getElementById(i).value=""})
  document.getElementById("cot_form").style.display="none"
 }
+// ---- Instalar como app ----
+let promptInstalar=null
+const esIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1)
+const enApp=()=>{try{return window.matchMedia("(display-mode: standalone)").matches||navigator.standalone===true}catch(e){return false}}
+function mostrarBotonInstalar(show=true){const b=document.getElementById("btn_instalar");if(b) b.style.display=(show&&!enApp())?"inline-block":"none"}
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();promptInstalar=e;mostrarBotonInstalar()})
+window.addEventListener("appinstalled",()=>{promptInstalar=null;mostrarBotonInstalar(false)})
+async function instalarApp(){
+ if(promptInstalar){
+  promptInstalar.prompt()
+  try{await promptInstalar.userChoice}catch(e){}
+  promptInstalar=null;mostrarBotonInstalar(false)
+ }else if(esIOS()){
+  abrirGuiaIOS()
+ }else{
+  setEstado("Para instalar: abre el menú del navegador y elige «Instalar app» o «Agregar a pantalla de inicio»")
+ }
+}
+function abrirGuiaIOS(){const g=document.getElementById("guia_ios");if(g) g.style.display="block"}
+function cerrarGuiaIOS(){
+ const g=document.getElementById("guia_ios");if(g) g.style.display="none"
+ try{localStorage.setItem("guia_ios_vista","1")}catch(e){}
+}
+function iniciarInstalacion(){
+ if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{})
+ if(esIOS()&&!enApp()){
+  mostrarBotonInstalar()
+  let vista=false;try{vista=localStorage.getItem("guia_ios_vista")==="1"}catch(e){}
+  if(!vista) abrirGuiaIOS() // la primera vez, solo en iPhone y fuera de la app instalada
+ }
+}
 async function actualizarApp(btn){
   if(btn){btn.disabled=true;btn.textContent="Actualizando..."}
   try{
     const archivos=["index.html","style.css","fondo.jpg","casetas_data.js","geocoder.js","router.js","tariffs.js","toll_detector.js","mapa_imagen.js","xlsx_min.js","docx_min.js","app.js","manifest.json"];
     await Promise.all(archivos.map(f=>fetch(f+"?v="+Date.now(),{cache:"reload"}).then(()=>fetch(f,{cache:"reload"}))));
   }catch(e){}
+  try{if(window.caches){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}}catch(e){}
   location.reload();
 }
-window.onload=()=>{initMap();mostrarHistorial()}
+window.onload=()=>{initMap();mostrarHistorial();iniciarInstalacion()}
