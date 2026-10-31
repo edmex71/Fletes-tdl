@@ -203,3 +203,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## PR 72 - Ingreso con foto y sesión no guardada
 - La pantalla de ingreso usa la foto del camión de fondo y pide usuario y contraseña cada vez que se abre o recarga la app.
+
+## PR 73 - Borrar arriba
+- El botón "Borrar" pasó junto al título, deja los precios sugeridos en $0.00 y sustituye a "Actualizar" para los usuarios de prueba; el administrador conserva "Actualizar".
