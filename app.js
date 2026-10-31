@@ -452,6 +452,9 @@ function borrar(){
  if(typeof mostrarFerry==="function") mostrarFerry(false)
  document.getElementById("resultado").innerHTML=""
  ultimoCalculo=null
+ for(const id of ["precio_bajo","precio_medio","precio_alto","precio_km"]){const e=document.getElementById(id);if(e)e.textContent="$0.00"}
+ const pe=document.getElementById("precio_envio");if(pe)pe.value="medio"
+ const cf=document.getElementById("cot_form");if(cf)cf.style.display="none"
  limpiarRuta()
  setEstado("Sistema listo")
 }
