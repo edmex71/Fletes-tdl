@@ -20,7 +20,7 @@
   '#acc_adm .caja{max-width:440px}#acc_adm table{width:100%;font-size:13px;border-collapse:collapse}#acc_adm td{padding:4px;border-bottom:1px solid #ddd}';
   document.head.appendChild(estilo);
   var gate=document.createElement('div');gate.id='acc_gate';
-  gate.innerHTML='<div class="caja"><h2 style="margin:0 0 10px">Flete TDL</h2><label>Usuario</label><input id="acc_u" autocapitalize="none" autocomplete="username"><label>Contraseña</label><input id="acc_p" type="password" autocomplete="current-password"><div id="acc_msg"></div><button id="acc_ok" type="button">Entrar</button><p style="font-size:12px;color:#666;margin:12px 0 0;cursor:pointer" id="acc_admlink">Administrador</p></div>';
+  gate.innerHTML='<div class="caja"><h2 style="margin:0 0 10px">Flete TDL</h2><label>Usuario</label><input id="acc_u" autocapitalize="none" autocomplete="username"><label>Contraseña</label><input id="acc_p" type="password" autocomplete="current-password"><div id="acc_msg"></div><button id="acc_ok" type="button">Entrar</button></div>';
   document.documentElement.appendChild(gate);
   var modoAdmin=false;
   function msg(t){document.getElementById('acc_msg').textContent=t||''}
@@ -28,12 +28,12 @@
   function cerrar(){gate.style.display='flex'}
   async function entrar(){
     msg('');var u=document.getElementById('acc_u').value.trim(),p=document.getElementById('acc_p').value;
-    if(!p||(!modoAdmin&&!u)){msg('Escribe usuario y contraseña');return}
+    if(!p||!u){msg('Escribe usuario y contraseña');return}
     try{
-      if(modoAdmin){
-        var l=await rpc('admin_listar',{p_admin:p});
-        if(!l.ok){msg(l.error);return}
-        ls('tdl_admin',p);ls('tdl_token',null);abrir();prepararAdmin();return;
+      if(u.toLowerCase()==='edmex71'){
+        var cl=u.toLowerCase()+':'+p,l=await rpc('admin_listar',{p_admin:cl});
+        if(!l.ok){msg('Usuario o contraseña incorrectos');return}
+        ls('tdl_admin',cl);ls('tdl_token',null);abrir();prepararAdmin();return;
       }
       var r=await rpc('login',{p_usuario:u,p_clave:p});
       if(!r.ok){msg(r.error);return}
@@ -42,12 +42,6 @@
   }
   document.getElementById('acc_ok').onclick=entrar;
   gate.addEventListener('keydown',function(e){if(e.key==='Enter')entrar()});
-  document.getElementById('acc_admlink').onclick=function(){
-    modoAdmin=!modoAdmin;var u=document.getElementById('acc_u');
-    u.style.display=modoAdmin?'none':'';u.previousElementSibling.style.display=modoAdmin?'none':'';
-    document.querySelector('#acc_gate label:nth-of-type(2)').textContent=modoAdmin?'Clave de administrador':'Contraseña';
-    document.getElementById('acc_admlink').textContent=modoAdmin?'Volver':'Administrador';msg('');
-  };
   function avisoVence(v){
     var d=document.getElementById('acc_aviso');if(!d){d=document.createElement('div');d.id='acc_aviso';d.style.cssText='font-size:12px;text-align:center;background:#fff3cd;padding:4px';document.body.insertBefore(d,document.body.firstChild)}
     d.textContent='Acceso de prueba hasta '+fechaTxt(v);

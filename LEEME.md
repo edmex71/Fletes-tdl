@@ -196,6 +196,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## PR 71 - Acceso con usuario, contraseña y fecha de vencimiento
 - Pantalla de ingreso (acceso.js) conectada a Supabase (proyecto flete-tdl). Cada usuario tiene contraseña y fecha límite; al vencer o desactivarse ya no entra.
-- "Administrador" en la pantalla de ingreso: con la clave de administrador aparece el botón "👤 Accesos" para crear usuarios, cambiar fecha y quitar accesos.
+- Administrador: entra con su usuario y contraseña normales; aparece el botón "👤 Accesos" para crear usuarios, cambiar fecha y quitar accesos.
 - 5 contraseñas incorrectas bloquean al usuario 15 minutos.
 - Limitación: es una compuerta del lado del navegador; los archivos de la página siguen siendo públicos en GitHub Pages.
