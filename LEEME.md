@@ -206,3 +206,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## PR 73 - Borrar arriba
 - El botón "Borrar" pasó junto al título, deja los precios sugeridos en $0.00 y sustituye a "Actualizar" para los usuarios de prueba; el administrador conserva "Actualizar".
+
+## PR 74 - Recuadro de ingreso en la esquina
+- El recuadro de usuario y contraseña quedó pequeño y arriba a la izquierda para que se vea el camión.
