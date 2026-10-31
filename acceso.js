@@ -64,6 +64,7 @@
   // ---- Panel de administrador ----
   var panel=null;
   function prepararAdmin(){
+    var ba=document.getElementById('btn_actualizar');if(ba)ba.style.display='inline-block';
     if(document.getElementById('btn_acc'))return;
     var b=document.createElement('button');b.id='btn_acc';b.type='button';b.textContent='👤 Accesos';
     b.style.cssText='font-size:12px;padding:2px 8px;margin-left:6px;width:auto;display:inline-block';
