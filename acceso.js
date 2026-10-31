@@ -3,7 +3,8 @@
 (function(){
   var URL_SB='https://mqwjkshosxzkiqhrvasn.supabase.co';
   var KEY_SB='sb_publishable_mM79u2QLOiIIDiDAaJEl-Q_xyPTov2z';
-  function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}}
+  var MEM={};['tdl_admin','tdl_token','tdl_vence','tdl_expira'].forEach(function(k){try{localStorage.removeItem(k)}catch(e){}});
+  function ls(k,v){if(k.indexOf('tdl_')===0){if(v===undefined)return MEM[k]||null;if(v===null)delete MEM[k];else MEM[k]=v;return}try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}}
   async function rpc(fn,args){
     var r=await fetch(URL_SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'apikey':KEY_SB,'Authorization':'Bearer '+KEY_SB,'Content-Type':'application/json'},body:JSON.stringify(args)});
     if(!r.ok)throw new Error('http '+r.status);
@@ -11,8 +12,8 @@
   }
   function fechaTxt(iso){return new Date(iso).toLocaleString('es-MX',{dateStyle:'medium',timeStyle:'short'})}
   var estilo=document.createElement('style');
-  estilo.textContent='#acc_gate{position:fixed;inset:0;z-index:99999;background:#12263a;display:flex;align-items:center;justify-content:center;padding:16px}'+
-  '#acc_gate .caja,#acc_adm .caja{background:#fff;border-radius:10px;padding:20px;width:100%;max-width:360px;box-sizing:border-box;max-height:90vh;overflow:auto}'+
+  estilo.textContent='#acc_gate{position:fixed;inset:0;z-index:99999;background:#12263a url(fondo.jpg) center/cover no-repeat;display:flex;align-items:center;justify-content:center;padding:16px}'+
+  '#acc_gate .caja,#acc_adm .caja{background:rgba(255,255,255,.93);border-radius:10px;padding:20px;width:100%;max-width:360px;box-sizing:border-box;max-height:90vh;overflow:auto}'+
   '#acc_gate input,#acc_adm input{width:100%;box-sizing:border-box;margin:4px 0 10px;padding:8px;font-size:16px}'+
   '#acc_gate button,#acc_adm button.p{width:100%;padding:10px;font-size:16px}'+
   '#acc_msg{color:#b00020;min-height:20px;font-size:14px}'+
