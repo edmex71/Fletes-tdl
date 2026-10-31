@@ -200,3 +200,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 - Administrador: entra con su usuario y contraseña normales; aparece el botón "👤 Accesos" para crear usuarios, cambiar fecha y quitar accesos.
 - 5 contraseñas incorrectas bloquean al usuario 15 minutos.
 - Limitación: es una compuerta del lado del navegador; los archivos de la página siguen siendo públicos en GitHub Pages.
+
+## PR 72 - Ingreso con foto y sesión no guardada
+- La pantalla de ingreso usa la foto del camión de fondo y pide usuario y contraseña cada vez que se abre o recarga la app.
