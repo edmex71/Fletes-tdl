@@ -12,13 +12,14 @@
   }
   function fechaTxt(iso){return new Date(iso).toLocaleString('es-MX',{dateStyle:'medium',timeStyle:'short'})}
   var estilo=document.createElement('style');
-  estilo.textContent='#acc_gate{position:fixed;inset:0;z-index:99999;background:#12263a url(fondo.jpg) center/cover no-repeat;display:flex;align-items:center;justify-content:center;padding:16px}'+
+  estilo.textContent='#acc_gate{position:fixed;inset:0;z-index:99999;background:#12263a url(fondo.jpg) center/cover no-repeat;display:flex;align-items:flex-start;justify-content:flex-start;padding:10px}'+
   '#acc_gate .caja,#acc_adm .caja{background:rgba(255,255,255,.93);border-radius:10px;padding:20px;width:100%;max-width:360px;box-sizing:border-box;max-height:90vh;overflow:auto}'+
   '#acc_gate input,#acc_adm input{width:100%;box-sizing:border-box;margin:4px 0 10px;padding:8px;font-size:16px}'+
   '#acc_gate button,#acc_adm button.p{width:100%;padding:10px;font-size:16px}'+
   '#acc_msg{color:#b00020;min-height:20px;font-size:14px}'+
   '#acc_adm{position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:16px}'+
-  '#acc_adm .caja{max-width:440px}#acc_adm table{width:100%;font-size:13px;border-collapse:collapse}#acc_adm td{padding:4px;border-bottom:1px solid #ddd}';
+  '#acc_adm .caja{max-width:440px}#acc_adm table{width:100%;font-size:13px;border-collapse:collapse}#acc_adm td{padding:4px;border-bottom:1px solid #ddd}'+
+  '#acc_gate .caja{max-width:230px;padding:10px;font-size:14px}#acc_gate h2{font-size:16px;margin:0 0 4px}#acc_gate label{font-size:13px}#acc_gate input{padding:5px;margin:2px 0 6px}#acc_gate button{padding:7px;font-size:15px}#acc_msg{min-height:16px;font-size:13px}';
   document.head.appendChild(estilo);
   var gate=document.createElement('div');gate.id='acc_gate';
   gate.innerHTML='<div class="caja"><h2 style="margin:0 0 10px">Flete TDL</h2><label>Usuario</label><input id="acc_u" autocapitalize="none" autocomplete="username"><label>Contraseña</label><input id="acc_p" type="password" autocomplete="current-password"><div id="acc_msg"></div><button id="acc_ok" type="button">Entrar</button></div>';
