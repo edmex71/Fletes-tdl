@@ -1,6 +1,6 @@
 // Service worker de Flete TDL: primero la red (siempre la versión más nueva) y, sin internet, la última copia guardada.
 const V="tdl-v1"
-const ARCHIVOS=["./","index.html","style.css","fondo.jpg","logo.png","casetas_data.js","geocoder.js","router.js","tariffs.js","toll_detector.js","mapa_imagen.js","xlsx_min.js","docx_min.js","app.js","manifest.json"]
+const ARCHIVOS=["./","index.html","style.css","fondo.jpg","logo.png","casetas_data.js","geocoder.js","router.js","tariffs.js","toll_detector.js","mapa_imagen.js","xlsx_min.js","docx_min.js","acceso.js","app.js","manifest.json"]
 self.addEventListener("install",e=>{
  self.skipWaiting()
  e.waitUntil(caches.open(V).then(c=>Promise.all(ARCHIVOS.map(f=>c.add(f).catch(()=>{})))))

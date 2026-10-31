@@ -193,3 +193,9 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 - `sw.js` (service worker): red primero (siempre la versión más nueva, revalidando) y, sin internet, la última copia guardada de los archivos de la app, así abre sin conexión. Rutas, búsquedas y mapas siguen necesitando internet.
 - "↻ Actualizar" también borra las copias guardadas por el service worker.
 - Manifest con idioma y alcance; meta tags para iPhone (modo app, título, ícono apple-touch-icon.png).
+
+## PR 71 - Acceso con usuario, contraseña y fecha de vencimiento
+- Pantalla de ingreso (acceso.js) conectada a Supabase (proyecto flete-tdl). Cada usuario tiene contraseña y fecha límite; al vencer o desactivarse ya no entra.
+- "Administrador" en la pantalla de ingreso: con la clave de administrador aparece el botón "👤 Accesos" para crear usuarios, cambiar fecha y quitar accesos.
+- 5 contraseñas incorrectas bloquean al usuario 15 minutos.
+- Limitación: es una compuerta del lado del navegador; los archivos de la página siguen siendo públicos en GitHub Pages.
