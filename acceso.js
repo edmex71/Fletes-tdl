@@ -77,7 +77,7 @@
     var h='<table>';
     l.accesos.forEach(function(a){
       var venc=new Date(a.vence)<new Date(),est=!a.activo?'desactivado':venc?'vencido':'activo';
-      h+='<tr><td><b>'+a.usuario.replace(/</g,'&lt;')+'</b><br>'+(a.nota||'').replace(/</g,'&lt;')+'<br>'+est+' · vence '+fechaTxt(a.vence)+'</td><td>'+(a.activo?'<button type="button" data-off="'+a.usuario.replace(/"/g,'')+'" style="width:auto">Quitar</button>':'')+'</td></tr>';
+      h+='<tr><td><b>'+a.usuario.replace(/</g,'&lt;')+'</b><br>'+(a.nota||'').replace(/</g,'&lt;')+'<br>'+est+' · vence '+fechaTxt(a.vence)+'<br>Entradas: '+(a.entradas||0)+' · Última: '+(a.ultimo_acceso?fechaTxt(a.ultimo_acceso):'nunca')+'</td><td>'+(a.activo?'<button type="button" data-off="'+a.usuario.replace(/"/g,'')+'" style="width:auto">Quitar</button>':'')+'</td></tr>';
     });
     box.innerHTML=h+'</table>';
     box.querySelectorAll('[data-off]').forEach(function(x){x.onclick=async function(){if(confirm('¿Quitar acceso a '+x.dataset.off+'?')){await rpc('admin_desactivar',{p_admin:ls('tdl_admin'),p_usuario:x.dataset.off});listar()}}});
