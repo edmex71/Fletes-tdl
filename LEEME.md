@@ -209,3 +209,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## PR 74 - Recuadro de ingreso en la esquina
 - El recuadro de usuario y contraseña quedó pequeño y arriba a la izquierda para que se vea el camión.
+
+## PR 75 - Conteo de entradas
+- En "Accesos" cada usuario muestra cuántas veces ha entrado y su última entrada.
