@@ -1,6 +1,7 @@
 let map=null
 let routeLayer=null
 let currentRoute=[]
+let viasUsuario=[] // puntos de «Pasar por» escritos por el usuario: {nombre,punto}
 
 function initMap(){
  if(typeof L==="undefined"){
@@ -311,13 +312,20 @@ async function calcularRuta(){
 
   // Puntos intermedios para forzar el camino. Se pueden escribir ciudades o nombres de casetas, separados por ;
   const vias=[]
+  viasUsuario=[]
   const viaTxt=(document.getElementById("via")||{value:""}).value
   for(const v of viaTxt.split(";").map(x=>x.trim()).filter(Boolean)){
-   if(/macro\s*-?\s*libramiento/i.test(v)&&!/arenal|cecilia/i.test(v)){vias.push(...viasMacrolibramiento(o,d));continue}
-   const pc=puntoCaseta(v)
-   if(pc){vias.push(pc);continue}
-   if(requiereBusqueda(v)) await esperar(1100)
-   vias.push(await geocode(v))
+   const n0=vias.length
+   if(/macro\s*-?\s*libramiento/i.test(v)&&!/arenal|cecilia/i.test(v)){vias.push(...viasMacrolibramiento(o,d))}
+   else{
+    const pc=puntoCaseta(v)
+    if(pc) vias.push(pc)
+    else{
+     if(requiereBusqueda(v)) await esperar(1100)
+     vias.push(await geocode(v))
+    }
+   }
+   vias.slice(n0).forEach(p=>viasUsuario.push({nombre:v,punto:p}))
   }
   // Desde CDMX hacia el norte se va por la autopista México-Querétaro (Palmillas y Chichimequillas),
   // no por el Arco Norte, que solo se usa viniendo de Puebla. Solo si el usuario no puso sus propios puntos.

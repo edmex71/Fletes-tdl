@@ -224,3 +224,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## PR 79 - Pasar por Cd. Juárez sin salir a EE.UU.
 - Cuando el usuario pone puntos en «Pasar por», cada tramo que llega o sale de Cd. Juárez (Baja California/Sonora ↔ Juárez, Juárez ↔ noreste y Piedras Negras/Acuña/Nuevo Laredo) lleva su corredor por México. Sus puntos se respetan.
+
+## PR 80 - Avance: lo que falta a los «Pasar por»
+- Al marcar el avance, un cuadro bajo el mapa y el globo del punto dicen cuántos km y horas faltan desde el punto marcado a cada «Pasar por» (o "ya pasó") y al destino.
