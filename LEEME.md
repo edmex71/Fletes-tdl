@@ -218,3 +218,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## PR 77 - Avance con Plus Code corto
 - En Avance, un Plus Code corto (ej. H384+P5) se ubica con la propia ruta como referencia, sin depender de que se encuentre el nombre de la localidad.
+
+## PR 78 - Cd. Juárez / Sonora → Piedras Negras, Acuña y Nuevo Laredo
+- La ruta forzada por México (Sacramento, Jiménez, Matamoros Coah.) ahora también aplica cuando el destino es una ciudad fronteriza de Coahuila o Tamaulipas (Piedras Negras, Cd. Acuña, Nuevo Laredo), para que no salga a EE.UU.
