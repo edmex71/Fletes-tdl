@@ -221,3 +221,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## PR 78 - Cd. Juárez / Sonora → Piedras Negras, Acuña y Nuevo Laredo
 - La ruta forzada por México (Sacramento, Jiménez, Matamoros Coah.) ahora también aplica cuando el destino es una ciudad fronteriza de Coahuila o Tamaulipas (Piedras Negras, Cd. Acuña, Nuevo Laredo), para que no salga a EE.UU.
+
+## PR 79 - Pasar por Cd. Juárez sin salir a EE.UU.
+- Cuando el usuario pone puntos en «Pasar por», cada tramo que llega o sale de Cd. Juárez (Baja California/Sonora ↔ Juárez, Juárez ↔ noreste y Piedras Negras/Acuña/Nuevo Laredo) lleva su corredor por México. Sus puntos se respetan.

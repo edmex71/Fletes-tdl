@@ -348,6 +348,23 @@ async function calcularRuta(){
    const a=puntoCaseta("Palmillas")
    if(a){vias.push(a,[-100.689,20.547],[-101.195,20.573]);viaAuto=true}
   }
+  // Con puntos del usuario: cada tramo que llega o sale de Cd. Juárez (Baja California/Sonora ↔ Juárez, Juárez ↔ noreste)
+  // lleva su corredor por México, para que ese tramo no se salga a EE.UU.
+  if(vias.length&&!viaAuto){
+   const W=[o,...vias,d], out=[]
+   let metio=false
+   for(let i=0;i<W.length-1;i++){
+    const a=W[i],b=W[i+1]
+    if(i>0) out.push(a)
+    let v=null,sg=bajaYJuarez(a,b)
+    if(sg){v=viasBajaJuarez()}else{sg=juarezANoreste(a,b);if(sg)v=viasJuarezNoreste()}
+    if(v){
+     if(sg<0) v=v.slice().reverse()
+     v.filter(p=>kmEntre(p,a)>20&&kmEntre(p,b)>20).forEach(p=>{out.push(p);metio=true})
+    }
+   }
+   if(metio){vias.length=0;vias.push(...out);viaAuto="juarez"}
+  }
   const pedirRuta=async vs=>{
    const puntos=[o,...vs,d].map(p=>p[0]+","+p[1]).join(";")
    const url=`https://router.project-osrm.org/route/v1/driving/${puntos}?overview=full&geometries=geojson${vs.length?"&continue_straight=true":""}`
