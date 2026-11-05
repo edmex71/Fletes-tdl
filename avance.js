@@ -3,7 +3,17 @@
 let avanceMarca=null
 function quitarAvance(){
  if(map&&avanceMarca){map.removeLayer(avanceMarca);avanceMarca=null}
+ const i=document.getElementById("avance_info"); if(i){i.style.display="none";i.innerHTML=""}
 }
+// Lo que falta (km y horas) desde el punto marcado hasta cada «Pasar por» del usuario
+function faltantesPasarPor(ruta,sActual,vel,vias){
+ const ac=_acumulada(ruta)
+ return (vias||[]).map(v=>{
+  const s=_proyectar(ruta,ac,v.punto).s
+  return {nombre:v.nombre,km:s-sActual,horas:(s-sActual)/vel,pasado:s<=sActual}
+ })
+}
+function _hhmm(h){const m=Math.round(h*60);return Math.floor(m/60)+" h "+String(m%60).padStart(2,"0")+" min"}
 function _kmEntre(a,b){
  const R=6371,r=Math.PI/180
  const dLat=(b[1]-a[1])*r,dLon=(b[0]-a[0])*r
@@ -74,10 +84,17 @@ async function calcularAvanceUI(){
   const r=calcularAvance(currentRoute,pos,horas,vel)
   if(r.separacion>60){msg.textContent="\""+lugar+"\" queda a "+r.separacion.toFixed(0)+" km de la ruta. Escribe un punto que esté sobre la ruta.";return}
   quitarAvance()
+  const falt=faltantesPasarPor(currentRoute,r.kmDesdeOrigen,vel,typeof viasUsuario!=="undefined"?viasUsuario:[])
+  const lineas=falt.map(f=>f.pasado?f.nombre+": ya pasó":f.nombre+": faltan "+f.km.toFixed(0)+" km (≈ "+_hhmm(f.horas)+")")
+  const infoDiv=document.getElementById("avance_info")
+  if(infoDiv&&lineas.length){
+   infoDiv.innerHTML="<b>Faltan desde el punto marcado:</b><br>"+lineas.map(x=>x.replace(/</g,"&lt;")).join("<br>")+"<br>Destino: "+(r.kmRestantes.toFixed(0))+" km (≈ "+_hhmm(r.kmRestantes/vel)+")"
+   infoDiv.style.display="block"
+  }
   if(map){
    avanceMarca=L.layerGroup([
     L.circleMarker([pos[1],pos[0]],{radius:6,color:"#1b5e20",fillColor:"#66bb6a",fillOpacity:1}).bindTooltip("Avance actual: "+lugar),
-    L.marker([r.punto[1],r.punto[0]]).bindPopup("<b>"+horas+" h después</b><br>"+r.km.toFixed(0)+" km de "+lugar+"<br>Faltan "+r.kmRestantes.toFixed(0)+" km al destino")
+    L.marker([r.punto[1],r.punto[0]]).bindPopup("<b>"+horas+" h después</b><br>"+r.km.toFixed(0)+" km de "+lugar+"<br>Faltan "+r.kmRestantes.toFixed(0)+" km al destino"+(lineas.length?"<br>"+lineas.map(x=>x.replace(/</g,"&lt;")).join("<br>"):""))
    ]).addTo(map)
    map.fitBounds(L.latLngBounds([[pos[1],pos[0]],[r.punto[1],r.punto[0]]]).pad(0.5),{maxZoom:9})
    avanceMarca.eachLayer(l=>{if(l.openPopup)l.openPopup()})
