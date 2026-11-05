@@ -212,3 +212,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## PR 75 - Conteo de entradas
 - En "Accesos" cada usuario muestra cuántas veces ha entrado y su última entrada.
+
+## PR 76 - Botón Avance
+- Aparece junto a Borrar cuando ya hay ruta calculada. Pide dónde va el camión y cuántas horas de avance (1 a 24); marca en el mapa el punto a esa distancia sobre la ruta, con la velocidad promedio de la cotización (5 ejes = 65 km/h; 3 h = 195 km).

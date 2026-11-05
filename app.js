@@ -231,6 +231,7 @@ function calcularFlete(){
  // Con ferry, el precio «Por km» suma el costo del ferry más 30% de ese costo
  const precios=calcularPrecios(costoTotal,kmTotal,ferry?ferry.monto*1.3:0)
 
+ if(typeof mostrarBotonAvance==="function") mostrarBotonAvance(currentRoute.length>0)
  ultimoCalculo={
   origen,destino,km:kmTotal,kmIda:km,redondo,ejes,vel,tiempo,rend,litros,dieselCosto,
   casetasTarifa:det?det.con.map(c=>({nombre:c.nombre+(redondo?" (×2)":""),monto:c.monto*f})):[],

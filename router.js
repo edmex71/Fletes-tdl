@@ -17,6 +17,8 @@ function initMap(){
 function limpiarRuta(){
  currentRoute=[]
  if(map&&routeLayer){map.removeLayer(routeLayer);routeLayer=null}
+ if(typeof quitarAvance==="function") quitarAvance()
+ if(typeof mostrarBotonAvance==="function") mostrarBotonAvance(false)
 }
 
 const esperar=ms=>new Promise(r=>setTimeout(r,ms))
@@ -416,6 +418,7 @@ async function calcularRuta(){
 
   limpiarRuta()
   currentRoute=coordsTotal
+  if(typeof mostrarBotonAvance==="function") mostrarBotonAvance(true)
   if(typeof ignoradas!=="undefined") ignoradas=new Set()
 
   if(map){

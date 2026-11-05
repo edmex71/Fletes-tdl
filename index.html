@@ -15,11 +15,22 @@
 </head>
 <body>
 
+<div id="avance_form" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:16px">
+<div style="background:#fff;border-radius:10px;padding:16px;width:100%;max-width:340px;box-sizing:border-box">
+<h3 style="margin:0 0 8px">Avance</h3>
+<label for="avance_lugar">Avance actual (dónde va)</label>
+<input id="avance_lugar" placeholder="Ej. Tecate">
+<label for="avance_horas">Tiempo de avance</label>
+<select id="avance_horas"><option value="1">1 h</option><option value="2">2 h</option><option value="3" selected>3 h</option><option value="4">4 h</option><option value="5">5 h</option><option value="6">6 h</option><option value="7">7 h</option><option value="8">8 h</option><option value="9">9 h</option><option value="10">10 h</option><option value="11">11 h</option><option value="12">12 h</option><option value="13">13 h</option><option value="14">14 h</option><option value="15">15 h</option><option value="16">16 h</option><option value="17">17 h</option><option value="18">18 h</option><option value="19">19 h</option><option value="20">20 h</option><option value="21">21 h</option><option value="22">22 h</option><option value="23">23 h</option><option value="24">24 h</option></select>
+<div id="avance_msg" style="color:#b00020;min-height:18px;font-size:14px;margin:6px 0"></div>
+<button type="button" onclick="calcularAvanceUI()">Marcar en el mapa</button>
+<button type="button" class="sec" onclick="cerrarAvance()">Cerrar</button>
+</div></div>
 <div id="estado">Sistema listo</div>
 
 <header class="header">
 <img src="logo.png" alt="">
-<h1>Flete TDL <small id="version" style="font-size:12px;font-weight:normal;opacity:.7">PR 75</small> <button type="button" onclick="borrar()" style="font-size:12px;padding:2px 8px;margin-left:6px;width:auto;display:inline-block">🗑 Borrar</button> <button type="button" id="btn_actualizar" onclick="actualizarApp(this)" style="display:none;font-size:12px;padding:2px 8px;margin-left:6px;width:auto">↻ Actualizar</button> <button type="button" id="btn_instalar" onclick="instalarApp()" style="display:none;font-size:12px;padding:2px 8px;margin-left:6px;width:auto">⬇ Instalar app</button></h1>
+<h1>Flete TDL <small id="version" style="font-size:12px;font-weight:normal;opacity:.7">PR 76</small> <button type="button" onclick="borrar()" style="font-size:12px;padding:2px 8px;margin-left:6px;width:auto;display:inline-block">🗑 Borrar</button> <button type="button" id="btn_avance" onclick="abrirAvance()" style="display:none;font-size:12px;padding:2px 8px;margin-left:6px;width:auto">📍 Avance</button> <button type="button" id="btn_actualizar" onclick="actualizarApp(this)" style="display:none;font-size:12px;padding:2px 8px;margin-left:6px;width:auto">↻ Actualizar</button> <button type="button" id="btn_instalar" onclick="instalarApp()" style="display:none;font-size:12px;padding:2px 8px;margin-left:6px;width:auto">⬇ Instalar app</button></h1>
 </header>
 
 <div class="container">
@@ -163,6 +174,7 @@
 <script src="mapa_imagen.js"></script>
 <script src="xlsx_min.js"></script>
 <script src="docx_min.js"></script>
+<script src="avance.js"></script>
 <div id="guia_ios" style="display:none">
 <div class="guia_fondo" onclick="cerrarGuiaIOS()"></div>
 <div class="guia_caja">
