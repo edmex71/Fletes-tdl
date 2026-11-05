@@ -194,9 +194,13 @@ function viasBajaJuarez(){
 // Agua Prieta, Janos), Galeana, Ojo Laguna, Sacramento y Chihuahua. De ahí en adelante el trazo normal ya es por México.
 // Cd. Juárez ↔ Monterrey/Saltillo/Reynosa y alrededores: por México, sin salir a EE.UU. (Villa Ahumada, Chihuahua, Jiménez, La Laguna y Saltillo).
 // Sin esto el servicio de rutas prefiere El Paso–San Antonio–Laredo/Acuña. Solo si el usuario no puso sus propios puntos.
+// Noreste y ciudades fronterizas de Coahuila/Tamaulipas (Acuña, Piedras Negras, Nuevo Laredo...)
+function enNoresteFrontera(p){
+ return (p[0]>-103&&p[0]<-97&&p[1]>24.5&&p[1]<27)||(p[0]>-101.6&&p[0]<-99&&p[1]>=27&&p[1]<29.6)
+}
 function juarezANoreste(o,d){
  const juarez=p=>p[0]>-106.9&&p[0]<-106.1&&p[1]>31.4&&p[1]<32.0
- const noreste=p=>p[0]>-103&&p[0]<-97&&p[1]>24.5&&p[1]<27
+ const noreste=enNoresteFrontera
  return (juarez(o)&&noreste(d))?1:((juarez(d)&&noreste(o))?-1:0)
 }
 function viasJuarezNoreste(){
@@ -207,7 +211,7 @@ function viasJuarezNoreste(){
 // (Mex 2 hasta Agua Prieta y Janos, Ojo Laguna, Chihuahua, Jiménez, La Laguna y Saltillo). Sin esto el trazo se va por Arizona–Texas.
 function sonoraANoreste(o,d){
  const sonora=p=>p[0]>-113.3&&p[0]<-107.5&&p[1]>30.3&&p[1]<32.2
- const noreste=p=>p[0]>-103&&p[0]<-97&&p[1]>24.5&&p[1]<27
+ const noreste=enNoresteFrontera
  return (sonora(o)&&noreste(d))?1:((sonora(d)&&noreste(o))?-1:0)
 }
 function viasSonoraANoreste(sonora){
