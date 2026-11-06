@@ -52,6 +52,74 @@ function _puntoEn(ruta,ac,s){
  const t=(s-ac[i-1])/((ac[i]-ac[i-1])||1)
  return [ruta[i-1][0]+(ruta[i][0]-ruta[i-1][0])*t,ruta[i-1][1]+(ruta[i][1]-ruta[i-1][1])*t]
 }
+// Busca el lugar SOLO dentro del área de la ruta y elige el resultado más cercano a ella
+// (así "Puerto San Luis" encuentra el de la ruta y no otro del mismo nombre en otra parte del país)
+async function buscarCercaDeRuta(lugar,ruta){
+ let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9
+ for(const p of ruta){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);y0=Math.min(y0,p[1]);y1=Math.max(y1,p[1])}
+ const m=0.3
+ const url="https://nominatim.openstreetmap.org/search?format=json&limit=10&countrycodes=mx&bounded=1&viewbox="+
+  (x0-m)+","+(y1+m)+","+(x1+m)+","+(y0-m)+"&q="+encodeURIComponent(lugar)
+ const r=await fetch(url)
+ if(!r.ok) return null
+ const data=await r.json()
+ const ac=_acumulada(ruta)
+ let mejor=null
+ for(const d of data){
+  const p=[parseFloat(d.lon),parseFloat(d.lat)]
+  if(!isFinite(p[0])||!isFinite(p[1])) continue
+  const dist=_proyectar(ruta,ac,p).d
+  if(!mejor||dist<mejor.dist) mejor={p,dist}
+ }
+ return mejor&&mejor.dist<=60?mejor.p:null
+}
+
+// Plus Code corto (ej. H384+P5): se recupera usando puntos de la propia ruta como referencia,
+// y se acepta el que quede sobre la ruta. Devuelve [lon,lat] o null.
+function plusCodeEnRuta(texto,ruta){
+ const pc=leerPlusCode(texto)
+ if(!pc||pc.completo) return null
+ const ac=_acumulada(ruta)
+ const paso=Math.max(1,Math.floor(ruta.length/400))
+ let mejor=null
+ for(let i=0;i<ruta.length;i+=paso){
+  let p
+  try{p=recuperarOLC(pc.codigo,ruta[i])}catch(e){continue}
+  if(!p||!isFinite(p[0])||!isFinite(p[1])) continue
+  const d=_proyectar(ruta,ac,p).d
+  if(!mejor||d<mejor.d) mejor={p,d}
+ }
+ return mejor&&mejor.d<=8?mejor.p:null
+}
+
+// Busca el lugar escrito dando preferencia a los que quedan sobre la ruta calculada
+// (varios pueblos comparten nombre; el buscador normal elige uno cualquiera del país).
+async function ubicarEnRuta(texto,ruta){
+ const pc=plusCodeEnRuta(texto,ruta)
+ if(pc) return pc
+ const cas=puntoCaseta(texto)
+ if(cas&&_proyectar(ruta,_acumulada(ruta),cas).d<=15) return cas
+ if(!leerCoordenadas(texto)&&!leerPlusCode(texto)){
+  try{
+   let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9
+   for(const c of ruta){x0=Math.min(x0,c[0]);x1=Math.max(x1,c[0]);y0=Math.min(y0,c[1]);y1=Math.max(y1,c[1])}
+   const vb=[x0-0.5,y1+0.5,x1+0.5,y0-0.5].join(",")
+   const url="https://nominatim.openstreetmap.org/search?format=json&limit=15&countrycodes=mx&viewbox="+vb+"&bounded=1&q="+encodeURIComponent(texto)
+   const r=await fetch(url)
+   if(r.ok){
+    const data=await r.json(),ac=_acumulada(ruta)
+    let mejor=null
+    for(const it of data){
+     const p=[parseFloat(it.lon),parseFloat(it.lat)],d=_proyectar(ruta,ac,p).d
+     if(!mejor||d<mejor.d) mejor={p,d}
+    }
+    if(mejor&&mejor.d<=30) return mejor.p
+   }
+  }catch(e){}
+ }
+ return null
+}
+
 // Cálculo puro (se puede probar sin pantalla)
 function calcularAvance(ruta,posicion,horas,vel){
  const ac=_acumulada(ruta),tot=ac[ac.length-1]
@@ -79,7 +147,7 @@ async function calcularAvanceUI(){
  if(!currentRoute.length){msg.textContent="Primero calcula la ruta";return}
  msg.textContent="Buscando..."
  try{
-  const pos=await geocode(lugar)
+  const pos=(await ubicarEnRuta(lugar,currentRoute))||await geocode(lugar)
   const vel=(ultimoCalculo&&ultimoCalculo.vel)||velocidadPromedio(parseInt(document.getElementById("ejes").value)||5)
   const r=calcularAvance(currentRoute,pos,horas,vel)
   if(r.separacion>60){msg.textContent="\""+lugar+"\" queda a "+r.separacion.toFixed(0)+" km de la ruta. Escribe un punto que esté sobre la ruta.";return}
