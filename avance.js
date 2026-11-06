@@ -94,12 +94,12 @@ async function calcularAvanceUI(){
   if(map){
    avanceMarca=L.layerGroup([
     L.circleMarker([pos[1],pos[0]],{radius:6,color:"#1b5e20",fillColor:"#66bb6a",fillOpacity:1}).bindTooltip("Avance actual: "+lugar),
-    L.marker([r.punto[1],r.punto[0]]).bindPopup("<b>"+horas+" h después</b><br>"+r.km.toFixed(0)+" km de "+lugar+"<br>Faltan "+r.kmRestantes.toFixed(0)+" km al destino"+(lineas.length?"<br>"+lineas.map(x=>x.replace(/</g,"&lt;")).join("<br>"):""))
+    L.marker([r.punto[1],r.punto[0]]).bindPopup((horas===0?"<b>Punto actual: "+lugar+"</b>":"<b>"+horas+" h después</b><br>"+r.km.toFixed(0)+" km de "+lugar)+"<br>Faltan "+r.kmRestantes.toFixed(0)+" km al destino"+(lineas.length?"<br>"+lineas.map(x=>x.replace(/</g,"&lt;")).join("<br>"):""))
    ]).addTo(map)
    map.fitBounds(L.latLngBounds([[pos[1],pos[0]],[r.punto[1],r.punto[0]]]).pad(0.5),{maxZoom:9})
    avanceMarca.eachLayer(l=>{if(l.openPopup)l.openPopup()})
   }
   cerrarAvance()
-  setEstado(r.llegoAlDestino?"Con "+horas+" h desde "+lugar+" ya llega al destino (faltaban menos de "+r.km.toFixed(0)+" km)":"Avance: a "+horas+" h de "+lugar+" (≈"+r.km.toFixed(0)+" km a "+vel+" km/h) · faltan "+r.kmRestantes.toFixed(0)+" km al destino")
+  setEstado(horas===0?"Desde "+lugar+": faltan "+r.kmRestantes.toFixed(0)+" km al destino (≈ "+_hhmm(r.kmRestantes/vel)+")":r.llegoAlDestino?"Con "+horas+" h desde "+lugar+" ya llega al destino (faltaban menos de "+r.km.toFixed(0)+" km)":"Avance: a "+horas+" h de "+lugar+" (≈"+r.km.toFixed(0)+" km a "+vel+" km/h) · faltan "+r.kmRestantes.toFixed(0)+" km al destino")
  }catch(e){msg.textContent=String(e)}
 }
