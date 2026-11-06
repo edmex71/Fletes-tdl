@@ -337,7 +337,13 @@ async function calcularRuta(){
    const v=viasBajaJuarez()
    if(v){vias.push(...(bajaYJuarez(o,d)>0?v:v.slice().reverse()));viaAuto="juarez"}
   }else if(!vias.length && bajaYNoreste(o,d)){
-   const v=viasBajaNoreste()
+   let v=viasBajaNoreste()
+   // Piedras Negras, Acuña y Nuevo Laredo: de Sacramento se sigue por Jiménez y La Laguna (si no, el trazo cruza a EE.UU.)
+   const fronteraCoah=p=>p[0]>-101.6&&p[0]<-99&&p[1]>=27&&p[1]<29.6
+   if(v&&(fronteraCoah(o)||fronteraCoah(d))){
+    const cola=[puntoCaseta("Jiménez"),puntoCaseta("Matamoros (Coah.)")]
+    if(cola.every(Boolean)) v=v.concat(cola)
+   }
    if(v){vias.push(...(bajaYNoreste(o,d)>0?v:v.slice().reverse()));viaAuto="juarez"}
   }else if(!vias.length && juarezANoreste(o,d)){
    const v=viasJuarezNoreste()
