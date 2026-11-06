@@ -230,3 +230,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## PR 81 - Baja California → Piedras Negras / Acuña / Nuevo Laredo
 - La ruta forzada por México desde Baja California continúa por Jiménez y Matamoros (Coah.) cuando el destino es Piedras Negras, Cd. Acuña o Nuevo Laredo (y al revés), para no cruzar a EE.UU. Monterrey y demás no cambian.
+
+## PR 82 - Avance con 0 horas
+- En Avance se puede elegir 0 h: marca el punto actual y calcula lo que falta a cada «Pasar por» y al destino desde ahí (desde el origen si se escribe el origen).
