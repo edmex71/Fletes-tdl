@@ -233,3 +233,7 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## PR 82 - Avance con 0 horas
 - En Avance se puede elegir 0 h: marca el punto actual y calcula lo que falta a cada «Pasar por» y al destino desde ahí (desde el origen si se escribe el origen).
+
+## PR 83 - Avance busca primero sobre la ruta
+- En Avance, el lugar escrito se busca primero entre los que quedan sobre la ruta calculada (Plus Code corto, casetas y búsqueda limitada a la zona de la ruta), para que nombres repetidos (Agua Prieta, San Luis...) no caigan en otro estado.
+- Restituye el arreglo del Plus Code corto (PR 77), que no había quedado incluido en ese PR.
