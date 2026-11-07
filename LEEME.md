@@ -237,3 +237,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 ## PR 83 - Avance busca primero sobre la ruta
 - En Avance, el lugar escrito se busca primero entre los que quedan sobre la ruta calculada (Plus Code corto, casetas y búsqueda limitada a la zona de la ruta), para que nombres repetidos (Agua Prieta, San Luis...) no caigan en otro estado.
 - Restituye el arreglo del Plus Code corto (PR 77), que no había quedado incluido en ese PR.
+
+## PR 84 - Ingreso con aviso
+- Al tocar Entrar muestra "Entrando..." y, si no hay respuesta en 15 s o falla la conexión, dice por qué en vez de quedarse sin hacer nada.

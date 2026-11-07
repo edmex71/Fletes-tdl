@@ -6,7 +6,9 @@
   var MEM={};['tdl_admin','tdl_token','tdl_vence','tdl_expira'].forEach(function(k){try{localStorage.removeItem(k)}catch(e){}});
   function ls(k,v){if(k.indexOf('tdl_')===0){if(v===undefined)return MEM[k]||null;if(v===null)delete MEM[k];else MEM[k]=v;return}try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}}
   async function rpc(fn,args){
-    var r=await fetch(URL_SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'apikey':KEY_SB,'Authorization':'Bearer '+KEY_SB,'Content-Type':'application/json'},body:JSON.stringify(args)});
+    var ctl=new AbortController(),tm=setTimeout(function(){ctl.abort()},15000);
+    var r;
+    try{r=await fetch(URL_SB+'/rest/v1/rpc/'+fn,{method:'POST',signal:ctl.signal,headers:{'apikey':KEY_SB,'Authorization':'Bearer '+KEY_SB,'Content-Type':'application/json'},body:JSON.stringify(args)})}finally{clearTimeout(tm)}
     if(!r.ok)throw new Error('http '+r.status);
     return r.json();
   }
@@ -24,12 +26,11 @@
   var gate=document.createElement('div');gate.id='acc_gate';
   gate.innerHTML='<div class="caja"><h2 style="margin:0 0 10px">Flete TDL</h2><label>Usuario</label><input id="acc_u" autocapitalize="none" autocomplete="username"><label>Contraseña</label><input id="acc_p" type="password" autocomplete="current-password"><div id="acc_msg"></div><button id="acc_ok" type="button">Entrar</button></div>';
   document.documentElement.appendChild(gate);
-  var modoAdmin=false;
   function msg(t){document.getElementById('acc_msg').textContent=t||''}
   function abrir(){gate.style.display='none'}
   function cerrar(){gate.style.display='flex'}
   async function entrar(){
-    msg('');var u=document.getElementById('acc_u').value.trim(),p=document.getElementById('acc_p').value;
+    msg('Entrando...');var u=document.getElementById('acc_u').value.trim(),p=document.getElementById('acc_p').value;
     if(!p||!u){msg('Escribe usuario y contraseña');return}
     try{
       if(u.toLowerCase()==='edmex71'){
@@ -40,7 +41,7 @@
       var r=await rpc('login',{p_usuario:u,p_clave:p});
       if(!r.ok){msg(r.error);return}
       ls('tdl_token',r.token);ls('tdl_vence',r.vence);ls('tdl_expira',r.expira);abrir();avisoVence(r.vence);
-    }catch(e){msg('Sin conexión. Intenta de nuevo')}
+    }catch(e){msg('No se pudo conectar ('+((e&&e.name==='AbortError')?'tardó demasiado':(e&&e.message)||'error')+'). Revisa tu internet e intenta de nuevo')}
   }
   document.getElementById('acc_ok').onclick=entrar;
   gate.addEventListener('keydown',function(e){if(e.key==='Enter')entrar()});
