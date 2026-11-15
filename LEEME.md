@@ -240,3 +240,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## PR 84 - Ingreso con aviso
 - Al tocar Entrar muestra "Entrando..." y, si no hay respuesta en 15 s o falla la conexión, dice por qué en vez de quedarse sin hacer nada.
+
+## PR 85 - Mantener Supabase activo
+- Tarea programada de GitHub Actions (cada 3 días) que hace una petición a los proyectos flete-tdl y bolsa-viajes para que Supabase gratis no los pause por inactividad.
