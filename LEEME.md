@@ -243,3 +243,6 @@ Si la ruta usa ferry, el precio «Por km» = precio por km normal (km por carret
 
 ## PR 85 - Mantener Supabase activo
 - Tarea programada de GitHub Actions (cada 3 días) que hace una petición a los proyectos flete-tdl y bolsa-viajes para que Supabase gratis no los pause por inactividad.
+
+## PR 86 - Arreglo de la tarea que mantiene Supabase activo
+- El archivo de la tarea tenía un error de formato (dos puntos dentro de un nombre) y GitHub no la ejecutaba; corregido.
